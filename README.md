@@ -1,1 +1,2 @@
-# EDPS documents
+# edps-docs
+EDPS documentation
