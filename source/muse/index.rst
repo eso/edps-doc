@@ -10,7 +10,6 @@ MUSE EDPS tutorial
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
    ../common/tbd.md
    #reducing_demo.md
