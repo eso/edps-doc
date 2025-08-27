@@ -6,7 +6,6 @@
 EDPS-GUI documentation
 ==============================
 
-
 .. toctree::
    :maxdepth: 1
 
