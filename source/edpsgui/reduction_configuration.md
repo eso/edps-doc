@@ -26,7 +26,7 @@ parameters that can be modified to customize the data reduction.
    :name: fig-reduction_configuration_editor_2
    :figclass: left-caption
 
-   The Reduction Configuration editor (lower part part), where workflow and recipe parameters can be edited.
+   The Reduction Configuration editor (lower part), where workflow and recipe parameters can be edited.
    ```
 
 There are several parameters sets available, that are configured to serve specific purposes. The `science_parameters` (
