@@ -13,5 +13,7 @@ EDPS-GUI manual
    tbd.md
    intro.md
    gui.md
+   reduction_configuration.md
+   final_products.md
    tipps.md
    
