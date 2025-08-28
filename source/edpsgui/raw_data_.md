@@ -11,7 +11,7 @@ There are 5 main buttons:
    :alt: select-inputs-dialog
    :name: fig_select-inputs-dialog
    ```` 
-
+<a name="inspect"></a>
 - **`Inspect input data`**. This button allows to inspect the input files. Press this button and a table with the the
   list of input files appears.
   The first part of the table shows the list of the input files, grouped by category. Click on the arrow of each

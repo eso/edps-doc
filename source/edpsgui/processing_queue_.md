@@ -20,5 +20,7 @@ the magnifying lens ![](figures/magnifying.jpg) next to each task, shows the gra
 reduction step.
 On the other hand, the same button next to the dataset, shows the graphic report of the last step of the data reduction.
 
+The button ![](figures/inspect.jpg) next to each dataset allows to inspect the various products of the reduction, as done for the input data (see [here](#inspect)).
+
 The results of a reduction can be stored in a desired location by pressing the button ![](figures/archive.jpg) (see
 Section ZZ for further information).
