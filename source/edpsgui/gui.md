@@ -70,7 +70,7 @@ Go to `edps-gui` documentation [index](../edpsgui/index)
 ---
 Go to [top](#top)
 
-Go to `edps-gui` documentation [index](../edpsgui/index)
+Go to `edps-gui` manual [index](../edpsgui/index)
 
 <a name="processing_queue"></a>
 ## The `Processing Queue` tab.
@@ -81,7 +81,7 @@ Go to `edps-gui` documentation [index](../edpsgui/index)
 ---
 Go to [top](#top)
 
-Go to `edps-gui` documentation [index](../edpsgui/index)
+Go to `edps-gui` manual [index](../edpsgui/index)
 
 
 <a name="archived_data"></a>
