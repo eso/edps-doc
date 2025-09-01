@@ -77,7 +77,7 @@ To override these values, specify the values in the `Override value` field of th
 
 ### Creation of a SKY_MASK
 
-It is possible to specify a sky mask, e.g. to specify the regions in the field of view to consider as pure sky. 
+It is possible to specify a sky mask, e.g. a fits file per exposure that specifies the regions in the field of view to consider as pure sky. 
 The best way for doing it is to start the reduction without sky mask and specify the targets `object` and `sky`. The product folder will contain the SKY_MASK automatically computed by the 
 pipeline. Edit them with your favourite fits editor and copy them in the input directory. Restart the reduction. EDPS will associate to each target and dedicated sky frame the SKY_MASK with the same mjd-obs (so, make sure you have the correct mjd-obs correspondence).
 To use the entire SKY_MASK set `skymodel_fraction` and `fraction` to 1, and `skymodel_ignore` and `ignore` to 0.
