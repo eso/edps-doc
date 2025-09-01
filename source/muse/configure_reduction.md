@@ -106,15 +106,15 @@ configuration window.
   and `skymodel_fraction=0.8`, then the brighter 80% of the pixels, with the exclusion of the fainter 5%, are included
   in the computation. They refer to the full field of view of the input frame, or only to the part
   specified by the input sky mask.
--
+
 
 The following recipe parameters of the task `sky`, also have an impact on the quality of the sky subtraction. They can
-be accessed by selecting the corresponding task from the `Recipe parameters` section of the configuration window.
+be accessed by selecting the corresponding task from the `Recipe parameters` section of the configuration window ({numref}`fig-reduction_configuration_muse_2`).
 
 - `fraction`. As `skymodel-fraction`, but it is applied to the dedicated sky exposure.
 - `ignore`. As `skymodel_ignore`, but it is applied to the dedicated sky exposure.
 
-*Important note*: The `MUSE` `EDPS` workflow automatically sets skymode-fraction and skymodel-ignore according to the
+*Important note*: The `MUSE` `EDPS` workflow automatically sets `skymode-fraction` and `skymodel-ignore` according to the
 following schema.
 
 - `skymodel-ignore=0.05` always.
