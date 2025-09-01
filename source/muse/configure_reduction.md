@@ -139,7 +139,7 @@ product folder will contain the SKY_MASK automatically computed by the
 pipeline. Edit them with your favourite fits editor and copy them in the input directory. Restart the reduction. EDPS
 will associate to each target and dedicated sky frame the SKY_MASK with the same mjd-obs (so, make sure you have the
 correct mjd-obs correspondence).
-To use the entire SKY_MASK set `skymodel_fraction` and `fraction` to 1, and `skymodel_ignore` and `ignore` to 0.
+To use the entire SKY_MASK set `skymodel_fraction` and `fraction` to 1, and `skymodel_ignore` and `ignore` to 0 in the desired actor (e.g.: `object` for regular science frames, `sky` for the dedicated sky exposures), of the configuration panel shown in {numref}`fig-reduction_configuration_muse_2`.
 
  ---
 Go to MUSE EDPS tutorial [index](../muse/index)
