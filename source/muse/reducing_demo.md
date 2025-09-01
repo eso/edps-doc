@@ -28,6 +28,4 @@ The EDPS Dashboard (Graphic User Interface) with the MUSE workflow loaded.
 ---
 Go to [top](#top)
 
-
----
 Go to MUSE EDPS tutorial [index](../muse/index)
