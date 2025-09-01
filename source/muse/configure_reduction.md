@@ -128,7 +128,7 @@ following schema.
 - For all other cases, `skymodel-fraction=0.2` (only 20% of the field of view is supposed to be free from object
   contamination).
 
-To override these values, specify the values in the `Override value` field of the configuration window.
+To override these values, specify the values in the `Override value` field of the configuration window shown in {numref}`fig-reduction_configuration_muse_2`.
 
 ### Creation of a SKY_MASK
 
