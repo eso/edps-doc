@@ -142,4 +142,6 @@ correct mjd-obs correspondence).
 To use the entire SKY_MASK set `skymodel_fraction` and `fraction` to 1, and `skymodel_ignore` and `ignore` to 0 in the desired actor (e.g.: `object` for regular science frames, `sky` for the dedicated sky exposures), of the configuration panel shown in {numref}`fig-reduction_configuration_muse_2`.
 
  ---
+Go to [top](#configuration)
+
 Go to MUSE EDPS tutorial [index](../muse/index)
