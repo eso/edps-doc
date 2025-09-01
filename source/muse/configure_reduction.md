@@ -3,7 +3,18 @@
 The data reduction of each dataset can be configured according to the scientific needs. In order to configure a
 reduction,
 go in the `Processing Queue` tab, which lists the datasets that are listed for reduction,
-and press the button ![](../edpsgui/figures/configure_dataset.jpg). The configuration window appears (see
+and press the button ![](../edpsgui/figures/configure_dataset.jpg) (see {numref}`fig-reduction_configuration_muse_0`). 
+
+```{figure} figures/reduction_configuration_muse_0.jpg
+:alt: reduction_configuration_muse_0
+:name: fig-reduction_configuration_muse_0
+:figclass: left-caption
+
+How to open the dataset configuration menu to customize data reduction.
+```
+
+
+The configuration window appears (see
 {numref}`fig-reduction_configuration_muse_1` and {numref}`fig-reduction_configuration_muse_2`)
 It is possible to configure `workflow parameters`, that specify the strategy of the data reduction, as well as the
 `recipe parameters` associated to each individual task. Predefined sets are configured, for normal scientific reduction
