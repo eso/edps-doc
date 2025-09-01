@@ -48,22 +48,7 @@ processing raw arc frames (done by the task
 `line_spread_function_arc`) or by dedicated calibrations (done by the
 task `line_spread_function_lsf`). Alternatively, a static calibration
 is used. The behavior is determined by the workflow parameter
-`lsfmode`. Possible values are:
-
-    "any"    Characterize the LSF from dedicated lsf raw exposures. If not
-             available, use arc raw exposures. If not available, use static
-             calibration from the pipeline distribution.
-	     
-    "lsf"    Characterize the LSF from dedicated lsf raw exposures. If not
-             available, use static calibration from the pipeline distribution.
-	     
-    "arc"    Characterize the LSF from dedicated arc raw exposures. If not
-             available, use static calibration from the pipeline distribution.
-	     
-    "static" Use static calibration from the pipeline distribution."
-
-For scientific reduction, the parameter is set to "any" in the
-`science_parameters` parameter set.
+`lsfmode`, which is described [here](../muse/configure_reduction.md#lsf).
 
 ## `Monitoring_and_long_term_calibs`
 
@@ -77,6 +62,17 @@ Additionally, the subworkflow contains tasks aimed at monitoring the instrument 
 such as the throughput (task throughput, recipe `muse_ampl`), the instrument
 linearity and gain (task linearity_and_gain, recipe `muse_lingain`). These tasks however, are executed only at the
 observatory, and they are not used in the data reduction flow.
+
+## `Process and combine sky`
+
+blablabla
+The strategy to compute the sky background using dedicated sky exposures is described [here](../muse/configure_reduction.md#skysub).
+
+
+## `Process and combine object`
+
+blablabla
+The strategy to compute and remove the sky background from scientific exposures are regulated by the workflow parameter `skysubtraction` and described [here](../muse/configure_reduction.md#skysub).
 
 ---
 Go to MUSE EDPS tutorial [index](../muse/index)

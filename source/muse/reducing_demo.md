@@ -25,31 +25,6 @@ The EDPS Dashboard (Graphic User Interface) with the MUSE workflow loaded.
 ```{include} ../common/reducing_demo_2.md
 ```
 
-%3. Select the `Raw Data` tab to load the data to be reduced. By default, the workflow already points to the demo
-%   datasets. Press `Create Datasets` to create the datasets. Select the datasets to reduce and send them to the
-%  processing queue by clicking on the button `Send to Processing Queue` (see {numref}`fig-datasets` below). The content
-%   of each dataset can be inspected by pressing the ![](figures/inspect.jpg) icon at the end of each dataset row (
-%   see [example](figures/muse_dataset_example.jpg)).
-%
-%```{figure} figures/muse_datasets.jpg
-%:alt: datasets
-%:name: fig-datasets
-%
-%The Creation of MUSE datasets.	
-%```  
-%
-%4. Select the `Processing Queue` tab (see {numref}`fig-queue`). The reduction of each dataset can be configured by
-%   pressing the icon  ![](figures/configure_dataset.jpg) at the end of each dataset row. To start the reduction, press
-%   the  ![](figures/start_reduction_all.jpg) button. The possible configuration options for MUSE data reduction are
-%   described in Section [Configuration](configure_reduction).
-%
-%```{figure} figures/muse_queue.jpg
-%:alt: datasets
-%:name: fig-queue
-%
-%The Creation of MUSE datasets.	
-%```
-
 ---
 Go to [top](#top)
 
