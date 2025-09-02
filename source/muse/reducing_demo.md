@@ -8,11 +8,14 @@ pipeline, please
 visit [https://www.eso.org/sci/software/pipe_aem_main.html](https://www.eso.org/sci/software/pipe_aem_main.html).
 
 ## 1. Setting the workflow
+
 ```{include} ../common/reducing_demo_1.md
 ```
-c. Choose the `MUSE` pipeline from the list in the `workflows` field. The workflows offered in this selector depend on the installed pipelines.
+
+c. Choose the `MUSE` pipeline from the list in the `workflows` field. The workflows offered in this selector depend on
+the installed pipelines.
 The graphic workflow representation will appear as in
-   {numref}`fig-wkf` under the 'Workflow' tab.
+{numref}`fig-wkf` under the 'Workflow' tab.
 
 ```{figure} figures/select_muse_workflow.jpg
 :alt: wkf
@@ -20,6 +23,7 @@ The graphic workflow representation will appear as in
 
 The EDPS Dashboard (Graphic User Interface) with the MUSE workflow loaded.	
 ```
+
 ## 2. Selecting the input data
 
 ```{include} ../common/reducing_demo_2.md
@@ -28,4 +32,36 @@ The EDPS Dashboard (Graphic User Interface) with the MUSE workflow loaded.
 ---
 Go to [top](#top)
 
+## 4. Final products
+
+By default, EDPS saves all the recipe products for all the executions in the directory specified a the first execution (
+default: `$HOME/EDPS_data`).
+However, it is possible to save only the final products into a desired location. This can be achieved by exporting
+archieved data reduction: press the `Export` button in the `Archieved Data` tab
+(see [here](../edpsgui/gui.md#archived_data)).
+
+To archieve a data reduction, press
+the button `Archive` in the `Processing Queue` tab (see [here](../edpsgui/gui.md#processing_queue))
+
+Products are organized by `DATASET` (named as the first scientific exposure of the dataset), and `TIMESTAMP` (time of
+start of reduction)
+
+The final products saved in the specified directory are:
+
+- Datacubes and reconstructed images of mosaics, when combination of multiple exposures has been perfomed. Their name
+  format are
+  `DATACUBE_COMBINED_` and `IMAGE_COMBINED_` followed by the target name (as obtained from the header
+  keyword `OBS TARG NAME` of the first exposure)
+- Datacubes and reconstructed images of individual exposures. Their name format are
+  `DATACUBE_` and `IMAGE_` followed by the exposure identifier (header keyword `arcfile`).
+  They are stored in the subdirectory `individual_exposures`
+
+Additionaly, if specified by the reduction target, also products
+of sky exposures (treated as regular science exposures) are saved. They product names have the same convention as
+regular science exposures.
+
+---
+Go to [top](#top)
+
+---
 Go to MUSE EDPS tutorial [index](../muse/index)
