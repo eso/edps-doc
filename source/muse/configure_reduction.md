@@ -155,9 +155,7 @@ panel shown in {numref}`fig-reduction_configuration_muse_2`.
  ---
 Go to [top](#configuration)
 
-<a name="combination"> </a>
-
-## Combination of exposures
+## Combination of exposures <a name="combination"> </a>
 
 The `MUSE` pipeline allows to align and combine scientific exposures belonging to the same target.
 It is possible to specify the method how to identify the exposures that are meant to be combined, this is regulated by
@@ -235,10 +233,7 @@ Possible values are:
  ---
 Go to [top](#configuration)
 
-
-<a name="telluric"> </a>
-
-## Telluric correction
+## Telluric correction <a name="telluric"> </a>
 
 The MUSE pipeline derives the atmospheric transmission (category: `STD_TELLURIC`) from the standard star. The correction
 is then applied to the entire datacube. This is enabled by default. To avoid telluric correction,
