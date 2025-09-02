@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-EDPS-GUI manual
+Complete manual
 ================================
 
 
@@ -13,5 +13,7 @@ EDPS-GUI manual
    ../common/tbd.md
    #intro.md
    #gui.md
+   #reduction_configuration.md
+   #final_products.md
    #tipps.md
    

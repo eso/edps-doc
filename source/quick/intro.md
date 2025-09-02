@@ -15,8 +15,8 @@ The ESO instrument pipelines web pages are available [here](https://www.eso.org/
 
 A more detailed description of the `EDPS` dashboard and its component is available [here:](../edpsgui/index)
 
-User specific `EDPS` tutorials, tailored to reduce data of specific instruments, are available here: TBD
-
+For specific instructions on how to reduce data from a particular instrument, consult the corresponding EDPS tutorials available in the 
+<a href="../index.html">main documentation page</a>
 
 ---
 Go to EDPS quick-start guide [index](../quick/index)
