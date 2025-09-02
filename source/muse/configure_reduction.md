@@ -276,8 +276,6 @@ Therefore, darks are not processed for scientific reduction. To enable and use d
 set the workflow parameter
 `use_darks`: "yes"
 
-
-
  ---
 Go to [top](#configuration)
 
