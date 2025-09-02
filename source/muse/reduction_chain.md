@@ -96,7 +96,7 @@ The strategy to combine sky exposures is the same as for the regular science exp
 This subworkflow contains the tasks to process standard stars and create the response and telluric corrections. They are:
 - `preprocess_standard`. It runs the recipe muse_scibasic on raw standard stars
 - `response`. It runs the recipe muse_standard and generate STD_RESPONSE and STD_TELLURIC calibrations. To disable telluric correction
-on your data, set the workflow parameter `telluric_correction` to `FALSE` (see   See [here](../muse/configure_reduction.md#telluric).
+on your data, set the workflow parameter `telluric_correction` to `FALSE` (see [here](../muse/configure_reduction.md#telluric)).
 
 
 
