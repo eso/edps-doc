@@ -3,7 +3,7 @@
 The data reduction of each dataset can be configured according to the scientific needs. In order to configure a
 reduction,
 go in the `Processing Queue` tab, which lists the datasets that are listed for reduction,
-and press the button ![](../edpsgui/figures/configure_dataset.jpg) (see {numref}`fig-reduction_configuration_muse_0`). 
+and press the button ![](../edpsgui/figures/configure_dataset.jpg) (see {numref}`fig-reduction_configuration_muse_0`).
 
 ```{figure} figures/reduction_configuration_muse_0.jpg
 :alt: reduction_configuration_muse_0
@@ -12,7 +12,6 @@ and press the button ![](../edpsgui/figures/configure_dataset.jpg) (see {numref}
 
 How to open the dataset configuration menu to customize data reduction.
 ```
-
 
 The configuration window appears (see
 {numref}`fig-reduction_configuration_muse_1` and {numref}`fig-reduction_configuration_muse_2`)
@@ -40,11 +39,12 @@ The lower part of the reduction configuration window of the MUSE workflow, where
 ```
 
 <a name="lsf"> </a>
-## **`lsfmode`**: parametrization of the Line Spread Function
+
+## Parametrization of the Line Spread Function
 
 The `MUSE` pipeline uses a model of the Line Spread Function (LSF) to model emission sky lines for the sky subtraction.
 An accurate knowledge of the LSF is crucial for a good removal of sky lines. The strategy for computing the LSF is
-regulated by the workflow parameter **`lsfmode`**.
+set by the workflow parameter **`lsfmode`**.
 The best results are generally obtained by setting it to `arc`, which
 uses the arc lines of the wavelength calibrations to model the line spread function. Possible values of **`lsfmode`**
 are:
@@ -61,9 +61,15 @@ are:
 
 - `static` Use static calibration from the pipeline distribution.
 
+ ---
+Go to [top](#configuration)
+
 <a name="skysub"> </a>
-## **`skysubtraction`**: sky subtraction.
-A crucial aspect of the `MUSE` data reduction is the sky subtraction. The workflow supports several strategies, which are determined by the value of the workflow parameter **`skysubtraction`**. Possible values are:
+
+## Sky subtraction
+
+A crucial aspect of the `MUSE` data reduction is the sky subtraction. The workflow supports several strategies, which
+are determined by the value of the workflow parameter **`skysubtraction`**. Possible values are:
 
 - `model`. It uses fluxes indicated in an input SKY_LINES table (either static calibration, or coming from a dedicated
   sky
@@ -107,14 +113,15 @@ configuration window.
   in the computation. They refer to the full field of view of the input frame, or only to the part
   specified by the input sky mask.
 
-
 The following recipe parameters of the task `sky`, also have an impact on the quality of the sky subtraction. They can
-be accessed by selecting the corresponding task from the `Recipe parameters` section of the configuration window ({numref}`fig-reduction_configuration_muse_2`).
+be accessed by selecting the corresponding task from the `Recipe parameters` section of the configuration window (
+{numref}`fig-reduction_configuration_muse_2`).
 
 - `fraction`. As `skymodel-fraction`, but it is applied to the dedicated sky exposure.
 - `ignore`. As `skymodel_ignore`, but it is applied to the dedicated sky exposure.
 
-*Important note*: The `MUSE` `EDPS` workflow automatically sets `skymode-fraction` and `skymodel-ignore` according to the
+*Important note*: The `MUSE` `EDPS` workflow automatically sets `skymode-fraction` and `skymodel-ignore` according to
+the
 following schema.
 
 - `skymodel-ignore=0.05` always.
@@ -128,7 +135,8 @@ following schema.
 - For all other cases, `skymodel-fraction=0.2` (only 20% of the field of view is supposed to be free from object
   contamination).
 
-To override these values, specify the values in the `Override value` field of the configuration window shown in {numref}`fig-reduction_configuration_muse_2`.
+To override these values, specify the values in the `Override value` field of the configuration window shown in
+{numref}`fig-reduction_configuration_muse_2`.
 
 ### Creation of a SKY_MASK
 
@@ -139,9 +147,130 @@ product folder will contain the SKY_MASK automatically computed by the
 pipeline. Edit them with your favourite fits editor and copy them in the input directory. Restart the reduction. EDPS
 will associate to each target and dedicated sky frame the SKY_MASK with the same mjd-obs (so, make sure you have the
 correct mjd-obs correspondence).
-To use the entire SKY_MASK set `skymodel_fraction` and `fraction` to 1, and `skymodel_ignore` and `ignore` to 0 in the desired actor (e.g.: `object` for regular science frames, `sky` for the dedicated sky exposures), of the configuration panel shown in {numref}`fig-reduction_configuration_muse_2`.
+To use the entire SKY_MASK set `skymodel_fraction` and `fraction` to 1, and `skymodel_ignore` and `ignore` to 0 in the
+desired actor (e.g.: `object` for regular science frames, `sky` for the dedicated sky exposures), of the configuration
+panel shown in {numref}`fig-reduction_configuration_muse_2`.
+
 
  ---
 Go to [top](#configuration)
 
+<a name="combination"> </a>
+
+## Combination of exposures
+
+The `MUSE` pipeline allows to align and combine scientific exposures belonging to the same target.
+It is possible to specify the method how to identify the exposures that are meant to be combined, this is regulated by
+the workflow parameters
+`combine_science`, `max_diameter_WFM`, `max_separation_WFM`, `max_diameter_NFM`, `max_separation_NFM`.
+
+`EDPS` first groups the scientific exposures present in the input directories by the header keyword specified by the
+workflow parameter
+`combine_science`. Possible values are:
+
+- `obs.targ.name` group all those exposures that have the same target name and instrumental setup.
+- `obs.id` group all those exposures that have the same OB identification and instrumental setup.
+- `tpl.start` group all those exposures that have the same template start and instrumental setup.
+- `exptime` group all those exposures that have the same exposure time and instrumental setup.
+- `night` group all exposures of the same night and the same instrumental setup.
+- `instrume` group all exposures of the same instrumental setup.
+
+Then, within each group, `EDPS` creates sub-groups on the basis of their sky coordinates. Exposures in the same
+sub-group are aligned and combined together.
+The keywords that regulates how exposures in each group are clustered by sky position are:
+`max_diameter_WFM` and `max_separation_WFM`, for the Wide Field Mode, and `max_diameter_WFM` and `max_separation_WFM`,
+for the Narrow Field Mode.
+
+- `max_diameter_WFM`. It specifies the maximum projected diameter of the sub-group of exposures to combine, in degrees.
+  If an exposure would make the sub-group bigger than this value, it is not included in this sub-group.
+- `max_separation_WFM`. Is specifies the maximum separation on the sky from an exposure and a sub-group, in degrees. If
+  the exposure is more distant than this threshold, it is not included in the sub-group. If it is closer, and if its
+  inclusion does not make the sub-group size to exceed `max_diameter_WFM`, then it is added to the sub-group.
+
+The default values ensures that exposures with an overlap of about 1/4 of the field of view are grouped together, and
+that the resulting mosaic does not exceed 3 times the MUSE field of view.
+
+Note: To process individual exposures without combining them together, specify the reduction target `object` and
+remove `object_combination` when creating the datasets in the `Raw Data` tab.
+
+
+
+ ---
+Go to [top](#configuration)
+
+<a name="autocalibration"> </a>
+
+## Autocalibration
+
+The `MUSE` pipeline has an algorithm (autocalibration) designed to minimize the non-homogeneities in flux calibration
+between different IFUs and slices. It works under the assumption that
+the vaste majority of the field of view is dominated by the background sky (e.g., only few nearly point-like sources are
+present in the field) and that the sky bakground is constant within the field of view.
+
+The workflow supports several autocalibration strategies, that are defined by the workflow parameter `autocalibration`.
+Possible values are:
+
+- `none` Do not apply self-calibration (default).
+
+- `deepfield` Apply the self-calibration on the target field itself, under the condition that the sky background
+  is constant and each IFU/slice is dominated by sky background (exposures of small and sparse objects).
+
+- `closest_sky` It applies the self-calibration algorithm to a sky exposure of the same night and instrument setup.
+  The self-calibration coefficients determined on the sky exposure are then applied to the scientific
+  target exposure. If not available, the dataset is reduced without autocalibration. Results are often sub-optima, hence
+  inspect the resulting field of view to assess the outcome.
+
+- `user` It uses the closest in time user-provided calibration table (from the same night). If not
+  available among the input data directory, the dataset is incomplete.
+
+ ---
+Go to [top](#configuration)
+
+
+<a name="telluric"> </a>
+
+## Telluric correction
+
+The MUSE pipeline derives the atmospheric transmission (category: `STD_TELLURIC`) from the standard star. The correction
+is then applied to the entire datacube. This is enabled by default. To avoid telluric correction,
+set the workflow parameter `telluric_correction` to `FALSE`.
+
+ ---
+Go to [top](#configuration)
+
+## Wavelength range
+
+It is possible to specify the wavelength range of the output by setting the parameters `wavelength_min` (default 4000
+angstrom) and - `wavelength_max` (default 10000 angstrom). It could be convenient to specify a shorter wavelength range
+to speed up the reduction process, e.g. by concentrating only on the spectra features of scientific interest.
+
+ ---
+Go to [top](#configuration)
+
+## Geometric and astrometric calibrations.
+
+By default, the ESO archive provides the closer in time geometric and astrometric calibrations. If one wants to
+reprocess them, it has to download the corresponding raw calibrations (`dpr.type` = `WAVE,MASK` and `ASTROMETRY`,
+respectively) from the archive and set
+the workflow parameters  `recompute_geometry`: "yes" and `recompute_astrometry`: "yes".
+Note that the computation of geometry calibration is expensive in terms of computation and RAM.
+
+ ---
+Go to [top](#configuration)
+
+## Removal of DARK currents
+
+The DARK current in MUSE detector is very low. Dark calibrations are taken as part of the instrument monitoring and
+calibration plan, but it is not advisable to process and remove a master dark from the scientific data, as it increase
+the noise in the product.
+Therefore, darks are not processed for scientific reduction. To enable and use dark calibrations for scientic reduction,
+set the workflow parameter
+`use_darks`: "yes"
+
+
+
+ ---
+Go to [top](#configuration)
+
+ ---
 Go to MUSE EDPS tutorial [index](../muse/index)
