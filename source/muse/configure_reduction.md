@@ -1,4 +1,4 @@
-# Datareduction configuration  <a name="configuration"></a>
+# How to configure the data reduction  <a name="configuration"></a>
 
 The data reduction of each dataset can be configured according to the scientific needs. In order to configure a
 reduction,
@@ -193,14 +193,23 @@ that the resulting mosaic does not exceed 3 times the MUSE field of view.
 Note: To process individual exposures without combining them together, specify the reduction target `object` and
 remove `object_combination` when creating the datasets in the `Raw Data` tab.
 
+## Sky flats
 
+By default, the `MUSE` pipeline uses sky flats exposures to account for large scale illumination variations within the
+field of view.
+The workflow parameter `use_skyflats` specifies whether or not to use skyflats in the data reduction cascade. Possible
+values are:
+
+- `no`. Do not use sky flats in the reduction cascade. Set the parameter to 'no' only if the skyflats are not
+  available or if they have bad quality.
+
+- `yes` (default). Use sky flats in the reduction cascade. This option requires the skyflats to be present. It is the
+  recommended strategy."
 
  ---
 Go to [top](#configuration)
 
-<a name="autocalibration"> </a>
-
-## Autocalibration
+## Autocalibration <a name="autocalibration"> </a>
 
 The `MUSE` pipeline has an algorithm (autocalibration) designed to minimize the non-homogeneities in flux calibration
 between different IFUs and slices. It works under the assumption that
