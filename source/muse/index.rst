@@ -12,6 +12,7 @@ MUSE EDPS tutorial
    :maxdepth: 2
 
    #../common/tbd.md
+   intro.md
    reducing_demo.md
    configure_reduction.md
    reduction_chain.md

@@ -1,13 +1,15 @@
 # Introduction
 
+## Scope
+
+This document is meant for first time user of EDPS, and guides through the installation procedure and data reduction
+using the EDPS dashboard (Graphic User Interface). After working through this tutorial, the reader should be able to use
+other supported EDPS workflows for the reduction of user provided data.
+
 ## What is EDPS?
 
 ```{include} ../common/what_is_edps.md
 ```
-## Scope
-This document is meant for first time user of EDPS, and guides through the installation procedure and data reduction
-using the EDPS dashboard (Graphic User Interface). After working through this tutorial, the reader should be able to use
-other supported EDPS workflows for the reduction of user provided data.
 
 ## Additional documentation
 
