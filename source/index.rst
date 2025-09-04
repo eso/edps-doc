@@ -15,6 +15,10 @@ EDPS documentation
    :maxdepth: 1
 
    quick/index.rst
+
+.. toctree::
+   :maxdepth: 1
+
    edpsgui/index.rst
 
 **Command line execution**
