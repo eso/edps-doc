@@ -28,3 +28,5 @@ The main concepts in EDPS are:
   The `Target category` is a group of target that have similar purposes. For example, the target category science, includes
   all the tasks that deliver final scientific products, the target category qc1calib includes all and only the tasks that 
   perform a calibration (e.g., bias, standard stars).
+
+- `Association levels`. T B D
