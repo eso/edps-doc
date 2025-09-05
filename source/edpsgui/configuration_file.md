@@ -13,10 +13,11 @@ certain task. In this case, one can specify to which type of calibration to give
 variable association_preference in the `application.properties` configuration file.
 
 Possible values of association_preference are:
- - **raw**. First, EDPS checks if there are raw calibrations ensuring the first quality level of the
+ - **raw**. First, EDPS checks if there are raw calibrations ensuring the first quality level (see [here](
+   ../common/main_concepts.md#association_levels)) of the
 products. If found, they are associated. If not found, raw calibrations ensuring the second quality
 level of the products are searched. If not found, the next level is searched until the last quality
-level permitted by the workflow parameter `quality_threshold` is reached.
+level  is reached.
 If no raw calibrations are found for none of the quality levels, then EDPS searches for master
 calibrations, starting from those ensuring the first quality level. If none are found, the second
 level is searched, and so forth. If no calibrations are found, the association is not done.

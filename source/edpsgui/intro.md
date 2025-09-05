@@ -12,7 +12,7 @@ reduction with EDPS can be found in Section {ref}`target-info`
 ```{include} ../common/what_is_edps.md
 ```
 
-## EDPS main concepts
+## EDPS main concepts <a name="main_concepts"></a>
 
 ```{include} ../common/main_concepts.md
 ```
