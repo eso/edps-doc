@@ -80,5 +80,16 @@ Answer: The panel server was not closed properly. Kill it by typing:
 
 </details>
 
+<details>
+<summary><b>Q6) How do I get additional support on EDPS or data reduction in general?</b>
+</summary>
+
+Answer: For suggestions, questions, or feedback in general, please open a ticket with the EDPS Support
+team. This [link](https://support.eso.org/new-ticket?ticket%5Bticket_field_13%5D%5Bdata%5D=227) should take you directly to a webpage for creating and EDPS feedback ticket, but
+incase you want to navigate there ’manually’, go to [https://support.eso.org](https://support.eso.org), login, click on
+"Submit Helpdesk Ticket", and specify the Help topic: "Post Observations", "ESO Data Processing
+System [EDPS]".
+
+
 ---
 Go to EDPS quick-start guide [index](../quick/index)
