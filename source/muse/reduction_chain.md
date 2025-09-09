@@ -19,12 +19,14 @@ This is done by specifying the desired tasks in the field `Select reduction targ
 
 The reduction steps of the MUSE workflow are:
 
-## `bias` (task)
+##  Bias subtraction
 
-This task reduces raw bias frames to generate a masterbias. It
+The task `bias` reduces raw bias frames to generate a combined masterbias. It
 runs the recipe `muse_bias`.
 
-## `dark` (task)
+**Apply the same format below**
+
+## `dark`
 
 This task runs the recipe `muse_dark`. If raw dark frames are
 present, the actor processes them and creates a master dark. It
@@ -36,7 +38,7 @@ noise to the final products. Currently, this task is not included in
 the scientific reduction. To include it, set the workflow parameter
 `use_darks` to `yes` in the `science_parameters` parameter set.
 
-## `lamp_flat` (task)
+## `lamp_flat`
 
 This task executes the recipe `muse_ﬂat`. It processes the raw ﬂat-ﬁelds
 exposures, producing a master ﬂat and a trace table. It requires the

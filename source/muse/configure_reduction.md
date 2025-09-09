@@ -1,5 +1,10 @@
-# How to configure the data reduction  <a name="configuration"></a>
+# Customizing the data reduction  <a name="configuration"></a>
 
+## Association levels blabla
+
+T.B.D.
+
+## configuration of parameters
 The data reduction of each dataset can be configured according to the scientific needs. In order to configure a
 reduction,
 go in the `Processing Queue` tab, which lists the datasets that are listed for reduction,
@@ -61,12 +66,16 @@ are:
 
 - `static` Use static calibration from the pipeline distribution.
 
+**When the defaults have to be changed?** T.B.D.
+
  ---
 Go to [top](#configuration)
 
 <a name="skysub"> </a>
 
 ## Sky subtraction
+
+**Things to consider, when to change defaults. If this happens, do this, if that happens do that**
 
 A crucial aspect of the `MUSE` data reduction is the sky subtraction. The workflow supports several strategies, which
 are determined by the value of the workflow parameter **`skysubtraction`**. Possible values are:
