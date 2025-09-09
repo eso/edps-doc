@@ -94,6 +94,7 @@ incase you want to navigate there ’manually’, go to [https://support.eso.org
 "Submit Helpdesk Ticket", and specify the Help topic: "Post Observations", "ESO Data Processing
 System [EDPS]".
 
+</details>
 
 ---
 Go to EDPS quick-start guide [index](../quick/index)
