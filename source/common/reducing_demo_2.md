@@ -26,11 +26,11 @@ d. Choose the datasets that should be processed
    :alt: send
    :name: fig_send
    ```` 
-and send them to the processing queue by pressing `Send to Processing Queue`.
+and send them to the data reduction queue by pressing `Submit to Reduction Queue`.
 
 ## 3. Start the reduction
 
-a. Press `Processing Queue`.
+a. Press `Reduction Queue`.
 
    ````{figure} figures/processing_queue.jpg
    :alt: processing_queue

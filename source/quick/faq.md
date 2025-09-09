@@ -7,20 +7,24 @@ Answer: all the products of all the datasets and the reductions are saved into t
 executing the `edps-gui` for the first time. One can decide to export only the final products for selected datasets and
 only for the desired reduction attempts into another location for further analysis. To do so, proceed as follows:
 
-1. In the `Processing Queue` tab, select the dataset and the dataset for which you want to export the final products.
+1. In the `Reduction Queue` tab, select the dataset and the dataset for which you want to export the final products.
    Click on the `Archive` button.
    ````{figure} figures/archive.jpg
    :alt: archive
    :name: archive
    ```` 
 
-2. Go in the `Archived Data` tab, and click on the `Export` button. A new tab window appear where you can indicate the
-   directory you want to copy your final products to.
+2. Go in the `Reduction Archive` tab, 
 
    ````{figure} figures/export1.jpg
    :alt: export1
    :name: fig_export1
    ```` 
+
+   and click on the `Export` button. A new tab window appear where you can indicate the
+   directory you want to copy your final products; finally press "Export" to copy the data.
+
+
    ````{figure} figures/export2.jpg
    :alt: export2
    :name: fig_export2
@@ -90,6 +94,7 @@ incase you want to navigate there ’manually’, go to [https://support.eso.org
 "Submit Helpdesk Ticket", and specify the Help topic: "Post Observations", "ESO Data Processing
 System [EDPS]".
 
+</details>
 
 ---
 Go to EDPS quick-start guide [index](../quick/index)
