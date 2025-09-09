@@ -14,13 +14,17 @@ only for the desired reduction attempts into another location for further analys
    :name: archive
    ```` 
 
-2. Go in the `Archived Data` tab, and click on the `Export` button. A new tab window appear where you can indicate the
-   directory you want to copy your final products to.
+2. Go in the `Reduction Archive` tab, 
 
    ````{figure} figures/export1.jpg
    :alt: export1
    :name: fig_export1
    ```` 
+
+   and click on the `Export` button. A new tab window appear where you can indicate the
+   directory you want to copy your final products; finally press "Export" to copy the data.
+
+
    ````{figure} figures/export2.jpg
    :alt: export2
    :name: fig_export2
