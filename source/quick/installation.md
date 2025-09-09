@@ -8,7 +8,7 @@
    currently not supported. After the installation, the `esorex` command must be in the path. To test whether the
    installation was successful, type
 
-   	esorex --recipes 
+   	    esorex --recipes 
 
 A list of available recipes should appear.
 
