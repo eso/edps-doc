@@ -11,7 +11,7 @@ Complete manual
    :maxdepth: 2
 
    ../common/tbd.md
-   #intro.md
+   #intro.mdd
    #gui.md
    #reduction_configuration.md
    #final_products.md
