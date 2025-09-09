@@ -11,8 +11,9 @@ MUSE EDPS tutorial
 .. toctree::
    :maxdepth: 2
 
-   #../common/tbd.md
-   intro.md
-   reducing_demo.md
-   configure_reduction.md
-   reduction_chain.md
+   ../common/tbd.md
+   #intro.md
+   #reducing_demo.md
+   #configure_reduction.md
+   #reduction_chain.md
+   #faq.md
