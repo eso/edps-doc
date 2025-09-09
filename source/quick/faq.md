@@ -7,7 +7,7 @@ Answer: all the products of all the datasets and the reductions are saved into t
 executing the `edps-gui` for the first time. One can decide to export only the final products for selected datasets and
 only for the desired reduction attempts into another location for further analysis. To do so, proceed as follows:
 
-1. In the `Processing Queue` tab, select the dataset and the dataset for which you want to export the final products.
+1. In the `Reduction Queue` tab, select the dataset and the dataset for which you want to export the final products.
    Click on the `Archive` button.
    ````{figure} figures/archive.jpg
    :alt: archive
