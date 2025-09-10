@@ -1,3 +1,9 @@
+<a name="association_levels"></a>
+# Association levels
+
+```{include} ../common/association_levels.md
+```
+
 # Reduction configuration editor
 
 This editor allows to select the data reduction strategy for a given dataset by specifying workflow and recipe

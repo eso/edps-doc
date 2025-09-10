@@ -1,13 +1,14 @@
 # Customizing the data reduction  <a name="configuration"></a>
 
-## Association levels blabla
+## Selection of most appropriate calibrations
 
-T.B.D.
+```{include} ../common/appropriate_calibrations.md
+```
 
-## configuration of parameters
+
+## Configuration of parameters
 The data reduction of each dataset can be configured according to the scientific needs. In order to configure a
-reduction,
-go in the `Processing Queue` tab, which lists the datasets that are listed for reduction,
+reduction, go in the `Processing Queue` tab, which lists the datasets that are listed for reduction,
 and press the button ![](../edpsgui/figures/configure_dataset.jpg) (see {numref}`fig-reduction_configuration_muse_0`).
 
 ```{figure} figures/reduction_configuration_muse_0.jpg
@@ -23,7 +24,7 @@ The configuration window appears (see
 It is possible to configure `workflow parameters`, that specify the strategy of the data reduction, as well as the
 `recipe parameters` associated to each individual task. Predefined sets are configured, for normal scientific reduction
 the default set `science_parameters` can be used.
-The main data reduction strategies that can be configured via `workflow parameters` are:
+The main data reduction steps for which one can modify the predefined strategy by editing the workflow parameters are:
 
 ```{figure} figures/reduction_configuration_muse_1.jpg
 :alt: reduction_configuration_muse_1

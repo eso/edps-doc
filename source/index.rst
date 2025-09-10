@@ -9,7 +9,7 @@ EDPS documentation
 .. toctree::
    :maxdepth: 1
 
-**EDPS-GUI**
+**Graphic User Interface (EDPS-Dashboard)**
 
 .. toctree::
    :maxdepth: 1
@@ -21,7 +21,7 @@ EDPS documentation
 
    edpsgui/index.rst
 
-**Command line execution**
+**EDPS command line execution**
 
 .. toctree::
    :maxdepth: 1
