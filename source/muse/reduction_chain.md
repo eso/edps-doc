@@ -2,7 +2,7 @@
 
 The overall data flow of the MUSE pipeline is displayed [here](figures/muse_cascade.jpg).
 
-The reduction cascade is organized in tasks, which represent a well defined step in the process. Tasks can be grouped
+The reduction cascade is organized in tasks, which represent well defined steps in the process. Tasks can be grouped
 inside sub-workflows.
 Each task runs a recipe; the detailed description of the algorithms,
 input, outputs and recipe parameters used in each recipe are available
@@ -24,34 +24,26 @@ The reduction steps of the MUSE workflow are:
 The task `bias` reduces raw bias frames to generate a combined masterbias. It
 runs the recipe `muse_bias`.
 
-**Apply the same format below**
+## Computation of darc current
 
-## `dark`
+The task `dark` runs the recipe `muse_dark`. If raw dark frames are
+present, the actor processes them and creates a master dark. This product is 
+currently used only for instrument monitoring but not for scientific reduction. Dark
+frames are taken monthly, therefore they might not represent the dark current at the time of the observations, and they add
+noise to the final products. If needed, darks can be used in the reduction cascade by setting
+ the workflow parameter `use_darks` to `yes` in the `science_parameters` parameter set.
 
-This task runs the recipe `muse_dark`. If raw dark frames are
-present, the actor processes them and creates a master dark. It
-requires the products of task `bias` as inputs. Important: the use of
-dark frames is not recommended for the scientific reduction; dark
-frames are taken on a monthly base (therefore they do not represent in
-detail the dark current at the time of the observations) and they add
-noise to the final products. Currently, this task is not included in
-the scientific reduction. To include it, set the workflow parameter
-`use_darks` to `yes` in the `science_parameters` parameter set.
+## Flat field correction #`lamp_flat`
 
-## `lamp_flat`
+The task `lamp_flat` runs the recipe `muse_ﬂat`. It processes the raw ﬂat-ﬁelds
+exposures, producing a master ﬂat and a trace table. 
 
-This task executes the recipe `muse_ﬂat`. It processes the raw ﬂat-ﬁelds
-exposures, producing a master ﬂat and a trace table. It requires the
-products of the task `bias` (and, optionally, of the task `dark`, if
-executed).
+## Wavelength correction
 
-## `wavelength` (task)
+The task `arc` executes the recipe muse_wavecal. It processes the raw arc frames,
+producing a table with the wavelength solution.
 
-This task executes the recipe muse_wavecal. It processes the raw arc frames,
-produc-ing a table with the wavelength solution. It requires the
-products of the task `bias`, `lamp_flat` (and `dark`, if executed).
-
-## `line_spread_function` (subworkflow)
+## Characterization of the line spread function.
 
 This subworkflow is designed to run the recipe `muse_lsf`
 to produce a calibration that characterize the line spread function.
@@ -62,10 +54,11 @@ task `line_spread_function_lsf`). Alternatively, a static calibration
 is used. The behavior is determined by the workflow parameter
 `lsfmode`, which is described [here](../muse/configure_reduction.md#lsf).
 
-## `Monitoring_and_long_term_calibs`, `Astrometry` (subworkflows)
+## Monitoring calibrations, geometry and astrometry calibrations
 
-This subworkflow contains tasks aimed at creating long term calibrations, such as geometry calibrations  (
-task `geometry`,
+
+The subworkflow "monitoring_and_long_term_calibs" contains tasks aimed at creating long term calibrations, 
+such as geometry calibrations  (task `geometry`,
 recipe `muse_geometry`), astrometric calibrations (tasks `preprocess_astrometry`, `astrometry`,
 recipes `muse_scibasic`, `muse_astrometry`). These calibrations
 are distributed by the ESO archive together with the scientific data. It is anyway possible
@@ -77,9 +70,9 @@ such as the throughput (task throughput, recipe `muse_ampl`), the instrument
 linearity and gain (task linearity_and_gain, recipe `muse_lingain`). These tasks however, are executed only at the
 observatory, and they are not used in the data reduction flow.
 
-## `Process and combine sky` (subworkflow)
+## Sky subtraction (subworkflow)
 
-This subworkflow contains the tasks in charge of evaluating the sky background from dedicated sky exposures.
+The subworkflow `Process and combine sky` contains the tasks in charge of evaluating the sky background from dedicated sky exposures.
 They are
 
 - `preprocess_sky`. It runs the recipe muse_scibasic on dedicated sky exposures
@@ -93,18 +86,18 @@ processes and combine them as such
 (tasks `preoprocess_sky_sky`, `object_sky`, `alignment_sky`, and `combine_sky`).
 The strategy to combine sky exposures is the same as for the regular science exposures.
 
-## `Response` (subworkflow)
+## Flux calibration
 
-This subworkflow contains the tasks to process standard stars and create the response and telluric corrections. They are:
+The subworkflow `response` contains the tasks to process standard stars and create the response and telluric corrections. They are:
 - `preprocess_standard`. It runs the recipe muse_scibasic on raw standard stars
 - `response`. It runs the recipe muse_standard and generate STD_RESPONSE and STD_TELLURIC calibrations. To disable telluric correction
 on your data, set the workflow parameter `telluric_correction` to `FALSE` (see [here](../muse/configure_reduction.md#telluric)).
 
 
 
-## `Process and combine object` (subworkflow)
+## Reduction and combination of scientific exposures
 
-This subworkflow contains the tasks in charge of aligning and combining scientific exposures. They are:
+The subworkflow `Process and combine object` contains the tasks in charge of aligning and combining scientific exposures. They are:
 
 - `preprocess_science`. This task runs the recipe muse_scibasic on scientific exposures.
 - `autocalibration_from_object_sky`. This tasks select autocalibration coefficients computed from sky exposures, if
