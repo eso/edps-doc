@@ -63,6 +63,15 @@ html_sidebars = {
     'sphere/**':[
         'globaltoc.html',  # Global Table of contents
         ],
+    'uves/**':[
+        'globaltoc.html',  # Global Table of contents
+        ],
+    'visir/**':[
+        'globaltoc.html',  # Global Table of contents
+        ],
+    'xshooter/**':[
+        'globaltoc.html',  # Global Table of contents
+        ],
     '**': [
         'globaltoc.html',  # Global Table of contents
         'searchbox.html',  # search box

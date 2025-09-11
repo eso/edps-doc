@@ -2,7 +2,7 @@
 
 # Reducing demo data
 
-Follow this procedure to quickly reduce SPHERE demo data. We assume that the `EDPS` Graphic User Interface and the SPHERE
+Follow this procedure to quickly reduce UVES demo data. We assume that the `EDPS` Graphic User Interface and the UVES
 pipeline and the demo data are installed in your system. For general instructions on how to install `EDPS` and the
 pipeline, please
 visit [https://www.eso.org/sci/software/pipe_aem_main.html](https://www.eso.org/sci/software/pipe_aem_main.html).
@@ -14,8 +14,7 @@ visit [https://www.eso.org/sci/software/pipe_aem_main.html](https://www.eso.org/
 
 c. Choose the desired workflow pipeline from the list in the `workflows` field. The workflows offered in this selector depend on
 the installed pipelines.
-The SPHERE pipeline comes with several workflow dedicated to the different instrument modes;
-the general workflow `sphere.sphere_wkf` deals with data from all modes.
+
 
 The graphic workflow representation will appear as in
 {numref}`fig-wkf`.
@@ -63,4 +62,4 @@ The final products saved in the specified directory are:
 Go to [top](#top)
 
 ---
-Go to SPHERE EDPS tutorial [index](../sphere/index)
+Go to UVES EDPS tutorial [index](../uves/index)
