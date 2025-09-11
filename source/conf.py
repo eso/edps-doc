@@ -42,10 +42,25 @@ html_sidebars = {
     'edpsgui/**':[
         'globaltoc.html',  # Global Table of contents
         ],
-    'muse/**':[
+    'crires/**':[
+        'globaltoc.html',  # Global Table of contents
+        ],
+    'eris/**':[
+        'globaltoc.html',  # Global Table of contents
+        ],
+    'espresso/**':[
         'globaltoc.html',  # Global Table of contents
         ],
     'fors/**':[
+        'globaltoc.html',  # Global Table of contents
+        ],
+    'giraffe/**':[
+        'globaltoc.html',  # Global Table of contents
+        ],
+    'muse/**':[
+        'globaltoc.html',  # Global Table of contents
+        ],
+    'sphere/**':[
         'globaltoc.html',  # Global Table of contents
         ],
     '**': [

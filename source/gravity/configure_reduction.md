@@ -4,13 +4,14 @@
 
 ```{include} ../common/appropriate_calibrations.md
 ```
+
 ## Quality reports
 ```{include} ../common/quality_plots.md
 ```
+
 ## Configuration of parameters
 ```{include} ../common/configure_reduction.md
 ```
-
 
 ## First step <a name="first_step"> </a>
 
@@ -40,4 +41,4 @@ Describe parameters here and what to do in case of bad results
 Go to [top](#configuration)
 
  ---
-Go to ESPRESSO EDPS tutorial [index](../espresso/index)
+Go to GRAVITY EDPS tutorial [index](../gravity/index)
