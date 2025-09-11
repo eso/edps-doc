@@ -45,6 +45,9 @@ html_sidebars = {
     'muse/**':[
         'globaltoc.html',  # Global Table of contents
         ],
+    'fors/**':[
+        'globaltoc.html',  # Global Table of contents
+        ],
     '**': [
         'globaltoc.html',  # Global Table of contents
         'searchbox.html',  # search box

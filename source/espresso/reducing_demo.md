@@ -2,7 +2,7 @@
 
 # Reducing demo data
 
-Follow this procedure to quickly reduce MUSE demo data. We assume that the `EDPS` Graphic User Interface and the MUSE
+Follow this procedure to quickly reduce ESPRESSO demo data. We assume that the `EDPS` Graphic User Interface and the FORS
 pipeline and the demo data are installed in your system. For general instructions on how to install `EDPS` and the
 pipeline, please
 visit [https://www.eso.org/sci/software/pipe_aem_main.html](https://www.eso.org/sci/software/pipe_aem_main.html).
@@ -12,8 +12,10 @@ visit [https://www.eso.org/sci/software/pipe_aem_main.html](https://www.eso.org/
 ```{include} ../common/reducing_demo_1.md
 ```
 
-c. Choose the `MUSE` pipeline from the list in the `workflows` field. The workflows offered in this selector depend on
+c. Choose the desired workflow pipeline from the list in the `workflows` field. The workflows offered in this selector depend on
 the installed pipelines.
+
+
 The graphic workflow representation will appear as in
 {numref}`fig-wkf`.
 
@@ -21,7 +23,7 @@ The graphic workflow representation will appear as in
 :alt: wkf
 :name: fig-wkf
 
-The EDPS Dashboard (Graphic User Interface) with the MUSE workflow loaded.	
+**Insert caption here**	
 ```
 
 ## 2. Selecting the input data
@@ -48,17 +50,7 @@ start of reduction)
 
 The final products saved in the specified directory are:
 
-- Datacubes and reconstructed images of mosaics, when combination of multiple exposures has been perfomed. Their name
-  format are
-  `DATACUBE_COMBINED_` and `IMAGE_COMBINED_` followed by the target name (as obtained from the header
-  keyword `OBS TARG NAME` of the first exposure)
-- Datacubes and reconstructed images of individual exposures. Their name format are
-  `DATACUBE_` and `IMAGE_` followed by the exposure identifier (header keyword `arcfile`).
-  They are stored in the subdirectory `individual_exposures`
-
-Additionally, if specified by the reduction target, also products
-of sky exposures (treated as regular science exposures) are saved. They product names have the same convention as
-regular science exposures.
+**Please desribe the main products of the reduction**
 
 ## 5. Quality plots
 
@@ -70,4 +62,4 @@ regular science exposures.
 Go to [top](#top)
 
 ---
-Go to MUSE EDPS tutorial [index](../muse/index)
+Go to ERIS EDPS tutorial [index](../eris/index)

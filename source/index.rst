@@ -34,3 +34,4 @@ EDPS documentation
    :maxdepth: 1
 
    muse/index.rst
+   fors/index.rst
