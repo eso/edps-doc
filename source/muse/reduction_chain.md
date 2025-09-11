@@ -105,9 +105,11 @@ The subworkflow `Process and combine object` contains the tasks in charge of ali
   See [here](../muse/configure_reduction.md#autocalibration).
 - `object`. This task runs the recipe muse_scipost to reduce a single scientific exposure.
 - `alignment`. This tasks runs the recipe muse_exp_align to correct for coordinate offsets the exposures that are meant
-  to be combined together (see [here](../muse/configure_reduction.md#combination)
+  to be combined together (see [here](../muse/configure_reduction.md#combination).
 - `object_combination`. This tasks runs the recipe muse_exp_combine and combines individual exposures to produce the
   final datacube
+
+
 
 ---
 Go to MUSE EDPS tutorial [index](../muse/index)

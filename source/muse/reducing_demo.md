@@ -41,7 +41,7 @@ archieved data reduction: press the `Export` button in the `Archieved Data` tab
 (see [here](../edpsgui/gui.md#archived_data)).
 
 To archieve a data reduction, press
-the button `Archive` in the `Processing Queue` tab (see [here](../edpsgui/gui.md#processing_queue))
+the button `Archive` in the `Reduction Queue` tab (see [here](../edpsgui/gui.md#processing_queue))
 
 Products are organized by `DATASET` (named as the first scientific exposure of the dataset), and `TIMESTAMP` (time of
 start of reduction)
@@ -56,9 +56,15 @@ The final products saved in the specified directory are:
   `DATACUBE_` and `IMAGE_` followed by the exposure identifier (header keyword `arcfile`).
   They are stored in the subdirectory `individual_exposures`
 
-Additionaly, if specified by the reduction target, also products
+Additionally, if specified by the reduction target, also products
 of sky exposures (treated as regular science exposures) are saved. They product names have the same convention as
 regular science exposures.
+
+## 5. Quality plots
+
+```{include} ../common/quality_plots.md
+```
+
 
 ---
 Go to [top](#top)
