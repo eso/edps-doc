@@ -72,15 +72,35 @@ observatory, and they are not used in the data reduction flow.
 
 ## Sky subtraction (subworkflow)
 
+
 The subworkflow `Process and combine sky` contains the tasks in charge of evaluating the sky background from dedicated
 sky exposures.
-They are
+They are:
 
 - `preprocess_sky`. It runs the recipe muse_scibasic on dedicated sky exposures
 - `sky`. It runs the recipe muse_create_sky to generate SKY_LINES and SKY_CONTINUUM calibrations.
 
-The strategy to compute the sky background using dedicated sky exposures is
-described [here](../muse/configure_reduction.md#skysub).
+Sky subtraction can also be done by evaluating the sky contribution directly on regions in the target field of view that is free from
+contamination from astronomical sources.
+The most important products to check, regardless of the method used, are the
+
+- SKY_CONTINUUM. It should not contain features that are typical of astronomical objects. 
+For example, if the sky region contains HII regions, the Halpha emission lines are not registered as a sky line in the 
+input list of sky lines. As a consequence, it will be present in the SKY_CONTINUUM and therefore subtracted from the 
+target spectrum.
+- SKY_MASK. A comparison between the image field of view and the sky mask should confirm that astronomical sources are not included as sky regions.
+
+If the SKY_MASK overlap with some source or if SKY_CONTINUUM contains astrophysical signal such as nebular emission lines, 
+consider to decrease the recipe parameter `skymodel-fraction` or to provide a custom SKY_MASK in the input directory.
+
+SKY_CONTINUUM and SKY_MASK products are available from the tasks sky (if dedicated sky observations are used) and 
+object (if the sky was evaluated on the target field of view). Click on the magnifying glass
+symbol close to the appropriate task, and select the tab `Output Files`. Products can be inspected via the `fv` fits 
+viewer (if available).
+
+
+More information on the sky background removal are given [here](../muse/configure_reduction.md#skysub).
+
 
 This subworkflow contains also the tasks that consider dedicated sky exposures as self-contained science exposures and
 processes and combine them as such
