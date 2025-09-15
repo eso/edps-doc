@@ -166,7 +166,7 @@ the recipe parameter accordingly in the configuration window (see [here](../muse
 
 
 - In case of complicated alignment, it might be advisable to specify `alignment` as reduction target when creating the
-  datasets. In this way the reduction
+  datasets in the `Raw Data` tab. In this way the reduction
   stops at this step, without wasting resources to combine the exposures. After the correct recipe parameters set has
   been found, the full reduction cascade can be triggered.
 
