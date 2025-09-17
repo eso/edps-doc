@@ -48,3 +48,12 @@ EDPS documentation
    #visir/index.rst
    #xshooter/index.rst
 
+-----------------------------------
+
+
+**PDF version**
+
+.. toctree::
+   :maxdepth: 1
+
+   pdf.md
