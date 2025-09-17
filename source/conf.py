@@ -42,36 +42,36 @@ html_sidebars = {
     'edpsgui/**':[
         'globaltoc.html',  # Global Table of contents
         ],
-    'crires/**':[
-        'globaltoc.html',  # Global Table of contents
-        ],
-    'eris/**':[
-        'globaltoc.html',  # Global Table of contents
-        ],
-    'espresso/**':[
-        'globaltoc.html',  # Global Table of contents
-        ],
-    'fors/**':[
-        'globaltoc.html',  # Global Table of contents
-        ],
-    'giraffe/**':[
-        'globaltoc.html',  # Global Table of contents
-        ],
+ #   'crires/**':[
+ #       'globaltoc.html',  # Global Table of contents
+ #       ],
+ #   'eris/**':[
+ #       'globaltoc.html',  # Global Table of contents
+ #       ],
+ #   'espresso/**':[
+ #       'globaltoc.html',  # Global Table of contents
+ #       ],
+ #   'fors/**':[
+ #       'globaltoc.html',  # Global Table of contents
+ #       ],
+ #   'giraffe/**':[
+ #       'globaltoc.html',  # Global Table of contents
+ #       ],
     'muse/**':[
         'globaltoc.html',  # Global Table of contents
         ],
-    'sphere/**':[
-        'globaltoc.html',  # Global Table of contents
-        ],
-    'uves/**':[
-        'globaltoc.html',  # Global Table of contents
-        ],
-    'visir/**':[
-        'globaltoc.html',  # Global Table of contents
-        ],
-    'xshooter/**':[
-        'globaltoc.html',  # Global Table of contents
-        ],
+ #   'sphere/**':[
+ #       'globaltoc.html',  # Global Table of contents
+ #      ],
+ #   'uves/**':[
+ #       'globaltoc.html',  # Global Table of contents
+ #       ],
+ #   'visir/**':[
+ #       'globaltoc.html',  # Global Table of contents
+ #       ],
+ #   'xshooter/**':[
+ #       'globaltoc.html',  # Global Table of contents
+ #       ],
     '**': [
         'globaltoc.html',  # Global Table of contents
         'searchbox.html',  # search box
