@@ -34,7 +34,7 @@ add
 noise to the final products. If needed, darks can be used in the reduction cascade by setting
 the workflow parameter `use_darks` to `yes` in the `science_parameters` parameter set.
 
-## Flat field correction #`lamp_flat`
+## Flat field correction
 
 The task `lamp_flat` runs the recipe `muse_ﬂat`. It processes the raw ﬂat-ﬁelds
 exposures, producing a master ﬂat and a trace table.
@@ -70,8 +70,7 @@ such as the throughput (task throughput, recipe `muse_ampl`), the instrument
 linearity and gain (task linearity_and_gain, recipe `muse_lingain`). These tasks however, are executed only at the
 observatory, and they are not used in the data reduction flow.
 
-## Sky subtraction (subworkflow)
-
+## Sky subtraction
 
 The subworkflow `Process and combine sky` contains the tasks in charge of evaluating the sky background from dedicated
 sky exposures.
@@ -97,7 +96,6 @@ SKY_CONTINUUM and SKY_MASK products are available from the tasks sky (if dedicat
 object (if the sky was evaluated on the target field of view). Click on the magnifying glass
 symbol close to the appropriate task, and select the tab `Output Files`. Products can be inspected via the `fv` fits 
 viewer (if available).
-
 
 More information on the sky background removal are given [here](../muse/configure_reduction.md#skysub).
 
