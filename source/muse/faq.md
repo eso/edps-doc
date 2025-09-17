@@ -97,4 +97,4 @@ System [EDPS]".
 </details>
 
 ---
-Go to EDPS quick-start guide [index](../quick/index)
+Go to MUSE tutorial [index](../muse/index)
