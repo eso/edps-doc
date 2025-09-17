@@ -59,6 +59,7 @@ html_sidebars = {
  #       ],
     'muse/**':[
         'globaltoc.html',  # Global Table of contents
+        'pdf.html',        #Link to full pdf documentation
         ],
  #   'sphere/**':[
  #       'globaltoc.html',  # Global Table of contents
@@ -75,5 +76,6 @@ html_sidebars = {
     '**': [
         'globaltoc.html',  # Global Table of contents
         'searchbox.html',  # search box
+        'pdf.html',        #Link to full pdf documentation
     ]
 }
