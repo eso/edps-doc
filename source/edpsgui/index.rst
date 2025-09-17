@@ -10,8 +10,8 @@ Complete manual
 .. toctree::
    :maxdepth: 2
 
+   intro.md
    ../common/tbd.md
-   #intro.mdd
    #gui.md
    #reduction_configuration.md
    #final_products.md

@@ -10,12 +10,9 @@ specific scientific needs are also given.
 
 
 
-## What is EDPS?
+For a more extensive documentation on the EDPS-GUI itself, consult the dedicated manual [here](../edpsgui/index).
 
-```{include} ../common/what_is_edps.md
-```
+For a brief description of EDPS and its main concepts, see [here](../edpsgui/intro.md/#what_is_edps).
 
-## EDPS main concepts
+For a detailed documentation on the GIRAFFE pipeline itself, consult the pipeline manual available [insert_link](https://ftp.eso.org/pub/dfs/pipelines/instruments/xxx).
 
-```{include} ../common/main_concepts.md
-```

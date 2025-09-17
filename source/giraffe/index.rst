@@ -14,6 +14,6 @@ GIRAFFE tutorial
    #../common/tbd.md
    intro.md
    reducing_demo.md
-   configure_reduction.md
    reduction_chain.md
+   configure_reduction.md
    faq.md

@@ -9,13 +9,10 @@ Details on the ESPRESSO data reduction stream and how to configure the reduction
 specific scientific needs are also given.
 
 
+For a more extensive documentation on the EDPS-GUI itself, consult the dedicated manual [here](../edpsgui/index).
 
-## What is EDPS?
+For a brief description of EDPS and its main concepts, see [here](../edpsgui/intro.md/#what_is_edps).
 
-```{include} ../common/what_is_edps.md
-```
+For a detailed documentation on the ESPRESSO pipeline itself, consult the pipeline manual available [insert_link](https://ftp.eso.org/pub/dfs/pipelines/instruments/xxx).
 
-## EDPS main concepts
 
-```{include} ../common/main_concepts.md
-```
