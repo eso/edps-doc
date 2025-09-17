@@ -3,17 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-MUSE EDPS tutorial
+MUSE tutorial
 ================================
-
-
 
 .. toctree::
    :maxdepth: 2
 
-   ../common/tbd.md
-   #intro.md
-   #reducing_demo.md
-   #configure_reduction.md
-   #reduction_chain.md
-   #faq.md
+   #../common/tbd.md
+   intro.md
+   reducing_demo.md
+   reduction_chain.md
+   configure_reduction.md
+   faq.md

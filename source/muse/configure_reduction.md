@@ -1,84 +1,65 @@
 # Customizing the data reduction  <a name="configuration"></a>
 
-## Association levels blabla
+## Selection of most appropriate calibrations
 
-T.B.D.
-
-## configuration of parameters
-The data reduction of each dataset can be configured according to the scientific needs. In order to configure a
-reduction,
-go in the `Processing Queue` tab, which lists the datasets that are listed for reduction,
-and press the button ![](../edpsgui/figures/configure_dataset.jpg) (see {numref}`fig-reduction_configuration_muse_0`).
-
-```{figure} figures/reduction_configuration_muse_0.jpg
-:alt: reduction_configuration_muse_0
-:name: fig-reduction_configuration_muse_0
-:figclass: left-caption
-
-How to open the dataset configuration menu to customize data reduction.
+```{include} ../common/appropriate_calibrations.md
+```
+## Quality reports
+```{include} ../common/quality_plots.md
+```
+## Configuration of parameters
+```{include} ../common/configure_reduction.md
 ```
 
-The configuration window appears (see
-{numref}`fig-reduction_configuration_muse_1` and {numref}`fig-reduction_configuration_muse_2`)
-It is possible to configure `workflow parameters`, that specify the strategy of the data reduction, as well as the
-`recipe parameters` associated to each individual task. Predefined sets are configured, for normal scientific reduction
-the default set `science_parameters` can be used.
-The main data reduction strategies that can be configured via `workflow parameters` are:
 
-```{figure} figures/reduction_configuration_muse_1.jpg
-:alt: reduction_configuration_muse_1
-:name: fig-reduction_configuration_muse_1
-:figclass: left-caption
-
-The top part of the reduction configuration window of the MUSE workflow, where the workflow parameters can be configured.
-
-```
-
-```{figure} figures/reduction_configuration_muse_2.jpg
-:alt: reduction_configuration_muse_2
-:name: fig-reduction_configuration_muse_2
-:figclass: left-caption
-
-The lower part of the reduction configuration window of the MUSE workflow, where the recipe parameters per each task can be configured.
-
-```
-
-<a name="lsf"> </a>
-
-## Parametrization of the Line Spread Function
+## Parametrization of the Line Spread Function<a name="lsf"> </a>
 
 The `MUSE` pipeline uses a model of the Line Spread Function (LSF) to model emission sky lines for the sky subtraction.
 An accurate knowledge of the LSF is crucial for a good removal of sky lines. The strategy for computing the LSF is
 set by the workflow parameter **`lsfmode`**.
 The best results are generally obtained by setting it to `arc`, which
-uses the arc lines of the wavelength calibrations to model the line spread function. Possible values of **`lsfmode`**
-are:
+uses the arc lines of the wavelength calibrations taken the same day to model the line spread function.
+
+If the model of the line spread function is not accurate, residual sky lines have to be expected. In particular,
+residuals with Pcygni profiles, or wings. In this case, it could be worth trying other methods
+Possible values of **`lsfmode`** are:
 
 - `any`  Characterize the LSF from dedicated lsf raw exposures. If not
   available, use arc raw exposures. If not available, use static
   calibration from the pipeline distribution.
 
 - `lsf`  Characterize the LSF from dedicated lsf raw exposures. If not
-  available, use static calibration from the pipeline distribution.
+  available, use static calibration from the pipeline distribution. Dedicated lsf
+  calibrations usually provide a better characterization of the LSF with respect to the regular arc calibrations,
+  because they are more numerous. However, they are taken every few months, therefore they might not describe exaclty
+  the LSF profile of the night where the observations were taken.
 
 - `arc`  Characterize the LSF from dedicated arc raw exposures. If not
   available, use static calibration from the pipeline distribution.
 
-- `static` Use static calibration from the pipeline distribution.
-
-**When the defaults have to be changed?** T.B.D.
+- `static` Use static calibration from the pipeline distribution. Use this option in combination with
+  master calibration for fast, but potentially less accurate, reduction.
 
  ---
 Go to [top](#configuration)
 
-<a name="skysub"> </a>
 
-## Sky subtraction
+## Sky subtraction <a name="skysub"> </a>
 
-**Things to consider, when to change defaults. If this happens, do this, if that happens do that**
+A crucial aspect of the MUSE data reduction is the sky subtraction. The workflow supports several strategies, which
+are determined by the value of the workflow parameter **`skysubtraction`**.
+By default, the MUSE workflow uses dedicated sky exposures (if available) to compute the SKY_CONTINUUM and the SKY_LINES
+calibrations. If artefacts are present in the sky continuum or if the emission lines are over or under-subtracted, it
+might
+be worth computing the sky on the field of view of the target (if not completely covered by sources),
+by setting `skysubtraction=model`.
+If the region used to compute the sky (either in the dedicated sky exposure or in the target field) contain
+astronomical objects, you might notice spurious absorption lines or distorted or surprisingly weak emission lines in
+your final spectrum.
+The region where the sky has to be computed can be set by dedicated recipe
+parameters (fraction, and fraction_ignore, see below) or by including a SKY_MASK among input files. file.
 
-A crucial aspect of the `MUSE` data reduction is the sky subtraction. The workflow supports several strategies, which
-are determined by the value of the workflow parameter **`skysubtraction`**. Possible values are:
+Possible values of **skysubtraction** are:
 
 - `model`. It uses fluxes indicated in an input SKY_LINES table (either static calibration, or coming from a dedicated
   sky
@@ -245,8 +226,9 @@ Go to [top](#configuration)
 ## Telluric correction <a name="telluric"> </a>
 
 The MUSE pipeline derives the atmospheric transmission (category: `STD_TELLURIC`) from the standard star. The correction
-is then applied to the entire datacube. This is enabled by default. To avoid telluric correction,
-set the workflow parameter `telluric_correction` to `FALSE`.
+is then applied to the entire datacube. This is enabled by default.
+If telluric lines are still present in the final product, one can skip the telluric correction
+(set the workflow parameter `telluric_correction` to `FALSE`) and do it with external tool.
 
  ---
 Go to [top](#configuration)
@@ -254,15 +236,17 @@ Go to [top](#configuration)
 ## Wavelength range
 
 It is possible to specify the wavelength range of the output by setting the parameters `wavelength_min` (default 4000
-angstrom) and - `wavelength_max` (default 10000 angstrom). It could be convenient to specify a shorter wavelength range
-to speed up the reduction process, e.g. by concentrating only on the spectra features of scientific interest.
+angstrom) and - `wavelength_max` (default 10000 angstrom). If the full wavelength range is not needed for scientific
+analysis, one can speed up the reduction process by specifying a shorter wavelenght range
+, e.g. by concentrating only on the spectra features of scientific interest.
 
  ---
 Go to [top](#configuration)
 
 ## Geometric and astrometric calibrations.
 
-By default, the ESO archive provides the closer in time geometric and astrometric calibrations. If one wants to
+By default, the ESO archive provides the closer in time geometric and astrometric calibrations. Generally, they ensure the best reduction and there is 
+no need to change them. However, if one wants to
 reprocess them, it has to download the corresponding raw calibrations (`dpr.type` = `WAVE,MASK` and `ASTROMETRY`,
 respectively) from the archive and set
 the workflow parameters  `recompute_geometry`: "yes" and `recompute_astrometry`: "yes".
@@ -276,7 +260,10 @@ Go to [top](#configuration)
 The DARK current in MUSE detector is very low. Dark calibrations are taken as part of the instrument monitoring and
 calibration plan, but it is not advisable to process and remove a master dark from the scientific data, as it increase
 the noise in the product.
-Therefore, darks are not processed for scientific reduction. To enable and use dark calibrations for scientic reduction,
+Therefore, darks are not used in scientific reduction. To reduce raw dark frames, specify the reduction target 
+"dark" in the `Raw Input` tab, before creating the datasets.
+
+In case one wants to test the effects of including darks in the scientic reduction,
 set the workflow parameter
 `use_darks`: "yes"
 

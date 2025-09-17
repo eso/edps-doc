@@ -1,3 +1,4 @@
+<a name="configuration_file"></a>
 # How to configure EDPS: the `application.properties` file.
 
 Several options in `EDPS` can be specified in a configuration file, named `application.properties`.
