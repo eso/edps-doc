@@ -33,18 +33,18 @@ EDPS documentation
 .. toctree::
    :maxdepth: 1
 
-   crires/index.rst
-   eris/index.rst
-   espresso/index.rst
-   fors/index.rst
-   giraffe/index.rst
-   hawki/index.rst
-   kmos/index.rst
-   matisse/index.rst
+   #crires/index.rst
+   #eris/index.rst
+   #espresso/index.rst
+   #fors/index.rst
+   #giraffe/index.rst
+   #hawki/index.rst
+   #kmos/index.rst
+   #matisse/index.rst
    muse/index.rst
-   sphere/index.rst
-   uves/index.rst
-   fors/index.rst
-   visir/index.rst
-   xshooter/index.rst
+   #sphere/index.rst
+   #uves/index.rst
+   #fors/index.rst
+   #visir/index.rst
+   #xshooter/index.rst
 
