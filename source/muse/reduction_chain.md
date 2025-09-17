@@ -1,8 +1,8 @@
-# The MUSE data reduction flow.
+# Customizing the MUSE data reduction.
 
 The overall data flow of the MUSE pipeline is displayed [here](figures/muse_cascade.jpg).
 
-The reduction cascade is organized in tasks, which represent well defined steps in the process. Tasks can be grouped
+The reduction cascade is organized in tasks, which represent well-defined steps in the process. Tasks can be grouped
 inside sub-workflows.
 Each task runs a recipe; the detailed description of the algorithms,
 input, outputs and recipe parameters used in each recipe are available
