@@ -1,2 +1,3 @@
 sphinx
 myst-parser
+sphinxcontrib-latex>=1.0.0
