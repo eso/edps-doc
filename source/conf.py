@@ -8,7 +8,7 @@
 
 project = 'EDPS'
 copyright = '2025, ESO'
-author = 'Lodovico Coccato'
+author = ' EDPS development team'
 release = '1.0'
 
 # -- General configuration ---------------------------------------------------
@@ -38,9 +38,11 @@ html_theme_options = {
 html_sidebars = {
     'quick/**':[
         'globaltoc.html',  # Global Table of contents
+        'pdf.html',        #Link to full pdf documentation
         ],
     'edpsgui/**':[
         'globaltoc.html',  # Global Table of contents
+        'pdf.html',        #Link to full pdf documentation
         ],
  #   'crires/**':[
  #       'globaltoc.html',  # Global Table of contents
