@@ -4,7 +4,7 @@
 
 This document describes how to reduce FORS data with the EDPS dashboard (Graphic User
 Interface), the recommended infrastructure to reduce data from the ESO
-telescope, using the new ESO Data Processing System (EDPS).
+telescope, using the ESO Data Processing System (EDPS).
 Details on the FORS data reduction stream and how to configure the reduction to meet 
 specific scientific needs are also given.
 
