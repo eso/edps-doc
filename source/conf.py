@@ -8,7 +8,7 @@
 
 project = 'EDPS'
 copyright = '2025, ESO'
-author = ' EDPS development team'
+author = 'EDPS development team'
 release = '1.0'
 
 # -- General configuration ---------------------------------------------------
