@@ -35,7 +35,7 @@ EDPS documentation
 
    #crires/index.rst
    #eris/index.rst
-   #espresso/index.rst
+   espresso/index.rst
    #fors/index.rst
    #giraffe/index.rst
    #hawki/index.rst
