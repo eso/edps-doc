@@ -21,7 +21,8 @@ To install `EDPS` follow these steps:
          python3 -m venv edpsgui
          . edpsgui/bin/activate 
 
-2. Install [graphviz](https://graphviz.org/), [fv](https://heasarc.gsfc.nasa.gov/docs/software/ftools/fv/fv.html.5.0), and [ds9](https://sites.google.com/cfa.harvard.edu/saoimageds9/download), which has to be included in the system path.
+2. Install [graphviz](https://graphviz.org/), [fv](https://heasarc.gsfc.nasa.gov/docs/software/ftools/fv/fv.html.5.0), and [ds9](https://sites.google.com/cfa.harvard.edu/saoimageds9/download), which have to be included in the system path (definying aliases not enough).
+
 
 3. Install the required packages:
 
