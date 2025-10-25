@@ -9,7 +9,7 @@
    installation was successful, type
 
    	    esorex --recipes 
-
+https://heasarc.gsfc.nasa.gov/docs/software/ftools/fv/fv.html.5.0
 A list of available recipes should appear.
 
 ## Installation steps
@@ -21,7 +21,9 @@ To install `EDPS` follow these steps:
          python3 -m venv edpsgui
          . edpsgui/bin/activate 
 
-2. Install the required packages:
+2. Install [graphviz](https://graphviz.org/), [fv](https://heasarc.gsfc.nasa.gov/docs/software/ftools/fv/fv.html.5.0), and [ds9](https://sites.google.com/cfa.harvard.edu/saoimageds9/download), which has to be included in the system path.
+
+3. Install the required packages:
 
          pip install --extra-index-url https://ftp.eso.org/pub/dfs/pipelines/repositories/stable/src edps edpsgui edpsplot adari_core 
 
