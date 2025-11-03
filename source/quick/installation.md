@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-1. Recent Firefox or Chrome browser, Python 3.11 or higher.
+1. Recent Firefox or Chrome browser, Python 3.11 or higher (but there are issues with Python 3.14).
 2. At least one ESO pipeline with EDPS workflow should be in your system. To install the desired ESO pipelines, follow
    the instructions in the [ESO pipelines pages](http://eso.org/pipelines). NOTE: the `apptainer` installation method is
    currently not supported. After the installation, the `esorex` command must be in the path. To test whether the
