@@ -12,6 +12,20 @@
 https://heasarc.gsfc.nasa.gov/docs/software/ftools/fv/fv.html.5.0
 A list of available recipes should appear.
 
+3. Install [graphviz](https://graphviz.org/), [fv](https://heasarc.gsfc.nasa.gov/docs/software/ftools/fv/fv.html.5.0), and 
+[ds9](https://sites.google.com/cfa.harvard.edu/saoimageds9/download), which have to be included in the system path (definying aliases not enough). Graphviz can be installed via:
+
+         sudo apt install graphviz (Debian, Ubuntu)
+         sudo dnf install graphviz (Fedora)
+
+   For the other two packages, follow the instructions in their webpages.
+   You can test whether these three packages are installed and their path is correctly set by typing on a terminal:
+
+         dot -V
+         fv  -version
+         ds9 -version
+
+
 ## Installation steps
 
 To install `EDPS` follow these steps:
@@ -19,13 +33,9 @@ To install `EDPS` follow these steps:
 1. Create a new Python virtual environment and activate it:
 
          python3 -m venv edpsgui
-         . edpsgui/bin/activate 
+         . edpsgui/bin/activate
 
-2. Install [graphviz](https://graphviz.org/), [fv](https://heasarc.gsfc.nasa.gov/docs/software/ftools/fv/fv.html.5.0), and 
-[ds9](https://sites.google.com/cfa.harvard.edu/saoimageds9/download), which have to be included in the system path (definying aliases not enough).
-
-
-3. Install the required packages:
+2. Install the required packages:
 
          pip install --extra-index-url https://ftp.eso.org/pub/dfs/pipelines/repositories/stable/src edps edpsgui edpsplot adari_core 
 
