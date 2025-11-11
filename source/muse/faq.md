@@ -108,15 +108,16 @@ to resize the space allocated to the in the organization of the filesystem. Howe
 
      before installing edps.
 
-   - Redirect the cache, Homebrew temporary build directories into a partition with enough space. Set the
-     following environmental variables in your .bashrc file:
+   - Redirect the cache, Homebrew temporary build directories into a partition with enough space. Set 
+     some of the following environmental variables in your .bashrc file:
 
          export HOMEBREW_CACHE=<path_to_new_cache_directory>
          export XDG_CACHE_HOME=<path_to_new_cache_directory>
          export HOMEBREW_TEMP=<path_to_new_temporary_directory>
+         export TMPDIR=<path_to_new_temporary_directory>
 
      The first moves only the location of Homebrew cache, the second the cache of most applications (instead of the default /home/username/.cache), the third moves
-     the directory where homebrew builds, extracts, and saves temporary files (instead of the defaults /tmp and /var/tmp).
+     the directory where homebrew builds, extracts, and saves temporary files (instead of the defaults /tmp and /var/tmp). The last changes the global system temporary directory and affects most of the linux commands.
 
    - As extreme measure, one can move the /home/linuxbrew/.linuxbrew directory somewhere else, and create a symbolic link in /home/linuxbrew. For example:
 
