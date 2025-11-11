@@ -95,6 +95,8 @@ incase you want to navigate there ’manually’, go to [https://support.eso.org
 System [EDPS]".
 
 </details>
+
+<details>
 <summary><b>Q7) I have a lot of disk space, but when I install EDPS with pip or an ESO pipeline with `Homebrew` I 
 get the error message: Cannot mkdir: No space left on device. How do I fix it?</b>
 </summary>

@@ -117,7 +117,7 @@ to resize the space allocated to the in the organization of the filesystem. Howe
          export XDG_CACHE_HOME=<path_to_new_cache_directory>
          export HOMEBREW_TEMP=<path_to_new_temporary_directory>
          export TMPDIR=<path_to_new_temporary_directory>
-   - 
+
      The first moves only the location of Homebrew cache, the second the cache of most applications (instead of the default /home/username/.cache), the third moves
      the directory where homebrew builds, extracts, and saves temporary files (instead of the defaults /tmp and /var/tmp).
      The last changes the global system temporary directory and affects most of the linux commands.
