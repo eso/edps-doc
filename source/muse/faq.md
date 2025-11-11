@@ -131,5 +131,6 @@ to resize the space allocated to the in the organization of the filesystem. Howe
      installation directory is located into a disk with enough space.
 
 </details>
+
 ---
 Go to MUSE tutorial [index](../muse/index)
