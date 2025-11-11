@@ -95,6 +95,38 @@ incase you want to navigate there ’manually’, go to [https://support.eso.org
 System [EDPS]".
 
 </details>
+<summary><b>Q7) I have a lot of disk space, but when I install EDPS with pip or an ESO pipeline with `Homebrew` I 
+get the error message: Cannot mkdir: No space left on device. How do I fix it?</b>
+</summary>
 
+Answer: This depends on how much disk space is allocated to the `/home`, `/var`, and `/tmp` directories. The final solution would be
+to resize the space allocated to the in the organization of the filesystem. However, we list here few tricks that might do the job.
+
+   - Clearing the pip .cache to make space for new packages. Type the command:
+
+          pip cache purge
+
+     before installing edps.
+
+   - Redirect the cache, Homebrew temporary build directories into a partition with enough space. Set the
+     following environmental variables in your .bashrc file:
+
+         export HOMEBREW_CACHE=<path_to_new_cache_directory>
+         export XDG_CACHE_HOME=<path_to_new_cache_directory>
+         export HOMEBREW_TEMP=<path_to_new_temporary_directory>
+
+     The first moves only the location of Homebrew cache, the second the cache of most applications (instead of the default /home/username/.cache), the third moves
+     the directory where homebrew builds, extracts, and saves temporary files (instead of the defaults /tmp and /var/tmp).
+
+   - As extreme measure, one can move the /home/linuxbrew/.linuxbrew directory somewhere else, and create a symbolic link in /home/linuxbrew. For example:
+
+         cd /home/linuxbrew
+         mv -f .linuxbrew <path_to_new_directory>
+         ln -s <path_to_new_directory> .linuxbrew
+
+     Note: this might require sudo priviliges. If packages are not installed via Homebrew, make sure that the
+     installation directory is located into a disk with enough space.
+
+</details>
 ---
 Go to MUSE tutorial [index](../muse/index)
