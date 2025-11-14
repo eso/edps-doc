@@ -126,7 +126,6 @@ to resize the space allocated to the in the organization of the filesystem. Howe
          mv -f .linuxbrew <path_to_new_directory>
          ln -s <path_to_new_directory> .linuxbrew
 
-     Note: this might require sudo priviliges. If packages are not installed via Homebrew, make sure that the
-     installation directory is located into a disk with enough space.
+     Important note: this operation migth break some internal links. Recipes requiring external packages such as telluriccorr might not work (impacts on kmos, xshooter, fors, and molecfit pipelines) 
 
 </details>

@@ -9,7 +9,7 @@
 project = 'EDPS'
 copyright = '2025, ESO'
 author = 'EDPS development team'
-release = '1.0.0 - rev. 20251112'
+release = '1.0.0 - rev. 20251114'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
