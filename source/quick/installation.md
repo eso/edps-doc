@@ -34,6 +34,7 @@ To install `EDPS` follow these steps:
 
          python3 -m venv edpsgui
          . edpsgui/bin/activate
+   Make sure the python3 version is 3.11 or higher, but not 3.14. 
 
 2. Install the required packages:
 
