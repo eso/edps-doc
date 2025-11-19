@@ -9,7 +9,7 @@
    installation was successful, type
 
    	    esorex --recipes 
-https://heasarc.gsfc.nasa.gov/docs/software/ftools/fv/fv.html.5.0
+
 A list of available recipes should appear.
 
 3. Install [graphviz](https://graphviz.org/), [fv](https://heasarc.gsfc.nasa.gov/docs/software/ftools/fv/fv.html.5.0), and 
