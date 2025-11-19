@@ -15,3 +15,7 @@ MUSE tutorial
    reduction_chain.md
    configure_reduction.md
    faq.md
+
+------------
+
+MUSE Version 2.10.16 - 20251119

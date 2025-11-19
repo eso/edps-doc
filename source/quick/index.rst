@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Quick-start
+EDPS-GUI Quick-start
 ========================
 
 
@@ -14,3 +14,8 @@ Quick-start
    installation.md
    reduction.md
    faq.md
+
+
+------------
+
+EDPS-GUI Version 0.8 - 20251119
