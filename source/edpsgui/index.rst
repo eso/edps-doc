@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Complete manual
+EDPS-GUI complete manual
 ================================
 
 
@@ -11,10 +11,12 @@ Complete manual
    :maxdepth: 2
 
    intro.md
-   ../common/tbd.md
-   #gui.md
+   gui.md
    #reduction_configuration.md
    #final_products.md
    #configuration_file.md
    #tipps.md
    
+------------
+
+EDPS-GUI Version 0.8 - 20251120
