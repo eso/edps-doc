@@ -65,13 +65,17 @@ There are 4 main buttons:
 - **Create Dataset**. This steps creates the datasets to be reduced until the specified reduction target.
   Datasets, together with all the calibrations needed to process them, are listed in a table. Press the "Create Dataset"
   blue button
-  to create the datasets. Selected datasets can be send to the processing queue by pressing
-  the "Submit to Reduction Queue" blue button.
+  to create the datasets. Selected datasets can be sent to the processing queue by pressing
+  the "Submit to Reduction Queue" blue button. 
+
+  **Important notes:**
+  - When submitting a dataset, the reduction 'does not start automatically'. To process a dataset, please, go the the Reduction Queue tab.
+  - You cannot submit to the Reduction queue datasets that are already submitted.
   
   ````{figure} figures/create-dataset.jpg
    :alt: create-dataset
    :name: fig_create-dataset
-   ```` 
+  ```` 
 
   The content and the file association within a dataset can be inspected by pressing the button ![](figures/inspect.jpg)
   at the end of each dataset row. This shows the association tree as in the figure below.
