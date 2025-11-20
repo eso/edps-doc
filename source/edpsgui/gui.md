@@ -41,14 +41,13 @@ There are 4 tabs in the main dashboard window, they are:
 
 - **Raw Data**. It allows to specify the input data, the preferences
   for association calibrations, and to create datasets to be reduced. It
-  is described in Section [The **Raw Data** tab](#raw_data)
-
+  is described in Section [The **Raw Data** tab](#raw_data).
 
 - **Reduction Queue**. It starts the data reduction. It is described in
-  Section [The **Reduction Queue** tab](#reduction_queue)
+  Section [The **Reduction Queue** tab](#reduction_queue).
 
 - **Reduction Archive**. It gives access to previously archived data
-  reduction and final products. It is described in Section [The **Reduction Archive** tab](#reduction_archive)
+  reduction and final products. It is described in Section [The **Reduction Archive** tab](#reduction_archive).
 
 
 At the bottom of the dashboard, the graphic representation of the
