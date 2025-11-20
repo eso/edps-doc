@@ -76,6 +76,14 @@ There are 4 main buttons:
    :alt: create-dataset
    :name: fig_create-dataset
   ```` 
+  The table shows information about the number of jobs, of files, if a dataset is complete, if it has been submitted to the reduction queue, 
+  of whether the final products have been archived.
+  It also indicates the **CalibLevel**, i.e. a number indicating the quality of the associations for that datasets. If CalibLevel is 0, it means that 
+  all the associations are within a "safe" time interval foreseen by the calibration plan of that instruments. 
+  Higher numbers indicate associations of lower quality. More information on the levels of associated calibrations can 
+  be found [here](reduction_configuration.md#association-levels) .
+
+  
 
   The content and the file association within a dataset can be inspected by pressing the button ![](figures/inspect.jpg)
   at the end of each dataset row. This shows the association tree as in the figure below.
@@ -85,3 +93,5 @@ There are 4 main buttons:
       :alt: dataset-tree
       :name: fig_dataset-tree
       ```` 
+
+  
