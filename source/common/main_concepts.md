@@ -8,7 +8,7 @@ The main concepts in EDPS are:
   Foe example, the same workflow can be used to process data following different strategies that trigger different
   reduction steps (e.g. in one strategy flux calibration can be omitted) or different end-points (e.g., combine 
   different science exposures, or stop after the reduction of individual exposures without combining them). Each of these "strategies"
-  defines a "reduction cascade"`".
+  defines a "reduction cascade".
 
 - **Task**, **jobs**, and **recipes**. A task is an element in the workflow that performs a given step of the data reduction
   cascade. Tasks are often associated to a recipe of the underlying instrument pipeline. 
@@ -25,7 +25,7 @@ The main concepts in EDPS are:
   all and only the files needed to execute it. For example, if my target is "science", and the science files
   need the bias files, EDPS will process only the biases that have been selected to process those science files.
   However, if my target is bias, then EDPS will process all and only the bias files, regardless they are not used by any science. 
-  The "Target category` is a group of target that have similar purposes. For example, the target category `science`, includes
-  all the tasks that deliver final scientific products, the target category `qc1calib` includes all and only the tasks that 
+  The "Target category" is a group of target that have similar purposes. For example, the target category "science", includes
+  all the tasks that deliver final scientific products, the target category "qc1calib" includes all and only the tasks that 
   perform a calibration (e.g., bias, standard stars).
 

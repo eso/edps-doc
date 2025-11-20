@@ -70,10 +70,10 @@ Go to EDPS-GUI documentation [index](../edpsgui/index)
 <a name="workflow"></a>
 
 ## The **Workflow** tab.
-t.b.d.
 
-%```{include} workflow_.md
-%```
+
+```{include} workflow_.md
+```
 ---
 Go to [top](#top)
 
@@ -82,10 +82,9 @@ Go to the EDPS-GUI documentation [index](../edpsgui/index)
 <a name="raw_data"></a>
 ## The **Raw Data** tab.
 
-t.b.d.
 
-%```{include} raw_data_.md
-%```
+```{include} raw_data_.md
+```
 
 ---
 Go to [top](#top)
