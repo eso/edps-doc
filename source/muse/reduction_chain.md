@@ -32,7 +32,7 @@ currently used only for instrument monitoring but not for scientific reduction. 
 frames are taken monthly, therefore they might not represent the dark current at the time of the observations, and they
 add
 noise to the final products. If needed, darks can be used in the reduction cascade by setting
-the workflow parameter **use_darks** to **yes** in the **science_parameters** parameter set.
+the workflow parameter **use_darks** to "yes" in the **science_parameters** parameter set.
 
 ## Flat field correction
 
