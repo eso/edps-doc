@@ -93,10 +93,8 @@ Go to the EDPS-GUI documentation [index](../edpsgui/index)
 <a name="reduction_queue"></a>
 ## The **Reduction Queue** tab.
 
-t.b.d.
-
-%```{include} reduction_queue_.md
-%```
+```{include} reduction_queue_.md
+```
 
 ---
 Go to [top](#top)

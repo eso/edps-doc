@@ -3,7 +3,7 @@ similar properties (e.g., taken with the same filter). The rules on how to assoc
 requiring it are encoded
 within the workflow. There could obviously be many calibrations that matches the association criteria (e.g., many flat
 fields taken with the same filter). In this case,  
-EDPS assciates the closest in time. However, having found a calibration does not mean that that calibration delivers a
+EDPS associates the closest in time. However, having found a calibration does not mean that that calibration delivers a
 trustful reduction (e.g., the flat could be 5 years old).
 Therefore, in EDPS there is the concept of "association level", or "quality level of the association", typically a
 quality level is associated to a validity time range that
