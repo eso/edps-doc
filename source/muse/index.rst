@@ -18,4 +18,4 @@ MUSE tutorial
 
 ------------
 
-MUSE Version 2.10.16 - 20251119
+MUSE Version 2.10.16 - 20251121
