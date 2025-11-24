@@ -24,7 +24,7 @@ The reduction steps of the MUSE workflow are:
 The task **bias** reduces raw bias frames to generate a combined masterbias. It
 runs the recipe **muse_bias**.
 
-## Computation of darc current
+## Computation of dark current
 
 The task **dark** runs the recipe **muse_dark**. If raw dark frames are
 present, the actor processes them and creates a master dark. This product is
