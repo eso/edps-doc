@@ -2,7 +2,7 @@
 
 # Reducing demo data
 
-Follow this procedure to quickly reduce XSHOOTER demo data. We assume that the `EDPS` Graphic User Interface and the SPHERE
+Follow this procedure to quickly reduce XSHOOTER demo data. We assume that the `EDPS` Graphic User Interface, the XSHOOTER
 pipeline and the demo data are installed in your system. For general instructions on how to install `EDPS` and the
 pipeline, please
 visit [https://www.eso.org/sci/software/pipe_aem_main.html](https://www.eso.org/sci/software/pipe_aem_main.html).
@@ -12,18 +12,17 @@ visit [https://www.eso.org/sci/software/pipe_aem_main.html](https://www.eso.org/
 ```{include} ../common/reducing_demo_1.md
 ```
 
-c. Choose the desired workflow pipeline from the list in the `workflows` field. The workflows offered in this selector depend on
+c. Choose the `XSHOOTER` pipeline from the list in the `workflows` field. The workflows offered in this selector depend on
 the installed pipelines.
-
 
 The graphic workflow representation will appear as in
 {numref}`fig-wkf`.
 
-```{figure} figures/select_workflow.jpg
+```{figure} figures/select_workflow_xsh2.jpg
 :alt: wkf
 :name: fig-wkf
 
-**Insert caption here**	
+The EDPS Dashboard (Graphic User Interface) with the XSHOOTER workflow loaded.	
 ```
 
 ## 2. Selecting the input data
@@ -50,13 +49,26 @@ start of reduction)
 
 The final products saved in the specified directory are:
 
-**Please desribe the main products of the reduction**
+- Merged and order-by-order 1D and 2D spectra. Their name format are `<PREF>_MERGE1/2D_ARM` and `<PREF>_ORDER1/2D_ARM`.
+- Merged and order-by-order flux-calibrated 1D and 2D spectra. Their name format are `<PREF>_FLUX_MERGE1/2D_ARM` and `<PREF>_FLUX_ORDER1/2D_ARM`.
+
+This is true for all slit modes: stare, offset and nod.
 
 ## 5. Quality plots
 
-```{include} ../common/quality_plots.md
-```
+Almost all processing tasks can display the input raw frames and the products in the so called "quality plots", which
+can be inspected from the `Reduction Queue` window.
+Those associated for the main product can be inspected by pressing the magnifying glass symbol at the right side of each dataset.
+To inspect those associated to each individual job (if created), 
 
+ - Expand the desired dataset by pressing the black arrow on its left. The list of jobs will appear with the associated status (COMPLETED, RUNNING, PENDING)
+ - Press the  magnifying glass symbol at the right side of the job you want to inspect. Only plots for completed jobs can be inspected.
+
+
+   ````{figure} figures/quality_plots.jpg
+   :alt: reports
+   :name: show_reports
+   ```` 
 
 ---
 Go to [top](#top)
