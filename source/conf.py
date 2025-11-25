@@ -59,6 +59,9 @@ html_sidebars = {
  #   'giraffe/**':[
  #       'globaltoc.html',  # Global Table of contents
  #       ],
+    'gravity/**':[
+        'globaltoc.html',  # Global Table of contents
+        ],
     'muse/**':[
         'globaltoc.html',  # Global Table of contents
         'pdf.html',        #Link to full pdf documentation
