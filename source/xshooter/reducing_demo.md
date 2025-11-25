@@ -35,13 +35,12 @@ Go to [top](#top)
 
 ## 4. Final products
 
-By default, EDPS saves all the recipe products for all the executions in the directory specified at the first execution (
-default: `$HOME/EDPS_data`).
+By default, EDPS saves all the recipe products for all the executions in the directory specified at the first execution (default: `$HOME/EDPS_data`).
 However, it is possible to save only the final products into a desired location. This can be achieved by exporting
-archieved data reduction: press the `Export` button in the `Archieved Data` tab
+archived data reduction: press the `Export` button in the `Archived Data` tab
 (see [here](../edpsgui/gui.md#archived_data)).
 
-To archieve a data reduction, press
+To archive a data reduction, press
 the button `Archive` in the `Reduction Queue` tab (see [here](../edpsgui/gui.md#processing_queue))
 
 Products are organized by `DATASET` (named as the first scientific exposure of the dataset), and `TIMESTAMP` (time of
@@ -49,10 +48,12 @@ start of reduction)
 
 The final products saved in the specified directory are:
 
-- Merged and order-by-order 1D and 2D spectra. Their name format are `<PREF>_MERGE1/2D_ARM` and `<PREF>_ORDER1/2D_ARM`.
-- Merged and order-by-order flux-calibrated 1D and 2D spectra. Their name format are `<PREF>_FLUX_MERGE1/2D_ARM` and `<PREF>_FLUX_ORDER1/2D_ARM`.
+- The merged and order-by-order 1D and 2D spectra. Their name format are `<PREF>_MERGE1/2D_ARM` and `<PREF>_ORDER1/2D_ARM`.
+- The merged and order-by-order flux-calibrated 1D and 2D spectra. Their name format are `<PREF>_FLUX_MERGE1/2D_ARM` and `<PREF>_FLUX_ORDER1/2D_ARM`.
 
-This is true for all slit modes: stare, offset and nod.
+This applies to all slit modes (stare, offset, and nod).
+Note that the pipeline combines all input exposures into a single 2D frame (using a mean or median), and then extracts only one 1D spectrum from that combined product. 
+If you need an individual extracted spectrum for each exposure (or for each A/B pair in nodding mode), for example to monitor temporal variations of your target, you must run the science recipe separately for each exposure (or each nod pair).
 
 ## 5. Quality plots
 
