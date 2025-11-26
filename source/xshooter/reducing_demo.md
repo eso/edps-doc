@@ -53,7 +53,8 @@ The final products saved in the specified directory are:
 
 This applies to all slit modes (stare, offset, and nod).
 Note that the pipeline combines all input exposures into a single 2D frame (using a mean or median), and then extracts only one 1D spectrum from that combined product. 
-If you need an individual extracted spectrum for each exposure (or for each A/B pair in nodding mode), for example to monitor temporal variations of your target, you must run the science recipe separately for each exposure (or each nod pair).
+If you need an individual extracted spectrum for each exposure (or for each A/B pair in nodding mode), for example to monitor temporal variations of your target, 
+you must run the science recipe separately for each exposure (or each nod pair).
 
 ## 5. Quality plots
 

@@ -136,7 +136,7 @@ Perform the data reduction:
 - Prepare the science frame (bias/dark/inter-order background correction, flat-fielding).
 - Rectify orders using the model and wavelength solution.
 - Perform sky subtraction (mode-dependent).
-- Localize the object and extract ORDER1D and MERGE1D products.
+- Localize the object and extract `ORDER1D` and `MERGE1D` products.
 
 When several exposures are fed together, 
 the recipes stack them (mean/median) before extraction, 
@@ -154,13 +154,13 @@ and `MEDIAN` is the fatest but may leave residuals.
 - Sky region selection:
 use parameters `sky-position1`, `sky-hheight1`, `sky-position2`, and `sky-hheight2` to manually select sky zones.
 Required when object not centered, multiple objects on slit, or strong NIR gradient.
-- Spectroscopic extraction: 
-Automatic detection
-(`localize-method`=AUTO)
-is usually fine for bright sources.
+- Spectroscopic extraction:
 Standard extraction 
 (`localize-method`=MANUAL)
 recommended for faint sources.
+Automatic detection
+(`localize-method`=AUTO)
+is usually fine for bright sources.
 
 ---
 Go to XSHOOTER EDPS tutorial [index](../xshooter/index)
