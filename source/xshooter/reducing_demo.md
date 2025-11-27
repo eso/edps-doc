@@ -48,8 +48,8 @@ start of reduction)
 
 The final products saved in the specified directory are:
 
-- The merged and order-by-order 1D and 2D spectra. Their name format are `<PREF>_MERGE1/2D_ARM` and `<PREF>_ORDER1/2D_ARM`.
-- The merged and order-by-order flux-calibrated 1D and 2D spectra. Their name format are `<PREF>_FLUX_MERGE1/2D_ARM` and `<PREF>_FLUX_ORDER1/2D_ARM`.
+- The merged and order-by-order 1D and 2D spectra. Their name format are `SCI_SLIT_MERGE1/2D_<ARM>` and `SCI_SLIT_ORDER1/2D_<ARM>`.
+- The merged and order-by-order flux-calibrated 1D and 2D spectra. Their name format are `SCI_SLIT_FLUX_MERGE1/2D_<ARM>` and `SCI_SLIT_FLUX_ORDER1/2D_<ARM>`.
 
 This applies to all slit modes (stare, offset, and nod).
 Note that the pipeline combines all input exposures into a single 2D frame (using a mean or median), and then extracts only one 1D spectrum from that combined product. 

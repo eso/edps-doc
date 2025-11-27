@@ -35,8 +35,10 @@ Go to [top](#configuration)
 
 ## Troubleshooting <a name="troubleshooting"> </a>
 
+This section provides guidance for diagnosing and resolving 
+common issues encountered during the XSHOOTER data-reduction cascade.
 
-### Not enough arc lines detected <a name="first_step"> </a>
+### Not enough arc lines detected <a name="lines_not_found"> </a>
 
 The recipe `xsh_2dmap` may fail with an error indicating that not enough arc lines were detected.
 Typical expected values for `QC.NLINE.FOUND.CLEAN` are:
@@ -59,24 +61,7 @@ to ensure more arc lines are detected.
  ---
 Go to [top](#configuration)
 
-### The extracted merged 1D spectrum looks poor  <a name="first_step"> </a>
-
-The `xsh_respon_slit_xxx` and/or `xsh_scired_slit_xxx` recipes may have
-failed to localize the trace correctly during extraction.
-
-Try setting `extract-method` = LOCALIZATION and provide appropriate values 
-for `localize-slit-position` and `localize-slit-hheight`, 
-based on the appearance of the merged 2D spectral image
-(e.g. `SCI_SLIT_FLUX_MERGE2D_NIR.fits`).
-
-These parameters should be tuned so that:
-- the object lies near the centre of the extraction aperture, and
-- the extraction window fully includes the entire positive flux profile.
-
- ---
-Go to [top](#configuration)
-
-### Sky subtraction residuals (especially NIR) <a name="first_step"> </a>
+### Sky subtraction residuals (especially NIR) <a name="high_nir_res"> </a>
 
 Residual tilts between the sky model and the observed 2D frame
 can introduce sky–subtraction artefacts, particularly in the NIR.
@@ -113,7 +98,25 @@ in the 2D image.
  ---
 Go to [top](#configuration)
 
-### Two object traces in the slit <a name="first_step"> </a>
+### Trace-localization failures <a name="trace_loc"> </a>
+
+`xsh_scired_slit_XXX` may fail when `extraction-method` = LOCALIZATION 
+and `localize-method` is set to either GAUSSIAN or MAXIMUM.
+
+This issue typically occurs with low S/N science exposures, 
+where the object trace cannot be reliably detected using either 
+the Gaussian cross-order profile or the maximum-detection algorithm.
+
+The user should try adjusting
+`localize-slit-position` and `localize-slit-hheight`
+to guide the trace-localization process,
+or alternatively set `extraction-method` = MANUAL,
+which avoids automatic trace detection altogether.
+
+ ---
+Go to [top](#configuration)
+
+### Two object traces in the slit <a name="two_objects"> </a>
 
 Reduce each object trace separately by providing appropriate values in
 the `xsh_scired_slit_XXX` recipe for the parameters
@@ -131,7 +134,7 @@ Both the central positions and the half-heights of the sky regions are expressed
  ---
 Go to [top](#configuration)
 
-### Order-edge artefacts in extracted spectra <a name="first_step"> </a>
+### Order-edge artefacts in extracted spectra <a name="order_edges"> </a>
 
 Artefacts may affect the edges of the 2D and 1D orders, 
 degrading the quality of the merged extracted 2D and 1D spectra.
@@ -154,7 +157,7 @@ the 2D sky-subtracted frame to assess the consistency of order edges.
  ---
 Go to [top](#configuration)
 
-### Small jumps between orders <a name="first_step"> </a>
+### Small jumps between orders <a name="orders_jump"> </a>
 
 Small discontinuities may appear between orders during merging, 
 typically caused by slit-edge artefacts introduced by the flat-field.
@@ -165,7 +168,10 @@ For low S/N objects, use `localize-method` = MANUAL and
 provide appropriate values for `localize-slit-position` and `localize-slit-hheight`.
 For high S/N objects, `localize-method` = AUTO is generally sufficient.
 
-### Overestimated uncertainties in the extracted spectrum <a name="first_step"> </a>
+ ---
+Go to [top](#configuration)
+
+### Overestimated uncertainties in the extracted spectrum <a name="large_err"> </a>
 
 This issue is typically caused by slit-edge artefacts introduced by the flat-field.
 To mitigate it, set `extract-method` = LOCALIZATION in `xsh_scired_slit_XXX` 
@@ -177,25 +183,27 @@ and specify suitable values for
 
 For high S/N objects, localize-method = AUTO is usually sufficient.
 
-### Trace-localization failures <a name="first_step"> </a>
+ ---
+Go to [top](#configuration)
 
-`xsh_scired_slit_XXX` may fail when `extraction-method` = LOCALIZATION 
-and `localize-method` is set to either GAUSSIAN or MAXIMUM.
+### The extracted merged 1D spectrum looks poor  <a name="bad_quality"> </a>
 
-This issue typically occurs with low S/N science exposures, 
-where the object trace cannot be reliably detected using either 
-the Gaussian cross-order profile or the maximum-detection algorithm.
+The `xsh_respon_slit_xxx` and/or `xsh_scired_slit_xxx` recipes may have
+failed to localize the trace correctly during extraction.
 
-The user should try adjusting
-`localize-slit-position` and `localize-slit-hheight`
-to guide the trace-localization process,
-or alternatively set `extraction-method` = MANUAL,
-which avoids automatic trace detection altogether.
+Try setting `extract-method` = LOCALIZATION and provide appropriate values 
+for `localize-slit-position` and `localize-slit-hheight`, 
+based on the appearance of the merged 2D spectral image
+(e.g. `SCI_SLIT_FLUX_MERGE2D_NIR.fits`).
+
+These parameters should be tuned so that:
+- the object lies near the centre of the extraction aperture, and
+- the extraction window fully includes the entire positive flux profile.
 
  ---
 Go to [top](#configuration)
 
-### Zero flux values? Check the cosmic-ray rejection <a name="second_step"> </a>
+### Spectral regions of zero flux values <a name="zero_flux"> </a>
 
 Large regions of zero-flux values in the final extracted 1D spectrum
 may be caused by spurious Cosmic-Ray (CR) detections. 
