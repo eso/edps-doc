@@ -17,3 +17,7 @@ KMOS tutorial
    reduction_chain.md
    configure_reduction.md
    faq.md
+
+------------
+
+KMOS Version 4.5.3 - 20251202
