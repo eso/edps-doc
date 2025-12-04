@@ -20,4 +20,4 @@ XSHOOTER tutorial
 
 ------------
 
-XSHOOTER Version 3.8.3 - 20251124
+XSHOOTER Version 3.8.3 - 20251204

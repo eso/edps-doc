@@ -19,11 +19,12 @@ It is possible to set `EDPS` to perform the data reduction until a certain step 
 (e.g. to reduce  only standard stars, or only flat fields).
 This is controlled by the `Select the reduction target` option in the `Raw Data` tab.
 
-The reduction steps are:
+The reduction steps are listed below. Before starting the reduction, 
+the parameters of the recipes associated to each task can be configured by pressing the button ![](../edpsgui/figures/configure_dataset.jpg) close to each dataset configuration.
+See [here](configure_reduction.md) for more information.
 
 ## Generate Master Bias
-
-Recipe: `xsh_mbias`
+This step is carried in the task **bias**, which runs the recipe  **xsh_mbias**.
 
 Produces a master bias for UVB/VIS arms.
 NIR frames do not use bias frames.
@@ -33,8 +34,8 @@ Customization:
 - Adjust sigma-clipping parameters.
 
 ## Generate Master Dark
+his step is carried in the task **dark**, which runs the recipe  **xsh_mdark**.
 
-Recipe: `xsh_mdark`
 
 Produces a master dark.
 Optional for UVB/VIS (dark current negligible).
