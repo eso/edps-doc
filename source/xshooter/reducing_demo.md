@@ -43,16 +43,19 @@ archived data reduction: press the `Export` button in the `Archived Data` tab
 To archive a data reduction, press
 the button `Archive` in the `Reduction Queue` tab (see [here](../edpsgui/gui.md#processing_queue))
 
-The exported products are organized by TARGET NAME (as read from the header), `DATASET` (named as the first scientific exposure of the dataset), and `TIMESTAMP` (time of
+The exported products are organized by TARGET_NAME (as read from the header), DATASET (named as the first scientific exposure of the dataset), and `TIMESTAMP` (time of
 start of reduction)
 
 The final products saved in the specified directory are:
 
 - The 1D spectrum, telluric corrected, obtained from the combination of individual exposures. Its name format
 is: SPECTRUM_COMBINED_<target_name>, where target name is read from the header.
-- The individual 1D spectra prior to combination (either telluric corrected or not). The are in a subdirectory of the combined spectrum they refer to
-their name formats are SPECTRUM_<ARM>_<arcfile> or SPECTRUM_TELLCORR_<ARM>_<arcfile> if telluric corrected. ARM (UVB, VIS, NIR) and arcfile (the file name of the raw science exposure) are read from the file header.
-- The datacubes obtained from individual exposures for IFU observations. Its name format is: DATACUBE_<ARM>_<arcfile>.
+- The individual 1D spectra prior to combination (either telluric corrected or not). They are in a subdirectory 
+of the combined spectrum they refer to
+their name formats are SPECTRUM_\<arm\>\_\<arcfile\> or SPECTRUM_TELLCORR_\<arm\>\_\<arcfile\> if telluric corrected. 
+The values of arm (UVB, VIS, NIR) and arcfile (the file name of the raw science exposure) are read from the file header.
+- The datacubes obtained from individual exposures for IFU observations. Its name format is: 
+- DATACUBE_\<arm\>\_\<arcfile\>.
 
 This applies to all slit modes (stare, offset, and nod) and ifu mode.
 
