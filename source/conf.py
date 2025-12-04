@@ -72,9 +72,9 @@ html_sidebars = {
  #   'visir/**':[
  #       'globaltoc.html',  # Global Table of contents
  #       ],
- #   'xshooter/**':[
- #       'globaltoc.html',  # Global Table of contents
- #       ],
+    'xshooter/**':[
+        'globaltoc.html',  # Global Table of contents
+        ],
     '**': [
         'globaltoc.html',  # Global Table of contents
         'searchbox.html',  # search box

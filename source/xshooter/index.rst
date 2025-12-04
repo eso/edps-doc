@@ -17,3 +17,7 @@ XSHOOTER tutorial
    reduction_chain.md
    configure_reduction.md
    faq.md
+
+------------
+
+XSHOOTER Version 3.8.3 - 20251124

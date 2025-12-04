@@ -46,4 +46,4 @@ EDPS documentation
    #uves/index.rst
    #fors/index.rst
    #visir/index.rst
-   #xshooter/index.rst
+   xshooter/index.rst
