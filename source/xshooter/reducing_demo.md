@@ -59,7 +59,7 @@ The values of arm (UVB, VIS, NIR) and arcfile (the file name of the raw science 
 
 This applies to all slit modes (stare, offset, and nod) and ifu mode.
 
-Other useful products cam be found in the EDPS_data directory, where all intermediate products are saved.
+Other useful products, such as 2D spectra prior to the extraction, can be found in the EDPS_data directory, where all intermediate products are saved.
 
 ## 5. Quality plots
 

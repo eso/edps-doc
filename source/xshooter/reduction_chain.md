@@ -60,8 +60,7 @@ Customization:
 The physical model is recommended and should be used by default.
 If the reduction fails or the optical model appears inconsistent, the polynomial mode can be enabled for troubleshooting or as an alternative.
 
-## Order tracing
-The subworkflow **fit_orders** 
+
 ## Order Tracing (Determining Order Geometry)
 
 Recipe: `xsh_orderpos`
