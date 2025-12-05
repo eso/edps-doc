@@ -22,12 +22,25 @@ meaning the flats used for science frames are also applied to standard stars.
 Set it to *standard* to use the flats taken closest in time 
 to the standard-star observations instead.
 - `telluric_correction_mode`: 
-The atmospheric parameters can be derived either from 
+Atmospheric parameters can be derived either from 
 a telluric standard or from the science frame itself.
 Set this parameter to *standard* (default) to use a telluric star 
 observed the same night with the same instrument setup.
 Set it to *science* to derive the parameters directly from the science.
 Use *none* to disable telluric correction.
+- `response`:
+This parameter selects the response curve used for flux calibration.
+*night* (default) uses the response from the standard star observed that night; 
+if unavailable, fall back to the master response.
+*master* uses the master response from CalSelector, 
+built by combining standards from multiple nights.
+- `reduction-mode`:
+Select between the physical-model mode (recommended) 
+and the polynomial mode to map each wavelength onto the CCDs.
+The physical model derives the solution from the actual optical path, 
+while the polynomial method uses empirical multi-coefficient fits per order.
+If the reduction fails or the physical model appears inconsistent, 
+the polynomial mode can be used for troubleshooting or as a fallback.
 - `max_diameter`:
 TODO
 - `max_separation`:

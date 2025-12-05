@@ -29,9 +29,11 @@ This step is carried in the task **bias**, which runs the recipe  **xsh_mbias**.
 Produces a master bias for UVB/VIS arms.
 NIR frames do not use bias frames.
 
-Customization:
-- Choose stacking method (average, median).
-- Adjust sigma-clipping parameters.
+**Customization**
+
+Recipe parameters:
+- Choose stacking method (average, median) with `stack-method`.
+- Adjust sigma-clipping with `klow` and `khigh`.
 
 ## 2. Generate Master Dark
 This step is carried in the task **dark**, which runs the recipe  **xsh_mdark**.
@@ -41,8 +43,10 @@ Optional for UVB/VIS (dark current negligible).
 For NIR it is only needed for stare observations; 
 generally not used in nodding/offset where ON–OFF subtraction removes the dark. 
 
-Customization:
-- Enable the use of darks for UVB/VIS data reduction with `use_optical_dark` (not recommended).
+**Customization**
+
+Recipe parameters:
+- Enable the use of darks for UVB/VIS data reduction with `use_optical_dark`.
 - Change `stack-method` and `klow` / `khigh` thresholds to adjust stacking behaviour, e.g. for better cosmic-ray rejection.
 
 ## 3. Subworkflow Fit Orders
@@ -59,11 +63,11 @@ ambient conditions during the observations
 (e.g. atmospheric  pressure, temperature, instrument setting)
 to predict line positions and a first dispersion solution.
 
-Customization:
-- Select between physical-model (recommended) and polynomial mode.
-The physical model is recommended and should be used by default.
-If the reduction fails or the optical model appears inconsistent, the polynomial mode can be enabled for troubleshooting or as an alternative.
+**Customization**
 
+Workflow parameters:
+- Select between physical-model (recommended) and polynomial mode. 
+See [here](configure_reduction.md) for more information.
 
 ### 3b. Order Tracing (Determining Order Geometry)
 
@@ -73,7 +77,9 @@ Uses pinhole order-definition frames (ORDERDEF_*)
 to trace the location and curvature of each echelle order on the detector. 
 Produces order tables that later help rectification and wavelength calibration.
 
-Customization:
+**Customization**
+
+Recipe parameters:
 - Tuning of detection thresholds can help when continuum levels are low or orders are partially vignetted.
 
 ## 4. Generate Master Flat
@@ -85,9 +91,13 @@ refined version of the table from `xsh_orderpos`
 and a bad pixel map for each arm. 
 The flat defines the detector response and 
 updates the true geometry of the orders from slit illumination.
+For IFU flat fields the edges of the slices are traced.
 
-Customization:
+**Customization**
+
+Recipe parameters:
 - Adjust bad-pixel handling (via `decode-bp`) if master flats saturate or raise quality control errors.
+- Change `stack-method` and `klow` / `khigh` thresholds to adjust stacking behaviour, e.g. for better cosmic-ray rejection.
 
 ## 5. Subworkflow Wavelength Calibration
 
@@ -106,8 +116,12 @@ and `SPECTRAL_FORMAT_TAB_ARM`,
 which defines, for each order, the wavelength range, pixel boundaries, predicted order edge traces,
 and spatial-to-spectral coordinate conversion.
 
-Customization:
+**Customization**
+
+Workflow parameters:
 - Select between physical-model (recommended) and polynomial mode.
+
+Recipe parameters:
 - Adjust line-detection thresholds for weak arcs via `detectarclines-fit-win-hsize` and `detectarclines-search-win-hsize`. 
 These parameters have to be small enough not to include a doublet but large
 enough to be able to detect and fit the line.
@@ -118,7 +132,9 @@ Recipe: `xsh_wavecal`
 
 Computes arc lines tilt and resolving power.
 
-Customization:
+**Customization**
+
+Workflow parameters:
 - Select between physical-model (recommended) and polynomial mode.
 
 ## 6. Flexure Compensation
@@ -128,7 +144,9 @@ Recipe: `xsh_flexcomp`
 Refines the wavelength solution to account for flexure, 
 especially when arcs are not taken at the same rotator angle as science.
 
-Customization:
+**Customization**
+
+Workflow parameters:
 - Select between physical-model (recommended) and polynomial mode.
 
 ## 7. Flat Strategy
@@ -139,10 +157,9 @@ The default strategy is to use the same flat as for the science observation.
 The alternative is to use the flat field selected by the rules, 
 i.e., those taken closest in time to the flux calibrator.
 
-Customization:
-- See science recipes below.
+**Customization**
 
-Customization:
+Workflow parameters:
 - By default, the `use_flat` parameter is set to *science*, 
 meaning the flats used for science frames are also applied to standard stars.
 Set it to *standard* to use the flats taken closest in time 
@@ -155,7 +172,9 @@ Recipes: `xsh_respon_slit_stare`, `xsh_respon_slit_offset` and `xsh_respon_slit_
 Use standard stars to derive the per-order and merged instrument response 
 (mapping detector counts to physical flux),
 the blaze correction and the telescope + instrument + detector efficiency.
-Used for flux calibration of science exposures.
+Used for flux calibration of science exposures. 
+The pipeline does not create response curves for IFU data, and they are therefore
+not flux-calibrated.
 
 ## 9. Science Reduction SLIT
 
@@ -173,37 +192,46 @@ and you get one combined 2D and 1D spectrum per run, not one per exposure.
 To obtain one spectrum per exposure (or per AB pair in nodding), 
 you must run `xsh_scired_slit_*` separately on each exposure or nod pair.
 
-Customization:
+**Customization**
+
+Workflow parameters:
 - By default, `telluric_correction_mode`=*standard* derives 
 the atmospheric parameters from the telluric standard.
 Set it to *science* to derive them directly from the science frame, 
 or to *none* to disable telluric correction.
 - Select between physical-model (recommended) and polynomial mode.
-- Use Active Flexure Correction (AFC) tables (`ORDER_TAB_AFC_`, `DISP_TAB_AFC_`) instead of the non-AFC ones, when available.
+
+Recipe parameters:
 - Change `stack-method` and `klow` / `khigh` thresholds to adjust stacking behaviour.
-- Sky modelling: In the NIR, `BSPLINE2` provides the best residuals,
-`BSPLINE1` is faster and acceptable for UVB/VIS, 
-and `MEDIAN` is the fatest but may leave residuals.
+- Sky modelling: 
+Use `sky-method` to select the method. 
+In the NIR, *BSPLINE2* provides the best residuals,
+*BSPLINE1* is faster and acceptable for UVB/VIS, 
+and *MEDIAN* is the fatest but may leave residuals.
 - Sky region selection:
 use parameters `sky-position1`, `sky-hheight1`, `sky-position2`, and `sky-hheight2` to manually select sky zones.
 Required when object not centered, multiple objects on slit, or strong NIR gradient.
 - Spectroscopic extraction:
 Standard extraction 
-(`localize-method`=MANUAL)
+(`localize-method`=*MANUAL*)
 recommended for faint sources.
 Automatic detection
-(`localize-method`=AUTO)
+(`localize-method`=*AUTO*)
 is usually fine for bright sources.
 
 ## 10. Science Reduction IFU (instrument mode decommissioned)
 
-## 11. Atmospheric modelling with calibration star
+Recipes: `xsh_scired_ifu_stare` and `xsh_scired_ifu_offset`
 
-## 12. Atmospheric modelling with science
+Reduces a science IFU stare or on-off exposure and builds a 3D cube.
 
-## 13. Telluric correction
+## 11. Atmospheric Modelling with Calibration Star
 
-## 14. Spectra combination
+## 12. Atmospheric Modelling with Science
+
+## 13. Telluric Correction
+
+## 14. Spectra Combination
 
 ## 15. Additional Tasks not used in the Science Reduction Cascade
 
