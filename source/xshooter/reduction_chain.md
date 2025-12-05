@@ -23,7 +23,7 @@ The reduction steps are listed below. Before starting the reduction,
 the parameters of the recipes associated to each task can be configured by pressing the button ![](../edpsgui/figures/configure_dataset.jpg) close to each dataset configuration.
 See [here](configure_reduction.md) for more information.
 
-## Generate Master Bias
+## 1. Generate Master Bias
 This step is carried in the task **bias**, which runs the recipe  **xsh_mbias**.
 
 Produces a master bias for UVB/VIS arms.
@@ -33,7 +33,7 @@ Customization:
 - Choose stacking method (average, median).
 - Adjust sigma-clipping parameters.
 
-## Generate Master Dark
+## 2. Generate Master Dark
 his step is carried in the task **dark**, which runs the recipe  **xsh_mdark**.
 
 
@@ -46,7 +46,12 @@ Customization:
 - You can omit darks entirely for UVB/VIS and for NIR nod/offset.
 - Change `stack-method` and `klow` / `khigh` thresholds to adjust stacking behaviour, e.g. for better cosmic-ray rejection.
 
-## Instrument Model Prediction
+## 3. Subworkflow Fit Orders
+
+Computes initial guesses for the wavelength solution and order positions.
+Performed in two steps, described hereafter.
+
+### 3a. Instrument Model Prediction
 
 Recipe: `xsh_predict`
 
@@ -61,7 +66,7 @@ The physical model is recommended and should be used by default.
 If the reduction fails or the optical model appears inconsistent, the polynomial mode can be enabled for troubleshooting or as an alternative.
 
 
-## Order Tracing (Determining Order Geometry)
+### 3b. Order Tracing (Determining Order Geometry)
 
 Recipe: `xsh_orderpos`
 
@@ -72,7 +77,7 @@ Produces order tables that later help rectification and wavelength calibration.
 Customization:
 - Tuning of detection thresholds can help when continuum levels are low or orders are partially vignetted.
 
-## Generate Master Flat
+## 4. Generate Master Flat
 
 Recipe: `xsh_mflat`
 
@@ -85,7 +90,13 @@ updates the true geometry of the orders from slit illumination.
 Customization:
 - Adjust bad-pixel handling (via `decode-bp`) if master flats saturate or raise quality control errors.
 
-## 2D Mapping
+## 5. Subworkflow Wavelength Calibration
+
+The wavelength calibration creates the wavelength and spatial resampling solutions 
+and computes the arc-line tilts and instrumental resolution.
+It is done in two steps:
+
+### 5a. 2D Mapping
 
 Recipe: `xsh_2dmap`
 
@@ -102,7 +113,7 @@ Customization:
 These parameters have to be small enough not to include a doublet but large
 enough to be able to detect and fit the line.
 
-## Wavelength Calibration
+### 5b. Wavelength Calibration
 
 Recipe: `xsh_wavecal`
 
@@ -111,7 +122,7 @@ Computes arc lines tilt and resolving power.
 Customization:
 - Select between physical-model (recommended) and polynomial mode.
 
-## Flexure Compensation
+## 6. Flexure Compensation
 
 Recipe: `xsh_flexcomp`
 
@@ -120,6 +131,20 @@ especially when arcs are not taken at the same rotator angle as science.
 
 Customization:
 - Select between physical-model (recommended) and polynomial mode.
+
+## 7. Subworkflow Flat Strategy
+
+This allows the user to choose between two strategies 
+to select a flat field for the flux calibrator.
+The default strategy is to use the same flat as for the science observation.
+The alternative is to use the flat field selected by the rules, 
+i.e., those taken closest in time to the flux calibrator.
+
+Customization:
+- By default, the `use_flat` parameter is set to "science", 
+meaning the flats used for science frames are also applied to standard stars.
+Set it to "standard" to use the flats taken closest in time 
+to the standard-star observations.
 
 ## Instrument Response and Efficiency
 
@@ -163,6 +188,21 @@ recommended for faint sources.
 Automatic detection
 (`localize-method`=AUTO)
 is usually fine for bright sources.
+
+## Additional Tasks not used in the Reduction Cascade
+
+### > Detector Linearity
+
+Recipe: `xsh_lingain`
+
+This recipe identifies pixels whose response to different flux levels 
+deviates significantly from that of the majority of the detector. 
+Such pixels are flagged in the output mask with the value 32768 
+and are considered potential bad pixels. 
+This step can be useful for diagnostic purposes, 
+but is not strictly required and, by default, 
+it is not included in the Reduction Cascade.
+The UVB/VIS detectors exhibit very few pixels of this type.
 
 ---
 Go to XSHOOTER EDPS tutorial [index](../xshooter/index)

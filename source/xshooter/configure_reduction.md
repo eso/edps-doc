@@ -13,6 +13,31 @@
 ```{include} ../common/configure_reduction.md
 ```
 
+For XSHOOTER, the following workflow parameters can be adjusted 
+when the `Target Category` is set to "science":
+
+- `use_flat`: 
+By default, this parameter is set to "science", 
+meaning the flats used for science frames are also applied to standard stars.
+Set it to "standard" to use the flats taken closest in time 
+to the standard-star observations instead.
+- `telluric_correction_mode`: 
+The atmospheric parameters can be derived either from 
+a telluric standard or from the science frame itself.
+Set this parameter to "standard" (default) to use a telluric star 
+observed the same night with the same instrument setup.
+Set it to "science" to derive the parameters directly from the science.
+Use "none" to disable telluric correction.
+- `max_diameter`:
+TODO
+- `max_separation`:
+TODO
+- `use_optical_dark`:
+This parameter controls the use of a dark frame in the UVB/VIS data reduction.
+Because the dark current is negligible at these wavelengths, 
+it is set to "FALSE" by default.
+Set it to "TRUE" if you wish to enable dark correction.
+
 ```{comment}
 ## Bad Pixels <a name="first_step"> </a>
 
