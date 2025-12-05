@@ -34,8 +34,7 @@ Customization:
 - Adjust sigma-clipping parameters.
 
 ## 2. Generate Master Dark
-his step is carried in the task **dark**, which runs the recipe  **xsh_mdark**.
-
+This step is carried in the task **dark**, which runs the recipe  **xsh_mdark**.
 
 Produces a master dark.
 Optional for UVB/VIS (dark current negligible).
@@ -43,7 +42,7 @@ For NIR it is only needed for stare observations;
 generally not used in nodding/offset where ON–OFF subtraction removes the dark. 
 
 Customization:
-- You can omit darks entirely for UVB/VIS and for NIR nod/offset.
+- Enable the use of darks for UVB/VIS data reduction with `use_optical_dark` (not recommended).
 - Change `stack-method` and `klow` / `khigh` thresholds to adjust stacking behaviour, e.g. for better cosmic-ray rejection.
 
 ## 3. Subworkflow Fit Orders
@@ -132,7 +131,7 @@ especially when arcs are not taken at the same rotator angle as science.
 Customization:
 - Select between physical-model (recommended) and polynomial mode.
 
-## 7. Subworkflow Flat Strategy
+## 7. Flat Strategy
 
 This allows the user to choose between two strategies 
 to select a flat field for the flux calibrator.
@@ -141,12 +140,15 @@ The alternative is to use the flat field selected by the rules,
 i.e., those taken closest in time to the flux calibrator.
 
 Customization:
-- By default, the `use_flat` parameter is set to "science", 
+- See science recipes below.
+
+Customization:
+- By default, the `use_flat` parameter is set to *science*, 
 meaning the flats used for science frames are also applied to standard stars.
-Set it to "standard" to use the flats taken closest in time 
+Set it to *standard* to use the flats taken closest in time 
 to the standard-star observations.
 
-## Instrument Response and Efficiency
+## 8. Instrument Response and Efficiency
 
 Recipes: `xsh_respon_slit_stare`, `xsh_respon_slit_offset` and `xsh_respon_slit_nod`
 
@@ -155,7 +157,7 @@ Use standard stars to derive the per-order and merged instrument response
 the blaze correction and the telescope + instrument + detector efficiency.
 Used for flux calibration of science exposures.
 
-## Science Reduction
+## 9. Science Reduction SLIT
 
 Recipes: `xsh_scired_slit_stare`, `xsh_scired_slit_offset` and `xsh_scired_slit_nod`
 
@@ -172,6 +174,10 @@ To obtain one spectrum per exposure (or per AB pair in nodding),
 you must run `xsh_scired_slit_*` separately on each exposure or nod pair.
 
 Customization:
+- By default, `telluric_correction_mode`=*standard* derives 
+the atmospheric parameters from the telluric standard.
+Set it to *science* to derive them directly from the science frame, 
+or to *none* to disable telluric correction.
 - Select between physical-model (recommended) and polynomial mode.
 - Use Active Flexure Correction (AFC) tables (`ORDER_TAB_AFC_`, `DISP_TAB_AFC_`) instead of the non-AFC ones, when available.
 - Change `stack-method` and `klow` / `khigh` thresholds to adjust stacking behaviour.
@@ -189,9 +195,19 @@ Automatic detection
 (`localize-method`=AUTO)
 is usually fine for bright sources.
 
-## Additional Tasks not used in the Reduction Cascade
+## 10. Science Reduction IFU (instrument mode decommissioned)
 
-### > Detector Linearity
+## 11. Atmospheric modelling with calibration star
+
+## 12. Atmospheric modelling with science
+
+## 13. Telluric correction
+
+## 14. Spectra combination
+
+## 15. Additional Tasks not used in the Science Reduction Cascade
+
+### 15a. Detector Linearity
 
 Recipe: `xsh_lingain`
 
