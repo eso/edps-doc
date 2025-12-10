@@ -38,7 +38,6 @@ EDPS documentation
    #espresso/index.rst
    #fors/index.rst
    #giraffe/index.rst
-   gravity/index.rst
    #hawki/index.rst
    kmos/index.rst
    #matisse/index.rst
