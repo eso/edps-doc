@@ -14,8 +14,9 @@ MUSE tutorial
    reducing_demo.md
    reduction_chain.md
    configure_reduction.md
+   task_list.md
    faq.md
 
 ------------
 
-MUSE Version 2.10.16 - 20251124
+MUSE Version 2.10.16 - 20251210
