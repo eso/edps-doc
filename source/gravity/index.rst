@@ -16,4 +16,9 @@ GRAVITY tutorial
    reducing_demo.md
    reduction_chain.md
    configure_reduction.md
+   task_list.md
    faq.md
+
+------------
+
+GRAVITY Version 1.9.7 - 20251125
