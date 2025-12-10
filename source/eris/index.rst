@@ -18,3 +18,7 @@ ERIS tutorial
    configure_reduction.md
    task_list.md
    faq.md
+
+------------
+
+ERIS version 1.8.14 - 20251210

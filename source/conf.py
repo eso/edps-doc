@@ -47,9 +47,9 @@ html_sidebars = {
  #   'crires/**':[
  #       'globaltoc.html',  # Global Table of contents
  #       ],
- #   'eris/**':[
- #       'globaltoc.html',  # Global Table of contents
- #       ],
+    'eris/**':[
+        'globaltoc.html',  # Global Table of contents
+        ],
  #   'espresso/**':[
  #       'globaltoc.html',  # Global Table of contents
  #       ],

@@ -34,7 +34,7 @@ EDPS documentation
    :maxdepth: 1
 
    #crires/index.rst
-   #eris/index.rst
+   eris/index.rst
    #espresso/index.rst
    #fors/index.rst
    #giraffe/index.rst
