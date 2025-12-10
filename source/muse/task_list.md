@@ -7,8 +7,8 @@ tasks that generates the calibrations needed for it are automatically executed.
 
 | TASK                            | 	RECIPE            | Used in  <br/>  science reduction | 	Notes                                                             |            
 |---------------------------------|---------------------|-------------------------------------|--------------------------------------------------------------------|
-| alignment	                      | muse_exp_align	  | yes	                                | Alignes a set of exposures for combination.                        |
-| alignment_sky	                  | muse_exp_align	  | no	                                 | Alignes a set of sky exposures for combination.                    |
+| alignment	                      | muse_exp_align	  | yes	                                | Aligns a set of exposures for combination.                         |
+| alignment_sky	                  | muse_exp_align	  | no	                                 | Aligns a set of sky exposures for combination.                     |
 | astrometry	                     | muse_astrometry	  | no	                                 | Computes astrometry.                                               |
 | autocalibration_from_object_sky | none		          | no	                                 | Selects sky expousres for additional slice-to-slice flat fielding. |
 | bias	                           | muse_bias	          | yes	                                | Computes the masterbias.                                           |
@@ -18,8 +18,8 @@ tasks that generates the calibrations needed for it are automatically executed.
 | line_spread_function_arc        | muse_lsf	     |yes     | 	Computes LSF from arc exposures.			                               |
 | line_spread_function_lsf        | muse_lsf	     |optional| 	Computes LSF from dedicated calibrations.		                       |
 | linearity_and_gain	             | muse_lingain     |no      | 	Computes linearity and gain correction.			                        |
-| object			                       | muse_scipost     |yes     | 	Create a datacube from individual scientific observations.        |
-| object_combination	             | muse_exp_combine |yes     | 	Create a datacube from combined scientific observations.          |
+| object			                       | muse_scipost     |yes     | 	Creates a datacube from individual scientific observations.       |
+| object_combination	             | muse_exp_combine |yes     | 	Creates a datacube from combined scientific observations.         |
 | object_sky		                    | muse_scipost     |no      | 	Processes sky exposures as they were science exposures.	          |
 | preprocess_astrometry	          | muse_scibasic    |optional| 	Reduces astrometric calibrations.			                              |
 | preprocess_science	             | muse_scibasic    |yes     | 	Reduces science exposures.				                                    |
