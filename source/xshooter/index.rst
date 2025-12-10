@@ -18,3 +18,7 @@ XSHOOTER tutorial
    configure_reduction.md
    task_list.md
    faq.md
+
+------------
+
+XSHOOTER Version 3.8.3 - 20251204

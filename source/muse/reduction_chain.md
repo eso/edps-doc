@@ -17,7 +17,9 @@ It is possible to set EDPS to perform the data reduction until a certain step of
 only standar stars, or only flat fields).
 This is done by specifying the desired tasks in the field **Select reduction target** of the **Raw Data** tab.
 
-The reduction steps of the MUSE workflow are:
+The reduction steps of the MUSE workflow are listed below. Before starting the reduction, 
+the parameters of the recipes associated to each task can be configured by pressing the button ![](../edpsgui/figures/configure_dataset.jpg) close to each dataset configuration.
+See [here](configure_reduction.md) for more information.
 
 ## Bias subtraction
 
