@@ -16,4 +16,9 @@ KMOS tutorial
    reducing_demo.md
    reduction_chain.md
    configure_reduction.md
+   task_list.md
    faq.md
+
+------------
+
+KMOS Version 4.5.3 - 20251202
