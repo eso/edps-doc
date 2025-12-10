@@ -16,4 +16,5 @@ XSHOOTER tutorial
    reducing_demo.md
    reduction_chain.md
    configure_reduction.md
+   task_list.md
    faq.md
