@@ -13,6 +13,6 @@ For a more extensive documentation on the EDPS-GUI itself, consult the dedicated
 
 For a brief description of EDPS and its main concepts, see [here](../edpsgui/intro.md/#what_is_edps).
 
-For a detailed documentation on the XSHOOTER pipeline itself, consult the pipeline manual available [insert_link](https://ftp.eso.org/pub/dfs/pipelines/instruments/xxx).
+For a detailed documentation on the XSHOOTER pipeline itself, consult the pipeline manual available [here](https://ftp.eso.org/pub/dfs/pipelines/instruments/xshooter/xshoo-pipeline-manual-3.8.3.pdf).
 
 

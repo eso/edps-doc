@@ -59,7 +59,7 @@ html_sidebars = {
  #   'giraffe/**':[
  #       'globaltoc.html',  # Global Table of contents
  #       ],
-    'gravity/**':[
+    'kmos/**':[
         'globaltoc.html',  # Global Table of contents
         ],
     'muse/**':[
@@ -75,9 +75,9 @@ html_sidebars = {
  #   'visir/**':[
  #       'globaltoc.html',  # Global Table of contents
  #       ],
- #   'xshooter/**':[
- #       'globaltoc.html',  # Global Table of contents
- #       ],
+    'xshooter/**':[
+        'globaltoc.html',  # Global Table of contents
+        ],
     '**': [
         'globaltoc.html',  # Global Table of contents
         'searchbox.html',  # search box

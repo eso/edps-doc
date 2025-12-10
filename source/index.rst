@@ -40,11 +40,11 @@ EDPS documentation
    #giraffe/index.rst
    gravity/index.rst
    #hawki/index.rst
-   #kmos/index.rst
+   kmos/index.rst
    #matisse/index.rst
    muse/index.rst
    #sphere/index.rst
    #uves/index.rst
    #fors/index.rst
    #visir/index.rst
-   #xshooter/index.rst
+   xshooter/index.rst
