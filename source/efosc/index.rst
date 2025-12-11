@@ -14,16 +14,9 @@ EFOSC tutorial
    #../common/tbd.md
    intro.md
    imaging.md
-   reduction_chain_img.md
-   configure_reduction.md
    spectroscopy.md
-   reduction_chain_spc.md
-   configure_reduction.md
-   #reducing_demo.md
-   #reduction_chain.md
-   #configure_reduction.md
    #task_list.md
-   #faq.md
+   faq.md
 
 ------------
 

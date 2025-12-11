@@ -38,6 +38,3 @@ This task runs the recipe **efosc_science** to process long-slit and MOS spectro
 
 T.B.D.
 
-
----
-Go to EFOSC EDPS tutorial [index](../efosc/index)

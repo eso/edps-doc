@@ -64,3 +64,14 @@ Go to [top](#top)
 
 ---
 Go to EFOSC EDPS tutorial [index](../efosc/index)
+
+
+```{include} reduction_chain_img.md
+```
+
+---
+Go to EFOSC EDPS tutorial [index](../efosc/index)
+
+
+```{include} configure_reduction.md
+```

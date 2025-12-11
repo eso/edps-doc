@@ -45,7 +45,6 @@ The recipe runs sextractor to identify objects and perform aperture photometry. 
 
 The task **science_imaging** runs the recipe **efosc_img_science** to reduce the raw image, and compiles a catalogue of extracted sources using sextractor.
 
-##
 
 ---
 Go to EFOSC EDPS tutorial [index](../efosc/index)
