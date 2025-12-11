@@ -52,7 +52,9 @@ start of reduction)
 The final products saved in the specified directory are:
 
  - SPECTRUM_MOS_<arcfile>. Two dimensional spectrum, where in each raw there is the extracted and 
-   reduced spectrum of a slit. The variable arcfile is taken from the fits header.
+   reduced spectrum of a slit.
+
+The variable arcfile is taken from the fits header, and it is the name of the raw science image.
  
 
 ---

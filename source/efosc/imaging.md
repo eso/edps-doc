@@ -49,13 +49,15 @@ archieved data reduction: press the `Export` button in the `Archieved Data` tab
 To archieve a data reduction, press
 the button `Archive` in the `Reduction Queue` tab (see [here](../edpsgui/gui.md#processing_queue))
 
-Products are organized by `DATASET` (named as the first scientific exposure of the dataset), and `TIMESTAMP` (time of
+Products are organized by `TARGET NAME` (the name of the object, as recorded in the header of the raw fits file) `DATASET` (named as the raw fits file), and `TIMESTAMP` (time of
 start of reduction)
 
 The final products saved in the specified directory are:
 
-**Please desribe the main products of the reduction**
+ - IMAGE_<arfcile>. The final reduced image. 
+ - CATALOG_<arcfile>. A catalog with the object detected in the reduced image. 
 
+The variable arcfile is read from the fits header, and it is the name of the raw science image.
 
 ---
 Go to [top](#top)
