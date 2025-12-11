@@ -20,11 +20,24 @@ The reduction steps are:
 
 ###  Bias subtraction
 
-**Add description**
+The task **bias** runs the recipe **efosc_bias** to generate a MASTER_BIAS calibration.
+Typically, default recipe paraemters deliver good results. 
 
-### Second step
+### Sky flats
 
-**Add description**
+The task **sky_flat** runs the recipe **efosc_img_sky_flat** to  reduce the sky flats and generate a MASTER_SKY_FLAT_IMG correction.
+Typically, default recipe parameters deliver good results. 
+
+### Photometric standard
+
+The task **photometric_standard** runs the recipe **efosc_zeropoint** to process observations of standard stars and compute the photometric zeropoint.
+The recipe runs sextractor to identify objects and perform aperture photometry. Typically, default recipe parameters deliver good results. 
+
+
+### Science imaging
+
+The task **science_imaging** runs the recipe **efosc_img_science** to reduce the raw image, and compiles a catalogue of extracted sources using sextractor.
+
 
 
 ---

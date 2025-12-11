@@ -1,4 +1,4 @@
-# The EFOSC spectroscopic data reduction flow.
+## The EFOSC spectroscopic data reduction flow.
 
 The overall data flow of the EFOSC spectroscopic pipeline is displayed [here](figures/reduction_cascade_spc.jpg).
 
@@ -18,11 +18,13 @@ This is done by specifying the desired tasks in the field `Select reduction targ
 
 The reduction steps are:
 
-##  Bias subtraction
+###  Bias subtraction
 
-**Add description**
+The task **bias** runs the recipe **efosc_bias** to generate a MASTER_BIAS calibration.
+Typicall, default recipe parameters deliver good results. 
 
-## Second step
+
+### Second step
 
 **Add description**
 
