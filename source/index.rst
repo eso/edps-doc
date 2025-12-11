@@ -40,7 +40,7 @@ EDPS documentation
    #fors/index.rst
    #giraffe/index.rst
    #hawki/index.rst
-   kmos/index.rst
+   #kmos/index.rst
    #matisse/index.rst
    muse/index.rst
    #sphere/index.rst

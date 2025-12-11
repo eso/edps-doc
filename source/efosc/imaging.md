@@ -29,7 +29,10 @@ The graphic workflow representation will appear as in
 
 ### 2. Selecting the input data
 
-```{include} reducing_demo_img.md
+```{include} ..commong/reducing_demo_1.md
+```
+
+```{include} reducing_demo_2_img.md
 ```
 
 ---
