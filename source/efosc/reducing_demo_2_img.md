@@ -28,7 +28,7 @@ d. Choose the datasets that should be processed
    ```` 
 and send them to the data reduction queue by pressing `Submit to Reduction Queue`.
 
-## 3. Start the reduction
+### 3. Start the reduction
 
 a. Press `Reduction Queue`.
 
