@@ -50,6 +50,9 @@ html_sidebars = {
  #   'eris/**':[
  #       'globaltoc.html',  # Global Table of contents
  #       ],
+     'efosc/**':[
+        'globaltoc.html',  # Global Table of contents
+        ],
  #   'espresso/**':[
  #       'globaltoc.html',  # Global Table of contents
  #       ],
@@ -59,9 +62,9 @@ html_sidebars = {
  #   'giraffe/**':[
  #       'globaltoc.html',  # Global Table of contents
  #       ],
-    'kmos/**':[
-        'globaltoc.html',  # Global Table of contents
-        ],
+ #   'kmos/**':[
+ #       'globaltoc.html',  # Global Table of contents
+ #       ],
     'muse/**':[
         'globaltoc.html',  # Global Table of contents
         'pdf.html',        #Link to full pdf documentation
