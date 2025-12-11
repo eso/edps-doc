@@ -36,5 +36,35 @@ The reduction configuration window, where the recipe parameters can be configure
  ---
 Go to [top](#configuration)
 
+
+
+### Inspection of intermediate products
+
+Go in the Reduction Queue Tab. There is the list of datasets with their reduction configurations. Select a COMPLETE reduction and expand it.
+A list of executed jobs will appear. By pressing on the magnifying lense in the raw of the configuration name, one has access to the main products
+quality plots (currently not available in EFOSC)
+as well as the list of inputs/outputs and recipe logs. 
+By pressing on the magnifying lense close to each job, one has acces to the product of that job only.
+
+Fits products can be inspected via fv and ds9 if present in the system, or via python plots.
+
+
+```{figure} figures/inspect_products_1.jpg
+:alt: inspect_products_1
+:name: fig-inspect_products_1
+:figclass: left-caption
+
+How to access the final and/or intermediate products and logs of a reduction.
+
+```
+
+```{figure} figures/inspect_products_2.jpg
+:alt: inspect_products_2
+:name: fig-inspect_products_2
+:figclass: left-caption
+
+Panel that allows to inspect the master bias intermediate product
+```
+
  ---
 Go to EFOSC EDPS tutorial [index](../efosc/index)
