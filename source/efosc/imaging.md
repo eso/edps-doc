@@ -56,11 +56,6 @@ The final products saved in the specified directory are:
 
 **Please desribe the main products of the reduction**
 
-### 5. Quality plots
-
-```{include} ../common/quality_plots.md
-```
-
 
 ---
 Go to [top](#top)
