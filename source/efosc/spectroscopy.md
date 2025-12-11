@@ -46,13 +46,14 @@ archieved data reduction: press the `Export` button in the `Archieved Data` tab
 To archieve a data reduction, press
 the button `Archive` in the `Reduction Queue` tab (see [here](../edpsgui/gui.md#processing_queue))
 
-Products are organized by `DATASET` (named as the first scientific exposure of the dataset), and `TIMESTAMP` (time of
+Products are organized by `TARGET NAME` (the name of the object, as recorded in the header of the raw fits file) `DATASET` (named as the raw fits file), and `TIMESTAMP` (time of
 start of reduction)
 
 The final products saved in the specified directory are:
 
-**Please desribe the main products of the reduction**
-
+ - SPECTRUM_MOS_<arcfile>. Two dimensional spectrum, where in each raw there is the extracted and 
+   reduced spectrum of a slit. The variable arcfile is taken from the fits header.
+ 
 
 ---
 Go to [top](#top)
