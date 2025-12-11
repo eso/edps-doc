@@ -11,12 +11,11 @@ EFOSC tutorial
 .. toctree::
    :maxdepth: 3
 
-   #../common/tbd.md
    intro.md
    imaging.md
    spectroscopy.md
    task_list.md
-   #faq.md
+   faq.md
 
 ------------
 
