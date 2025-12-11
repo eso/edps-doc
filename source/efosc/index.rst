@@ -20,3 +20,7 @@ EFOSC tutorial
    #configure_reduction.md
    #task_list.md
    #faq.md
+
+------------
+
+EFOSC Version 2.3.11 - 20251211
