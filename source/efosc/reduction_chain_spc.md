@@ -24,10 +24,20 @@ The task **bias** runs the recipe **efosc_bias** to generate a MASTER_BIAS calib
 Typicall, default recipe parameters deliver good results. 
 
 
-### Second step
+### Spectroscopic calibrations
 
-**Add description**
+T.B.D.
+
+### Spectroscopic standard
+
+T.B.D.
+
+### Science spectrum
+
+This task runs the recipe **efosc_science** to process long-slit and MOS spectroscopic observations.
+
+T.B.D.
 
 
 ---
-Go to SPHERE EDPS tutorial [index](../sphere/index)
+Go to EFOSC EDPS tutorial [index](../efosc/index)

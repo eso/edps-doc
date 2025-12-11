@@ -1,6 +1,13 @@
 ## The EFOSC imaging data reduction flow.
 
-The overall data flow of the EFOSC imaging pipeline is displayed [here](figures/reduction_cascade_img.jpg).
+The overall data flow of the EFOSC imaging pipeline is displayed in {numref}`fig_reduction_cascade_img`.
+
+	
+   ````{figure} figures/reduction_cascade_img.jpg
+   :alt: reduction_cascade_img
+   :name: fig_reduction_cascade_img
+   ````
+
 
 The reduction cascade is organized in tasks, which represent well defined steps in the process. Tasks can be grouped
 inside sub-workflows.
@@ -38,7 +45,7 @@ The recipe runs sextractor to identify objects and perform aperture photometry. 
 
 The task **science_imaging** runs the recipe **efosc_img_science** to reduce the raw image, and compiles a catalogue of extracted sources using sextractor.
 
-
+##
 
 ---
 Go to EFOSC EDPS tutorial [index](../efosc/index)
