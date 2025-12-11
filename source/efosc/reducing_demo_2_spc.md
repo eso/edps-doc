@@ -8,9 +8,9 @@ a. Press `Raw Data`.
  	
 b. Press `Select Inputs`. A selection window will appear that allows to select data that are stored on a local disk.
 
-   ````{figure} figures/select_input_spc.jpg
-   :alt: select_input_spc
-   :name: fig_select_input_spc
+   ````{figure} figures/select_inputs_spc.jpg
+   :alt: select_inputs_spc
+   :name: fig_select_inputs_spc
    ````
 
 c. Press `Create Datasets`. A list of datasets appears, one line for each set of science data.
