@@ -15,8 +15,8 @@ EFOSC tutorial
    intro.md
    imaging.md
    spectroscopy.md
-   #task_list.md
-   faq.md
+   task_list.md
+   #faq.md
 
 ------------
 
