@@ -18,4 +18,4 @@ EDPS-GUI Quick-start
 
 ------------
 
-EDPS-GUI Version 0.8 - 20251119
+EDPS-GUI Version 0.8 - 20251212

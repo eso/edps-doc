@@ -18,4 +18,4 @@ EDPS-GUI complete manual
    
 ------------
 
-EDPS-GUI Version 0.8 - 20251121
+EDPS-GUI Version 0.8 - 20251212
