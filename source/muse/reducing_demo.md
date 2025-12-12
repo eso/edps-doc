@@ -12,7 +12,7 @@ visit [https://www.eso.org/sci/software/pipe_aem_main.html](https://www.eso.org/
 ```{include} ../common/reducing_demo_1.md
 ```
 
-c. Choose the `MUSE` pipeline from the list in the `workflows` field. The workflows offered in this selector depend on
+d. Choose the `MUSE` pipeline from the list in the `workflows` field. The workflows offered in this selector depend on
 the installed pipelines.
 The graphic workflow representation will appear as in
 {numref}`fig-wkf`.

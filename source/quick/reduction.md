@@ -6,7 +6,7 @@ This Quick Start Guide walks through the steps to reduce data using the default 
 
 ```{include} ../common/reducing_demo_1.md
 ```
-c. Choose a pipeline workflow that matches the data to be reduced. The workflows offered in this selector depend on the installed pipelines.
+d. Choose a pipeline workflow that matches the data to be reduced. The workflows offered in this selector depend on the installed pipelines.
 
    ````{figure} figures/select_workflow.jpg
    :alt: select_workflow

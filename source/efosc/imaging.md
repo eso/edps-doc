@@ -14,7 +14,7 @@ visit [https://www.eso.org/sci/software/pipe_aem_main.html](https://www.eso.org/
 ```{include} ../common/reducing_demo_1.md
 ```
 
-c. Choose the desired workflow pipeline from the list in the `workflows` field. The workflows offered in this selector depend on
+d. Choose the desired workflow pipeline from the list in the `workflows` field. The workflows offered in this selector depend on
 the installed pipelines. To reduce EFOSC imaging data, select the workflow efosc_imaging_wkf.
 
 The graphic workflow representation will appear as in
