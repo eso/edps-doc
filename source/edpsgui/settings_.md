@@ -20,7 +20,8 @@ They new values will be used when pressing "Start EDPS" the next time.
   information of the various reductions (specified via **path**). These are specified at the first execution of the EDPS-GUI, but
   it might be convenient to change it, e.g. if the selected location has no more space.
   Obviously, if new values are specified, all the information stored in the previous location is no longer visible.
-
+  It is recommended to specify full paths, otherwise a new directory will be created everytime on the path the EDPS-GUI is launched from.
+- 
 - **Association preference**: RAW vs MASTER calibrations.
 
    If the input directory contain both MASTER (e.g., pre-reduced calibrations) and RAW calibrations, it
