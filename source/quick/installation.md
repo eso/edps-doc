@@ -18,7 +18,7 @@ A list of available recipes should appear.
          sudo apt install graphviz (Debian, Ubuntu)
          sudo dnf install graphviz (Fedora)
 
-   For fv and ds9, follow the instructions in corresponding webpages.
+   fv and ds9, are optional. To install them, follow the instructions in corresponding webpages.
    You can test whether these three packages are installed and their path are correctly set by typing on a terminal:
 
          dot -V

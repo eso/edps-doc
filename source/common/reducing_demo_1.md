@@ -1,5 +1,5 @@
 
-a. After installation and while still in the installation virtual environment (if not, activate it again), start the `EDPS` dashboard by typing:
+a. After installation and while still in the installation virtual environment (if not, activate it [again](../quick/installation.md#installation-steps)), start the `EDPS` dashboard by typing:
 
 		edps-gui
 

@@ -26,7 +26,8 @@ d. Choose the datasets that should be processed
    :alt: send
    :name: fig_send
    ```` 
-and send them to the data reduction queue by pressing `Submit to Reduction Queue`.
+and send them to the data reduction queue by pressing `Submit to Reduction Queue`. Note that this action does not start the 
+reduction automatically.
 
 ## 3. Start the reduction
 
@@ -45,5 +46,5 @@ b.  Press the `Reduce` button. The selected data will now be processed with the 
    ```` 
 
 
-Congratulations, you reduced your first data with the `EDPS` dashboard! All the reduced data are saved in the EDPS_data directory specified when executing `edps-gui` for the first time.
+Congratulations! You reduced your first data with the `EDPS` dashboard! All the reduced data are saved in the EDPS_data directory specified when executing `edps-gui` for the first time.
 	
