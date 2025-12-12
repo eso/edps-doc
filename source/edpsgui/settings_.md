@@ -3,8 +3,14 @@
 Several options in EDPS can be specified in a configuration file, named application.properties.
 This file is located in the .edps/ directory in your `HOME` directory. 
 It is possible to modify the file directly through the EDPS-GUI, by selecting the menu "Settings" in the drop-down menu "Help" at the top of the GUI. 
+
+
+   ````{figure} ../common/figures/help_settings.jpg
+   :alt: help_settings
+   :name: fig_help_settings
+   ```` 
+
 Note, the file can be edited only if EDPS is not running; press the "Stop EDPS" red button if necessary.
-Click here to see an example of the file.
 In the following, we describe the most important configuration variables. After the settings are changed, press the SAVE button to save.
 They new values will be used when pressing "Start EDPS" the next time.
 
@@ -13,6 +19,7 @@ They new values will be used when pressing "Start EDPS" the next time.
   This is the folder where EDPS saves all the products of all the executed jobs (specified via  **base_dir**), as well as it keeps a database with the
   information of the various reductions (specified via **path**). These are specified at the first execution of the EDPS-GUI, but
   it might be convenient to change it, e.g. if the selected location has no more space.
+  Obviously, if new values are specified, all the information stored in the previous location is no longer visible.
 
 - **Association preference**: RAW vs MASTER calibrations.
 
