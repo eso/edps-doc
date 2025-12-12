@@ -50,9 +50,9 @@ html_sidebars = {
  #   'eris/**':[
  #       'globaltoc.html',  # Global Table of contents
  #       ],
-     'efosc/**':[
-        'globaltoc.html',  # Global Table of contents
-        ],
+ #    'efosc/**':[
+ #       'globaltoc.html',  # Global Table of contents
+ #       ],
  #   'espresso/**':[
  #       'globaltoc.html',  # Global Table of contents
  #       ],
