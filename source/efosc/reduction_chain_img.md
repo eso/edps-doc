@@ -39,13 +39,13 @@ Typically, default recipe parameters deliver good results.
 
 The task **photometric_standard** runs the recipe **efosc_zeropoint** to process observations of standard stars and compute the photometric zeropoint.
 The recipe runs sextractor to identify objects and perform aperture photometry. Typically, default recipe parameters deliver good results. 
+Standard stars are used to determine the zeropoint only for filters "U#640" (using catalogue from Landolt 1992, 2007), and filters
+"B#639", "V#641", "R#642", "i#705" (using catalogs from Stetson 2000). See [here](https://www.eso.org/sci/facilities/lasilla/instruments/efosc/doc/PhotStds.pdf) for more information.
 
 
 ### Science imaging
 
 The task **science_imaging** runs the recipe **efosc_img_science** to reduce the raw image, and compiles a catalogue of extracted sources using sextractor.
-Images are calibrated using standard stars associated to the dataset only for filters "U#640" (using catalogue from Landolt 1992, 2007), and filters
-"B#639", "V#641", "R#642", "i#705" (using catalogs from Stetson 2000). See [here](https://www.eso.org/sci/facilities/lasilla/instruments/efosc/doc/PhotStds.pdf) for more information.
 
 ---
 Go to EFOSC EDPS tutorial [index](../efosc/index)
