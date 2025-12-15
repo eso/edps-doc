@@ -224,6 +224,8 @@ is usually fine for bright sources.
 Recipes: `xsh_scired_ifu_stare` and `xsh_scired_ifu_offset`
 
 Reduces a science IFU stare or on-off exposure and builds a 3D cube.
+Contrary to the slit mode, the pipeline does not create response curves 
+for IFU data and they are therefore not flux-calibrated.
 
 ## 11. Atmospheric Modelling with Calibration Star
 

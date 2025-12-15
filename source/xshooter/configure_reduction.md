@@ -284,6 +284,10 @@ Same as {numref}`fig-cr`, but with `removecrhsingle-sigmalim`=7.0.
 In this case, this avoids the flagging of good pixels as CR-affected.
 ```
 
+### IFU cube not well aligned <a name="ifu_misaligned"> </a>
+
+
+
  ---
 Go to [top](#configuration)
 
