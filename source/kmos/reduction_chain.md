@@ -1,8 +1,8 @@
 # The KMOS data reduction flow.
 
-The overall data flow of the KMOS pipeline is displayed [here](figures/reduction_cascade.jpg).
+The overall data flow of the KMOS pipeline is displayed [here](figures/reduction_cascade.png).
 
-The reduction cascade is organized in tasks, which represent well defined steps in the process. Tasks can be grouped
+The reduction cascade is organized in tasks, which represent well-defined steps in the process. Tasks can be grouped
 inside sub-workflows.
 Each task runs a recipe; the detailed description of the algorithms,
 input, outputs and recipe parameters used in each recipe are available
