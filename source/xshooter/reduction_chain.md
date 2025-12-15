@@ -229,9 +229,48 @@ for IFU data and they are therefore not flux-calibrated.
 
 ## 11. Atmospheric Modelling with Calibration Star
 
+Recipe: `xsh_molecfit_model`
+
+Models the atmosphere by fitting an atmospheric model to the input telluric-standard spectrum to derive the column densities of several molecular species.
+
+The fitting process accounts for instrument-dependent parameters, including telescope background, spectral resolution, and wavelength calibration accuracy.
+
+The products of this recipe are:
+- `ATMOS_PARM`: table containing atmospheric parameters (e.g. pressure, temperature, humidity), 
+- `BEST_FIT_PARM`: table with the best-fit atmospheric and instrumental parameters, 
+- `BEST_FIT_MODEL`: the best-fit atmospheric model to the data.
+
 ## 12. Atmospheric Modelling with Science
 
+Recipe: `xsh_molecfit_model`
+
+Same as step 11, but using the science spectrum to be corrected as input instead of a telluric-standard spectrum.
+
 ## 13. Telluric Correction
+
+## 13a. 
+
+Recipe: `xsh_molecfit_calctrans`
+
+Computes the telluric correction 
+by combining the atmospheric model produced by 
+`xsh_molecfit_model` with a single reduced observation 
+(science, flux standard, or telluric standard). 
+This step derives the atmospheric transmission over 
+the full wavelength range of the data.
+
+If `xsh_molecfit_model` was computed using a different target 
+than the one processed by `xsh_molecfit_calctrans` 
+(e.g. a standard star instead of the science target), 
+the difference in airmass between the two observations 
+is taken into account when computing the transmission.
+
+## 13b. 
+
+Recipe: `xsh_molecfit_correct`
+
+Applies the telluric correction derived from 
+the atmospheric transmission to the input data.
 
 ## 14. Spectra Combination
 
