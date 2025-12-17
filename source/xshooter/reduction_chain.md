@@ -49,7 +49,7 @@ Recipe parameters:
 - Enable the use of darks for UVB/VIS data reduction with `use_optical_dark`.
 - Change `stack-method` and `klow` / `khigh` thresholds to adjust stacking behaviour, e.g. for better cosmic-ray rejection.
 
-## 3. Subworkflow Fit Orders
+## 3. Fit Orders
 
 Computes initial guesses for the wavelength solution and order positions.
 Performed in two steps, described hereafter.
@@ -99,7 +99,7 @@ Recipe parameters:
 - Adjust bad-pixel handling (via `decode-bp`) if master flats saturate or raise quality control errors.
 - Change `stack-method` and `klow` / `khigh` thresholds to adjust stacking behaviour, e.g. for better cosmic-ray rejection.
 
-## 5. Subworkflow Wavelength Calibration
+## 5. Wavelength Calibration
 
 The wavelength calibration creates the wavelength and spatial resampling solutions 
 and computes the arc-line tilts and instrumental resolution.
@@ -248,7 +248,9 @@ Same as step 11, but using the science spectrum to be corrected as input instead
 
 ## 13. Telluric Correction
 
-## 13a. 
+The telluric absorption correction is performed using the Molecfit software in two steps, as described below:
+
+## 13a. Determine Correction
 
 Recipe: `xsh_molecfit_calctrans`
 
@@ -265,7 +267,7 @@ than the one processed by `xsh_molecfit_calctrans`
 the difference in airmass between the two observations 
 is taken into account when computing the transmission.
 
-## 13b. 
+## 13b. Apply Correction
 
 Recipe: `xsh_molecfit_correct`
 
@@ -274,14 +276,28 @@ the atmospheric transmission to the input data.
 
 ## 14. Spectra Combination
 
+Recipe: `esotk_spectrum1d_combine`
+
+This sub-workflow combines spectra selected according to the grouping rule 
+defined in the `raw_spectra_to_combine` datasource. 
+The process is performed in two steps: 
+first, the products of the relevant science reduction tasks are collected based on the raw frames; 
+second, the spectra are combined in a task named according to `input_type`. 
+The recipe used for the combination is `esotk_spectrum1d_combine`. 
+It resamples all input 1D spectra onto a common wavelength grid and stacks them. 
+It is well suited for combining a small number of spectra affected by cosmic rays, 
+using a median-based preprocessing step to identify and reject outliers; 
+for larger stacks, sigma clipping alone is usually sufficient.
+
 ## 15. Additional Tasks not used in the Science Reduction Cascade
 
 ### 15a. Detector Linearity
 
-Recipe: `xsh_lingain`
+Recipes: `detmon_opt_lg`, `detmon_ir_lg`
 
-This recipe identifies pixels whose response to different flux levels 
-deviates significantly from that of the majority of the detector. 
+These recipes identify pixels whose response to different flux levels 
+deviates significantly from that of the majority of the detector 
+(optical and infrared). 
 Such pixels are flagged in the output mask with the value 32768 
 and are considered potential bad pixels. 
 This step can be useful for diagnostic purposes, 
