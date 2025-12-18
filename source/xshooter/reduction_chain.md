@@ -23,30 +23,38 @@ The reduction steps are listed below. Before starting the reduction,
 the parameters of the recipes associated to each task can be configured by pressing the button ![](../edpsgui/figures/configure_dataset.jpg) close to each dataset configuration.
 See [here](configure_reduction.md) for more information.
 
-## Generate Master Bias
+## 1. Generate Master Bias
 This step is carried in the task **bias**, which runs the recipe  **xsh_mbias**.
 
 Produces a master bias for UVB/VIS arms.
 NIR frames do not use bias frames.
 
-Customization:
-- Choose stacking method (average, median).
-- Adjust sigma-clipping parameters.
+**Customization**
 
-## Generate Master Dark
-his step is carried in the task **dark**, which runs the recipe  **xsh_mdark**.
+Recipe parameters:
+- Choose stacking method (average, median) with `stack-method`.
+- Adjust sigma-clipping with `klow` and `khigh`.
 
+## 2. Generate Master Dark
+This step is carried in the task **dark**, which runs the recipe  **xsh_mdark**.
 
 Produces a master dark.
 Optional for UVB/VIS (dark current negligible).
 For NIR it is only needed for stare observations; 
 generally not used in nodding/offset where ON–OFF subtraction removes the dark. 
 
-Customization:
-- You can omit darks entirely for UVB/VIS and for NIR nod/offset.
+**Customization**
+
+Recipe parameters:
+- Enable the use of darks for UVB/VIS data reduction with `use_optical_dark`.
 - Change `stack-method` and `klow` / `khigh` thresholds to adjust stacking behaviour, e.g. for better cosmic-ray rejection.
 
-## Instrument Model Prediction
+## 3. Fit Orders
+
+Computes initial guesses for the wavelength solution and order positions.
+Performed in two steps, described hereafter.
+
+### 3a. Instrument Model Prediction
 
 Recipe: `xsh_predict`
 
@@ -55,13 +63,13 @@ ambient conditions during the observations
 (e.g. atmospheric  pressure, temperature, instrument setting)
 to predict line positions and a first dispersion solution.
 
-Customization:
-- Select between physical-model (recommended) and polynomial mode.
-The physical model is recommended and should be used by default.
-If the reduction fails or the optical model appears inconsistent, the polynomial mode can be enabled for troubleshooting or as an alternative.
+**Customization**
 
+Workflow parameters:
+- Select between physical-model (recommended) and polynomial mode. 
+See [here](configure_reduction.md) for more information.
 
-## Order Tracing (Determining Order Geometry)
+### 3b. Order Tracing (Determining Order Geometry)
 
 Recipe: `xsh_orderpos`
 
@@ -69,10 +77,12 @@ Uses pinhole order-definition frames (ORDERDEF_*)
 to trace the location and curvature of each echelle order on the detector. 
 Produces order tables that later help rectification and wavelength calibration.
 
-Customization:
+**Customization**
+
+Recipe parameters:
 - Tuning of detection thresholds can help when continuum levels are low or orders are partially vignetted.
 
-## Generate Master Flat
+## 4. Generate Master Flat
 
 Recipe: `xsh_mflat`
 
@@ -81,11 +91,21 @@ refined version of the table from `xsh_orderpos`
 and a bad pixel map for each arm. 
 The flat defines the detector response and 
 updates the true geometry of the orders from slit illumination.
+For IFU flat fields the edges of the slices are traced.
 
-Customization:
+**Customization**
+
+Recipe parameters:
 - Adjust bad-pixel handling (via `decode-bp`) if master flats saturate or raise quality control errors.
+- Change `stack-method` and `klow` / `khigh` thresholds to adjust stacking behaviour, e.g. for better cosmic-ray rejection.
 
-## 2D Mapping
+## 5. Wavelength Calibration
+
+The wavelength calibration creates the wavelength and spatial resampling solutions 
+and computes the arc-line tilts and instrumental resolution.
+It is done in two steps:
+
+### 5a. 2D Mapping
 
 Recipe: `xsh_2dmap`
 
@@ -96,41 +116,67 @@ and `SPECTRAL_FORMAT_TAB_ARM`,
 which defines, for each order, the wavelength range, pixel boundaries, predicted order edge traces,
 and spatial-to-spectral coordinate conversion.
 
-Customization:
+**Customization**
+
+Workflow parameters:
 - Select between physical-model (recommended) and polynomial mode.
+
+Recipe parameters:
 - Adjust line-detection thresholds for weak arcs via `detectarclines-fit-win-hsize` and `detectarclines-search-win-hsize`. 
 These parameters have to be small enough not to include a doublet but large
 enough to be able to detect and fit the line.
 
-## Wavelength Calibration
+### 5b. Wavelength Calibration
 
 Recipe: `xsh_wavecal`
 
 Computes arc lines tilt and resolving power.
 
-Customization:
+**Customization**
+
+Workflow parameters:
 - Select between physical-model (recommended) and polynomial mode.
 
-## Flexure Compensation
+## 6. Flexure Compensation
 
 Recipe: `xsh_flexcomp`
 
 Refines the wavelength solution to account for flexure, 
 especially when arcs are not taken at the same rotator angle as science.
 
-Customization:
+**Customization**
+
+Workflow parameters:
 - Select between physical-model (recommended) and polynomial mode.
 
-## Instrument Response and Efficiency
+## 7. Flat Strategy
+
+This allows the user to choose between two strategies 
+to select a flat field for the flux calibrator.
+The default strategy is to use the same flat as for the science observation.
+The alternative is to use the flat field selected by the rules, 
+i.e., those taken closest in time to the flux calibrator.
+
+**Customization**
+
+Workflow parameters:
+- By default, the `use_flat` parameter is set to *science*, 
+meaning the flats used for science frames are also applied to standard stars.
+Set it to *standard* to use the flats taken closest in time 
+to the standard-star observations.
+
+## 8. Instrument Response and Efficiency
 
 Recipes: `xsh_respon_slit_stare`, `xsh_respon_slit_offset` and `xsh_respon_slit_nod`
 
 Use standard stars to derive the per-order and merged instrument response 
 (mapping detector counts to physical flux),
 the blaze correction and the telescope + instrument + detector efficiency.
-Used for flux calibration of science exposures.
+Used for flux calibration of science exposures. 
+The pipeline does not create response curves for IFU data, and they are therefore
+not flux-calibrated.
 
-## Science Reduction
+## 9. Science Reduction SLIT
 
 Recipes: `xsh_scired_slit_stare`, `xsh_scired_slit_offset` and `xsh_scired_slit_nod`
 
@@ -146,23 +192,118 @@ and you get one combined 2D and 1D spectrum per run, not one per exposure.
 To obtain one spectrum per exposure (or per AB pair in nodding), 
 you must run `xsh_scired_slit_*` separately on each exposure or nod pair.
 
-Customization:
+**Customization**
+
+Workflow parameters:
+- By default, `telluric_correction_mode`=*standard* derives 
+the atmospheric parameters from the telluric standard.
+Set it to *science* to derive them directly from the science frame, 
+or to *none* to disable telluric correction.
 - Select between physical-model (recommended) and polynomial mode.
-- Use Active Flexure Correction (AFC) tables (`ORDER_TAB_AFC_`, `DISP_TAB_AFC_`) instead of the non-AFC ones, when available.
+
+Recipe parameters:
 - Change `stack-method` and `klow` / `khigh` thresholds to adjust stacking behaviour.
-- Sky modelling: In the NIR, `BSPLINE2` provides the best residuals,
-`BSPLINE1` is faster and acceptable for UVB/VIS, 
-and `MEDIAN` is the fatest but may leave residuals.
+- Sky modelling: 
+Use `sky-method` to select the method. 
+In the NIR, *BSPLINE2* provides the best residuals,
+*BSPLINE1* is faster and acceptable for UVB/VIS, 
+and *MEDIAN* is the fatest but may leave residuals.
 - Sky region selection:
 use parameters `sky-position1`, `sky-hheight1`, `sky-position2`, and `sky-hheight2` to manually select sky zones.
 Required when object not centered, multiple objects on slit, or strong NIR gradient.
 - Spectroscopic extraction:
 Standard extraction 
-(`localize-method`=MANUAL)
+(`localize-method`=*MANUAL*)
 recommended for faint sources.
 Automatic detection
-(`localize-method`=AUTO)
+(`localize-method`=*AUTO*)
 is usually fine for bright sources.
+
+## 10. Science Reduction IFU (instrument mode decommissioned)
+
+Recipes: `xsh_scired_ifu_stare` and `xsh_scired_ifu_offset`
+
+Reduces a science IFU stare or on-off exposure and builds a 3D cube.
+Contrary to the slit mode, the pipeline does not create response curves 
+for IFU data and they are therefore not flux-calibrated.
+
+## 11. Atmospheric Modelling with Calibration Star
+
+Recipe: `xsh_molecfit_model`
+
+Models the atmosphere by fitting an atmospheric model to the input telluric-standard spectrum to derive the column densities of several molecular species.
+
+The fitting process accounts for instrument-dependent parameters, including telescope background, spectral resolution, and wavelength calibration accuracy.
+
+The products of this recipe are:
+- `ATMOS_PARM`: table containing atmospheric parameters (e.g. pressure, temperature, humidity), 
+- `BEST_FIT_PARM`: table with the best-fit atmospheric and instrumental parameters, 
+- `BEST_FIT_MODEL`: the best-fit atmospheric model to the data.
+
+## 12. Atmospheric Modelling with Science
+
+Recipe: `xsh_molecfit_model`
+
+Same as step 11, but using the science spectrum to be corrected as input instead of a telluric-standard spectrum.
+
+## 13. Telluric Correction
+
+The telluric absorption correction is performed using the Molecfit software in two steps, as described below:
+
+## 13a. Determine Correction
+
+Recipe: `xsh_molecfit_calctrans`
+
+Computes the telluric correction 
+by combining the atmospheric model produced by 
+`xsh_molecfit_model` with a single reduced observation 
+(science, flux standard, or telluric standard). 
+This step derives the atmospheric transmission over 
+the full wavelength range of the data.
+
+If `xsh_molecfit_model` was computed using a different target 
+than the one processed by `xsh_molecfit_calctrans` 
+(e.g. a standard star instead of the science target), 
+the difference in airmass between the two observations 
+is taken into account when computing the transmission.
+
+## 13b. Apply Correction
+
+Recipe: `xsh_molecfit_correct`
+
+Applies the telluric correction derived from 
+the atmospheric transmission to the input data.
+
+## 14. Spectra Combination
+
+Recipe: `esotk_spectrum1d_combine`
+
+This sub-workflow combines spectra selected according to the grouping rule 
+defined in the `raw_spectra_to_combine` datasource. 
+The process is performed in two steps: 
+first, the products of the relevant science reduction tasks are collected based on the raw frames; 
+second, the spectra are combined in a task named according to `input_type`. 
+The recipe used for the combination is `esotk_spectrum1d_combine`. 
+It resamples all input 1D spectra onto a common wavelength grid and stacks them. 
+It is well suited for combining a small number of spectra affected by cosmic rays, 
+using a median-based preprocessing step to identify and reject outliers; 
+for larger stacks, sigma clipping alone is usually sufficient.
+
+## 15. Additional Tasks not used in the Science Reduction Cascade
+
+### 15a. Detector Linearity
+
+Recipes: `detmon_opt_lg`, `detmon_ir_lg`
+
+These recipes identify pixels whose response to different flux levels 
+deviates significantly from that of the majority of the detector 
+(optical and infrared). 
+Such pixels are flagged in the output mask with the value 32768 
+and are considered potential bad pixels. 
+This step can be useful for diagnostic purposes, 
+but is not strictly required and, by default, 
+it is not included in the Reduction Cascade.
+The UVB/VIS detectors exhibit very few pixels of this type.
 
 ---
 Go to XSHOOTER EDPS tutorial [index](../xshooter/index)

@@ -54,8 +54,7 @@ is: SPECTRUM_COMBINED_<target_name>, where target name is read from the header.
 of the combined spectrum they refer to
 their name formats are SPECTRUM_\<arm\>\_\<arcfile\> or SPECTRUM_TELLCORR_\<arm\>\_\<arcfile\> if telluric corrected. 
 The values of arm (UVB, VIS, NIR) and arcfile (the file name of the raw science exposure) are read from the file header.
-- The datacubes obtained from individual exposures for IFU observations. Its name format is: 
-- DATACUBE_\<arm\>\_\<arcfile\>.
+- The datacubes obtained from individual exposures for IFU observations. Its name format is: DATACUBE_\<arm\>\_\<arcfile\>.
 
 This applies to all slit modes (stare, offset, and nod) and ifu mode.
 

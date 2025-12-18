@@ -13,6 +13,44 @@
 ```{include} ../common/configure_reduction.md
 ```
 
+For XSHOOTER, the following workflow parameters can be adjusted 
+when the `Target Category` is set to *science*:
+
+- `use_flat`: 
+By default, this parameter is set to *science*, 
+meaning the flats used for science frames are also applied to standard stars.
+Set it to *standard* to use the flats taken closest in time 
+to the standard-star observations instead.
+- `telluric_correction_mode`: 
+Atmospheric parameters can be derived either from 
+a telluric standard or from the science frame itself.
+Set this parameter to *standard* (default) to use a telluric star 
+observed the same night with the same instrument setup.
+Set it to *science* to derive the parameters directly from the science.
+Use *none* to disable telluric correction.
+- `response`:
+This parameter selects the response curve used for flux calibration.
+*night* (default) uses the response from the standard star observed that night; 
+if unavailable, fall back to the master response.
+*master* uses the master response from CalSelector, 
+built by combining standards from multiple nights.
+- `reduction-mode`:
+Select between the physical-model mode (recommended) 
+and the polynomial mode to map each wavelength onto the CCDs.
+The physical model derives the solution from the actual optical path, 
+while the polynomial method uses empirical multi-coefficient fits per order.
+If the reduction fails or the physical model appears inconsistent, 
+the polynomial mode can be used for troubleshooting or as a fallback.
+- `max_diameter`:
+TODO
+- `max_separation`:
+TODO
+- `use_optical_dark`:
+This parameter controls the use of a dark frame in the UVB/VIS data reduction.
+Because the dark current is negligible at these wavelengths, 
+it is set to *FALSE* by default.
+Set it to *TRUE* if you wish to enable dark correction.
+
 ```{comment}
 ## Bad Pixels <a name="first_step"> </a>
 
@@ -245,6 +283,10 @@ in the extracted 1D spectrum.
 Same as {numref}`fig-cr`, but with `removecrhsingle-sigmalim`=7.0.
 In this case, this avoids the flagging of good pixels as CR-affected.
 ```
+
+### IFU cube not well aligned <a name="ifu_misaligned"> </a>
+
+
 
  ---
 Go to [top](#configuration)
