@@ -14,7 +14,9 @@ SPHERE tutorial
    #../common/tbd.md
    intro.md
    reducing_demo.md
-   reduction_chain.md
+   reduction_chain_zimpol.md
+   reduction_chain_irdis.md
+   reduction_chain_ifu.md
    configure_reduction.md
    task_list.md
    faq.md
