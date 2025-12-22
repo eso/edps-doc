@@ -1,4 +1,4 @@
-# The KMOS data reduction flow.
+# The KMOS data reduction flow
 
 The overall data flow of the KMOS pipeline is displayed [here](figures/reduction_cascade.png).
 
@@ -80,7 +80,63 @@ The further usage of the products is controlled via the workflow parameter `mole
                 This generates a combined correction that includes response curve and telluric features, which is then
                 used to correct scientific exposures.
 
+## Response
 
+This step involves either the task **response** or the task **telluric_and_response**. Both use the pipeline recipe
+**kmos_gen_telluric**.
+
+If the workflow parameter `molecfit` is set to 'false', then the task **telluric_and_response** is used. 
+The telluric spectrum as calculated from the **standard** task and the response are passed to the science reduction.
+For this other values of the workflow parameter, only the response is used.
+
+## Science reduction
+
+Task: **object**. Recipe: **kmos_sci_red**.
+
+In this step, the basic data reduction of the science data is executed. The data from the IFUs are extracted, 
+calibrated, and reconstructed into data cubes. If the workflow parameter `molecfit` is set to 'false', then the 
+products are flux-calibrated and corrected for telluric absorption. Otherwise, the products are only
+flux-calibrated. The telluric correction is then executed in the following workflow steps.
+
+Main products:
+- **SCI_RECONSTRUCTED**: one file for each exposure that contains IFUs on objects (no file for pure sky exposures). Each file has 24 extensions with data cubes.
+- **SCI_RECONSTRUCTED_COLL**: files with 24 extensions containing the reconstructed field-of-view images for each IFU.
+
+## Telluric model
+
+This step either involves the tasks **model_on_standard** and **transmission_on_standard** 
+or the tasks **model_on_science** and **transmission_on_science**. The tasks are encapsulated in the
+sub workflows telluric_on_standard and telluric_on science, respectively.
+The pipeline recipes **kmos_molecfit_model** **kmos_molecfit_calctrans** are used.
+
+If the workflow parameter `molecfit` is set to 'standard', then 
+the atmospheric model is fit to the extracted spectra from the **reponse** task. 
+With the parameter set to `science`, the fit is executed on the science data themselves.
+In both cases, the actual transmission curve is calculated using the model and the information from the science data.
+
+## Telluric correction
+
+Task: **telluric_correction**. Recipe: **kmos_molecfit_correct**.
+
+In this step, the science data are corrected for telluric absorption using the transmission from the previous step.
+
+## Object combination
+
+Task: **object_combination_molecfit** or **object_combination**. Recipe: **kmos_combine**.
+
+The different exposures for each object are combined. The final products are:
+- One combined data cube for each object in the dataset, coming in two different formats as
+  `COMBINED_CUBE` and `IDP_COMBINED_CUBE`. Both products have the same data content. 
+  The latter file has the needed metadata information for ingestion into the ESO archive.
+- A field-of-view image `COMBINED_IMAGE` and an exposure mask image `EXP_MASK` for each object.
+
+## Cubes combination
+
+Task: **cubes_combination**. Recipe: **kmos_combine**.
+
+If data have already been processed with the previous reduction then the resulting cubes can be combined
+for each object. This is useful for combining observations of the same targets which have been measured
+using different Observation Blocks.
 
 ---
 Go to KMOS EDPS tutorial [index](../kmos/index)
