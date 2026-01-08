@@ -1,6 +1,6 @@
 The data reduction of each dataset can be configured according to the scientific needs. In order to configure a
 reduction, go in the `Reduction Queue` tab, which lists the datasets that are listed for reduction,
-and press the button ![](../edpsgui/figures/configure_dataset.jpg) (see {numref}`fig-reduction_configuration_0`).
+and press the button ![](../edpsgui/figures/configure_dataset.jpg).
 
 ```{figure} figures/reduction_configuration_0.jpg
 :alt: reduction_configuration_0
