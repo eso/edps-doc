@@ -17,11 +17,11 @@ the installed pipelines.
 
 
 The graphic workflow representation will appear as in
-{numref}`fig-wkf`.
+{numref}`kmos-fig-wkf`.
 
-```{figure} figures/select_workflow.png
-:alt: wkf
-:name: fig-wkf
+```{figure} figures/select_workflow.jpg
+:alt: kmos-wkf
+:name: kmos-fig-wkf
 
 The EDPS Dashboard (Graphic User Interface) with the KMOS workflow loaded
 ```
