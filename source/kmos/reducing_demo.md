@@ -19,11 +19,11 @@ the installed pipelines.
 The graphic workflow representation will appear as in
 {numref}`fig-wkf`.
 
-```{figure} figures/select_workflow.jpg
+```{figure} figures/select_workflow.png
 :alt: wkf
 :name: fig-wkf
 
-**Insert caption here**	
+The EDPS Dashboard (Graphic User Interface) with the KMOS workflow loaded
 ```
 
 ## 2. Selecting the input data
@@ -39,18 +39,20 @@ Go to [top](#top)
 By default, EDPS saves all the recipe products for all the executions in the directory specified at the first execution (
 default: `$HOME/EDPS_data`).
 However, it is possible to save only the final products into a desired location. This can be achieved by exporting
-archieved data reduction: press the `Export` button in the `Archieved Data` tab
+archived data reduction: press the `Export` button in the `Archived Data` tab
 (see [here](../edpsgui/gui.md#archived_data)).
 
-To archieve a data reduction, press
+To archive a data reduction, press
 the button `Archive` in the `Reduction Queue` tab (see [here](../edpsgui/gui.md#processing_queue))
 
 Products are organized by `DATASET` (named as the first scientific exposure of the dataset), and `TIMESTAMP` (time of
 start of reduction)
 
 The final products saved in the specified directory are:
-
-**Please describe the main products of the reduction**
+- One combined data cube for each object in the dataset, coming in two different formats as
+  `COMBINED_CUBE` and `IDP_COMBINED_CUBE`. Both products have the same data content. 
+  The latter file has the needed metadata information for ingestion into the ESO archive.
+- A field-of-view image `COMBINED_IMAGE` and an exposure mask image `EXP_MASK` for each object.
 
 ## 5. Quality plots
 
