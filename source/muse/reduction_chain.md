@@ -1,4 +1,4 @@
-# Customizing the MUSE data reduction.
+# The MUSE data reduction flow.
 
 The overall data flow of the MUSE pipeline is displayed [here](figures/muse_cascade.jpg).
 
