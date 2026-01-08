@@ -10,8 +10,7 @@ and press the button ![](../edpsgui/figures/configure_dataset.jpg).
 How to open the dataset configuration menu to customize data reduction.
 ```
 
-The configuration window appears (see
-{numref}`fig-reduction_configuration_1` and {numref}`fig-reduction_configuration_2`)
+The configuration window appears (see below)
 It is possible to configure `workflow parameters`, that specify the strategy of the data reduction, as well as the
 `recipe parameters` associated to each individual task. Predefined sets are configured, for normal scientific reduction
 the default set `science_parameters` can be used.
