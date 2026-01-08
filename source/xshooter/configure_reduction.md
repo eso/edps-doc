@@ -1,4 +1,4 @@
-# Customizing the data reduction  <a name="configuration"></a>
+# Overview of all the data reduction configuration options  <a name="configuration"></a>
 
 ## Selection of most appropriate calibrations
 
