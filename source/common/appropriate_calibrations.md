@@ -28,7 +28,7 @@ calibrations that follow the rules of the instrument calibration plans have
 been selected. The higher the number, the poorer the quality of the products.
 
 More information on the application properties file can be
-found [here](../edpsgui/configuration_file.md#configuration_file).
+found [here](../edpsgui/reduction_configuration.md#configuration_file).
 
 More explanations on the concept of "association levels" can be
 found [here](../edpsgui/reduction_configuration.md#association_level).
