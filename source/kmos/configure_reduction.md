@@ -123,5 +123,55 @@ the spectral range. It can, however, introduce spurious effects at the edges of 
  ---
 Go to [top](#configuration)
 
+## Science reduction: object/sky association for sky subtraction <a name="object_sky"> </a>
+
+The **kmos_sci_red** recipe parameter `obj_sky_table` allows to specify the path to an ASCII file that
+associates every object exposure with its corresponding sky, overriding the automatic association done by the
+recipe itself. The suggested procedure to for this is:
+1. Run the workflow on only one data set.
+2. Locate the file obj_sky_table.txt produced by the **object** task (kmos_sci_red recipe). It is located in the direc-
+tory: **TBD**.
+3. Copy it into a safe place and rename it in a way that makes it easy to associate it with the current dataset.
+4. Change it according to the needs (an example is provided below). Each time the file is edited, it should
+be saved with a new name, otherwise a new reduction will not be triggered.
+5. Enter the edited file name with its full path to the `obj_sky_table` field in the interactive window.
+6. Reduce the data set again.
+
+The ASCII file that associates every object exposure with its corresponding sky looks like the following (the
+caption lines are not shown here, for sake of clarity).
+
+    # [caption lines skipped]
+    Object/sky associations of frames tagged as: SCIENCE
+    index: filename:
+    # 0: reflex_input/kmos-demo-reflex-1.1/raw/KMOS.2013-06-30T23:48:06.049.fits
+    # 1: reflex_input/kmos-demo-reflex-1.1/raw/KMOS.2013-06-30T23:53:23.571.fits
+    # 2: reflex_input/kmos-demo-reflex-1.1/raw/KMOS.2013-06-30T23:59:09.586.fits
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    IFU          1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18  19  20 21 22 23 24
+                -----------------------------------------------------------------------------
+    frame #  0:  reflex_input/kmos-demo-reflex-1.1/raw/KMOS.2013-06-30T23:48:06.049.fits
+          type:  O  O  O  O  O  O  O  O  O  O  O  O  .  .  O  .  O  O   O   O  O  O  O  O
+      sky in #:  1  1  1  1  1  1  1  1  1  1  1  1  .  .  1  .  1  1   1   1  1  1  1  1
+    frame # 2:   reflex_input/kmos-demo-reflex-1.1/raw/KMOS.2013-06-30T23:59:09.586.fits
+          type:  O  O  O  O  O  O  O  O  O  O  O  O  .  .  O  .  O  O   O   O  O  O  O  O
+      sky in #:  1  1  1  1  1  1  1  1  1  1  1  1  .  .  1  .  1  1  1/20 1  1  1  1  1
+    -----------------------------------------------------------------------------------------
+
+The IFUs pointing to Object and Sky are identified with the letters “O” and “S”, respectively. Inactive arms
+are identified with a dot “.”. For each frame and IFU containing an object, the corresponding frame and IFU
+containing the sky is displayed in the line below. If the sky location is described with a single number, e.g. N
+(N is an integer), then the sky to be used is on the exposure with index N , on the same IFU as the object.
+If the sky location is described in the format N/M (N and M integers, with 1 < M < 24), then the sky to be
+used is located in the exposure with index N and IFU M.
+
+In the example shown above, in the object frame KMOS.2013-06-30T23:48:06.049.fits (that has index 0) each
+n-th IFU has the corresponding sky cube in the same n-th IFU of the frame with index 1 
+(KMOS.2013-06-30T23:53:23.571.fits).
+The same is true for the object frame KMOS.2013-06-30T23:59:09.586.fits (that has index 2), 
+except for IFU 19. The corresponding sky has to be found in the frame with index 1, at ifu 20.
+
+ ---
+Go to [top](#configuration)
+
  ---
 Go to KMOS EDPS tutorial [index](../kmos/index)
