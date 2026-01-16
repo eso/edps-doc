@@ -129,8 +129,7 @@ The **kmos_sci_red** recipe parameter `obj_sky_table` allows to specify the path
 associates every object exposure with its corresponding sky, overriding the automatic association done by the
 recipe itself. The suggested procedure to for this is:
 1. Run the workflow on only one data set.
-2. Locate the file obj_sky_table.txt produced by the **object** task (kmos_sci_red recipe). It is located in the direc-
-tory: **TBD**.
+2. Locate the file obj_sky_table.txt produced by the **object** task (kmos_sci_red recipe). It is located in the same directory as the output products for the object task. This can be checked by clicking on the "Output files" tab in the "Quality reports" window.
 3. Copy it into a safe place and rename it in a way that makes it easy to associate it with the current dataset.
 4. Change it according to the needs (an example is provided below). Each time the file is edited, it should
 be saved with a new name, otherwise a new reduction will not be triggered.
@@ -143,16 +142,16 @@ caption lines are not shown here, for sake of clarity).
     # [caption lines skipped]
     Object/sky associations of frames tagged as: SCIENCE
     index: filename:
-    # 0: reflex_input/kmos-demo-reflex-1.1/raw/KMOS.2013-06-30T23:48:06.049.fits
-    # 1: reflex_input/kmos-demo-reflex-1.1/raw/KMOS.2013-06-30T23:53:23.571.fits
-    # 2: reflex_input/kmos-demo-reflex-1.1/raw/KMOS.2013-06-30T23:59:09.586.fits
+    # 0: /scratch/data/edps/kmos/2013-06-30/KMOS.2013-06-30T23:48:06.049.fits
+    # 1: /scratch/data/edps/kmos/2013-06-30/KMOS.2013-06-30T23:53:23.571.fits
+    # 2: /scratch/data/edps/kmos/2013-06-30/KMOS.2013-06-30T23:59:09.586.fits
     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     IFU          1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18  19  20 21 22 23 24
                 -----------------------------------------------------------------------------
-    frame #  0:  reflex_input/kmos-demo-reflex-1.1/raw/KMOS.2013-06-30T23:48:06.049.fits
+    frame #  0:  /scratch/data/edps/kmos/2013-06-30/KMOS.2013-06-30T23:48:06.049.fits
           type:  O  O  O  O  O  O  O  O  O  O  O  O  .  .  O  .  O  O   O   O  O  O  O  O
       sky in #:  1  1  1  1  1  1  1  1  1  1  1  1  .  .  1  .  1  1   1   1  1  1  1  1
-    frame # 2:   reflex_input/kmos-demo-reflex-1.1/raw/KMOS.2013-06-30T23:59:09.586.fits
+    frame # 2:   /scratch/data/edps/kmos/2013-06-30/KMOS.2013-06-30T23:59:09.586.fits
           type:  O  O  O  O  O  O  O  O  O  O  O  O  .  .  O  .  O  O   O   O  O  O  O  O
       sky in #:  1  1  1  1  1  1  1  1  1  1  1  1  .  .  1  .  1  1  1/20 1  1  1  1  1
     -----------------------------------------------------------------------------------------
@@ -169,6 +168,27 @@ n-th IFU has the corresponding sky cube in the same n-th IFU of the frame with i
 (KMOS.2013-06-30T23:53:23.571.fits).
 The same is true for the object frame KMOS.2013-06-30T23:59:09.586.fits (that has index 2), 
 except for IFU 19. The corresponding sky has to be found in the frame with index 1, at ifu 20.
+
+ ---
+Go to [top](#configuration)
+
+## Cubes combination <a name="cubes_combination"> </a>
+
+The tasks **object_combination** and **object_combination_molecfit** work on data from a single execution
+of an Observation Block. In order to create combined data cubes from several observations, the task
+**cubes_combination** can be used.
+
+The task **cubes_combination** requires as input products of type **SINGLE_CUBES** that have been created with
+previous executions of the task **telluric_correction**. Each file contains the data cube for a single target. 
+The task allows to combine the different data cubes for the same target. 
+
+The suggested procedure is:
+1. Copy the **SINGLE_CUBES** files that shall be combined into an (empty) directory.
+2. Select this directory as input in the "Raw data" section of the GUI and create a dataset for them. This data set should have the target **cubes_combination**.
+3. Start the reduction of this data set in the "Reduction Queue" section.
+
+For each target in the input data set, a product of category **COMBINED_CUBE**, **COMBINED_IMAGE**, 
+**IDP_COMBINED_CUBE**, and **EXP_MASK**, respectively, is then created.
 
  ---
 Go to [top](#configuration)
