@@ -1,6 +1,6 @@
 <a name="top"></a>
 
-# EFOS spectriscipic workflow
+# EFOS spectroscopic workflow
 
 ## Reducing spectroscopic data
 
@@ -67,12 +67,8 @@ Go to EFOSC EDPS tutorial [index](../efosc/index)
 ---
 Go to EFOSC EDPS tutorial [index](../efosc/index)
 
-```{include} reduction_chain_img.md
+```{include} reduction_chain_spc.md
 ```
-
----
-Go to EFOSC EDPS tutorial [index](../efosc/index)
-
 
 ```{include} configure_reduction.md
 ```
