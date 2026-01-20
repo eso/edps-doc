@@ -63,10 +63,6 @@ Go to [top](#top)
 ---
 Go to EFOSC EDPS tutorial [index](../efosc/index)
 
-
----
-Go to EFOSC EDPS tutorial [index](../efosc/index)
-
 ```{include} reduction_chain_spc.md
 ```
 

@@ -21,20 +21,21 @@ The reduction steps are:
 ###  Bias subtraction
 
 The task **bias** runs the recipe **efosc_bias** to generate a MASTER_BIAS calibration.
-Typicall, default recipe parameters deliver good results. 
+Typically, default recipe parameters deliver good results. 
 
 
 ### Spectroscopic calibrations
 
-T.B.D.
+The task **spectroscopic_calibrations** runs the recipe **efosc_calib** to generate master calibrations
+for wavelength calibration, slit tracing, and flat fielding. Typically, default recipe parameters deliver good results. 
+
 
 ### Spectroscopic standard
 
-T.B.D.
+The task **spectroscopic_standard** runs the recipe **efosc_science** on the standar stars and produces a response curve.
+Typically, default recipe parameters deliver good results. 
 
 ### Science spectrum
 
 This task runs the recipe **efosc_science** to process long-slit and MOS spectroscopic observations.
-
-T.B.D.
-
+Products are flux calibrated if a standard star is included in the dataset.
