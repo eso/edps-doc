@@ -193,5 +193,101 @@ For each target in the input data set, a product of category **COMBINED_CUBE**, 
  ---
 Go to [top](#configuration)
 
+## Telluric correction <a name="telluric_correction"> </a>
+
+The KMOS workflow allows to select between three strategies in order to correct the observations for atmospheric 
+transition. These are controlled via the workflow parameter `molecfit` which can have the values:
+1. 'standard': Atmospheric features are modeled with the molecfit algorithm using the telluric standard as
+                reference. The results are used to construct the full atmospheric transmission to correct
+                science exposures. A static response curve is used to correct the relative instrumental 
+                efficiency with wavelength. The zeropoint computed on the observed telluric standard is used for
+                absolute spectrophotometric calibration.
+2. 'science': Atmospheric features are modeled with the molecfit algorithm using the scientific exposure itself
+                as reference. To be used only if the science exposure has a bright continuum that allows
+                a proper fit to the atmospheric features. A static response curve is used to correct the
+                relative instrumental efficiency with wavelength. The zeropoint computed
+                on the observed telluric standard is used for absolute spectrophotometric calibration.
+3. 'false': The observations of the telluric standard stars are compared with a model spectrum for that star.
+                This generates a combined correction that includes response curve and telluric features, which is then
+                used to correct scientific exposures.
+
+For detailed information on Molecfit, we refer to its user manual which is available
+[here](http://www.eso.org/sci/software/pipelines/skytools/molecfit).
+
+The use of molecfit provides in general the best results, as it constructs a model of the atmospheric
+transmission, and does not transfer to the science issues that can be included in the extraction of the 1D
+standard star spectrum, such as low S/N, cosmic-rays, and recipe failure in the absorption line fitting. However,
+it is rather slow, and the user might want to optimize the atmospheric model parameters to improve the execution
+speed and the fit performance (LINK).
+
+Another advantage of using molecfit is that it accounts for the dependency of the instrumental spectral
+resolution from wavelength, IFU and grating, and rotator angle. This is advisable for example, if a bright target
+was not observed with the same IFU and rotator angle as the telluric standard star.
+
+The benefits of using molecfit are in general visible for high S/N targets (S/N >= 20). If the target has
+low S/N then it could be tried to switch the usage of molecfit off (by setting the workflow parameter to 'false').
+This could also be a strategy if the standard star and the target have been observed with the same IFU. 
+In this way, the determination of the response curve is based on the data from that night, and does not rely on 
+an average static calibration for the response.
+
+The strategy of running molecfit directly on science has the advantage that the atmospheric model is obtained
+under the same atmospheric conditions (water vapor and column densities of molecules) as the science spectra. 
+This strategy is recommended if there are science data with high signal-to-noise and few intrinsic features. These
+data can be used to determine the correction for all other science frames in the dataset.
+
+## Using a telluric model from a standard star observation <a name="telluric_standard"> </a>
+
+The tasks for determining an atmospheric model from a standard star observation 
+are encapsulated in the sub workflow **telluric_on_standard**. It uses the tasks **model_on_standard**
+(pipeline recipe **kmos_molecfit_model**) and **transmission_on_standard** (recipe **kmos_molecfit_calctrans**).
+
+There are several recipe parameters for **model_on_standard** which can be used to improve the fit of the
+model.
+
+**Limiting the fit to certain IFUs.** `process_ifu` accepts a list of comma-separated integer numbers. 
+The processing will then only be executed on those IFUs. Using only one IFU can be useful to increase the
+processing speed when trying different parameters. With the default value of '-1', all IFUs that have data are
+processed.
+
+**Wavelength ranges.** The fit is performed on a sub-set of wavelength ranges and not to the entire spectrum;
+this is found to be more efficient and less time-consuming. The advice is to select few wavelength ranges
+that include the expected molecules that are observable in the spectrum. The recipe parameter to be used
+is `wave_range`. For example, the entry ’0.815,0.830,0.972,0.986’ will perform the fit in the two ranges 
+0.815 < λ[μm] < 0.830 and 0.972 < λ[μm] < 0.986. The quotation marks “ ’ ” are mandatory, spaces are not allowed.
+The default value “-1” uses the ranges (values in in μm):
+- IZ: ’0.815,0.830,0.894,0.899,0.914,0.919,0.929,0.940,0.972,0.986’
+- YJ: ’1.106,1.116,1.075,1.083,1.131,1.137,1.139,1.149,1.155,1.166,1.177,1.189,1.201,1.209,1.263,1.276,1.294,1.303,1.312,1.336’
+- H: ’1.482,1.491,1.500,1.512,1.559,1.566,1.598,1.605,1.575,1.583,1.622,1.629,1.646,1.671,1.699,1.711,1.721,1.727,1.746,1.758,1.764,1.767,1.773,1.780,1.789,1.794’
+- K: ’1.975,1.987,1.993,2.010,2.041,2.060,2.269,2.291,2.308,2.335,2.360,2.379,2.416,2.440,2.445,2.475’
+- HK: ’1.575,1.584,1.594,1.606,1.646,1.671,1.756,1.771,1.781,1.811,1.945,1.969,1.975,1.987,1.993,2.030,2.043,2.089,2.242,2.294,2.308,2.335,2.360,2.379’
+
+It is good advice to limit the number of wavelength regions to 4 or 5. The default ranges are defined
+to provide a good fit for all the possible cases at the cost of high execution time, but in general, they
+are redundant. Regions have to be selected to include strong telluric features, avoiding at the same time
+regions where transmission is close to 0. All molecules expected to contribute
+in a specific instrumental wavelength range should be considered when defining the fitting regions.
+It is also advisable to define narrow wavelength regions, so that the continuum can be approximated by a
+1<sup>st</sup> or 2<sup>nd</sup> order polynomial.
+
+**Molecules.** Only the molecules that appear in the wavelength region of the grism should
+be fitted. The recipe parameters `relcol`, `fit_molec`, and `list_molec` should then be defined
+accordingly. The default values depend on the instrument configuration and should be valid in general. Change
+them only if you have evidence that a given molecule is not affecting the transmission.
+The defaults of `list_molec` (enabled with parameter value "-1") are: 
+- IZ: ’H2O’
+- YJ: ’H2O,CO2,CH4,O2’
+- H: ’H2O,CO2,CO,CH4’ 
+- K: ’H2O,CO2,CH4’
+- HK: ’H2O,CO2,CH4’
+
+For a full list of supported molecules, please consult the molecfit user manual.
+
+ ---
+Go to [top](#configuration)
+
+
+ ---
+Go to [top](#configuration)
+
  ---
 Go to KMOS EDPS tutorial [index](../kmos/index)
