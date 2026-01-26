@@ -280,7 +280,59 @@ The defaults of `list_molec` (enabled with parameter value "-1") are:
 - K: ’H2O,CO2,CH4’
 - HK: ’H2O,CO2,CH4’
 
-For a full list of supported molecules, please consult the molecfit user manual.
+For a full list of supported molecules, please consult the molecfit user manual. Other parameters:
+
+- `fit_molec`: Flags to fit the column density of the corresponding list_molec. If set to -1,
+grating dependent values are used (see manual for reference).
+- `relcol`: Column density relative to atmospheric profile of the corresponding list_molec in grating.
+If set to -1 grating dependent default values are used (see manual for reference).
+
+**Fit of continuum shape and wavelength solution.** It is advisable to fit both the continuum
+shape and the wavelength solution. Each wavelength region used in the fit has the continuum fitted
+independently; it is recommended to use a small polynomial degree such as 1 or 2 
+for the continuum (unless the extension of
+the wavelength regions justifies the use of larger values). A global wavelength solution is used for all the
+wavelength regions. The wavelength solution is found by comparing the position of the telluric features
+in the observations with those of the internal molecfit atlas. Note that the output spectrum will not be
+adapted to the new wavelength scheme, in order not to have extrapolation problems at the edges of the
+wavelength region. It is advisable to use a small polynomial degree (1 to 4) for the wavelength solution.
+Parameters:
+
+- `fit_cont `: Flag to enable/disable the polynomial fit of the continuum. Default: true.
+- `cont_n`: Degree of polynomial continuum fit. Default: 1.
+- `fit_wlc`: Flag to enable/disable the refinement of the wavelength solution. Default: true.
+- `wlc_n`: Polynomial degree of the refined wavelength solution. Default: 2.
+- `wlc_const`: Initial constant term for wavelength adjustment (shift relative to half wavelength range). Default: 0.
+
+**Instrumental spectral resolution (kernel).** The fit to the observations accounts for the instrumental 
+spectral resolution. The default is to use a static calibration that models the wavelength 
+dependent (Gaussian) FWHM for each IFU of each grating at several rotator angles.
+These are availablie in the kernel_<GRATING>.fits
+files distributed with the pipeline. Alternatively, the user can let the recipe fit the instrumental spectral
+resolution. The fit includes Gaussian, Lorentzian, and Voigt profiles. The spectral resolution can be
+constant in terms of FWHM (angstrom) or in terms of resolving power (fixed R). The latter is rarely used, but
+it can be activated by setting `varkern` to true. 
+
+In the majority of the cases, the best results are obtained by using the provided static calibration.
+
+Parameters:
+- `use_input_kernel`: If true (default), the provided input kernel is used.
+- `fit_res_box`: Fit resolution by Boxcar LSF (if input kernel is not provided or discarded). Default: false.
+- `relres_box`: Initial value for FWHM of Boxcar rel. to slit width if input kernel is not provided or discarded. Range between 0 and 2, default is 0.
+- `fit_res_gauss`: Fit resolution by Gaussian (if input kernel is not provided or discarded). Default: true.
+- `res_gauss`: Initial value for FWHM of the Gaussian in pixels if input kernel is not provided or discarded. The default value -1 uses the following hard-coded values IZ=1.84, YJ=1.82, H=1.76, K=1.73, and HK=2.06.
+- `fit_res_lorentz `: Fit resolution by Lorentz (if input kernel is not provided or discarded). Default: false.
+- `res_lorentz`: Initial value for FWHM of the Lorentz in pixels (if input kernel is not provided or discarded). Default: 0.5.
+- `kernmode`: Voigt profile approximation (if set to true) or independent Gauss/Lorentz fit (if input kernel is not provided or discarded). Default: false.
+- `kernfac`: Size of Gaussian/Lorentz/Voigt kernel in FWHM (if input kernel is not provided or discarded). Default: 5.0.
+- `varkern `: Does the kernel size increase linearly with wavelength (if input kernel is not provided or discarded)? Default: false.
+
+**Fit precision.** The fit precision is regulated by `ftol` and `xtol`. Default values are generally good.
+If fitting precision is increased, the improvement of the fit is not noticeable but the computation time
+increases a lot. One might set `xtol` to 0.01 (instead of 0.001) during the testing and set back the
+default resolution once the optimal configuration has been found. Parameters:
+- `ftol`: Relative chi-square convergence criterion. Default: 0.01.
+- `xtol`: Relative parameter convergence criterion. Default: 0.001.
 
  ---
 Go to [top](#configuration)
