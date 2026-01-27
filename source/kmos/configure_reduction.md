@@ -235,16 +235,35 @@ under the same atmospheric conditions (water vapor and column densities of molec
 This strategy is recommended if there are science data with high signal-to-noise and few intrinsic features. These
 data can be used to determine the correction for all other science frames in the dataset.
 
+ ---
+Go to [top](#configuration)
+
 ## Using a telluric model from a standard star observation <a name="telluric_standard"> </a>
 
 The tasks for determining an atmospheric model from a standard star observation 
 are encapsulated in the sub workflow **telluric_on_standard**. It uses the tasks **model_on_standard**
 (pipeline recipe **kmos_molecfit_model**) and **transmission_on_standard** (recipe **kmos_molecfit_calctrans**).
 
-There are several recipe parameters for **model_on_standard** which can be used to improve the fit of the
-model.
+ ---
+Go to [top](#configuration)
 
-**Limiting the fit to certain IFUs.** `process_ifu` accepts a list of comma-separated integer numbers. 
+## Using a telluric model from a science observation <a name="telluric_science"> </a>
+
+The tasks for determining an atmospheric model from a science observation 
+are encapsulated in the sub workflow **telluric_on_science**. 
+It uses the tasks **extract_spectra**, **select_reference**, 
+**model_on_science** (pipeline recipe **kmos_molecfit_model**) 
+and **transmission_on_science** (recipe **kmos_molecfit_calctrans**).
+
+ ---
+Go to [top](#configuration)
+
+## Improving the telluric model <a name="improve_telluric_model"> </a>
+
+There are several recipe parameters for **model_on_standard** or **model_on_science**
+which can be used to improve the fit of the model.
+
+**Limiting the fit to certain IFUs.** `process_ifus` accepts a list of comma-separated integer numbers. 
 The processing will then only be executed on those IFUs. Using only one IFU can be useful to increase the
 processing speed when trying different parameters. With the default value of '-1', all IFUs that have data are
 processed.
@@ -336,6 +355,23 @@ default resolution once the optimal configuration has been found. Parameters:
 
  ---
 Go to [top](#configuration)
+
+## Computation of atmospheric transmission: running calctrans <a name="calctrans"> </a>
+
+Once the parameters of the atmosphere are computed,
+the workflow combines them with the reconstructed cube to determine the full telluric correction. 
+This is executed by the task **transmission_on_standard** or **transmission_on_science**
+(recipe **kmos_molecfit_calctrans**). The process
+accounts for the airmass difference between the reference spectrum that was used to model the atmosphere 
+and the science observations to be corrected. The recipe also accounts for the
+different instrumental resolution between the IFU X, in which the reference spectrum was observed, and the
+IFU Y, in which the scientific target was observed. The IFU X and IFU Y match is done automatically or can
+be specified by the user. For or example, setting the recipe parameter `IFU_1` to 3
+will use the solution determined by the molecfit model obtained on IFU 3 (Y=3) to calibrate the scientific data
+on IFU 1 (X=1). A value of -1 triggers the following automatic matching:
+1. If IFU Y in ATMOS_PARM and BEST_FIT_PARM contains data, then `IFU_Y` = Y.
+2. Otherwise, the first IFU X with valid data among those that belong to the same detector as IFU Y will be used.
+3. If there are no available IFU for that detector, the first IFU Y among the input data that contains data will be used.
 
 
  ---
