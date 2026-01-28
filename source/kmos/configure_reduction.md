@@ -21,11 +21,11 @@ the three detectors at one of the six rotator position angles.
 Other rotator angles (either 0, 60, 120, 180, 240, or 300 degrees) can be chosen with the
 `Select Angle` menu. The
 output file with the reconstructed arc frames has 18 extensions (3 extensions per detector, times 6 angles).
-Exposures at different angles are taken to account for the instrument flexures. When applying the wavelength
+Exposures at different angles are taken in order to account for instrument flexures. When applying the wavelength
 correction to a dataset, the KMOS pipeline automatically selects the calibration with the closest angle. 
 
 
-The KMOS wavelength calibration uses Argon and Neon arc line. 
+The KMOS wavelength calibration uses Argon and Neon arc lines. 
 There is normally no need to fine tune the wavelength calibration result. 
 Since the Argon lines are less numerous and
 less bright than the Neon ones, the fit to the line positions is dominated by the Neon lines and
@@ -43,15 +43,15 @@ Go to [top](#configuration)
 ## Science reduction: level correction <a name="level_correction"> </a>
 
 Science data can contain extra counts due to the electronics and other sources. These counts differ from one
-detector read-out channel to another and can vary intensity across the detector. 
+detector read-out channel to another and can change the intensity across the detector. 
 The KMOS pipeline has two main strategies for removing this extra level (“level correction”).
 
-The first strategy (overscan) evaluates the extra counts on pre- and over- scan regions; 
+The first strategy (overscan) evaluates the extra counts on pre- and over-scan regions; 
 it evaluates the correction for each of the 32 read-out channels independently and for even and odd pixels.
 
 The second strategy (intra slices), uses the non illuminated portion of the detector located in between the various
 slices and IFUs to evaluate the extra light and remove it. This strategy is to be used only for very faint sources,
-otherwise the cross-talk effect contaminates the intra-slices region and the pipeline over-correct the data.
+otherwise the cross-talk effect contaminates the intra-slices region and the pipeline over corrects the data.
 
 These strategies can be selected by setting the `lcmethod` parameter in the recipe **kmos_sci_red** 
 (task **object**).
@@ -60,7 +60,7 @@ The values for `lcmethod` are:
 - OSCAN It applies the overscan method. This is the default value.
 - SLICES_MEAN. It applies the intra-slices method. The input file is divided into a grid of 32×16 windows,
 each of them 64 × 128 pixels wide. The mean of the non illuminated portions (i.e., intra-slices pixels) of
-the detector within each window is subtracted from the data. Bad pixels are masked. Intra slice pixels and
+the detector within each window is subtracted from the data. Bad pixels are masked. Intra-slice pixels and
 bad pixels are identified with the calibrations BADPIXEL_DARK and LCAL produced by the workflow.
 - SLICES_MEDIAN. Same as SLICES_MEAN but the median is computed instead of the average.
 - NONE. No correction is done.
@@ -79,10 +79,10 @@ Go to [top](#configuration)
 ## Science reduction: optimizing sky removal with recipe parameters <a name="sky_removal"> </a>
 
 The **kmos_sci_red** recipe triggered by the **object** task automatically assigns a sky IFU to an
-object IFU. The adopted criteria is to use the same IFU as the object, which is closest in time. To override the
-automatic assignment, please refer to the next section.
+object IFU. The adopted criteria is to use the same IFU as the object and which is closest in time. 
+To override the automatic assignment, please refer to the next section.
 
-Once the Object / Sky pair is identified, the recipe proceeds to remove the sky from the corresponding object
+Once the object / sky pair is identified, the recipe proceeds to remove the sky from the corresponding object
 IFU. To suppress sky subtraction, set `no_subtract` to true and `sky_tweak` to false. This setup will
 create also reconstructed sky cubes.
 
@@ -94,8 +94,8 @@ from the dataset.
 
 Then the user has the option to re-scale the intensities of the sky emission lines measured on the sky cube
 to match those observed in the science cube. This option exploits the sky tweaking algorithm described in
-Davies et al. 2007, MNRAS, 375, 1099, that defines groups of lines with the same scaling factor. This op-
-tion is triggered setting `sky_tweak` to true (default). In some (rare) cases, switching off the `skytweak`
+Davies et al. 2007, MNRAS, 375, 1099, that defines groups of lines with the same scaling factor. This 
+option is triggered by setting `sky_tweak` to true (default). In some (rare) cases, switching off the `skytweak`
 method gives better results than the default configuration. Note that you cannot trigger this option and set
 `no_subtract` to true.
 
@@ -127,10 +127,10 @@ Go to [top](#configuration)
 
 The **kmos_sci_red** recipe parameter `obj_sky_table` allows to specify the path to an ASCII file that
 associates every object exposure with its corresponding sky, overriding the automatic association done by the
-recipe itself. The suggested procedure to for this is:
+recipe itself. The suggested procedure for this is:
 1. Run the workflow on only one data set.
 2. Locate the file obj_sky_table.txt produced by the **object** task (kmos_sci_red recipe). It is located in the same directory as the output products for the object task. This can be checked by clicking on the "Output files" tab in the "Quality reports" window.
-3. Copy it into a safe place and rename it in a way that makes it easy to associate it with the current dataset.
+3. Copy it to a safe place and rename it in a way that makes it easy to associate it with the current dataset.
 4. Change it according to the needs (an example is provided below). Each time the file is edited, it should
 be saved with a new name, otherwise a new reduction will not be triggered.
 5. Enter the edited file name with its full path to the `obj_sky_table` field in the interactive window.
@@ -159,7 +159,7 @@ caption lines are not shown here, for sake of clarity).
 The IFUs pointing to Object and Sky are identified with the letters “O” and “S”, respectively. Inactive arms
 are identified with a dot “.”. For each frame and IFU containing an object, the corresponding frame and IFU
 containing the sky is displayed in the line below. If the sky location is described with a single number, e.g. N
-(N is an integer), then the sky to be used is on the exposure with index N , on the same IFU as the object.
+(N is an integer), then the sky to be used is on the exposure with index N, on the same IFU as the object.
 If the sky location is described in the format N/M (N and M integers, with 1 < M < 24), then the sky to be
 used is located in the exposure with index N and IFU M.
 
@@ -178,12 +178,12 @@ The tasks **object_combination** and **object_combination_molecfit** work on dat
 of an Observation Block. In order to create combined data cubes from several observations, the task
 **cubes_combination** can be used.
 
-The task **cubes_combination** requires as input products of type **SINGLE_CUBES** that have been created with
+The task **cubes_combination** requires products of type **SINGLE_CUBES** as input that have been created with
 previous executions of the task **telluric_correction**. Each file contains the data cube for a single target. 
 The task allows to combine the different data cubes for the same target. 
 
 The suggested procedure is:
-1. Copy the **SINGLE_CUBES** files that shall be combined into an (empty) directory.
+1. Copy the **SINGLE_CUBES** files that shall be combined to an (empty) directory.
 2. Select this directory as input in the "Raw data" section of the GUI and create a dataset for them. This data set should have the target **cubes_combination**.
 3. Start the reduction of this data set in the "Reduction Queue" section.
 
@@ -208,7 +208,7 @@ transition. These are controlled via the workflow parameter `molecfit` which can
                 relative instrumental efficiency with wavelength. The zeropoint computed
                 on the observed telluric standard is used for absolute spectrophotometric calibration.
 3. 'false': The observations of the telluric standard stars are compared with a model spectrum for that star.
-                This generates a combined correction that includes response curve and telluric features, which is then
+                This generates a combined correction that includes response curve and telluric features which is then
                 used to correct scientific exposures.
 
 For detailed information on Molecfit, we refer to its user manual which is available
@@ -218,16 +218,16 @@ The use of molecfit provides in general the best results, as it constructs a mod
 transmission, and does not transfer to the science issues that can be included in the extraction of the 1D
 standard star spectrum, such as low S/N, cosmic-rays, and recipe failure in the absorption line fitting. However,
 it is rather slow, and the user might want to optimize the atmospheric model parameters to improve the execution
-speed and the fit performance (LINK).
+speed and the fit performance ([see below](#improve_telluric_model)).
 
 Another advantage of using molecfit is that it accounts for the dependency of the instrumental spectral
-resolution from wavelength, IFU and grating, and rotator angle. This is advisable for example, if a bright target
+resolution from wavelength, IFU and grating, and rotator angle. This is advisable, for example, if a bright target
 was not observed with the same IFU and rotator angle as the telluric standard star.
 
 The benefits of using molecfit are in general visible for high S/N targets (S/N >= 20). If the target has
 low S/N then it could be tried to switch the usage of molecfit off (by setting the workflow parameter to 'false').
 This could also be a strategy if the standard star and the target have been observed with the same IFU. 
-In this way, the determination of the response curve is based on the data from that night, and does not rely on 
+In this way, the determination of the response curve is based on the data from that night and does not rely on 
 an average static calibration for the response.
 
 The strategy of running molecfit directly on science has the advantage that the atmospheric model is obtained
@@ -268,7 +268,7 @@ The processing will then only be executed on those IFUs. Using only one IFU can 
 processing speed when trying different parameters. With the default value of '-1', all IFUs that have data are
 processed.
 
-**Wavelength ranges.** The fit is performed on a sub-set of wavelength ranges and not to the entire spectrum;
+**Wavelength ranges.** The fit is performed on a subset of wavelength ranges and not to the entire spectrum;
 this is found to be more efficient and less time-consuming. The advice is to select few wavelength ranges
 that include the expected molecules that are observable in the spectrum. The recipe parameter to be used
 is `wave_range`. For example, the entry ’0.815,0.830,0.972,0.986’ will perform the fit in the two ranges 
@@ -326,7 +326,7 @@ Parameters:
 **Instrumental spectral resolution (kernel).** The fit to the observations accounts for the instrumental 
 spectral resolution. The default is to use a static calibration that models the wavelength 
 dependent (Gaussian) FWHM for each IFU of each grating at several rotator angles.
-These are availablie in the kernel_<GRATING>.fits
+These are availablie in the kernel_\<GRATING\>.fits
 files distributed with the pipeline. Alternatively, the user can let the recipe fit the instrumental spectral
 resolution. The fit includes Gaussian, Lorentzian, and Voigt profiles. The spectral resolution can be
 constant in terms of FWHM (angstrom) or in terms of resolving power (fixed R). The latter is rarely used, but
@@ -360,7 +360,7 @@ Go to [top](#configuration)
 
 Once the parameters of the atmosphere are computed,
 the workflow combines them with the reconstructed cube to determine the full telluric correction. 
-This is executed by the task **transmission_on_standard** or **transmission_on_science**
+This is executed by the tasks **transmission_on_standard** or **transmission_on_science**
 (recipe **kmos_molecfit_calctrans**). The process
 accounts for the airmass difference between the reference spectrum that was used to model the atmosphere 
 and the science observations to be corrected. The recipe also accounts for the

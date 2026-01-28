@@ -8,11 +8,11 @@ tasks that generate the calibrations needed for it are automatically executed.
 | TASK                        | RECIPE                  | Used in  <br/>  science reduction | Notes                                                                        |            
 |-----------------------------|-------------------------|-----------------------------------|------------------------------------------------------------------------------|
 | acquisition_image           | kmo_make_image          | no                                | Creates white-light images for acquisition data                              |
-| acquisition_profile         | kmo_fit_profile         | no                                | Fits profiles to field-of-view images for acquisition                        |
+| acquisition_profile         | kmo_fit_profile         | no                                | Fits profiles to white-light images for acquisition                          |
 | acquisition_reconstruct     | kmos_reconstruct        | no                                | Creates data cubes from acquisition data                                     |
 | arc                         | kmos_wave_cal           | yes                               | Computes the wavelength calibration                                          |
 | astrometry_make_image       | kmo_make_image          | no                                | Creates white-light images for astrometry                                    |
-| astrometry_profile          | kmo_fit_profile         | no                                | Fits profiles to field-of-view images for astrometry                         |
+| astrometry_profile          | kmo_fit_profile         | no                                | Fits profiles to white-light images for astrometry                           |
 | astrometry_reconstruct      | kmos_reconstruct        | no                                | Creates data cubes from astrometry observations                              |
 | cubes_combination           | kmos_combine            | optional                          | Combines data cubes from separate observations                               |
 | dark                        | kmos_dark               | yes                               | Processes dark exposures                                                     |

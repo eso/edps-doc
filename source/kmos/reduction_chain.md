@@ -9,9 +9,8 @@ input, outputs and recipe parameters used in each recipe are available
 in the pipeline manual. Here, we present only the description of most
 important features.
 
-The `EDPS` workflow is designed to execute the tasks that deliver
-the final reduced data cube for each dataset. It can be either the product of a single exposure, or the combination of
-multiple exposures. Only calibrations needed by the selected the scientific exposures are processed.
+The `EDPS` workflow is designed to execute the tasks that deliver the final reduced data cube for each dataset. 
+Only calibrations needed by the selected scientific exposures are processed.
 
 It is possible to set `EDPS` to perform the data reduction until a certain step of the reduction chain (e.g. to reduce
 only standard stars, or only flat fields).
@@ -107,7 +106,7 @@ Main products:
 This step either involves the tasks **model_on_standard** and **transmission_on_standard** 
 or the tasks **model_on_science** and **transmission_on_science**. The tasks are encapsulated in the
 sub workflows telluric_on_standard and telluric_on science, respectively.
-The pipeline recipes **kmos_molecfit_model** **kmos_molecfit_calctrans** are used.
+The pipeline recipes **kmos_molecfit_model** and **kmos_molecfit_calctrans** are used.
 
 If the workflow parameter `molecfit` is set to 'standard', then 
 the atmospheric model is fit to the extracted spectra from the **reponse** task. 
