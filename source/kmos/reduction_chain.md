@@ -64,12 +64,17 @@ Products:
 - **STD_IMAGE**: reconstructed IFU field-of-view image
 - **STD_MASK**: mask for extracting the standard star.
 
-The further usage of the products is controlled via the workflow parameter `molecfit` which can have the values:
+The further usage of the products depends on the workflow parameters `telluric_correction` and `molecfit`.
+The parameter `telluric_correcton` can have the values:
+- 'true': The science spectra are corrected for telluric absorption using the strategy which is defined by the parameter `molecfit`. This is the default.
+- 'false': The science spectra are not corrected for telluric absorption.
+
+The workflow parameter `molecfit` can have the values:
 - 'standard': Atmospheric features are modeled with the molecfit algorithm using the telluric standard as
                 reference. The results are used to construct the full atmospheric transmission to correct
                 science exposures. A static response curve is used to correct the relative instrumental 
                 efficiency with wavelength. The zeropoint computed on the observed telluric standard is used for
-                absolute spectrophotometric calibration.
+                absolute spectrophotometric calibration. 
 - 'science': Atmospheric features are modeled with the molecfit algorithm using the scientific exposure itself
                 as reference. To be used only if the science exposure has a bright continuum that allows
                 a proper fit to the atmospheric features. A static response curve is used to correct the
@@ -84,9 +89,10 @@ The further usage of the products is controlled via the workflow parameter `mole
 This step involves either the task **response** or the task **telluric_and_response**. Both use the pipeline recipe
 **kmos_gen_telluric**.
 
-If the workflow parameter `molecfit` is set to 'false', then the task **telluric_and_response** is used. 
+If the workflow parameter `molecfit` is set to 'false' (and `telluric_correction` is 'true'), 
+then the task **telluric_and_response** is used. 
 The telluric spectrum as calculated from the **standard** task and the response are passed to the science reduction.
-For this other values of the workflow parameter, only the response is used.
+For the other values of `molecfit` or if `telluric_correction` is 'false', only the response is used.
 
 ## Science reduction
 
@@ -121,7 +127,7 @@ In this step, the science data are corrected for telluric absorption using the t
 
 ## Object combination
 
-Task: **object_combination_molecfit** or **object_combination**. Recipe: **kmos_combine**.
+Task: **object_combination**. Recipe: **kmos_combine**.
 
 The different exposures for each object are combined. The final products are:
 - One combined data cube for each object in the dataset, coming in two different formats as
@@ -133,7 +139,7 @@ The different exposures for each object are combined. The final products are:
 
 Task: **cubes_combination**. Recipe: **kmos_combine**.
 
-If data have already been processed with the previous reduction then the resulting cubes can be combined
+If data have already been processed then the resulting cubes can be combined
 for each object. This is useful for combining observations of the same targets which have been measured
 using different Observation Blocks.
 
