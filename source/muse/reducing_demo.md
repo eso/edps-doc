@@ -38,7 +38,7 @@ By default, EDPS saves all the recipe products for all the executions in the dir
 default: `$HOME/EDPS_data`).
 However, it is possible to save only the final products into a desired location. This can be achieved by exporting
 archieved data reduction: press the `Export` button in the `Archieved Data` tab
-(see [here](../edpsgui/gui.md#the-reduction-archive-tab), or consult the [Frequently Asked Questions](faq.md) ).
+(see [here](the-reduction-archive-tab.md), or consult the [Frequently Asked Questions](faq.md) ).
 
 To archieve a data reduction, press the button `Archive` in the `Reduction Queue` tab.
 
