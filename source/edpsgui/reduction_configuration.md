@@ -6,14 +6,31 @@
 <a name="reduction_configuration_editor"></a>
 # Reduction configuration editor
 
-T.B.D.
+This editor allows to configure the data reduction for a given dataset by specifying workflow and recipe
+parameters.
+Note: some workflow parameters were already configured before creating the dataset and sending it to the reduction queue.
+Here, they can be changed again. Please, note that the parameters have an effect only on the files that are already in the dataset. 
+If one specifies a parameter that should include extra files in the dataset (e.g., the inclusion of more calibrations), files are not added and the reduction might fail. 
+If you need to change a parameter that modifies the dataset content, please go back to the Raw data tab and create a new dataset.
 
-%This editor allows to select the data reduction strategy for a given dataset by specifying workflow and recipe
-%parameters.
-%To open the editor, go on the <a href="gui.html#processing_queue">Processing Queue</a> tab and click on
-%the ![](figures/configure_dataset.jpg) button next to the dataset you desire to configure the reduction for.
-%
-%The editor is divided into 2 parts. The first is shown in {numfig}`reduction_configuration_editor_1`. It displays the
+To open the editor, click on
+the ![](figures/configure_dataset.jpg) button next to the dataset you desire to configure the reduction for.
+
+
+
+The editor is divided into 4 parts. 
+
+**Current configuration**
+
+**Other configurations**
+
+**Comment**
+
+**Parameters**
+
+
+
+The first is shown in {numfig}`reduction_configuration_editor_1`. It displays the
 %dataset the configuration refers to and it allows to load, save, edit, and select different configurations for the same
 %dataset. Comments describing the characteristics of the configuration can be written in the apposite field and copied
 %into the selected configuration.
