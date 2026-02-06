@@ -14,7 +14,7 @@ EDPS-GUI complete manual
    gui.md
    reduction_configuration.md
    #final_products.md
-   #tipps.md
+   faq.md
    
 ------------
 
