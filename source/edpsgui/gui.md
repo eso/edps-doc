@@ -115,7 +115,7 @@ Reduction Queue and appear in the tab "Reduction Archive".
 The content of the "Reduction Archive", e.g. the list of archived reductions, can be inspected by pressing the
 **Reduction Archive" tab.
 
-   ````{figure} figures/archive-dataset.jpg
+   ````{figure} figures/export1.jpg
    :alt: archive
    :name: archive
    ```` 
@@ -132,7 +132,7 @@ scientific tasks are saved. Other files can be found in the EDPS_data directory.
 The operation can take several minutes, depending on the sizes of the files.
 The default structure is `<dataset_name>/<reduction_time_stamp>/<category>.fits`.
 
-   ````{figure} figures/archive-dataset_2.jpg
+   ````{figure} figures/export2.jpg
    :alt: archive2
    :name: archive2
    ````  
