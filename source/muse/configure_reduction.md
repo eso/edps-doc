@@ -7,7 +7,7 @@
 ## Quality reports
 ```{include} ../common/quality_plots.md
 ```
-## Configuration of parameters
+## Configuration of parameters: the configuration editor
 ```{include} ../common/configure_reduction.md
 ```
 
