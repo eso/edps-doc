@@ -21,13 +21,17 @@ They new values will be used when pressing "Start EDPS" the next time.
   it might be convenient to change it, e.g. if the selected location has no more space.
   Obviously, if new values are specified, all the information stored in the previous location is no longer visible.
   It is recommended to specify full paths, otherwise a new directory will be created everytime on the path the EDPS-GUI is launched from.
-- 
+
+<a name="association_preference"></a>
 - **Association preference**: RAW vs MASTER calibrations.
 
+   **Note: it is recommended to specify this variable via the GUI, before 
+   creating the datasets (see [here](raw_data_.md#create_dataset)), and not by editing the application.properties file.**
+ 
    If the input directory contain both MASTER (e.g., pre-reduced calibrations) and RAW calibrations, it
    could happen that both of them fulfill the matching criteria and quality level for a
    certain task. In this case, one can specify to which type of calibration to give priority by setting the
-   variable **association_preference** in the  configuration file.
+   variable **association_preference** in the  configuration file. 
 
    Possible values of association_preference are:
   - **raw**. First, EDPS checks if there are raw calibrations ensuring the first quality level (see [here](

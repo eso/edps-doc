@@ -61,16 +61,27 @@ There are 4 main buttons:
   images.
   Other target categories are specific for Paranal operations, and are not needed for the general user.
 
+<a name="set_parameters"></a>
+- **Select the workflow parameters** 
 
+<a name="create_dataset"></a>
 - **Create Dataset**. This steps creates the datasets to be reduced until the specified reduction target.
-  Datasets, together with all the calibrations needed to process them, are listed in a table. Press the "Create Dataset"
-  blue button
-  to create the datasets. Selected datasets can be sent to the processing queue by pressing
+ 
+  The menu "Calibration preference" allows to specify the preferences in associating calibrations (e.g., raw or 
+  master calibrations). The various preferences are described [here](settings_.md#association_preference). For regular 
+  science reduction the options raw_per_quality_level or master_per_quality_level are recommended.
+
+  Press the "Create Dataset" blue button to create the datasets. 
+  Datasets, together with all the calibrations needed to process them, are listed in a table.  Selected datasets can be sent to the processing queue by pressing
   the "Submit to Reduction Queue" blue button. 
 
   **Important notes:**
   - When submitting a dataset, the reduction 'does not start automatically'. To process a dataset, please, go the the Reduction Queue tab.
-  - You cannot submit to the Reduction queue datasets that are already submitted.
+  - You cannot submit to the Reduction queue datasets that are already submitted. 
+  - If datasets are already generated, the "Create dataset" button is not active. Because a dataset is defined by the reduction 
+    target and the files it contains, to generate new datasets, one has either to specify new input files, change workflow 
+    parameters that change the way files are included (e.g., different combination strategy) or change the association preference. 
+    
   
   ````{figure} figures/create-dataset.jpg
    :alt: create-dataset
