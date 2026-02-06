@@ -14,7 +14,8 @@ If one specifies a parameter that should include extra files in the dataset (e.g
 If you need to change a parameter that modifies the dataset content, please go back to the Raw data tab and create a new dataset.
 
 To open the editor, click on
-the ![](figures/configure_dataset.jpg) button next to the dataset you desire to configure the reduction for.
+the ![](figures/configure_dataset.jpg) button next to the dataset you desire to configure the reduction for. A window with the
+configuration editor appears as shown the figure below.
 
 ```{figure} figures/configuration_editor_0.jpg
    :alt: configuration_editor_0
@@ -24,41 +25,21 @@ the ![](figures/configure_dataset.jpg) button next to the dataset you desire to 
 The Reduction Configuration editor.
 ```
 
-The editor is divided into 4 parts. 
+The editor is divided into 4 parts, which can be accessed pressing the corresponding expansion arrow. 
 
-**Current configuration**
+**Current configuration** It indicate the name of the selected configuration for a given dataset.
 
-**Other configurations**
+**Other configurations** It allows to specify other configurations, to which the changes shall be copied to.
 
-**Comment**
+**Comment** It allows to specify a comment to describe the configuration. It is possible to append or replace a comment.
+Comments can be changed on all configurations. It is possible to save the comment for the current configuration only, or for all
+the selected configurations.
 
 **Parameters**
 
+T.B.D.
 
 
-The first is shown in {numfig}`reduction_configuration_editor_1`. It displays the
-%dataset the configuration refers to and it allows to load, save, edit, and select different configurations for the same
-%dataset. Comments describing the characteristics of the configuration can be written in the apposite field and copied
-%into the selected configuration.
-%
-%```{figure} figures/reduction_configuration_editor_1.jpg
-%   :alt: reduction_configuration
-%   :name: fig-reduction_configuration_editor_1
-%   :figclass: left-caption
-%
-%   The Reduction Configuration editor (upper part), where the dataset and the associated configurations are visible.
-%   ```
-%
-%The second part of the editor shown in {numfig}`reduction_configuration_editor_2` lists the workflow and recipe
-%parameters that can be modified to customize the data reduction.
-%
-%```{figure} figures/reduction_configuration_editor_2.jpg
-%   :alt: reduction_configuration
-%   :name: fig-reduction_configuration_editor_2
-%   :figclass: left-caption
-%
-%   The Reduction Configuration editor (lower part), where workflow and recipe parameters can be edited.
-%   ```
 %
 %There are several parameters sets available, that are configured to serve specific purposes. The `science_parameters` (
 %default) set is the one set for general reduction purposes, the `qc0_parameters` defines a strategy for quick analysis,

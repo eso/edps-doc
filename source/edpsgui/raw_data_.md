@@ -68,6 +68,14 @@ of the reduction or, as in case of fors (see figure below), the criteria on how 
 Workflow parameters can influence which files enter a dataset. Click on the parameter name to visualize a short description.
 Every workflow has a different list of workflow parameters. 
 
+There are several "Parameter sets" that can be selected, e.g. sets whose parameter values are predefined according to specific
+use cases. By default, the "science" parameter set is loaded, which contains the settings for the most science use cases. 
+This is the recommended parameter set to use or, eventually modify.
+Other parameters sets are qc0_parameters (for quick inspection at Paranal), idp_parameters (the set used by ESO to 
+populate the science archive), default_parameters (to automatically process calibrations in Chile). Other workflows
+might contain additional parameters sets, depending on the use case.
+
+
 
    ````{figure} figures/select_workflow_parameters.jpg
    :alt: select_workflow_parameters
