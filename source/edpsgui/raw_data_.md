@@ -1,7 +1,7 @@
 This tab allows to specify and inspect the input data, to specify how deep into the reduction cascade to go
 (reduction target), to configure the association preference, and, finally, to create the dataset to reduce.
 
-There are 4 main buttons:
+There are 5 main buttons:
 
 - **Select the input data**. The button "Select Inputs" opens a window that allows to specify the
   directory where the input data are located. 
@@ -54,22 +54,31 @@ There are 4 main buttons:
 
   Individual tasks within that category are listed in the "Targets" bar. In the figure below,
   the "Science" category is shown, that contains the tasks called science_spectra and telluric_correction. The
-  categories and the tasks depends on the loaded workflow. Typically, the category "science" is specified by default.
+  categories and the tasks depends on the loaded workflow. The category "science" is specified by default.
   The category "all" shows all the tasks in that workflow. Tasks that are not desired, can be removed from the list.
   The category "qc1calib" triggers all the calibration and instrument monitoring tasks, but it does not process
-  scientific
-  images.
+  scientific images.
   Other target categories are specific for Paranal operations, and are not needed for the general user.
 
 <a name="set_parameters"></a>
 - **Select the workflow parameters** 
+
+This windows allows to specify the so called "workflow parameters", e.g. parameters that define the strategy
+of the reduction or, as in case of fors (see figure below), the criteria on how to group files to combine.
+Workflow parameters can influence which files enter a dataset. 
+
+
+   ````{figure} figures/select_workflow_parameters.jpg
+   :alt: select_workflow_parameters
+   :name: fig_select_workflow_parameters
+   ```` 
 
 <a name="create_dataset"></a>
 - **Create Dataset**. This steps creates the datasets to be reduced until the specified reduction target.
  
   The menu "Calibration preference" allows to specify the preferences in associating calibrations (e.g., raw or 
   master calibrations). The various preferences are described [here](settings_.md#association_preference). For regular 
-  science reduction the options raw_per_quality_level or master_per_quality_level are recommended.
+  science reduction the options raw_per_quality_level (default) or master_per_quality_level are recommended.
 
   Press the "Create Dataset" blue button to create the datasets. 
   Datasets, together with all the calibrations needed to process them, are listed in a table.  Selected datasets can be sent to the processing queue by pressing
