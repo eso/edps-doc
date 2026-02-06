@@ -1,13 +1,10 @@
 By default, EDPS associates raw calibrations to the reduction process. It is also possible to use pre-processed
 calibrations (a.k.a. master calibrations) if available, in order to speed up the reduction. 
-To do that:
+The preference can be specified in the Raw Data tab, before creating the datasets 
+(see [here](../edpsgui/raw_data_.md#create_dataset)).
 
-- Stop EDPS by pressing the green Stop EDPS button in the dashboard.
-- Edit the $HOME/.edps/application.properties file, by setting the parameter `association_preference`
-  to `master_per_quality_level`.
-- Restart EDPS to make the changes effective.
 
-Possible values of `association_preference` are:
+Possible values of the Calibration Preferences are:
 
 - **raw_per_quality_level**: At equal quality of reduction, association of raw calibrations is preferred. This is the
   default.
