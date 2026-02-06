@@ -10,7 +10,7 @@ Reduction Queue and appear in the tab "Reduction Archive".
 The content of the "Reduction Archive", e.g. the list of archived reductions, can be inspected by pressing the
 **Reduction Archive" tab.
 
-   ````{figure} figures/archive.jpg
+   ````{figure} figures/export1.jpg
    :alt: archive
    :name: archive
    ```` 
