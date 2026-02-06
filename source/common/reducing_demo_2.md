@@ -13,14 +13,18 @@ b. Press `Select Inputs`. A selection window will appear that allows to select d
    :name: fig_select_input
    ````
 
-c. Press `Create Datasets`. A list of datasets appears, one line for each set of science data.
+c. (Optional). Select the reduction target, configure the workflow parameter and specify the association preferences. 
+Thise steps are optional. For more information please consult the full 
+edps-gui guide [here](../edpsgui/raw_data_.md#select_reduction_target).
+
+d. Press `Create Datasets`. A list of datasets appears, one line for each set of science data.
 	
    ````{figure} figures/create_datasets.jpg
    :alt: create_datasets
    :name: fig_create_datasets
    ```` 
 
-d. Choose the datasets that should be processed 
+e. Choose the datasets that should be processed 
 	
    ````{figure} figures/send.jpg
    :alt: send

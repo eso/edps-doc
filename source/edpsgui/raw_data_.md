@@ -31,6 +31,7 @@ There are 5 main buttons:
    :name: fig_inspect_2
    ```` 
 
+<a name="select_reduction_target"></a>
 - **Select reduction target**. This window allows to specify the final steps of the reduction cascade, the so-called
   "target tasks".
   The tasks, i.e. the various steps of the reduction flow, are grouped by categories, which can be selected from the
@@ -62,13 +63,12 @@ There are 5 main buttons:
 
 <a name="set_parameters"></a>
 - **Select the workflow parameters** 
-
-This windows allows to specify the so called "workflow parameters", e.g. parameters that define the strategy
+  This windows allows to specify the so called "workflow parameters", e.g. parameters that define the strategy
 of the reduction or, as in case of fors (see figure below), the criteria on how to group files to combine.
 Workflow parameters can influence which files enter a dataset. Click on the parameter name to visualize a short description.
 Every workflow has a different list of workflow parameters. 
 
-There are several "Parameter sets" that can be selected, e.g. sets whose parameter values are predefined according to specific
+  There are several "Parameter sets" that can be selected, e.g. sets whose parameter values are predefined according to specific
 use cases. By default, the "science" parameter set is loaded, which contains the settings for the most science use cases. 
 This is the recommended parameter set to use or, eventually modify.
 Other parameters sets are qc0_parameters (for quick inspection at Paranal), idp_parameters (the set used by ESO to 
