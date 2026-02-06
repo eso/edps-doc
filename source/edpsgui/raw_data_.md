@@ -65,7 +65,8 @@ There are 5 main buttons:
 
 This windows allows to specify the so called "workflow parameters", e.g. parameters that define the strategy
 of the reduction or, as in case of fors (see figure below), the criteria on how to group files to combine.
-Workflow parameters can influence which files enter a dataset. 
+Workflow parameters can influence which files enter a dataset. Click on the parameter name to visualize a short description.
+Every workflow has a different list of workflow parameters. 
 
 
    ````{figure} figures/select_workflow_parameters.jpg
