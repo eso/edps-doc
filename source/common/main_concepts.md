@@ -12,7 +12,7 @@ The main concepts in EDPS are:
 
 - **Task**, **jobs**, and **recipes**. A task is an element in the workflow that performs a given step of the data reduction
   cascade. Tasks are often associated to a recipe of the underlying instrument pipeline. 
-  A jobs is a work unit in a processing environment, that runs a recipe on a set of input data with a set of recipe paraemters.
+  A jobs is a work unit in a processing environment, that runs a recipe on a set of input data with a set of recipe parameters.
   A single task can generate several jobs: for
   example, a "bias" task, can generate multiple jobs, each of the running the bias recipe on a different set of input files.
 
