@@ -42,7 +42,11 @@ a. Press `Reduction Queue`.
    :name: fig_processing_queue
    ```` 
 	
-b.  Press the `Reduce` button. The selected data will now be processed with the default parameters.
+
+b. (Optional). Configure the workflow and recipe parameters by pressing the wheel 
+button ![](figures/configure_dataset.jpg) to open the configuration editor.
+
+c.  Press the `Reduce` button. The selected data will now be processed with the default parameters.
 	
    ````{figure} figures/reduce.jpg
    :alt: reduce
