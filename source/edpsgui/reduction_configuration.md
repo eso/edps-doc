@@ -41,16 +41,37 @@ The editor is divided into 4 parts, which can be accessed pressing the correspon
 Comments can be changed on all configurations. It is possible to save the comment for the current configuration only, or for all
 the selected configurations.
 
+```{figure} figures/configuration_editor_3.jpg
+   :alt: configuration_editor_3
+   :name: configuration_editor_3
+```
 **Parameters**
 
-T.B.D.
+This window allows to: 
+
+- Select the parameter set. A pre-determined list of workflow parameters and recipe parameters for a given 
+  use case. For the majority of the cases, the "science" parameter set can be used.
+
+- Edit the workflow parameters. These are parameters that regulates the reduction strategy, e.g. whether to 
+  use a given calibration or not, or to trigger a certain reduction step. Note that if the changes imply that 
+  some files not in the dataset are needed, the reduction might fail. In case, go back to the raw data tab, edit the 
+  workflow parameters there, and recreate the datasets.
+
+- Edit the recipe parameters. These are parameters associated to the recipe of a given task. 
+  Note: the same recipe parameters can be configured differently for the tasks that run the same recipe.
+  Default parameters are shown (albeit some parameters can be dynamic, e.g. `EDPS` changes
+  their value depending on the type of input data).  
+
+Change the values according to the needs and then select whether to save it to the current or the selected configurations. 
+Note, complete configurations cannot be modified, new configurations will be automatically created instead.
 
 
-%
-%There are several parameters sets available, that are configured to serve specific purposes. The `science_parameters` (
-%default) set is the one set for general reduction purposes, the `qc0_parameters` defines a strategy for quick analysis,
-%that is typically carried on at the Observatory during night observations. The `idp_parameters` set is configured for
-%the automatic archival data reduction carried on at ESO. For the general users purposes, the default is the best choice.
+```{figure} figures/configuration_editor_4.jpg
+   :alt: configuration_editor_4
+   :name: configuration_editor_4
+```
+
+
 %
 %The various parameters present in the selected set are divided in workflow parameters and recipe parameters. Workflow
 %parameters are for general purpose, e.g. they
@@ -64,7 +85,6 @@ T.B.D.
 %recipe default value or any dynamic value the workflow sets automatically.
 %Each workflow has a different set of tasks and different recipes.
 %
-%Note: the recipe parameters can be configured differently even for the tasks that run the same recipe.
-
+%
 
 
