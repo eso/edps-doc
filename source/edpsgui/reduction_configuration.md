@@ -16,7 +16,13 @@ If you need to change a parameter that modifies the dataset content, please go b
 To open the editor, click on
 the ![](figures/configure_dataset.jpg) button next to the dataset you desire to configure the reduction for.
 
+```{figure} figures/configuration_editor_0.jpg
+   :alt: configuration_editor_0
+   :name: configuration_editor_0
+   :figclass: left-caption
 
+The Reduction Configuration editor.
+```
 
 The editor is divided into 4 parts. 
 
