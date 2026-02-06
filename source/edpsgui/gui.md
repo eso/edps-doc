@@ -132,6 +132,10 @@ scientific tasks are saved. Other files can be found in the EDPS_data directory.
 The operation can take several minutes, depending on the sizes of the files.
 The default structure is `<dataset_name>/<reduction_time_stamp>/<category>.fits`.
 
+   ````{figure} figures/archive-dataset_2.jpg
+   :alt: archive2
+   :name: archive2
+   ````  
 ---
 Go to [top](#top)
 
