@@ -72,19 +72,4 @@ Note, complete configurations cannot be modified, new configurations will be aut
 ```
 
 
-%
-%The various parameters present in the selected set are divided in workflow parameters and recipe parameters. Workflow
-%parameters are for general purpose, e.g. they
-%can regulate which data reduction step to include in the process (e.g. whether to apply telluric correction or not) or
-%which calibration to avoid in the process
-%(e.g. do not perform dark current correction). Each workflow has different workflow parameters.
-%The recipe parameters are grouped in tasks. Each task is associated to a given recipe. The table shows the recipe
-%parameters for the
-%recipe associated to that task. Default parameters are shown (albeit some parameters can be dynamic, e.g. `EDPS` change
-%their value depending on the type of input data). The user can specify the value to use for each parameter. The user choice overrides any
-%recipe default value or any dynamic value the workflow sets automatically.
-%Each workflow has a different set of tasks and different recipes.
-%
-%
-
 
