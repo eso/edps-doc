@@ -14,7 +14,7 @@ If one specifies a parameter that should include extra files in the dataset (e.g
 If you need to change a parameter that modifies the dataset content, please go back to the Raw data tab and create a new dataset.
 
 To open the editor, click on
-the ![](figures/configure_dataset.jpg) button next to the dataset you desire to configure the reduction for. A window with the
+the wheel button ![](figures/configure_dataset.jpg) next to the dataset you desire to configure the reduction for. A window with the
 configuration editor appears as shown the figure below.
 
 ```{figure} figures/configuration_editor_0.jpg
@@ -27,10 +27,16 @@ The Reduction Configuration editor.
 
 The editor is divided into 4 parts, which can be accessed pressing the corresponding expansion arrow. 
 
-**Current configuration** It indicate the name of the selected configuration for a given dataset.
-
+**Current configuration** It indicates the name of the selected configuration for a given dataset.
+```{figure} figures/configuration_editor_1.jpg
+   :alt: configuration_editor_1
+   :name: configuration_editor_1
+```
 **Other configurations** It allows to specify other configurations, to which the changes shall be copied to.
-
+```{figure} figures/configuration_editor_2.jpg
+   :alt: configuration_editor_2
+   :name: configuration_editor_2
+```
 **Comment** It allows to specify a comment to describe the configuration. It is possible to append or replace a comment.
 Comments can be changed on all configurations. It is possible to save the comment for the current configuration only, or for all
 the selected configurations.

@@ -74,6 +74,9 @@ This is the recommended parameter set to use or, eventually modify.
 Other parameters sets are qc0_parameters (for quick inspection at Paranal), idp_parameters (the set used by ESO to 
 populate the science archive), default_parameters (to automatically process calibrations in Chile). Other workflows
 might contain additional parameters sets, depending on the use case.
+Note that the parameters shown in this window are only the workflow parameters, e.g. those that can determine the 
+content of the dataset. Other parameters (e.g. recipe parameters) can be configured 
+in the Reduction Queue individually for each dataset (see [here](reduction_configuration.md#reduction-configuration-editor)).
 
 
 
