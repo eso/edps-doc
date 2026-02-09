@@ -129,7 +129,16 @@ In this step, the science data are corrected for telluric absorption using the t
 
 Task: **object_combination**. Recipe: **kmos_combine**.
 
-The different exposures for each object are combined. The final products are:
+The different exposures for each object are combined. The behaviour of this task is controlled by the workflow parameter
+`$combine_exposures`. Its values can be:
+- 'obs.targ.name': one job for each target name is created (default).
+- 'tpl.start': one job for each OB template execution is created.
+
+If there are several observations in the data set then one job per target name is created with the first
+value. If an object was observed with different OB executions then all observations of this object are combined in
+the final data cube. With the second value, the combination is only done per observation, i.e., OB/template execution.
+
+The final products are:
 - One combined data cube for each object in the dataset, coming in two different formats as
   `COMBINED_CUBE` and `IDP_COMBINED_CUBE`. Both products have the same data content. 
   The latter file has the needed metadata information for ingestion into the ESO archive.
@@ -140,8 +149,8 @@ The different exposures for each object are combined. The final products are:
 Task: **cubes_combination**. Recipe: **kmos_combine**.
 
 If data have already been processed then the resulting cubes can be combined
-for each object. This is useful for combining observations of the same targets which have been measured
-using different Observation Blocks.
+for each object without doing the full data reduction again.
+
 
 ---
 Go to KMOS EDPS tutorial [index](../kmos/index)
