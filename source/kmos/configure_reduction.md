@@ -219,7 +219,7 @@ Go to [top](#configuration)
 ## Cubes combination <a name="cubes_combination"> </a>
 
 The task **object_combination** works on data cube that share the same target name (OBS TARGET NAME header keyword).
-In order to create combined data cubes from observations with different target name (but for the same objects), the task
+In order to create combined data cubes from observations with different target names (but for the same objects), the task
 **cubes_combination** can be used.
 
 The task **cubes_combination** requires products of type **SINGLE_CUBES** as input that have been created with
@@ -233,6 +233,8 @@ The suggested procedure is:
 
 For each target in the input data set, a product of category **COMBINED_CUBE**, **COMBINED_IMAGE**, 
 **IDP_COMBINED_CUBE**, and **EXP_MASK**, respectively, is then created.
+
+The same workflow and recipe parameters as for [object combination](#object_combination) can be applied.
 
  ---
 Go to [top](#configuration)
