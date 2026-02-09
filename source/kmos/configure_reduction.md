@@ -39,6 +39,21 @@ With its default value of 0, the applied order is 6 for the H, K, and YJ grisms,
  ---
 Go to [top](#configuration)
 
+## Science reduction: grouping of input data <a name="science_grouping"> </a>
+
+There are two different ways of grouping the input data for the task **object** (recipe **kmos_sci_red**).
+The workflow parameter `$process_exposures` contains the header keyword that is used for the grouping.
+Options are:
+- 'tpl.start': data are grouped per observing block (template) execution (default).
+- 'obs.container.id': data are grouped per container ID. To be used, for example,
+  if target and sky are observed in different OBs but with the same OB container.
+
+Note: this parameter does not affect the final combination of the data cubes with the tasks **object_combination** or
+**cubes_combination**. It only groups the input data for the task **object** which are then processed
+with the same set of calibrations.
+
+ ---
+Go to [top](#configuration)
 
 ## Science reduction: level correction <a name="level_correction"> </a>
 
