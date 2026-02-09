@@ -24,7 +24,6 @@ output file with the reconstructed arc frames has 18 extensions (3 extensions pe
 Exposures at different angles are taken in order to account for instrument flexures. When applying the wavelength
 correction to a dataset, the KMOS pipeline automatically selects the calibration with the closest angle. 
 
-
 The KMOS wavelength calibration uses Argon and Neon arc lines. 
 There is normally no need to fine tune the wavelength calibration result. 
 Since the Argon lines are less numerous and
@@ -35,6 +34,21 @@ less than the uncertainties. The effect could be mitigated by increasing the rec
 The parameter determines the order of the fit polynomial.
 With its default value of 0, the applied order is 6 for the H, K, and YJ grisms, 4 for the IZ grism, and
 5 for the HK grism. 
+
+ ---
+Go to [top](#configuration)
+
+## Illumination correction <a name="illumination_correction"> </a>
+
+Task: **illumination**. Recipe: **kmos_illumination**. 
+
+This step can be run on lamp-flat or sky-flat exposures. It creates for each IFU an image
+(product **ILLUM_CORR**) for correcting the
+sensitivity variation within the IFU. It is recommended to execute this step on lamp flats (which is the
+default workflow setup).
+
+This step can be customized by setting the workflow parameter `use_sky_flats` to 'false' (default, recommended) or 
+'true'.
 
  ---
 Go to [top](#configuration)
@@ -140,15 +154,15 @@ Go to [top](#configuration)
 
 ## Science reduction: object/sky association for sky subtraction <a name="object_sky"> </a>
 
-The **kmos_sci_red** recipe parameter `obj_sky_table` allows to specify the path to an ASCII file that
+The workflow parameter `object_sky_association` allows to specify the path to an ASCII file that
 associates every object exposure with its corresponding sky, overriding the automatic association done by the
-recipe itself. The suggested procedure for this is:
+recipe itself (which is applied with the default parameter value 'auto'. The suggested procedure for this is:
 1. Run the workflow on only one data set.
 2. Locate the file obj_sky_table.txt produced by the **object** task (kmos_sci_red recipe). It is located in the same directory as the output products for the object task. This can be checked by clicking on the "Output files" tab in the "Quality reports" window.
 3. Copy it to a safe place and rename it in a way that makes it easy to associate it with the current dataset.
 4. Change it according to the needs (an example is provided below). Each time the file is edited, it should
 be saved with a new name, otherwise a new reduction will not be triggered.
-5. Enter the edited file name with its full path to the `obj_sky_table` field in the interactive window.
+5. Enter the edited file name with its full path to the `object_sky_association` field.
 6. Reduce the data set again.
 
 The ASCII file that associates every object exposure with its corresponding sky looks like the following (the
@@ -241,19 +255,25 @@ Go to [top](#configuration)
 
 ## Telluric correction <a name="telluric_correction"> </a>
 
-The KMOS workflow allows to select between three strategies in order to correct the observations for atmospheric 
-transition. These are controlled via the workflow parameter `molecfit` which can have the values:
-1. 'standard': Atmospheric features are modeled with the molecfit algorithm using the telluric standard as
+The KMOS workflow allows to correct the observations for atmospheric transition. This is controlled by the
+workflow parameters `telluric_correction` and `molecfit`. 
+
+The parameter `telluric_correction` can have the values:
+- 'true': telluric correction is performed, using the strategy as defined by the parameter `molecfit` (default).
+- 'false': telluric correction is not applied.
+
+The workflow allows to select between three strategies which are set by the workflow parameter `molecfit`:
+- 'standard': Atmospheric features are modeled with the molecfit algorithm using the telluric standard as
                 reference. The results are used to construct the full atmospheric transmission to correct
                 science exposures. A static response curve is used to correct the relative instrumental 
                 efficiency with wavelength. The zeropoint computed on the observed telluric standard is used for
                 absolute spectrophotometric calibration.
-2. 'science': Atmospheric features are modeled with the molecfit algorithm using the scientific exposure itself
+- 'science': Atmospheric features are modeled with the molecfit algorithm using the scientific exposure itself
                 as reference. To be used only if the science exposure has a bright continuum that allows
                 a proper fit to the atmospheric features. A static response curve is used to correct the
                 relative instrumental efficiency with wavelength. The zeropoint computed
                 on the observed telluric standard is used for absolute spectrophotometric calibration.
-3. 'false': The observations of the telluric standard stars are compared with a model spectrum for that star.
+- 'false': The observations of the telluric standard stars are compared with a model spectrum for that star.
                 This generates a combined correction that includes response curve and telluric features which is then
                 used to correct scientific exposures.
 
