@@ -14,7 +14,7 @@ tasks that generate the calibrations needed for it are automatically executed.
 | astrometry_make_image       | kmo_make_image          | no                                | Creates white-light images for astrometry                                    |
 | astrometry_profile          | kmo_fit_profile         | no                                | Fits profiles to white-light images for astrometry                           |
 | astrometry_reconstruct      | kmos_reconstruct        | no                                | Creates data cubes from astrometry observations                              |
-| cubes_combination           | kmos_combine            | optional                          | Combines data cubes from separate observations                               |
+| cubes_combination           | kmos_combine            | optional                          | Combines already reduced data cubes                                          |
 | dark                        | kmos_dark               | yes                               | Processes dark exposures                                                     |
 | extract_spectra             | kmos_extract_spec       | optional                          | Extracts spectra from science data as input for molecfit                     |
 | illumination                | kmos_illumination       | optional                          | Creates the IFU illumination correction from lamp flats                      |
@@ -22,8 +22,7 @@ tasks that generate the calibrations needed for it are automatically executed.
 | model_on_science            | kmos_molecfit_model     | optional                          | Fits an atmospheric model to science data                                    |
 | model_on_standard           | kmos_molecfit_model     | optional                          | Fits an atmospheric model to a telluric standard                             |
 | object                      | kmos_sci_red            | yes                               | Extracts science data and creates data cubes                                 |
-| object_combination          | kmos_combine            | optional                          | Combines data cubes per target if molecfit is not used                       |
-| object_combination_molecfit | kmos_combine            | optional                          | Combines data cubes per target if molecfit is used                           |
+| object_combination          | kmos_combine            | optional                          | Combines data cubes per object                                               |
 | response                    | kmos_gen_telluric       | optional                          | Creates the response from a standard star if molecfit is used                |
 | select_reference            | none                    | optional                          | Selects the data for the atmospheric model fit <br>if fit is on science data |
 | sky_flat                    | kmos_illumination       | optional                          | Creates the IFU illumination correction from sky flats                       |
