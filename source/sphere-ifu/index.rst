@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-SPHERE tutorial
+SPHERE-IFS tutorial
 ================================
 
 
@@ -14,9 +14,7 @@ SPHERE tutorial
    #../common/tbd.md
    intro.md
    reducing_demo.md
-   reduction_chain_zimpol.md
-   reduction_chain_irdis.md
-   reduction_chain_ifu.md
+   reduction_chain.md
    configure_reduction.md
    task_list.md
    faq.md

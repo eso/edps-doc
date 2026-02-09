@@ -69,9 +69,15 @@ html_sidebars = {
         'globaltoc.html',  # Global Table of contents
         'pdf.html',        #Link to full pdf documentation
         ],
- #   'sphere/**':[
- #       'globaltoc.html',  # Global Table of contents
- #      ],
+    'sphere-ifu/**':[
+        'globaltoc.html',  # Global Table of contents
+       ],
+#   'sphere-irdis/**':[
+#       'globaltoc.html',  # Global Table of contents
+#      ],
+#   'sphere-zimpol/**':[
+#       'globaltoc.html',  # Global Table of contents
+#      ],
  #   'uves/**':[
  #       'globaltoc.html',  # Global Table of contents
  #       ],

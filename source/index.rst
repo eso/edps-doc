@@ -34,7 +34,7 @@ EDPS documentation
    :maxdepth: 1
 
    #crires/index.rst
-   efosc/index.rst
+   #efosc/index.rst
    #eris/index.rst
    #espresso/index.rst
    #fors/index.rst
@@ -43,7 +43,7 @@ EDPS documentation
    #kmos/index.rst
    #matisse/index.rst
    muse/index.rst
-   #sphere/index.rst
+   sphere-ifu/index.rst
    #uves/index.rst
    #fors/index.rst
    #visir/index.rst
