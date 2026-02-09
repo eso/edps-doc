@@ -50,7 +50,7 @@ Options are:
 
 Note: this parameter does not affect the final combination of the data cubes with the tasks **object_combination** or
 **cubes_combination**. It only groups the input data for the task **object** which are then processed
-with the same set of calibrations.
+with the same set of calibrations. See [object combination](#object_combination) or [cubes combination](#cubes_combination).
 
  ---
 Go to [top](#configuration)
@@ -187,15 +187,44 @@ except for IFU 19. The corresponding sky has to be found in the frame with index
  ---
 Go to [top](#configuration)
 
+## Object combination <a name="object_combination"> </a>
+
+Task: **object_combination**. Recipe: **kmos_combine**.
+
+The different exposures for each object are combined. The behaviour of this task is controlled by the workflow parameter
+`$combine_exposures`. Its values can be:
+- 'obs.targ.name': one job for each target name is created (default).
+- 'tpl.start': one job for each OB template execution is created.
+
+If there are several observations in the data set then one job per target name is created with the first
+value. If an object was observed with different OB executions then all observations of this object are combined in
+the final data cube. With the second value, the combination is only done per observation, i.e., OB/template execution.
+
+The behaviour of the task can be controlled further with the workflow parameters `ifus`, `target_name`, and `offset_filename`.
+- `ifus`: the indices of the IFU arms to combine. E.g.: '1;2;5'. Default: 'all'.
+- `target_name`: the name of the object to combine (as in the header keyword OCS ARM NAME). Default: 'all'.
+- `offset_filename`: the path to the file with the shift vectors for the combination. 
+   Only applicable if the recipe parameter `method` is set to 'user'.
+
+With the recipe parameter `method`, the shifts that are applied in the object combination can be controlled. 
+Its possible values are:
+- 'none': no shifting, combined directly
+- 'header': shifts are applied according to WCS (default)
+- 'center': centering algorithm is used
+- 'user': shifts are read from file.
+
+ ---
+Go to [top](#configuration)
+
 ## Cubes combination <a name="cubes_combination"> </a>
 
-The tasks **object_combination** and **object_combination_molecfit** work on data from a single execution
-of an Observation Block. In order to create combined data cubes from several observations, the task
+The task **object_combination** works on data cube that share the same target name (OBS TARGET NAME header keyword).
+In order to create combined data cubes from observations with different target name (but for the same objects), the task
 **cubes_combination** can be used.
 
 The task **cubes_combination** requires products of type **SINGLE_CUBES** as input that have been created with
-previous executions of the task **telluric_correction**. Each file contains the data cube for a single target. 
-The task allows to combine the different data cubes for the same target. 
+previous executions of the task **telluric_correction**. Each file contains the data cube for a single object. 
+The task allows to combine the different data cubes for the same object. 
 
 The suggested procedure is:
 1. Copy the **SINGLE_CUBES** files that shall be combined to an (empty) directory.
