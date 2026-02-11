@@ -6,7 +6,7 @@ The reduction cascade is organized in tasks,
 which represent well-defined steps in the process. 
 Tasks are grouped inside sub-workflows. 
 Each task runs a recipe; 
-the detailed description of the algorithms, input, outputs and recipe parameters 
+the detailed description of the algorithms, inputs, outputs and recipe parameters 
 used in each recipe are available in the pipeline manual. 
 Here, we present only the description of the most important features.
 
