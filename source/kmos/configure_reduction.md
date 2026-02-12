@@ -5,9 +5,6 @@
 ```{include} ../common/appropriate_calibrations.md
 ```
 
-## Quality reports
-```{include} ../common/quality_plots.md
-```
 
 ## Configuration of parameters
 ```{include} ../common/configure_reduction.md
@@ -35,31 +32,17 @@ The parameter determines the order of the fit polynomial.
 With its default value of 0, the applied order is 6 for the H, K, and YJ grisms, 4 for the IZ grism, and
 5 for the HK grism. 
 
- ---
-Go to [top](#configuration)
 
-## Illumination correction <a name="illumination_correction"> </a>
+[## Illumination correction <a name="illumination_correction"> </a>]:#
 
-Describe parameters here and what to do in case of bad results
+[Describe parameters here and what to do in case of bad results]:#
 
 
- ---
-Go to [top](#configuration)
+[## Second step <a name="second_step"> </a>]:#
 
 
-## Second step <a name="second_step"> </a>
+[Describe parameters here and what to do in case of bad results]:#
 
-
-Describe parameters here and what to do in case of bad results
-
-
- ---
-Go to [top](#configuration)
-
-
-## Third step <a name="third_step"> </a>
-
-Describe parameters here and what to do in case of bad results
 
 
  ---
