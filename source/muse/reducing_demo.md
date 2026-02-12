@@ -29,6 +29,11 @@ The EDPS Dashboard (Graphic User Interface) with the MUSE workflow loaded.
 ```{include} ../common/reducing_demo_2.md
 ```
 
+c. (Optional). Select the reduction target, configure the workflow parameter and specify the association preferences. 
+Thise steps are optional. For more information see [here](configure_dataset_.md).
+
+```{include} ../common/reducing_demo_3.md
+```
 ---
 Go to [top](#top)
 
@@ -38,10 +43,9 @@ By default, EDPS saves all the recipe products for all the executions in the dir
 default: `$HOME/EDPS_data`).
 However, it is possible to save only the final products into a desired location. This can be achieved by exporting
 archieved data reduction: press the `Export` button in the `Archieved Data` tab
-(see [here](../edpsgui/gui.md#archived_data)).
+(see [here](the-reduction-archive-tab.md), or consult the [Frequently Asked Questions](faq.md) ).
 
-To archieve a data reduction, press
-the button `Archive` in the `Reduction Queue` tab (see [here](../edpsgui/gui.md#processing_queue))
+To archieve a data reduction, press the button `Archive` in the `Reduction Queue` tab.
 
 Products are organized by `DATASET` (named as the first scientific exposure of the dataset), and `TIMESTAMP` (time of
 start of reduction)

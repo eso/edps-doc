@@ -1,35 +1,54 @@
-The data reduction of each dataset can be configured according to the scientific needs. In order to configure a
-reduction, go in the `Reduction Queue` tab, which lists the datasets that are listed for reduction,
-and press the button ![](../edpsgui/figures/configure_dataset.jpg).
+The data reduction of each dataset can be configured according to the scientific needs using an appropriate configuration editor.
+This editor allows to configure the data reduction for a given dataset by specifying workflow and recipe
+parameters.
+Note: some workflow parameters were already configured before creating the dataset and sending it to the reduction queue.
+Here, they can be changed again. Please, note that the parameters have an effect only on the files that are already in the dataset. 
+If one specifies a parameter that should include extra files in the dataset (e.g., the inclusion of more calibrations), files are not added and the reduction might fail. 
+If you need to change a parameter that modifies the dataset content, please go back to the Raw data tab and create a new dataset.
 
-```{figure} figures/reduction_configuration_0.jpg
-:alt: reduction_configuration_0
-:name: fig-reduction_configuration_0
-:figclass: left-caption
+To open the editor, click on
+the wheel button ![](figures/configure_dataset.jpg) next to the dataset you desire to configure the reduction for. A window with the
+configuration editor appears as shown the figure below.
 
-How to open the dataset configuration menu to customize data reduction.
+```{figure} figures/configuration_editor_0.jpg
+   :alt: configuration_editor_0
+   :name: configuration_editor_0
+   :figclass: left-caption
+
+The Reduction Configuration editor.
 ```
 
-The configuration window appears (see below)
-It is possible to configure `workflow parameters`, that specify the strategy of the data reduction, as well as the
-`recipe parameters` associated to each individual task. Predefined sets are configured, for normal scientific reduction
-the default set `science_parameters` can be used.
-The main data reduction steps for which one can modify the predefined strategy by editing the workflow parameters are:
+The editor is divided into 4 parts, which can be accessed pressing the corresponding expansion arrow. 
 
-```{figure} figures/reduction_configuration_1.jpg
-:alt: reduction_configuration_muse_1
-:name: fig-reduction_configuration_muse_1
-:figclass: left-caption
+**Current configuration** It indicates the name of the selected configuration for a given dataset.
+```{figure} figures/configuration_editor_1.jpg
+   :alt: configuration_editor_1
+   :name: configuration_editor_1
+```
+**Other configurations** It allows to specify other configurations, to which the changes shall be copied to.
+```{figure} figures/configuration_editor_2.jpg
+   :alt: configuration_editor_2
+   :name: configuration_editor_2
+```
+**Comment** It allows to specify a comment to describe the configuration. It is possible to append or replace a comment.
+Comments can be changed on all configurations. It is possible to save the comment for the current configuration only, or for all
+the selected configurations.
 
-The top part of the reduction configuration window, where the workflow parameters can be configured.
+```{figure} figures/configuration_editor_3.jpg
+   :alt: configuration_editor_3
+   :name: configuration_editor_3
+```
+**Parameters**
 
+```{include} ../common/workflow_parameters.md
 ```
 
-```{figure} figures/reduction_configuration_2.jpg
-:alt: reduction_configuration_2
-:name: fig-reduction_configuration_2
-:figclass: left-caption
-
-The lower part of the reduction configuration window, where the recipe parameters per each task can be configured.
-
+```{figure} figures/configuration_editor_4.jpg
+   :alt: configuration_editor_4
+   :name: configuration_editor_4
 ```
+
+
+
+
+

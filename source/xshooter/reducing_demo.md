@@ -30,6 +30,11 @@ The EDPS Dashboard (Graphic User Interface) with the XSHOOTER workflow loaded.
 ```{include} ../common/reducing_demo_2.md
 ```
 
+c. (Optional). Select the reduction target, configure the workflow parameter and specify the association preferences. 
+Thise steps are optional. For more information see [here](configure_dataset_.md).
+
+```{include} ../common/reducing_demo_3.md
+```
 ---
 Go to [top](#top)
 

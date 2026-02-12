@@ -13,9 +13,8 @@ EDPS-GUI complete manual
    intro.md
    gui.md
    reduction_configuration.md
-   #final_products.md
-   #tipps.md
+   faq.md
    
 ------------
 
-EDPS-GUI Version 0.8 - 20251212
+EDPS-GUI Version 0.9 - 20260207

@@ -12,7 +12,7 @@ The main concepts in EDPS are:
 
 - **Task**, **jobs**, and **recipes**. A task is an element in the workflow that performs a given step of the data reduction
   cascade. Tasks are often associated to a recipe of the underlying instrument pipeline. 
-  A jobs is a work unit in a processing environment, that runs a recipe on a set of input data with a set of recipe paraemters.
+  A jobs is a work unit in a processing environment, that runs a recipe on a set of input data with a set of recipe parameters.
   A single task can generate several jobs: for
   example, a "bias" task, can generate multiple jobs, each of the running the bias recipe on a different set of input files.
 
@@ -23,9 +23,11 @@ The main concepts in EDPS are:
 
 - **Target** and **Target category**. The "target", or the "target task" is the end point of the reduction cascade. When specifying a target, EDPS will process
   all and only the files needed to execute it. For example, if my target is "science", and the science files
-  need the bias files, EDPS will process only the biases that have been selected to process those science files.
+  need the bias files, EDPS will process only the biases that have been selected to process those science files; then it 
+  processes the science using the product of the bias reduction.
   However, if my target is bias, then EDPS will process all and only the bias files, regardless they are not used by any science. 
+  In this case, EDPS does not processes the science, as it has reached already the end reduction point (e.g., process all biases).
   The "Target category" is a group of target that have similar purposes. For example, the target category "science", includes
   all the tasks that deliver final scientific products, the target category "qc1calib" includes all and only the tasks that 
-  perform a calibration (e.g., bias, standard stars).
+  processes calibrations (e.g., bias, standard stars).
 

@@ -13,14 +13,16 @@ b. Press `Select Inputs`. A selection window will appear that allows to select d
    :name: fig_select_inputs_spc
    ````
 
-c. Press `Create Datasets`. A list of datasets appears, one line for each set of science data.
+c. (Optional). Select the reduction target and the association preferences (either raw or master calibrations). For more information see [here](configure_dataset_.md).
+
+d. Press `Create Datasets`. A list of datasets appears, one line for each set of science data.
 	
    ````{figure} figures/create_datasets_spc.jpg
    :alt: create_datasets_spc
    :name: fig_create_datasets_spc
    ```` 
 
-d. Choose the datasets that should be processed 
+e. Choose the datasets that should be processed 
 	
    ````{figure} figures/send_spc.jpg
    :alt: send_spc

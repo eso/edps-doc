@@ -8,8 +8,9 @@ Each dataset configuration has a status, that could be either:
   - "pending": the reduction is scheduled but no jobs has been executed yet
   - "running": the reduction has started, some jobs have been completed, some jobs are running and other pending.
   - "failed": the reduction terminated but some jobs have failed.
+  - "aborted": the reduction was aborted.
 
-Only "new" or "failed" configurations can be reduced. "Completed" configurations can be modified: in this way a new 
+Only "new", "aborted" or "failed" configurations can be reduced. "Completed" configurations can be modified: in this way a new 
 configuration is created and can be processed.
 
 
@@ -39,4 +40,4 @@ On the other hand, the same button next to the dataset, shows the graphic report
 The button ![](figures/inspect.jpg) next to each dataset allows to inspect the various products of the reduction, as done for the input data (see [here](#inspect)).
 
 The results of a reduction can be stored in a desired location by pressing the button ![](figures/archive.jpg) (see
-Section ZZ for further information).
+Section [Reduction Archive](gui.md#the-reduction-archive-tab) for further information).

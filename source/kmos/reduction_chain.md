@@ -9,9 +9,8 @@ input, outputs and recipe parameters used in each recipe are available
 in the pipeline manual. Here, we present only the description of most
 important features.
 
-The `EDPS` workflow is designed to execute the tasks that deliver
-the final reduced data cube for each dataset. It can be either the product of a single exposure, or the combination of
-multiple exposures. Only calibrations needed by the selected the scientific exposures are processed.
+The `EDPS` workflow is designed to execute the tasks that deliver the final reduced data cube for each dataset. 
+Only calibrations needed by the selected scientific exposures are processed.
 
 It is possible to set `EDPS` to perform the data reduction until a certain step of the reduction chain (e.g. to reduce
 only standard stars, or only flat fields).
