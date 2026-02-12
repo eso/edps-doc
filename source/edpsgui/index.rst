@@ -17,4 +17,4 @@ EDPS-GUI complete manual
    
 ------------
 
-EDPS-GUI Version 0.9 - 20260207
+EDPS-GUI Version 0.9 - 20260212
