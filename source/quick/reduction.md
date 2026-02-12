@@ -18,6 +18,13 @@ d. Choose a pipeline workflow that matches the data to be reduced. The workflows
 ```{include} ../common/reducing_demo_2.md
 ```
 
+c. (Optional). Select the reduction target, configure the workflow parameter and specify the association preferences. 
+Thise steps are optional. For more information please consult the full 
+edps-gui guide [here](../edpsgui/raw_data_.md#select_reduction_target).
+
+```{include} ../common/reducing_demo_3.md
+```
+
 ## 3. Save the final data (Optional).
 All the products (final and intermediate) of all reduced configuration for all datasets are saved into
 the EDPS_data directory. In addition, EDPS offers the possibility to "archive" a desired reduction (e.g., the one
