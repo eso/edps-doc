@@ -14,7 +14,7 @@ b. Press `Select Inputs`. A selection window will appear that allows to select d
    ````
 
 
-c. (Optional). Select the reduction target and the association preferences (either raw or master calibrations).
+c. (Optional). Select the reduction target and the association preferences (either raw or master calibrations). For more information see [here](configure_dataset_.md).
 
 d. Press `Create Datasets`. A list of datasets appears, one line for each set of science data.
 	
