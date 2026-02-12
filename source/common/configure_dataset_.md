@@ -17,6 +17,13 @@ processes calibrations (e.g., bias, standard stars).
 
 For scientific data reduction purposes, leave the default Target Category and Reduction Targets. 
 
+
+```{figure} figures/select_target.png
+:alt: select_target
+:name: select_target
+```
+
+
 ## Select appropriate calibrations
 ```{include} ../common/appropriate_calibrations.md
 ```
@@ -30,3 +37,8 @@ This window allows to:
   reduction strategy, e.g. whether to use a given calibration or not, or to trigger a certain reduction step. 
   Some changes can define a strategy that selects different files; in this case a new dataset is created.
 
+
+```{figure} figures/select_wkf_parameters.png
+:alt: select_wkf_parameters
+:name: select_wkf_parameters
+```
