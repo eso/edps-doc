@@ -44,6 +44,7 @@ EDPS documentation
    #matisse/index.rst
    muse/index.rst
    sphere-ifu/index.rst
+   sphere-irdis/index.rst
    #uves/index.rst
    #fors/index.rst
    #visir/index.rst

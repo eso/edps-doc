@@ -106,7 +106,7 @@ The corrected PDT is written as the main product, together with updated QC keywo
 
 Recipe parameters:
 
-- `ifs.master_dark.coll_alg`: collapse algorithm (0 = Mean, 1 = Median, 2 = Clean Mean; default).
+- `ifs.wave_calib.coll_alg`: collapse algorithm (0 = Mean, 1 = Median, 2 = Clean Mean; default).
 
 ## 4. Subworkflow Detector Flat
 
@@ -137,7 +137,7 @@ and a smoothed large-scale flat.
 
 Recipe parameters:
 
-- `ifs.master_dark.coll_alg`: collapse algorithm (0 = Mean, 1 = Median, 2 = Clean Mean; default).
+- `ifs.master_detector_flat.coll_alg`: collapse algorithm (0 = Mean, 1 = Median, 2 = Clean Mean; default).
 - The fit between signal and illumination level can be performed using either 
 a maximum-likelihood (`ifs.master_detector_flat.robust_fit` = TRUE; default) 
 or a robust linear method (change parameter to FALSE), 
@@ -172,7 +172,7 @@ The outputs are:
 
 Recipe parameters:
 
-- `ifs.master_dark.coll_alg`: collapse algorithm (0 = Mean, 1 = Median, 2 = Clean Mean; default).
+- `ifs.instrument_flat.coll_alg`: collapse algorithm (0 = Mean, 1 = Median, 2 = Clean Mean; default).
 
 ## 6. Distortion map
 
@@ -200,6 +200,12 @@ input for future runs of this recipe.
 - `IFS_DISTORTION_MAP` - The distortion map, with 8 extensions. The first 4 contain the  distortion in the x direction, the
 badpixels, the rms on the distortion and a weightmap. The second set of 4 extensions contain the same information
 but for the y direction.
+
+**Customization**
+
+Recipe parameters:
+- `ird.distortion_map.coll_alg`: collapse algorithm (0 = Mean, 1 = Median, 2 = Clean Mean; default).
+- `ird.distortion_map.threshold`: threshold for source detection (default is 3.0).
 
 ## 7. Subworkflow Science Data Reduction 
 
@@ -236,7 +242,7 @@ with the small-scale flat correction strongly recommended and the large-scale va
 
 Recipe parameters:
 
-- `ifs.master_dark.coll_alg`: collapse algorithm (0 = Mean, 1 = Median, 2 = Clean Mean; default).
+- `ifs.science_dr.coll_alg`: collapse algorithm (0 = Mean, 1 = Median, 2 = Clean Mean; default).
 - `ifs.science_dr.use_adi`: enable use of ADI (0 = not applied, 1 = always applied, 2 = applied only if the total rotation is larger than `ifs.science_dr.min_adi_angle`).
 - `ifs.science_dr.min_adi_angle`: minimum angle for automatic ADI switch (when previous parameter equals 2).
 - `ifs.science_dr.spec_deconv`: enable use of spectral deconvolution (0 = not applied, 1 = always applied).

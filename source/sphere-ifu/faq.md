@@ -4,4 +4,4 @@
 ```
 
 ---
-Go to SPHERE tutorial [index](../sphere/index)
+Go to SPHERE-IFS tutorial [index](../sphere/index)

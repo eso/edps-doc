@@ -30,9 +30,6 @@ The EDPS Dashboard (Graphic User Interface) with the SPHERE-IFS workflow loaded.
 ```{include} ../common/reducing_demo_2.md
 ```
 
----
-Go to [top](#top)
-
 ## 4. Final products
 
 By default, EDPS saves all the recipe products for all the executions in the directory specified at the first execution (default: `$HOME/EDPS_data`).
