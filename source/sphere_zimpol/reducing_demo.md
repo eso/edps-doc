@@ -12,10 +12,11 @@ visit [https://www.eso.org/sci/software/pipe_aem_main.html](https://www.eso.org/
 ```{include} ../common/reducing_demo_1.md
 ```
 
-c. Choose the desired workflow pipeline from the list in the `workflows` field. The workflows offered in this selector depend on
+d. Choose the desired workflow pipeline from the list in the `workflows` field. The workflows offered in this selector depend on
 the installed pipelines.
 The SPHERE pipeline comes with several workflow dedicated to the different instrument modes;
-the general workflow `sphere.sphere_wkf` deals with data from all modes.
+the general workflow `sphere.sphere_wkf` deals with data from all modes. Select `sphere.sphere_zimpol_wkf` 
+to reduce ZIMPOL data.
 
 The graphic workflow representation will appear as in
 {numref}`fig-wkf`.
@@ -31,7 +32,12 @@ The graphic workflow representation will appear as in
 
 ```{include} ../common/reducing_demo_2.md
 ```
+c. (Optional). Select the reduction target, configure the workflow parameter and specify the association preferences. 
+Thise steps are optional. For more information see [here](configure_dataset_.md).
 
+```{include} ../common/reducing_demo_3.md
+```
+---
 ---
 Go to [top](#top)
 
@@ -41,17 +47,16 @@ By default, EDPS saves all the recipe products for all the executions in the dir
 default: `$HOME/EDPS_data`).
 However, it is possible to save only the final products into a desired location. This can be achieved by exporting
 archieved data reduction: press the `Export` button in the `Archieved Data` tab
-(see [here](../edpsgui/gui.md#archived_data)).
+(see [here](the-reduction-archive-tab.md), or consult the [Frequently Asked Questions](faq.md) ).
 
-To archieve a data reduction, press
-the button `Archive` in the `Reduction Queue` tab (see [here](../edpsgui/gui.md#processing_queue))
+To archieve a data reduction, press the button `Archive` in the `Reduction Queue` tab.
 
 Products are organized by `DATASET` (named as the first scientific exposure of the dataset), and `TIMESTAMP` (time of
-start of reduction)
+start of reduction).
 
 The final products saved in the specified directory are:
 
-**Please desribe the main products of the reduction**
+**Please describe the main products of the reduction**
 
 ## 5. Quality plots
 

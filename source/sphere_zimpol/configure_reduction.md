@@ -1,20 +1,19 @@
-# Customizing the data reduction  <a name="configuration"></a>
+# Overview of all the data reduction configuration options <a name="configuration"></a>
 
 ## Selection of most appropriate calibrations
 
 ```{include} ../common/appropriate_calibrations.md
 ```
 
+## Configuration of parameters: the configuration editor
+```{include} ../common/configure_reduction.md
+```
 ## Quality reports
 ```{include} ../common/quality_plots.md
 ```
 
-## Configuration of parameters
-```{include} ../common/configure_reduction.md
-```
 
 ## First step <a name="first_step"> </a>
-
 Describe parameters here and what to do in case of bad results
 
 
