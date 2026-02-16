@@ -74,7 +74,7 @@ Optionally, a 2D distortion model is fitted and incorporated into the lenslet mo
 The output is a pixel description table (PDT) written out as a FITS image 
 with 6  extensions, corresponding to:
 wavelength, spectra region id, lenslet id,
-wavelength width, second derivate of
+wavelength width, second derivative of
 wavelength and illumination fraction.
 
 **Customization**

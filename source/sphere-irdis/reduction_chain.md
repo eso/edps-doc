@@ -67,7 +67,7 @@ Recipe parameters:
 
 Recipe: `sph_ird_master_detector_flat`
 
-This task generates the IRDIS instrument flat field using narrow- 
+The task `irdis_flat_fiel` generates the IRDIS instrument flat field using narrow- 
 or broadband lamp exposures and varying flux levels.
 The resulting flat must be applied only to matching data.
 For optimal dark subtraction, raw dark frames with matching DITs should be provided; 
@@ -109,16 +109,12 @@ The optical axis is estimated from the most central point,
 the patterns are aligned, outliers beyond a user-defined maximum distortion are rejected, 
 and 2D polynomial fits are computed to model the X and Y distortion across the detector.
 
-The distortion map is saved in a FITS file
-with a total of 16 extensions. The first 4
-extensions contain values, badpixels,
-rms and weightmap for the distortion in
-the x direction and the next 4
-extensions the same information for the
-distortion in the y direction. The first 8
-extension contain the information for
-the left FOV the next 8 extension the
-information for the right FOV.
+The distortion map is saved in a FITS file with a total of 16 extensions. 
+The first 4 extensions contain values, badpixels, rms and weightmap for 
+the distortion in the x direction and the next 4 extensions the same information 
+for the distortion in the y direction. 
+The first 8 extension contain the information for the left FOV the next 8 extension 
+the information for the right FOV.
 Optional QC products include images of the input point patterns, 
 corrected detector and FoV images, and residual distortion maps 
 (typical residuals < 0.1 pixels for good solutions). 
@@ -178,25 +174,68 @@ Recipe parameters:
 
 ## 5. Subworkflow On-Sky Science Calibrations
 
-This subworkflow processes on-sky calibrations for imaging data.
-
-### 5a. Polarimetry flux standard
-
-
-
-### 5b. Imaging flux standard
-### 5c. Polarimetry flux standard
-
 Recipes: `sph_ird_science_dpi`, `sph_ird_science_dbi`, `sph_ird_star_center`
 
-## 5. Subworkflow On-Sky Science Calibrations
+This subworkflow processes on-sky calibrations for imaging data (IRDIS-IMG).
 
-Recipe: `sph_ird_science_dbi`, `sph_ird_star_center`
+### 5a. Polarimetry Flux Standard
+
+The task **irdis_science_flux_polarimetry** uses `sph_ird_science_dpi` 
+to reduce flux frames acquired for coronagraphic observations, 
+where the telescope is offset to observe the star outside the coronagraph. 
+
+These reductions are not used in the science processing
+(no flux calibration is applied to the science data).
+
+### 5b. Imaging Flux Standard
+
+The task **irdis_science_flux_imaging** uses `sph_ird_science_dbi` 
+to reduce flux frames acquired for coronagraphic observations, 
+where the telescope is offset to observe the star outside the coronagraph. 
+
+These reductions are not used in the science processing
+(no flux calibration is applied to the science data).
+
+### 5c. Coronagraph Center
+
+The task **irdis_coronagraph_center** executes the pipeline recipe `sph_ird_star_center` to 
+determine the stellar center position behind the coronagraph and produce a table of frame centers.
+
+The illuminated left and right detector regions are analysed separately using 
+a source-detection algorithm with a user-defined sigma threshold.
+For each waffle image, the output table records the exposure start time, 
+the derived center position, and the IRDIS DMS position converted from microns to pixels.
+
+Recipe parameters:
+- `ird.star_center.coll_alg`: collapse algorithm 
+(0 = Mean, 1 = Median, 2 = Clean Mean; default).
+- `ird.star_center.sigma`: the sigma threshold for source detection
+  (default = 10.0).
 
 ## 6. Subworkflow Wavelength Calibration
 
 Recipe: `sph_ird_wave_calib`
 
+In spectroscopy mode (IRDIS-LSS) the task **irdis_wavecal_spectroscopy** 
+performs the wavelength calibration with the pipeline recipe `sph_ird_wave_calib`. 
+Raw frames are combined, dark-subtracted, and flat-fielded, with bad pixels flagged. 
+The combined image is sliced along the wavelength direction, 
+and calibration lines are detected within a window of ±`ird.wave_calib.line_tolerance` 
+around their expected positions.
+
+Measured line positions are matched to known wavelengths and fitted with a polynomial, 
+which defines the wavelength solution and interpolates values between calibration lines. 
+The updated solution is written to the pixel description table (PDT) as the final product.
+
+The output is a FITS file containing six image extensions, 
+each corresponding to a column of the PDT: 
+wavelength, spectrum ID, slit ID, wavelength width (or uncertainty), 
+second derivative, and illumination fraction. 
+Additional extensions include the combined image, a bad-pixel map, and an RMS map.
+
+Recipe parameters:
+- `ird.wave_ calib.coll_alg`: collapse algorithm 
+(0 = Mean, 1 = Median, 2 = Clean Mean; default).
 
 ### 2. Spectra positions
 
