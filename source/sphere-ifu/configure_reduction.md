@@ -16,7 +16,7 @@
 ## Troubleshooting <a name="troubleshooting"> </a>
 
 This section provides guidance for diagnosing and resolving 
-common issues encountered during the XSHOOTER data-reduction cascade.
+common issues encountered during the SPHERE-IFS data-reduction cascade.
 
 ### Master darks <a name="master_darks"> </a>
 

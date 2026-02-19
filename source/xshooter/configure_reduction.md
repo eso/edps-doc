@@ -241,7 +241,7 @@ These parameters should be tuned so that:
  ---
 Go to [top](#configuration)
 
-### Spectral regions of zero flux values <a name="zero_flux"> </a>
+### Large spectral regions of zero flux values <a name="zero_flux"> </a>
 
 Large regions of zero-flux values in the final extracted 1D spectrum
 may be caused by spurious Cosmic-Ray (CR) detections. 
@@ -284,9 +284,38 @@ Same as {numref}`fig-cr`, but with `removecrhsingle-sigmalim`=7.0.
 In this case, this avoids the flagging of good pixels as CR-affected.
 ```
 
-### IFU cube not well aligned <a name="ifu_misaligned"> </a>
+<!--- ### IFU cube not well aligned <a name="ifu_misaligned"> </a> --->
 
+ ---
+Go to [top](#configuration)
 
+### Small spectral regions of zero flux values <a name="zero_flux2"> </a>
+
+During extraction, the local spatial profile of the spectrum 
+(along the cross-order direction) is derived by collapsing 
+the two-dimensional spectrum along the dispersion axis. 
+The parameter `stdextract-interp-hsize` defines the half-width 
+of the wavelength region over which this collapse is performed and 
+therefore controls the interpolation of flagged pixels.
+
+In some cases, wavelength regions of zero flux values occur when a long streak of 
+flagged (bad) pixels in the two-dimensional object frame intersects 
+the extraction region, preventing the pipeline from constructing 
+a reliable local spatial profile with the default value (`stdextract-interp-hsize` = 30).
+
+Increasing stdextract-interp-hsize allows the profile to be estimated 
+over a larger wavelength range, enabling proper interpolation 
+across the affected region 
+(see Figure {numref}`fig-interp-hsize`).
+
+```{figure} figures/stdextract-interp-hsize.jpg
+:alt: cr
+:name: fig-interp-hsize
+
+Extracted 1D VIS spectrum obtained for different values of `stdextract-interp-hsize`.
+The default value of 30 produces a gap with zero flux between ~635–638 nm.
+Increasing this parameter removes the gap and restores a continuous spectrum.
+```
 
  ---
 Go to [top](#configuration)

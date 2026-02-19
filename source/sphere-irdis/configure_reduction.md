@@ -16,7 +16,7 @@
 ## Troubleshooting <a name="troubleshooting"> </a>
 
 This section provides guidance for diagnosing and resolving 
-common issues encountered during the XSHOOTER data-reduction cascade.
+common issues encountered during the SPHERE-IRDIS data-reduction cascade.
 
 ### Master darks <a name="master_darks"> </a>
 
@@ -82,4 +82,4 @@ It must therefore be enabled separately by setting `ifs.science_dr.xtalkco.large
 Go to [top](#configuration)
 
  ---
-Go to SPHERE-IFS EDPS tutorial [index](../sphere/index)
+Go to SPHERE-IRDIS EDPS tutorial [index](../sphere/index)

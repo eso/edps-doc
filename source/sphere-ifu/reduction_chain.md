@@ -259,4 +259,4 @@ This subworkflow executes the tasks:
 At the moment, astrometry and flux standard observations are processed like science data.
 
 ---
-Go to SPHERE EDPS tutorial [index](../sphere/index)
+Go to SPHERE-IFS EDPS tutorial [index](../sphere/index)

@@ -166,6 +166,7 @@ Left and right subframes are extracted using the IRDIS instrument model.
 Frames are combined using weighted mean, mean (with bad-pixel rejection), or median. 
 The final product is a multi-extension FITS file 
 (8 extensions: image, bad-pixel map, N map, RMS for left and right FoVs).
+
 **Customization**
 
 Recipe parameters:
@@ -178,18 +179,18 @@ Recipes: `sph_ird_science_dpi`, `sph_ird_science_dbi`, `sph_ird_star_center`
 
 This subworkflow processes on-sky calibrations for imaging data (IRDIS-IMG).
 
-### 5a. Polarimetry Flux Standard
+### 5a. Imaging Flux Standard
 
-The task **irdis_science_flux_polarimetry** uses `sph_ird_science_dpi` 
+The task **irdis_science_flux_imaging** uses `sph_ird_science_dbi` 
 to reduce flux frames acquired for coronagraphic observations, 
 where the telescope is offset to observe the star outside the coronagraph. 
 
 These reductions are not used in the science processing
 (no flux calibration is applied to the science data).
 
-### 5b. Imaging Flux Standard
+### 5b. Polarimetry Flux Standard
 
-The task **irdis_science_flux_imaging** uses `sph_ird_science_dbi` 
+The task **irdis_science_flux_polarimetry** uses `sph_ird_science_dpi` 
 to reduce flux frames acquired for coronagraphic observations, 
 where the telescope is offset to observe the star outside the coronagraph. 
 
@@ -205,6 +206,8 @@ The illuminated left and right detector regions are analysed separately using
 a source-detection algorithm with a user-defined sigma threshold.
 For each waffle image, the output table records the exposure start time, 
 the derived center position, and the IRDIS DMS position converted from microns to pixels.
+
+**Customization**
 
 Recipe parameters:
 - `ird.star_center.coll_alg`: collapse algorithm 
@@ -233,113 +236,80 @@ wavelength, spectrum ID, slit ID, wavelength width (or uncertainty),
 second derivative, and illumination fraction. 
 Additional extensions include the combined image, a bad-pixel map, and an RMS map.
 
+**Customization**
+
 Recipe parameters:
-- `ird.wave_ calib.coll_alg`: collapse algorithm 
+- `ird.wave_calib.coll_alg`: collapse algorithm 
 (0 = Mean, 1 = Median, 2 = Clean Mean; default).
 
-### 2. Spectra positions
+### 7. Science Imaging
 
-Recipe: `sph_IRDIS_spectra_positions`
+Recipe: `sph_ird_science_dbi`
 
-The task **IRDIS_spectra_positions** runs the pipeline recipe to associate detector pixels with IRDIS lenslets and assigns an initial wavelength solution to each pixel. 
-The first-order solution is later refined by the dedicated wavelength calibration recipe (`sph_IRDIS_wave_calib`).
+The task **irdis_science_imaging** uses the recipe to produce 
+reduced science frames for IRDIS observations 
+in dual-band imaging (DBI) mode, 
+supporting dithering as well as optional angular differential imaging (ADI), 
+ and spectral differential imaging (SDI) processing. 
+Raw frames are dark-subtracted (mandatory), optionally flat-fielded, 
+and combined with static bad pixels from dark and flat frames. 
+Left and right subframes are extracted using the IRDIS instrument model.
 
-Spectral traces are detected via thresholding and used to determine their centroid positions. 
-These measured positions are compared to those predicted by a scaled and shifted lenslet model, 
-allowing refinement of the model’s scale and position. 
-Optionally, a 2D distortion model is fitted and incorporated into the lenslet model to improve wavelength calibration.
-
-The output is a pixel description table (PDT) written out as a FITS image 
-with 6  extensions, corresponding to:
-wavelength, spectra region id, lenslet id,
-wavelength width, second derivate of
-wavelength and illumination fraction.
-
-**Customization**
-
-Recipe parameters:
-
-- `IRDIS.master_dark.coll_alg`: collapse algorithm (0 = Mean, 1 = Median, 2 = Clean Mean; default).
-
-
-## 3. Wavelength calibration
-
-Recipe: `sph_IRDIS_wave_calib`
-
-The task **IRDIS_wavelength_calibration** runs the pipeline recipe to perform the wavelength calibration by refining the pixel-to-wavelength associations
-(starting from the model produced by the spectra-positions calibration),
-using observed wavelength calibration frames and an existing lenslet model. 
-
-1D spectra are then extracted for each spectral region, and the positions of known calibration lines 
-are measured using a flux-weighted centroid within a configurable fitting window. 
-These measured line positions are fitted with a polynomial that defines the wavelength solution for each spectrum, 
-provided the solution is consistent with the expected dispersion; 
-otherwise, the original model wavelengths are retained or the region is flagged as bad.
-
-From the final wavelength solutions, the recipe computes per-spectrum quality-control metrics, 
-including minimum, maximum, and central wavelengths, as well as the resolving power derived from the local wavelength gradient. 
-The corrected PDT is written as the main product, together with updated QC keywords.
+The output is an 8-extension FITS file containing image, bad-pixel map, 
+N map, and RMS for both left and right FoVs. 
+A dark/background frame is required, with priority: 
+`SKY_BG_FIT` → `SKY_BG` → `INS_BG_FIT` → `INS_BG` → `MASTER_DARK`; 
+matching DIT/readout (and ideally filter) is the user’s responsibility. 
+Optional QC includes Strehl ratio estimation when calibration tables are available.
 
 **Customization**
 
 Recipe parameters:
-
-- `IRDIS.master_dark.coll_alg`: collapse algorithm (0 = Mean, 1 = Median, 2 = Clean Mean; default).
-
-
-
-
+- `ird.science_dbi.coll_alg`: collapse algorithm 
+(0 = Mean, 1 = Median, 2 = Clean Mean; default).
+- `ifs.science_dbi.use_adi`: enable use of ADI (0 = not applied; Default , 1 = applied).
+- `ifs.science_dbi.use_sdi`: enable use of SDI (0 = not applied; Default , 1 = applied).
 
 
+### 8. Science Polarimetry
 
+Recipe: `sph_ird_science_dpi`
 
+The task **irdis_science_polarimetry** uses the recipe to produce 
+reduced science frames for IRDIS observations in DPI mode. 
+The processing is essentially identical to the DBI science recipe, 
+but the final products are saved as polarization (P) and intensity (I) images 
+instead of left and right FoVs (see the IRDIS DBI recipe for processing details).
 
-This subworkflow executes the tasks:
-
-- **IRDIS_science_flux**
-- **IRDIS_coronagraph_center**
-- **IRDIS_science**
-
-to reduce IRDIS science observations, 
-with optional background or dark subtraction and pre-amplifier stripe correction. 
-
-It also processes FLUX frames acquired during coronagraphic observations, 
-where the telescope is offset to move the target away from the coronagraph, 
-allowing to measure the stellar flux.
-
-In addition, it processes CENTER frames to determine the stellar position behind the coronagraph. 
-This is required to accurately define the center of rotation for pupil-stabilized observations.
-
-Large-scale flat-field effects are removed using a wavelength-dependent “super flat” 
-built from multi-colour lamp flats and the wavelength calibration, while small-scale, 
-time-dependent pixel-to-pixel variations are corrected using a broadband master flat.
-
-The recipe supports automatic frame combination using "spectral deconvolution"
-(a method used to reduce speckle noise; see Mesa et al. 2015) 
-and angular differential imaging (ADI), 
-which can be enabled or disabled via flags. 
-<!-- Pixel-to-pixel detector corrections and bad-pixel interpolation can also be applied, 
-with the small-scale flat correction strongly recommended and the large-scale variant deprecated. -->
-
-**Customization**
+The main output is a FITS file with eight extensions: 
+the first four contain the polarization (P) image, bad-pixel map, RMS map, and weight map, 
+while the last four contain the same products for the intensity (I) image. 
+When ADI is enabled, only four extensions are written, containing the P image products.
 
 Recipe parameters:
+- `ird.science_dpi.coll_alg`: collapse algorithm 
+(0 = Mean, 1 = Median, 2 = Clean Mean; default).
+- `ifs.science_dpi.use_adi`: enable use of ADI (0 = not applied; Default , 1 = applied).
+- `ifs.science_dpi.use_sdi`: enable use of SDI (0 = not applied; Default , 1 = applied).
 
-- `IRDIS.master_dark.coll_alg`: collapse algorithm (0 = Mean, 1 = Median, 2 = Clean Mean; default).
-- `IRDIS.science_dr.use_adi`: enable use of ADI (0 = not applied, 1 = always applied, 2 = applied only if the total rotation is larger than `IRDIS.science_dr.min_adi_angle`).
-- `IRDIS.science_dr.min_adi_angle`: minimum angle for automatic ADI switch (when previous parameter equals 2).
-- `IRDIS.science_dr.spec_deconv`: enable use of spectral deconvolution (0 = not applied, 1 = always applied).
+### 9. Science Spectroscopy
 
-## 8. Subworkflow Standard Data Reduction
+Recipe: `sph_ird_science_spectroscopy`
 
-Recipe: `sph_IRDIS_science_dr`
+The task **irdis_science_spectroscopy** uses the recipe to produce 
+reduced science frames for spectroscopy mode. 
+The processing consists of dark subtraction and flat-fielding 
+followed by frame combination using a user-selected method. 
+If an atmospheric calibration is provided, it is subtracted from the combined result.
 
-This subworkflow executes the tasks:
+The output is a FITS file containing the reduced 2D spectrum 
+for the left FoV as a full-detector image. 
+The file includes four extensions: the science image, bad-pixel map, 
+N-combination map (number of contributing frames per pixel), and an RMS map.
 
-- **IRDIS_standard_astrometry**
-- **IRDIS_standard_flux**
-
-At the moment, astrometry and flux standard observations are processed like science data.
+Recipe parameters:
+- `ird.science_spectroscopy.coll_alg`: collapse algorithm 
+(0 = Mean, 1 = Median, 2 = Clean Mean; default).
 
 ---
-Go to SPHERE EDPS tutorial [index](../sphere/index)
+Go to SPHERE-IRDIS EDPS tutorial [index](../sphere/index)
