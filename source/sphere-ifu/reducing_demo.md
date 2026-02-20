@@ -44,7 +44,7 @@ The exported products are organized by DATASET (named as the first scientific ex
 start of reduction).
 
 The final product saved in the specified directory is the wavelength-calibrated datacube, with name format 
-`DATACUBE_SPHER.` followed by the observing date (corresponding to header keyword `DATE-OBS`).
+`DATACUBE_` followed by the archive file name (corresponding to header keyword `ARCFILE`).
 
 Other useful products can be found in the EDPS_data directory, where all intermediate products are saved.
 

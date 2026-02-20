@@ -39,7 +39,7 @@ It consists of the tasks:
 
 which run the pipeline recipes `sph_ifs_cal_background` and `sph_ifs_master_dark`.
 
-The first recipe measures the instrumental background in counts per second per pixel.  
+The first recipe measures the instrumental background and/or a sky background in counts per second per pixel.  
 The output is a 4-extension FITS file containing the background image, bad-pixel map, RMS map, and weight map.
 
 The second recipe derives the detector dark current (`IFS_MASTER_DARK`) and a bad pixel map (`IFS_STATIC_BADPIXELMAP`; also contained in the 2nd extension of the master dark).
