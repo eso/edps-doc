@@ -64,7 +64,8 @@ Recipe parameters:
 Recipe: `sph_ifs_spectra_positions`
 
 The task **ifs_spectra_positions** runs the pipeline recipe to associate detector pixels with IFS lenslets and assigns an initial wavelength solution to each pixel. 
-The first-order solution is later refined by the dedicated wavelength calibration recipe (`sph_ifs_wave_calib`).
+
+<!--- The first-order solution is later refined by **ifs_wavelength_calibration** (see below), which runs the dedicated wavelength calibration recipe (`sph_ifs_wave_calib`). --->
 
 Spectral traces are detected via thresholding and used to determine their centroid positions. 
 These measured positions are compared to those predicted by a scaled and shifted lenslet model, 
@@ -89,7 +90,7 @@ Recipe parameters:
 Recipe: `sph_ifs_wave_calib`
 
 The task **ifs_wavelength_calibration** runs the pipeline recipe to perform the wavelength calibration by refining the pixel-to-wavelength associations
-(starting from the model produced by the spectra-positions calibration),
+(starting from the model produced by **ifs_spectra_positions**; see above),
 using observed wavelength calibration frames and an existing lenslet model. 
 
 1D spectra are then extracted for each spectral region, and the positions of known calibration lines 
@@ -259,4 +260,4 @@ This subworkflow executes the tasks:
 At the moment, astrometry and flux standard observations are processed like science data.
 
 ---
-Go to SPHERE-IFS EDPS tutorial [index](../sphere/index)
+Go to SPHERE-IFS EDPS tutorial [index](../sphere-ifu/index)

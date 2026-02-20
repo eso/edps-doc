@@ -68,4 +68,4 @@ To inspect those associated to each individual job (if created),
 Go to [top](#top)
 
 ---
-Go to SPHERE-IFS EDPS tutorial [index](../SPHERE-IFS/index)
+Go to SPHERE-IFS EDPS tutorial [index](../sphere-ifu/index)

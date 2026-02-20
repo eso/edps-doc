@@ -69,4 +69,4 @@ To inspect those associated to each individual job (if created),
 Go to [top](#top)
 
 ---
-Go to SPHERE-IRDIS EDPS tutorial [index](../SPHERE-IRDIS/index)
+Go to SPHERE-IRDIS EDPS tutorial [index](../sphere-irdis/index)

@@ -13,18 +13,19 @@
 ```{include} ../common/configure_reduction.md
 ```
 
-## Customizing and troubleshooting <a name="troubleshooting"> </a>
+## Configuration and troubleshooting <a name="troubleshooting"> </a>
 
-This section provides guidance for customizing, diagnosing and resolving 
-common issues encountered during the SPHERE-IFS data-reduction cascade.
+This section provides guidance on configuring the reduction, 
+as well as diagnosing and resolving common issues encountered 
+during the SPHERE-IFS data-reduction cascade.
 
 ### Master darks <a name="master_darks"> </a>
 
 `sph_ifs_master_dark` produces the detector dark-current calibration (`IFS_MASTER_DARK`) and generates a static bad-pixel map (`IFS_STATIC_BADPIXELMAP`).
 
-If too few bad pixels are detected, decrease `ifs.master_dark.sigma_clip` from the default value of 5 to 3 to make the clipping more aggressive.
+If you believe too many bad pixels are detected, increase `ifs.master_dark.sigma_clip` from the default value of 3 to 5 to make the clipping less aggressive.
 
-The parameters `ifs.master_dark.min_acceptable` and `ifs.master_dark.max_acceptable` are currently set to 0 and 800, respectively (default values: −100 and 1000).
+<!--- The parameters `ifs.master_dark.min_acceptable` and `ifs.master_dark.max_acceptable` are currently set to 0 and 1000, respectively (default values: −100 and 1000).--->
 
 ### Distortion map <a name="distortion_map"> </a>
 
@@ -34,7 +35,7 @@ When applied to science data, these discrepancies can introduce artificial disto
 For this reason, the recipe is not included in the standard workflow.
 
 If you wish to force the use of a distortion map, 
-set the workflow parameter force_distortion_correction to `TRUE`.
+set the workflow parameter `force_distortion_correction` to `TRUE`.
 
 The dominant distortion component is a stable anamorphism of approximately 0.6%. 
 This can be corrected in a simple and reproducible way by rescaling the detector coordinates, 
@@ -85,4 +86,4 @@ It must therefore be enabled separately by setting `ifs.science_dr.xtalkco.large
 Go to [top](#configuration)
 
  ---
-Go to SPHERE-IFS EDPS tutorial [index](../sphere/index)
+Go to SPHERE-IFS EDPS tutorial [index](../sphere-ifu/index)

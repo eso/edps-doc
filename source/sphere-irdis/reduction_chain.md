@@ -309,4 +309,4 @@ Recipe parameters:
 (0 = Mean, 1 = Median, 2 = Clean Mean; default).
 
 ---
-Go to SPHERE-IRDIS EDPS tutorial [index](../sphere/index)
+Go to SPHERE-IRDIS EDPS tutorial [index](../sphere-irdis/index)

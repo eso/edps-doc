@@ -38,8 +38,8 @@ The recipe `sph_ird_instrument_flat` is executed using modified bad-pixel reject
 Instead of the default values of 0.1 and 10 for `ird.instrument_flat.badpix_lowtolerance` 
 and `ird.instrument_flat.badpix_uptolerance`, respectively, values of 0.75 and 1.25 are adopted. 
 
-For K-band data, the High Contrast Data Centre (HCDC) recommends increasing 
-`ird.instrument_flat.badpix_uptolerance` to 1.5.
+For K-band data, the [High Contrast Data Center](https://hc-dc.cnrs.fr/) 
+recommends increasing `ird.instrument_flat.badpix_uptolerance` to 1.5.
 
 ### Distortion map are not used by default <a name="distortion_map"> </a>
 
@@ -112,4 +112,4 @@ set the recipe parameter `ird.science_dbi.save_interprod` = `TRUE`.
 Go to [top](#configuration)
 
  ---
-Go to SPHERE-IRDIS EDPS tutorial [index](../sphere/index)
+Go to SPHERE-IRDIS EDPS tutorial [index](../sphere-irdis/index)
