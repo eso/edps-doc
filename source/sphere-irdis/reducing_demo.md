@@ -16,11 +16,11 @@ c. Choose the `SPHERE-IRDIS` pipeline from the list in the `workflows` field. Th
 the installed pipelines.
 
 The graphic workflow representation will appear as in
-{numref}`fig-wkf`.
+{numref}`fig-wkf-ird`.
 
-```{figure} figures/select_workflow_sph_IRDIS1.jpg
+```{figure} figures/select_workflow_sph_irdis1.jpg
 :alt: wkf
-:name: fig-wkf
+:name: fig-wkf-ird
 
 The EDPS Dashboard (Graphic User Interface) with the SPHERE-IRDIS workflow loaded.	
 ```
@@ -44,7 +44,8 @@ The exported products are organized by DATASET (named as the first scientific ex
 start of reduction).
 
 The final product saved in the specified directory is the wavelength-calibrated datacube, with name format 
-`DATACUBE_SPHER.` followed by the observing date (corresponding to header keyword `DATE-OBS`).
+`IRDIS_` followed by the observing mode (e.g., `IMAGE_`, `POLARIMETRY_`, `STAR_CENTER_`), 
+and archive file name (corresponding to header keyword `ARCFILE`).
 
 Other useful products can be found in the EDPS_data directory, where all intermediate products are saved.
 

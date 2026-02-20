@@ -14,7 +14,7 @@ tasks that generate the calibrations needed for it are automatically executed.
 | ifs_det_flat_narrow_band2  | sph_ifs_master_detector_flat | yes                             | Produces narrow-band detector flat component.                                                                     |
 | ifs_det_flat_narrow_band3  | sph_ifs_master_detector_flat | yes                             | Produces narrow-band detector flat component.                                                                     |
 | ifs_det_flat_narrow_band4  | sph_ifs_master_detector_flat | yes                             | Produces narrow-band detector flat component.                                                                     |
-| ifs_distortion_map         | sph_ifs_distortion_map       | yes                             | Measures geometric distortion via point-pattern comparison; outputs distortion map and optional residual map.     |
+| ifs_distortion_map         | sph_ifs_distortion_map       | optional                        | Measures geometric distortion via point-pattern comparison; outputs distortion map and optional residual map.     |
 | ifs_ifu_flat               | sph_ifs_instrument_flat      | yes                             | Produces total instrument flat and/or IFU (lenslet) flat.                                                         |
 | ifs_instrument_background  | sph_ifs_cal_background       | yes                             | Measures instrumental background in counts/s per pixel.                                                           |
 | ifs_science                | sph_ifs_science_dr           | yes                             | Main science reduction task; applies flats, background/dark subtraction, optional ADI and spectral deconvolution. |
@@ -23,5 +23,5 @@ tasks that generate the calibrations needed for it are automatically executed.
 | ifs_spectra_positions      | sph_ifs_spectra_positions    | yes                             | Associates pixels with lenslets and assigns initial wavelength solution; produces Pixel Description Table (PDT).  |
 | ifs_standard_astrometry    | sph_ifs_science_dr           | optional                        | Reduces astrometric standard observations (currently treated as science data).                                    |
 | ifs_standard_flux          | sph_ifs_science_dr           | optional                        | Reduces flux standard observations (currently treated as science data).                                         |
-| ifs_static_bad_pixel_map   | sph_ifs_master_dark          | yes                             | Produces static bad-pixel map (`IFS_STATIC_BADPIXELMAP`) from master dark.                                        |
+| ifs_static_bad_pixel_map   | sph_ifs_master_dark          | optional                        | Produces static bad-pixel map (`IFS_STATIC_BADPIXELMAP`) from master dark.                                        |
 | ifs_wavelength_calibration | sph_ifs_wave_calib           | yes                             | Refines pixel-to-wavelength solution using calibration lines; updates PDT and QC metrics.                         |

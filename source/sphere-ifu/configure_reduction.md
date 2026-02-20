@@ -13,9 +13,9 @@
 ```{include} ../common/configure_reduction.md
 ```
 
-## Troubleshooting <a name="troubleshooting"> </a>
+## Customizing and troubleshooting <a name="troubleshooting"> </a>
 
-This section provides guidance for diagnosing and resolving 
+This section provides guidance for customizing, diagnosing and resolving 
 common issues encountered during the SPHERE-IFS data-reduction cascade.
 
 ### Master darks <a name="master_darks"> </a>
@@ -32,6 +32,9 @@ The pipeline recipe `sph_ifs_distortion_map`, intended to measure the geometric 
 Calibration data acquired close in time can yield inconsistent distortion solutions, including variations in the derived central axes. 
 When applied to science data, these discrepancies can introduce artificial distortions rather than correct them. 
 For this reason, the recipe is not included in the standard workflow.
+
+If you wish to force the use of a distortion map, 
+set the workflow parameter force_distortion_correction to `TRUE`.
 
 The dominant distortion component is a stable anamorphism of approximately 0.6%. 
 This can be corrected in a simple and reproducible way by rescaling the detector coordinates, 

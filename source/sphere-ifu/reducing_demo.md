@@ -16,11 +16,11 @@ c. Choose the `SPHERE-IFS` pipeline from the list in the `workflows` field. The 
 the installed pipelines.
 
 The graphic workflow representation will appear as in
-{numref}`fig-wkf`.
+{numref}`fig-wkf-ifu`.
 
 ```{figure} figures/select_workflow_sph_ifs1.jpg
 :alt: wkf
-:name: fig-wkf
+:name: fig-wkf-ifu
 
 The EDPS Dashboard (Graphic User Interface) with the SPHERE-IFS workflow loaded.	
 ```
