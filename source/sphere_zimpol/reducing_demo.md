@@ -2,10 +2,11 @@
 
 # Reducing demo data
 
-Follow this procedure to quickly reduce SPHERE demo data. We assume that the `EDPS` Graphic User Interface and the SPHERE
-pipeline and the demo data are installed in your system. For general instructions on how to install `EDPS` and the
-pipeline, please
-visit [https://www.eso.org/sci/software/pipe_aem_main.html](https://www.eso.org/sci/software/pipe_aem_main.html).
+Follow this procedure to quickly reduce SPHERE-ZIMPOL demo data. 
+We assume that the `EDPS` Graphic User Interface and the SPHERE
+pipeline and the demo data are installed in your system. 
+For general instructions on how to install `EDPS` and the
+pipeline, please visit [https://www.eso.org/sci/software/pipe_aem_main.html](https://www.eso.org/sci/software/pipe_aem_main.html).
 
 ## 1. Setting the workflow
 

@@ -2,7 +2,7 @@
 
 ## Scope
 
-This document describes how to reduce SPHERE-ZIMPOL with the EDPS dashboard (Graphic User
+This document describes how to reduce SPHERE-ZIMPOL data with the EDPS dashboard (Graphic User
 Interface), the recommended infrastructure to reduce data from the ESO
 telescope, using the new ESO Data Processing System (EDPS).
 Details on the SPHERE-ZIMPOL data reduction stream and how to configure the reduction to meet 
