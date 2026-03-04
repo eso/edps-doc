@@ -40,4 +40,4 @@ Describe parameters here and what to do in case of bad results
 Go to [top](#configuration)
 
  ---
-Go to SPHERE EDPS tutorial [index](../sphere/index)
+Go to SPHERE EDPS tutorial [index](../sphere-zimpol/index)

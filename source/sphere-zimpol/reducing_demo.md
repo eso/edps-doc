@@ -69,4 +69,4 @@ The final products saved in the specified directory are:
 Go to [top](#top)
 
 ---
-Go to SPHERE EDPS tutorial [index](../sphere/index)
+Go to SPHERE EDPS tutorial [index](../sphere-zimpol/index)

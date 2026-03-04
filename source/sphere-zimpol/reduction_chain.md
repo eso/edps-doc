@@ -33,4 +33,4 @@ The reduction steps are:
 
 
 ---
-Go to SPHERE EDPS tutorial [index](../sphere/index)
+Go to SPHERE EDPS tutorial [index](../sphere-zimpol/index)
