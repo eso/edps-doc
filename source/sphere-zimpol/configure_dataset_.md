@@ -6,4 +6,4 @@
 Go to [top](#top)
 
 ---
-Go to SPHERE ZIMPOL EDPS tutorial [index](../sphere-zimpol/index)
+Go to SPHERE-ZIMPOL EDPS tutorial [index](../sphere-zimpol/index)

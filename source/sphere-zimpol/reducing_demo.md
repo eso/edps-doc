@@ -20,13 +20,13 @@ the general workflow `sphere.sphere_wkf` deals with data from all modes. Select 
 to reduce ZIMPOL data.
 
 The graphic workflow representation will appear as in
-{numref}`fig-wkf`.
+{numref}`fig-wkf-zimpol`.
 
 ```{figure} figures/select_workflow.jpg
 :alt: wkf
-:name: fig-wkf
+:name: fig-wkf-zimpol
 
-**Insert caption here**	
+The EDPS Dashboard (Graphic User Interface) with the ZIMPOL workflow loaded.	
 ```
 
 ## 2. Selecting the input data
@@ -34,7 +34,7 @@ The graphic workflow representation will appear as in
 ```{include} ../common/reducing_demo_2.md
 ```
 c. (Optional). Select the reduction target, configure the workflow parameter and specify the association preferences. 
-Thise steps are optional. For more information see [here](configure_dataset_.md).
+These steps are optional. For more information see [here](configure_dataset_.md).
 
 ```{include} ../common/reducing_demo_3.md
 ```
@@ -44,20 +44,32 @@ Go to [top](#top)
 
 ## 4. Final products
 
-By default, EDPS saves all the recipe products for all the executions in the directory specified at the first execution (
-default: `$HOME/EDPS_data`).
+By default, EDPS saves all the recipe products for all the executions in the directory specified at the first execution (default: `$HOME/EDPS_data`).
 However, it is possible to save only the final products into a desired location. This can be achieved by exporting
-archieved data reduction: press the `Export` button in the `Archieved Data` tab
-(see [here](the-reduction-archive-tab.md), or consult the [Frequently Asked Questions](faq.md) ).
+archived data reduction: press the `Export` button in the `Archived Data` tab
+(see [here](../edpsgui/gui.md#archived_data)).
 
-To archieve a data reduction, press the button `Archive` in the `Reduction Queue` tab.
+To archive a data reduction, press
+the button `Archive` in the `Reduction Queue` tab (see [here](../edpsgui/gui.md#processing_queue)).
 
-Products are organized by `DATASET` (named as the first scientific exposure of the dataset), and `TIMESTAMP` (time of
+The exported products are organized by DATASET (named as the first scientific exposure of the dataset), and `TIMESTAMP` (time of
 start of reduction).
 
-The final products saved in the specified directory are:
+In imaging mode, the final products saved in the specified directory are the reduced and combined images from the two ZIMPOL cameras, 
+with name format `ZIMPOL_` followed by the observing mode (`IMAGE_`), camera number (`CAM1_` or `CAM2_`), 
+and archive file name (corresponding to header keyword `ARCFILE`).
+The file contains 8 extensions:
+In addition to the combined science intensity image, additional extensions include a bad-pixel map, number-of-combined (ncomb) frames map, and RMS map; 
+a combined dark-current image, with its own corresponding bad-pixel map, ncomb map, and RMS map.
 
-**Please describe the main products of the reduction**
+In polarimetry mode, the final products saved in the specified directory are the reduced and combined Q and U Stoke parameter images 
+from the two ZIMPOL cameras, with name format `ZIMPOL_` followed by the polarimetry mode (`POL1_` or `POL23_`), camera number (`CAM1_` or `CAM2_`)
+and archive file name (corresponding to header keyword `ARCFILE`).
+The file contains 8 extensions:
+In addition to the combined science intensity image, additional extensions include a bad-pixel map, number-of-combined (ncomb) frames map, and RMS map; 
+an image with the polarization component, with its own corresponding bad-pixel map, ncomb map, and RMS map.
+
+Other useful products can be found in the EDPS_data directory, where all intermediate products are saved.
 
 ## 5. Quality plots
 
@@ -69,4 +81,4 @@ The final products saved in the specified directory are:
 Go to [top](#top)
 
 ---
-Go to SPHERE EDPS tutorial [index](../sphere-zimpol/index)
+Go to SPHERE-ZIMPOL EDPS tutorial [index](../sphere-zimpol/index)

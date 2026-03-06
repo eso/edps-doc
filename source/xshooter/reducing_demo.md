@@ -12,15 +12,14 @@ visit [https://www.eso.org/sci/software/pipe_aem_main.html](https://www.eso.org/
 ```{include} ../common/reducing_demo_1.md
 ```
 
-c. Choose the `XSHOOTER` pipeline from the list in the `workflows` field. The workflows offered in this selector depend on
+d. Choose the `XSHOOTER` pipeline from the list in the `workflows` field. The workflows offered in this selector depend on
 the installed pipelines.
 
-The graphic workflow representation will appear as in
-{numref}`fig-wkf`.
+The graphic workflow representation will appear as in {numref}`fig-wkf-xsh`.
 
 ```{figure} figures/select_workflow_xsh2.jpg
 :alt: wkf
-:name: fig-wkf
+:name: fig-wkf-xsh
 
 The EDPS Dashboard (Graphic User Interface) with the XSHOOTER workflow loaded.	
 ```

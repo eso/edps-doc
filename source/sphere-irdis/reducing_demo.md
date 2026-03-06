@@ -12,7 +12,7 @@ visit [https://www.eso.org/sci/software/pipe_aem_main.html](https://www.eso.org/
 ```{include} ../common/reducing_demo_1.md
 ```
 
-c. Choose the `SPHERE-IRDIS` pipeline from the list in the `workflows` field. The workflows offered in this selector depend on
+d. Choose the `SPHERE-IRDIS` pipeline from the list in the `workflows` field. The workflows offered in this selector depend on
 the installed pipelines.
 
 The graphic workflow representation will appear as in
@@ -29,6 +29,15 @@ The EDPS Dashboard (Graphic User Interface) with the SPHERE-IRDIS workflow loade
 
 ```{include} ../common/reducing_demo_2.md
 ```
+
+c. (Optional). Select the reduction target, configure the workflow parameter and specify the association preferences. 
+These steps are optional. For more information see [here](configure_dataset_.md).
+
+```{include} ../common/reducing_demo_3.md
+```
+---
+---
+Go to [top](#top)
 
 ## 4. Final products
 

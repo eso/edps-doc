@@ -13,8 +13,14 @@
 ```
 
 
-## First step <a name="first_step"> </a>
-Describe parameters here and what to do in case of bad results
+## Image Incorrectly Rotated / Signal Smeared out </a>
+
+The task **zimpol_coronagraph_center_imaging** uses the instrument pipeline recipe `sph_zpl_star_center_img` 
+to identify waffle spots and determine the position of the target behind the coronagraph. 
+In some cases the detection threshold of 10σ is too high and the recipe cannot identify
+the target’s position. In such a case `sph_zpl_science_imaging` will rotate the frames around an
+incorrect position which will smear out the signal. If you see such behaviour you may try to reduce
+`star_center_img.sigma` to 5.
 
 
  ---

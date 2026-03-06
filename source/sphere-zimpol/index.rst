@@ -14,7 +14,8 @@ SPHERE ZIMPOL tutorial
    #../common/tbd.md
    intro.md
    reducing_demo.md
-   reduction_chain.md
+   reduction_chain-img.md
+   reduction_chain-pol.md
    configure_reduction.md
    task_list.md
    faq.md
