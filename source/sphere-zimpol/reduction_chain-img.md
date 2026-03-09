@@ -37,10 +37,10 @@ This subworkflow generates the camera master flats, the master dark and bais. It
 
 Each time, the calibration (flat, dark or bias) is generated separately for the odd (informative) and even (dark current) 
 ZIMPOL sub-frames and stored in a DOUBLE IMAGE FITS format. 
+Inputs can be raw frames, or pre-processed frames.
 If raw frames are provided, a pre-processing step on the raw cubes is performed with `sph_zpl_preproc_imaging` to generate pre-processed frames.
 Outputs include the master calibration (flat, dark or bias), 
 as well as a bad-pixel map, a number-of-combined frames map, and an RMS map.
-
 
 In practice, bias and darks are rarely used in the current workflow:
 
@@ -71,16 +71,39 @@ Recipe parameters:
 (0 = Mean; default, 1 = Median, 2 = Clean Mean).
 - `zpl.star_center.sigma`: the sigma threshold for source detection
   (default = 10.0).
+- `zpl.star_center.save_interprod`: enable to produce
+a field center table containing the calculated center positions
+(default = FALSE). 
 
 ## 3. Subworkflow Standard Imaging
 
 Recipe: `sph_zpl_science_imaging` 
 
-The tasks **zimpol_standard_astrometry_imaging** 
-and **zimpol_standard_flux_imaging** both use `sph_zpl_science_imaging` 
-to reduce calibration frames of astrometric and flux standards.
-The calibration steps and customizable parameters are the same 
-as for the science frames (see below).
+This subworkflow processes imaging standard-star observations used for calibration 
+and monitoring of the ZIMPOL imaging mode. 
+It reduces observations of astrometric and photometric (flux) standard stars 
+to verify the instrument’s astrometric and photometric performance.
+
+Two tasks are executed:
+- **zimpol_standard_astrometry_imaging**: Processes observations of astrometric standard fields 
+to assess the astrometric calibration, including the plate scale and detector orientation.
+- **zimpol_standard_flux_imaging**: Processes observations of photometric standard stars to monitor 
+the photometric response of the instrument.
+
+Both tasks run the corresponding imaging pipeline recipes and may use available calibration products 
+such as master dark frames and intensity flat fields. 
+These calibrations are optional, as the pipeline can process the data without them.
+
+The resulting products are used primarily for quality control and instrument monitoring 
+(qc0, qc1calib, calchecker) and are not required for the reduction of science imaging observations.
+
+**Customization**
+
+Recipe parameters:
+- `zpl.science_imaging.coll_alg`: collapse algorithm 
+(0 = Mean; default, 1 = Median, 2 = Clean Mean).
+- `zpl.imaging.save_interprod` enable to produce
+a field center table containing the calculated center positions (default = FALSE). 
 
 ## 4. Subworkflow Science Imaging
 
@@ -100,7 +123,7 @@ otherwise, the geometric center of the frame (xc=512, yc=512) is used.
 In the final step, all calibrated, de-dithered, and de-rotated frames are combined using a mean algorithm. 
 The resulting products for each camera are written in DOUBLE IMAGE format (8 FITS extensions), containing:
 
-- a combined science intensity image, bad-pixel map, number-of-combined frames map, and RMS map;
+- a combined science intensity image, bad-pixel map, number-of-combined (ncomb) frames map, and RMS map;
 - a combined dark-current image, with corresponding bad-pixel map, ncomb map, and RMS map.
 
 These outputs constitute the final reduced science products for both ZIMPOL cameras.
@@ -113,6 +136,11 @@ When successful, Strehl-related quality-control parameters are written into the 
 Recipe parameters:
 - `zpl.science_imaging.coll_alg`: collapse algorithm 
 (0 = Mean; default, 1 = Median, 2 = Clean Mean).
+- `zpl.imaging.save_interprod` enable to produce
+a field center table containing the calculated center positions (default = FALSE). 
+
+---
+Go to [top](#top)
 
 ---
 Go to SPHERE EDPS tutorial [index](../sphere-zimpol/index)

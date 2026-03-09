@@ -13,7 +13,11 @@
 ```
 
 
-## Image Incorrectly Rotated / Signal Smeared out </a>
+## Troubleshooting
+
+This section provides guidance for diagnosing and resolving common issues encountered during the SPHERE-ZIMPOL data-reduction cascade.
+
+### Image Incorrectly Rotated / Signal Smeared out </a>
 
 The task **zimpol_coronagraph_center_imaging** uses the instrument pipeline recipe `sph_zpl_star_center_img` 
 to identify waffle spots and determine the position of the target behind the coronagraph. 
@@ -21,26 +25,6 @@ In some cases the detection threshold of 10σ is too high and the recipe cannot 
 the target’s position. In such a case `sph_zpl_science_imaging` will rotate the frames around an
 incorrect position which will smear out the signal. If you see such behaviour you may try to reduce
 `star_center_img.sigma` to 5.
-
-
- ---
-Go to [top](#configuration)
-
-
-## Second step <a name="second_step"> </a>
-
-
-Describe parameters here and what to do in case of bad results
-
-
- ---
-Go to [top](#configuration)
-
-
-## Third step <a name="third_step"> </a>
-
-Describe parameters here and what to do in case of bad results
-
 
  ---
 Go to [top](#configuration)

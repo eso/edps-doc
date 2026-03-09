@@ -306,4 +306,7 @@ it is not included in the Reduction Cascade.
 The UVB/VIS detectors exhibit very few pixels of this type.
 
 ---
+Go to [top](#top)
+
+---
 Go to XSHOOTER EDPS tutorial [index](../xshooter/index)
