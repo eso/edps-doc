@@ -134,10 +134,8 @@ When successful, Strehl-related quality-control parameters are written into the 
 **Customization**
 
 Recipe parameters:
-- `zpl.science_imaging.coll_alg`: collapse algorithm 
-(0 = Mean; default, 1 = Median, 2 = Clean Mean).
-- `zpl.imaging.save_interprod` enable to produce
-a field center table containing the calculated center positions (default = FALSE). 
+- `zpl.science_imaging.coll_alg`: collapse algorithm (0 = Mean; default, 1 = Median, 2 = Clean Mean).
+- `zpl.imaging.save_interprod` enable to produce a field center table containing the calculated center positions (default = FALSE). 
 
 ---
 Go to [top](#top)

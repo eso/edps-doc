@@ -25,3 +25,10 @@ tasks that generate the calibrations needed for it are automatically executed.
 | ifs_standard_flux          | sph_ifs_science_dr           | optional                        | Reduces flux standard observations (currently treated as science data).                                         |
 | ifs_static_bad_pixel_map   | sph_ifs_master_dark          | optional                        | Produces static bad-pixel map (`IFS_STATIC_BADPIXELMAP`) from master dark.                                        |
 | ifs_wavelength_calibration | sph_ifs_wave_calib           | yes                             | Refines pixel-to-wavelength solution using calibration lines; updates PDT and QC metrics.                         |
+
+**Notes**
+
+- For IFS science and standard tasks, backgrounds are associated in the following priority order: **sky background**, then **internal background**, then **master dark**.
+- The detector-flat tasks are split by calibration lamp / wavelength. `ifs_det_flat_narrow_band4` is only relevant for the **YJH** setting.
+- Distortion is associated as **mandatory or optional depending on configuration**, through the `distortion_mandatory` / `distortion_optional` conditions in the workflow.
+- `ifs_science_flux` and `ifs_coronagraph_center` are also associated to `ifs_science` mainly for **calselector support**, not because their products are always required by the science recipe.

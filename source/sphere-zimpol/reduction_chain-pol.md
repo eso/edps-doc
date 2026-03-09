@@ -92,12 +92,9 @@ to define the rotation center during frame combination.
 **Customization**
 
 Recipe parameters:
-- `zpl.star_center.coll_alg`: collapse algorithm 
-(0 = Mean; default, 1 = Median, 2 = Clean Mean).
-- `zpl.star_center.sigma`: the sigma threshold for source detection
-  (default = 10.0).
-- `zpl.star_center.save_interprod`: enable to produce
-a field center table containing the calculated center positions
+- `zpl.star_center.coll_alg`: collapse algorithm (0 = Mean; default, 1 = Median, 2 = Clean Mean).
+- `zpl.star_center.sigma`: the sigma threshold for source detection (default = 10.0).
+- `zpl.star_center.save_interprod`: enable to produce a field center table containing the calculated center positions
 (default = FALSE). 
 
 ## 3. Subworkflow Standard Polarimetry
@@ -126,8 +123,7 @@ and are not required for the reduction of science observations.
 **Customization**
 
 Recipe parameters:
-- `zpl.science_p1.coll_alg`: collapse algorithm  
-(0 = Mean; default, 1 = Median, 2 = Clean Mean)
+- `zpl.science_p1.coll_alg`: collapse algorithm (0 = Mean; default, 1 = Median, 2 = Clean Mean)
 - `zpl.science_p1.save_interprod` enable to produce
 a field center table containing the calculated center positions (default = FALSE). 
 
@@ -137,8 +133,8 @@ Recipe: `sph_zpl_science_p1`
 
 The subworkflow contains two tasks:
 
-- `zimpol_science_flux_p1`, which reduces flux frames obtained with the star moved off the coronagraph;
-- `zimpol_science_p1`, which reduces the science polarimetric observations themselves.
+- **zimpol_science_flux_p1**, which reduces flux frames obtained with the star moved off the coronagraph;
+- **zimpol_science_p1**, which reduces the science polarimetric observations themselves.
 
 Both tasks use the pipeline recipe `sph_zpl_science_p1` and process polarimetric frames obtained in ZIMPOL P1 mode.
 
@@ -153,8 +149,8 @@ The center of rotation is taken from the star-center calibration frames (`SPH_ZP
 
 In the next step, the calibrated frames of each measurement group are combined using the collapse mean algorithm, producing DOUBLE IMAGE products (8 FITS extensions) for each group containing:
 
-- a combined intensity image (I) with its bad-pixel map, number-of-combined (`ncomb`) frames map, and RMS map;
-- a combined polarimetric image (P) with its bad-pixel map, `ncomb` map, and RMS map.
+- a combined intensity image (I) with its bad-pixel map, number-of-combined (ncomb) frames map, and RMS map;
+- a combined polarimetric image (P) with its bad-pixel map, ncomb map, and RMS map.
 
 Finally, the Qplus and Qminus frames (and similarly Uplus and Uminus) are combined polarimetrically:
 
@@ -172,8 +168,7 @@ The task `zimpol_science_p1` produces the final reduced Q and/or U DOUBLE IMAGE 
 **Customization**
 
 Recipe parameters:
-- `zpl.science_p1.coll_alg`: collapse algorithm  
-(0 = Mean; default, 1 = Median, 2 = Clean Mean)
+- `zpl.science_p1.coll_alg`: collapse algorithm (0 = Mean; default, 1 = Median, 2 = Clean Mean)
 - `zpl.science_p1.save_interprod` enable to produce
 a field center table containing the calculated center positions (default = FALSE). 
 
@@ -183,10 +178,10 @@ Recipe: `sph_zpl_science_p23`
 
 The subworkflow contains two tasks:
 
-- `zimpol_science_flux_p2`, which reduces flux frames obtained with the star moved off the coronagraph;
-- `zimpol_science_p2`, which reduces the science polarimetric observations themselves.
+- **zimpol_science_flux_p2**, which reduces flux frames obtained with the star moved off the coronagraph;
+- **zimpol_science_p2**, which reduces the science polarimetric observations themselves.
 
-Both tasks use the pipeline recipe `sph_zpl_science_p23` and process polarimetric frames obtained in ZIMPOL P2/P3 modes.
+Both tasks use the pipeline recipe `sph_zpl_science_p23` and process polarimetric frames obtained in ZIMPOL P23 modes.
 
 Optional calibration inputs include master bias, master dark, intensity flat-field, polarization flat-field, and modulation–demodulation efficiency (modem) calibration frames for each camera. If raw frames are provided, a pre-processing step on the raw cubes is performed with `sph_zpl_preproc` to generate pre-processed frames.
 
@@ -196,8 +191,8 @@ The calibrated frames are then de-dithered and saved as intermediate products.
 
 In the next step, the calibrated frames of each measurement group are combined using the collapse mean algorithm, producing DOUBLE IMAGE products (8 FITS extensions) for each group containing:
 
-- a combined intensity image (I) with its bad-pixel map, number-of-combined (`ncomb`) frames map, and RMS map;
-- a combined polarimetric image (P) with its bad-pixel map, `ncomb` map, and RMS map.
+- a combined intensity image (I) with its bad-pixel map, number-of-combined (ncomb) frames map, and RMS map;
+- a combined polarimetric image (P) with its bad-pixel map, ncomb map, and RMS map.
 
 Finally, the Qplus and Qminus frames (and similarly Uplus and Uminus) are combined polarimetrically:
 
@@ -215,8 +210,7 @@ The task `zimpol_science_p2` produces the final reduced Q and/or U DOUBLE IMAGE 
 **Customization**
 
 Recipe parameters:
-- `zpl.science_p23.coll_alg`: collapse algorithm  
-(0 = Mean; default, 1 = Median, 2 = Clean Mean)
+- `zpl.science_p23.coll_alg`: collapse algorithm (0 = Mean; default, 1 = Median, 2 = Clean Mean)
 - `zpl.science_p23.save_interprod` enable to produce
 a field center table containing the calculated center positions (default = FALSE). 
 

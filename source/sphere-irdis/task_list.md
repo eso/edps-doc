@@ -22,3 +22,8 @@ tasks that generate the calibrations needed for it are automatically executed.
 | irdis_standard_flux_imaging       | sph_ird_science_imaging        | optional                        | Reduces photometric standards for zero-point calibration.                                               |
 | irdis_static_bad_pixel_map        | sph_ird_master_dark            | yes                             | Static bad pixels identified during master dark creation and propagated to later reductions.           |
 | irdis_wavecal_spectroscopy        | sph_ird_wave_calib             | yes (LSS only)                  | Computes wavelength solution and updates Pixel Description Table (PDT).                                |
+
+**Notes**
+
+- For science tasks, backgrounds are associated in the following priority order: **sky background**, then **internal background**, then **master dark**.
+- In DPI mode, the coronagraph-center association is constrained so that only suitable center frames taken **before** the science can be used.
