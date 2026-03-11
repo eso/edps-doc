@@ -9,7 +9,7 @@ tasks that generate the calibrations needed for it are automatically executed.
 |-----------------------------------|--------------------------------|---------------------------------|---------------------------------------------------------------------------------------------------------|
 | irdis_coronagraph_center          | sph_ird_star_center            | yes (coronagraphic data)        | Determines stellar position behind coronagraph using waffle images; outputs center table for registration. |
 | irdis_dark_imaging                | sph_ird_master_dark            | yes                             | Creates `MASTER_DARK` by combining dark frames and produces hot/static bad-pixel map.                  |
-| irdis_distortion_map              | sph_ird_distortion_map         | optional                        | Derives geometric distortion solution via point-pattern matching; outputs polynomial distortion model. |
+| irdis_distortion_map              | sph_ird_distortion_map         | no                              | Derives geometric distortion solution via point-pattern matching; outputs polynomial distortion model. |
 | irdis_flat_field                  | sph_ird_master_detector_flat   | yes                             | Generates detector master flat; includes linearity fit and updated bad-pixel map.                      |
 | irdis_instrument_background       | sph_ird_ins_bg                 | yes                             | Produces instrumental background (`INS_BG`) used for subtraction when darks are unavailable.           |
 | irdis_science_flux_imaging        | sph_ird_science_dbi            | optional                        | Reduces off-axis flux frames for coronagraphic observations; not applied to final science calibration. |

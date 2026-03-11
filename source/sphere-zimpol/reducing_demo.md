@@ -38,9 +38,6 @@ These steps are optional. For more information see [here](configure_dataset_.md)
 
 ```{include} ../common/reducing_demo_3.md
 ```
----
----
-Go to [top](#top)
 
 ## 4. Final products
 

@@ -41,7 +41,7 @@ and `ird.instrument_flat.badpix_uptolerance`, respectively, values of 0.75 and 1
 For K-band data, the [High Contrast Data Center](https://hc-dc.cnrs.fr/) 
 recommends increasing `ird.instrument_flat.badpix_uptolerance` to 1.5.
 
-### Distortion map are not used by default <a name="distortion_map"> </a>
+### Distortion map are not used <a name="distortion_map"> </a>
 
 The pipeline recipe `sph_ird_distortion_map` determines the geometric distortion 
 of IRDIS data using internal calibration observations obtained with a pinhole mask. 
@@ -59,10 +59,7 @@ beyond what is achieved using a simple anamorphism correction alone,
 and in some cases may even degrade the data.
 
 For this reason, processing of internal distortion calibrations 
-is disabled by default in the standard IRDIS workflow. 
-If required, the distortion map computation can be enabled manually by 
-changing workflow parameter `force_distortion_correction` = `TRUE`.
-
+is disabled.
 A more robust approach is to correct only the dominant distortion component, 
 which is a stable anamorphism of approximately 0.6%. 
 This can be applied in a simple and reproducible manner by 

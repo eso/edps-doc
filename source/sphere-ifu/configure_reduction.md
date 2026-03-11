@@ -32,10 +32,7 @@ If you believe too many bad pixels are detected, increase `ifs.master_dark.sigma
 The pipeline recipe `sph_ifs_distortion_map`, intended to measure the geometric distortion of IFS frames, has been found to be insufficiently robust. 
 Calibration data acquired close in time can yield inconsistent distortion solutions, including variations in the derived central axes. 
 When applied to science data, these discrepancies can introduce artificial distortions rather than correct them. 
-For this reason, the recipe is not included in the standard workflow.
-
-If you wish to force the use of a distortion map, 
-set the workflow parameter `force_distortion_correction` to `TRUE`.
+For this reason, the recipe is not included in the workflow.
 
 The dominant distortion component is a stable anamorphism of approximately 0.6%. 
 This can be corrected in a simple and reproducible way by rescaling the detector coordinates, 

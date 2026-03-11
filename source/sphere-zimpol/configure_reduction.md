@@ -5,11 +5,12 @@
 ```{include} ../common/appropriate_calibrations.md
 ```
 
-## Configuration of parameters: the configuration editor
-```{include} ../common/configure_reduction.md
-```
 ## Quality reports
 ```{include} ../common/quality_plots.md
+```
+
+## Configuration of parameters: the configuration editor
+```{include} ../common/configure_reduction.md
 ```
 
 
