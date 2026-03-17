@@ -43,7 +43,9 @@ EDPS documentation
    kmos/index.rst
    #matisse/index.rst
    muse/index.rst
-   #sphere_zimpol/index.rst
+   sphere_ifu/index.rst
+   sphere_irdis/index.rst
+   sphere_zimpol/index.rst
    #uves/index.rst
    #fors/index.rst
    #visir/index.rst
