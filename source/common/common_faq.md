@@ -129,3 +129,11 @@ to resize the space allocated to the in the organization of the filesystem. Howe
      Important note: this operation migth break some internal links. Recipes requiring external packages such as telluriccorr might not work (impacts on kmos, xshooter, fors, and molecfit pipelines) 
 
 </details>
+
+<details>
+<summary><b>Q8) I have re-triggered the creation of datasets after having added a new directory in the input data dir. Some of the previously reduced datasets are labelled as new, despite the newly added files should have no impact. What's happening and how do I fix it?</b>
+</summary>
+
+Answer: This is a know bug that will be fixed in the next release. The cause is that the input data directory contains 2 files with the same properties and the same mjd-obs, but with different names (e.g. the same static calibration
+that is present in 2 places). Since their mjd-obs is the same, EDPS sometimes adds one file, sometimes the other. When a different file is associated, the dataset is labelled as new.
+</details>
