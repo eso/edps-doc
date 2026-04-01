@@ -1,12 +1,24 @@
 The data reduction of each dataset can be configured according to the scientific needs using an appropriate configuration editor.
 This editor allows to configure the data reduction for a given dataset by specifying workflow and recipe
 parameters.
+
+The EDPS workflows contain two types of parameters and they 
+both have default values that can be modified to improve the
+data reduction.
+
+ - **Workflow parameters** are global and they are applied to the entire workflow. They are accessible both in the `Raw Data`
+tab, prior to the creation og a dataset, and in the `Reduction Configuration` editor, in the `Reduction queue` tab.
 Note: some workflow parameters were already configured before creating the dataset and sending it to the reduction queue.
 Here, they can be changed again. Please, note that the parameters have an effect only on the files that are already in the dataset. 
 If one specifies a parameter that should include extra files in the dataset (e.g., the inclusion of more calibrations), files are not added and the reduction might fail. 
 If you need to change a parameter that modifies the dataset content, please go back to the Raw data tab and create a new dataset.
 
-To open the editor, click on
+ - **Recipe parameters** are specific to the individual recipes and can be configured per task. They are accessible in the `Reduction Configuration` editor, in the `Reduction queue` tab.
+
+
+
+
+To open the `Reduction configuration` editor, click on
 the wheel button ![](figures/configure_dataset.jpg) next to the dataset you desire to configure the reduction for. A window with the
 configuration editor appears as shown the figure below.
 
