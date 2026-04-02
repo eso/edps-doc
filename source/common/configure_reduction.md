@@ -13,7 +13,8 @@ Here, they can be changed again. Please, note that the parameters have an effect
 If one specifies a parameter that should include extra files in the dataset (e.g., the inclusion of more calibrations), files are not added and the reduction might fail. 
 If you need to change a parameter that modifies the dataset content, please go back to the Raw data tab and create a new dataset.
 
- - **Recipe parameters** are specific to the individual recipes and can be configured per task. They are accessible in the `Reduction Configuration` editor, in the `Reduction queue` tab.
+ - **Recipe parameters** are specific to the individual recipes and can be configured per task. 
+They are accessible in the `Reduction Configuration` editor, in the `Reduction queue` tab.
 
 
 

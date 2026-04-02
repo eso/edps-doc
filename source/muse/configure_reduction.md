@@ -48,7 +48,8 @@ Go to [top](#configuration)
 
 A crucial aspect of the MUSE data reduction is the sky subtraction. The workflow supports several strategies, which
 are determined by the value of the workflow parameter **skysubtraction**.
-By default **skysubtraction** is set to **model**. In this configuration the MUSE workflow uses dedicated sky exposures (if available) to compute the SKY_CONTINUUM and the SKY_LINES
+By default **skysubtraction** is set to **model**. In this configuration the MUSE workflow uses dedicated sky 
+exposures (if available) to compute the SKY_CONTINUUM and the SKY_LINES
 calibrations. The SKY_CONTINUUM is the directly subtracted from the target field of view, whereas the intensities of the 
 sky emission lines are refitted (using a small portion of the target field of view) to compensate the time variation between
 scientific exposure and dedicated sky observations.
@@ -73,12 +74,11 @@ Possible values of **skysubtraction** are:
   from dedicated sky exposures, it is directly subtracted from the data. Otherwise, the sky continuum is computed
   directly from teh science exposure. The portion
   of the field of view of the science exposures it uses to fit the sky lines and compute the continuum is regulated by
-  the recipe parameters
-  **skymodel_fraction** and **skymodel_ignore**. Select this option if no dedicated sky exposures are available (sky lines
+  the recipe parameters **skymodel_fraction** and **skymodel_ignore**. 
+  Select this option if no dedicated sky exposures are available (sky lines
   and sky continuum will be computed on the target field of view), or if dedicated sky exposures are present and enough
-  empty sky regions are
-  available in the target field of view (sky continumm is
-  computed on dedicated sky exposures, sky lines are re-fitted on the target field of view). To discard completely
+  but empty sky regions are available in the target field of view. In this case, sky continumm is
+  computed on dedicated sky exposures, sky lines are re-fitted on the target field of view. To discard completely
   dedicated sky exposures, remove them from the pool of input data.
 
 - **subtract-model**. It uses sky emission lines and sky continuum determined on the field of view of dedicated sky
