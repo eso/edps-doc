@@ -163,7 +163,7 @@ the recipe parameter in the configuration window as desired (see [here](../muse/
     via the parameter **start_threshold_sigma**. To prevent the threshold to go too low during iterations, one can set 
     the minimum accepted threshold via the parameter **threshold_limit**.
   - A lot of sources are detected in the edges of the field of view. This can be solved by increasing the
-    parameter **bpixdistance**.
+    parameter **border_distance_pxl**.
   
 - **Task alignment**.
   - The maximum number of allowed stars is detected, but the alignment is not correct. This can happen
