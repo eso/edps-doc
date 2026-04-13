@@ -48,7 +48,8 @@ Go to [top](#configuration)
 
 A crucial aspect of the MUSE data reduction is the sky subtraction. The workflow supports several strategies, which
 are determined by the value of the workflow parameter **skysubtraction**.
-By default **skysubtraction** is set to **model**. In this configuration the MUSE workflow uses dedicated sky exposures (if available) to compute the SKY_CONTINUUM and the SKY_LINES
+By default **skysubtraction** is set to **model**. In this configuration the MUSE workflow uses dedicated sky 
+exposures (if available) to compute the SKY_CONTINUUM and the SKY_LINES
 calibrations. The SKY_CONTINUUM is the directly subtracted from the target field of view, whereas the intensities of the 
 sky emission lines are refitted (using a small portion of the target field of view) to compensate the time variation between
 scientific exposure and dedicated sky observations.

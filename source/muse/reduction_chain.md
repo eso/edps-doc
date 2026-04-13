@@ -128,8 +128,10 @@ exposures. They are:
   requested. It is not directly associated to any recipe.
   See [here](../muse/configure_reduction.md#autocalibration).
 - **object**. This task runs the recipe muse_scipost to reduce a single scientific exposure.
-- **alignment**. This tasks runs the recipe muse_exp_align to correct for coordinate offsets the exposures that are meant
-  to be combined together (see [here](../muse/configure_reduction.md#combination).
+- **source_detection**. This task runs the recipe muse_detection to detect sources in the datacube of each individual 
+  exposure and create a source catalog. The source catalogs are used for the alignment of the exposures.
+- **alignment**. This tasks runs the recipe muse_alignment to correct for coordinate offsets the exposures that are meant
+  to be combined together (see [here](../muse/configure_reduction.md#combination). It uses sources detected in the previous step to compute the offsets.
 - **object_combination**. This tasks runs the recipe muse_exp_combine and combines individual exposures to produce the
   final datacube
 
