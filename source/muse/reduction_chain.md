@@ -153,44 +153,35 @@ field of views after alignment correction. In the case of good alignment, there 
    :name: fig_alignment_2
    ````
 
-In case of bad alignment, here we provide some tipps that can help in improving the alignment.
-Re-configure the reduction of the dataset by pressing the ![](../edpsgui/figures/configure_dataset.jpg)  button and set
-the recipe parameter accordingly in the configuration window (see [here](../muse/configure_reduction.md#configuration))
 
-- In the case of too many or too few detected sources, decrease or increase the parameters **srcmin** and **srcmax**
-  (minimum and maximum number of detections, respectively). Sometimes it helps to change the initial threshold level,
-  via the parameter **threshold**.
-- The maximum number of allowed stars is detected, but the alignment is not correct. This can happen
-  in crowded fields, and the alignment algorithm does not find the correct matching between the sources
-  detected in different frames. There are two tricks to overcome this issue. First, one could either decrease
-  the number of maximum sources allowed in the detection. However, this solution is not advisable for
-  mosaicing, because the number of reference sources in the overlapping regions could be too small. Second,
-  if the offsets are known to be small, the user can decrease value of the first search radius and set
-  the corresponding recipe parameter (**rsearch**) to, for example, 10.,4.,2.,0.8`. The first entry (10 in
-  this example) forces the matching algorithm to find offsets of at most 10 arcseconds. If the first entry of
-  **rsearch** is modified, it might be required to change the **nbins** parameter; a value twice the first
-  **rsearch** value is usually a good choice (**nbins=20** in the example above).
-
-- A lot of sources are detected in the edges of the field of view. This can be solved by increasing the
-  parameter **bpixdistance**.
-
-
-- Crowded field, dithered exposures. If the field is very crowded, but the exposures are targeting the same
-  field, it might be advisable to decrease the maximum number of maximum sources (recipe parameter
-  **srcmax**) to avoid problems in the matching algorithm. Alternatively, if there are bright sources in the
-  field (e.g., if targeting globular clusters), it is advisable to increase the initial **threshold** and the **step**
-  parameters.
-
-- Crowded field, mosaicing exposures. Although a large number of sources are found, it might be necessary
-  to increase the minimum or maximum number of sources (recipe parameters **srcmin** and **srcmax**,
-  respectively) to ensure enough stars in the overlapping region between the exposures. If the large number
-  of sources can create confusion, decrease the first entry of the **rsearch** recipe parameter.
+- **Task source_detection**.
+  - In the case of too many or too few detected sources (e.g. in crowded fields), decrease or increase the parameters **source_min** and **source_max**
+    (minimum and maximum number of detections, respectively). Sometimes it helps to change the initial threshold level,
+    via the parameter **start_threshold_sigma**. To prevent the threshold to go too low during iterations, one can set 
+    the minimum accepted threshold via the parameter **threshold_limit**.
+  - A lot of sources are detected in the edges of the field of view. This can be solved by increasing the
+    parameter **border_distance_pxl**.
+  
+- **Task alignment**.
+  - The maximum number of allowed stars is detected, but the alignment is not correct. This can happen
+    in crowded fields, and the alignment algorithm does not find the correct matching between the sources
+    detected in different frames. There are two tricks to overcome this issue. First, one could either decrease
+    the number of maximum sources allowed in the detection. However, this solution is not advisable for
+    mosaicing, because the number of reference sources in the overlapping regions could be too small. Second,
+    if the offsets are known to be small, the user can decrease value of the first search radius and set
+    the corresponding recipe parameter (**search_radii**) to, for example, 10.,4.,2.,0.8`. The first entry (10 in
+    this example) forces the matching algorithm to find offsets of at most 10 arcseconds. 
+  - Avoid source misidentification across exposures. To avoid to associate the wrong sources, one can specify the maximum
+    difference in magnitude or in fwhm between sources in different exposures. This can be done by setting the recipe 
+    parameters **threshold_on_mag** and **threshold_on_fwhm**, respectively. 
 
 
-- In case of complicated alignment, it might be advisable to specify **alignment** as reduction target when creating the
+Tipp: In case of complicated alignment, it might be advisable to specify **alignment** as reduction target when creating the
   datasets in the **Raw Data** tab. In this way the reduction
   stops at this step, without wasting resources to combine the exposures. After the correct recipe parameters set has
   been found, the full reduction cascade can be triggered.
+
+
 
 ---
 Go to MUSE EDPS tutorial [index](../muse/index)
