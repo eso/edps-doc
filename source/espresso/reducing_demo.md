@@ -25,7 +25,7 @@ Go to [top](#top)
 ```{include} ../common/reducing_demo_1.md
 ```
 
-c. Select the necessary pipeline workflow from the `Workflow` 
+d. Select the necessary pipeline workflow from the `Workflow` 
 pull-down menu (with a black background in the figure below):
 
 ```{figure} figures/select_workflow2a.jpg
@@ -94,7 +94,11 @@ Go to [top](#top)
 ```
 
 
+c. (Optional). Select the reduction target, configure the workflow parameter and specify the association preferences. 
+These steps are optional. For more information see [here](configure_dataset_.md).
 
+```{include} ../common/reducing_demo_3.md
+```
 ---
 Go to [top](#top)
 
@@ -116,6 +120,24 @@ It is defined in `$HOME/.edps/application.properties` in a
 parameter called `base_dir`. For example:
 
 		base_dir=/scratch/EDPS_data
+
+However, it is possible to save only the final products into a desired location. This can be achieved by exporting
+archieved data reduction: press the `Export` button in the `Archieved Data` tab
+(see [here](the-reduction-archive-tab.md), or consult the [Frequently Asked Questions](faq.md) ).
+
+To archieve a data reduction, press the button `Archive` in the `Reduction Queue` tab.
+
+Products are organized by `DATASET` (named as the first scientific exposure of the dataset), and `TIMESTAMP` (time of
+start of reduction)
+
+The final products saved in the specified directory are:
+
+- Final spectrum, obtained by combining several science exposures (if the combination task was performed). 
+  Its name is `SPECTRUM_COMBINED_` followed by the target name (as obtained from the header
+  keyword `OBS TARG NAME` of the first exposure)
+- Individual extracted spectra. Their name are SPECTRUM_ followed by the exposure identifier 
+  (header keyword `arcfile`). They are stored in the subdirectory `individual_exposures`.
+
 
 
 ---

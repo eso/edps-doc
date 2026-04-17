@@ -49,12 +49,9 @@ environment. It also accounts for changes in the instrument
 hardware when organizing the data through the so-called 
 "break points".
 
-A brief description of EDPS and its main concepts is available 
-[here](http://localhost:63342/EDPS_docs/build/edpsgui/intro.html#what_is_edps).
+For a more extensive documentation on the EDPS-GUI itself, consult the dedicated manual [here](../edpsgui/index).
 
-For more extensive documentation on the EDPS GUI itself, 
-please consult the dedicated 
-[EDPS manual](http://localhost:63342/EDPS_docs/build/edpsgui/index.html).
+For a brief description of EDPS and its main concepts, see [here](../edpsgui/intro.md/#what_is_edps).
 
 The ESPRESSO pipeline itself is described in detail in a 
 [pipeline manual](https://ftp.eso.org/pub/dfs/pipelines/instruments/espresso/espdr-pipeline-manual-3.3.12.pdf).
