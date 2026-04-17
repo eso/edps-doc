@@ -6,8 +6,6 @@
 ESPRESSO tutorial
 ================================
 
-
-
 .. toctree::
    :maxdepth: 2
 
@@ -17,3 +15,7 @@ ESPRESSO tutorial
    reduction_chain.md
    configure_reduction.md
    faq.md
+
+------------
+
+ESPRESSO Version 3.3.12 - 20251119
