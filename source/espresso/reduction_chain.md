@@ -74,10 +74,6 @@ task/sub-workflow to another during the data processing.
 
 The ESPRESSO reduction steps are:
 
-
----
-Go to [top](#top)
-
 ## 1. Detector-level manipulations
 
 The processing begins with the usual detector-related manipulations

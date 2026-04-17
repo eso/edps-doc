@@ -53,9 +53,9 @@ html_sidebars = {
      'efosc/**':[
         'globaltoc.html',  # Global Table of contents
         ],
- #   'espresso/**':[
- #       'globaltoc.html',  # Global Table of contents
- #       ],
+    'espresso/**':[
+        'globaltoc.html',  # Global Table of contents
+        ],
  #   'fors/**':[
  #       'globaltoc.html',  # Global Table of contents
  #       ],
