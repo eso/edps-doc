@@ -58,6 +58,7 @@ The final products saved in the specified directory are:
   `COMBINED_CUBE` and `IDP_COMBINED_CUBE`. Both products have the same data content. 
   The latter file has the needed metadata information for ingestion into the ESO archive.
 - A field-of-view image `COMBINED_IMAGE` and an exposure mask image `EXP_MASK` for each object.
+- Reconstructed cubes obtained from individual exposures (telluric corrected and not telluric corrected) are also saved in a subdirectory.
 
 ## 5. Quality plots
 

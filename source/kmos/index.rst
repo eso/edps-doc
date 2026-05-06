@@ -21,4 +21,4 @@ KMOS tutorial
 
 ------------
 
-KMOS Version 4.5.3 - 20251602
+KMOS Version 4.5.12 - 20260507

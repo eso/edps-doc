@@ -154,16 +154,17 @@ Go to [top](#configuration)
 
 ## Science reduction: object/sky association for sky subtraction <a name="object_sky"> </a>
 
-The workflow parameter `object_sky_association` allows to specify the path to an ASCII file that
+The recipe parameter `obj_sky_table` available in the task `object` allows to specify the path to an ASCII file that
 associates every object exposure with its corresponding sky, overriding the automatic association done by the
-recipe itself (which is applied with the default parameter value 'auto'. The suggested procedure for this is:
+recipe itself (which is applied with the default parameter value 'none'). The suggested procedure for this is:
 1. Run the workflow on only one data set.
 2. Locate the file obj_sky_table.txt produced by the **object** task (kmos_sci_red recipe). It is located in the same directory as the output products for the object task. This can be checked by clicking on the "Output files" tab in the "Quality reports" window.
 3. Copy it to a safe place and rename it in a way that makes it easy to associate it with the current dataset.
 4. Change it according to the needs (an example is provided below). Each time the file is edited, it should
 be saved with a new name, otherwise a new reduction will not be triggered.
-5. Enter the edited file name with its full path to the `object_sky_association` field.
-6. Reduce the data set again.
+5. For each dataset/configuration the file applies to, open the configuration editor and enter the full path in the 
+   `obj_sky_table` field (task `object`). Save as new configuration.
+6. Save as new configuration (or update existing) and start the reduction.
 
 The ASCII file that associates every object exposure with its corresponding sky looks like the following (the
 caption lines are not shown here, for sake of clarity).
@@ -205,7 +206,7 @@ Go to [top](#configuration)
 
 Task: **object_combination**. Recipe: **kmos_combine**.
 
-The different exposures for each object are combined. The behaviour of this task is controlled by the workflow parameter
+The different exposures for each object are combined. The behavior of this task is controlled by the workflow parameter
 `$combine_exposures`. Its values can be:
 - 'obs.targ.name': one job for each target name is created (default).
 - 'tpl.start': one job for each OB template execution is created.
@@ -214,10 +215,10 @@ If there are several observations in the data set then one job per target name i
 value. If an object was observed with different OB executions then all observations of this object are combined in
 the final data cube. With the second value, the combination is only done per observation, i.e., OB/template execution.
 
-The behaviour of the task can be controlled further with the workflow parameters `ifus`, `target_name`, and `offset_filename`.
-- `ifus`: the indices of the IFU arms to combine. E.g.: '1;2;5'. Default: 'all'.
-- `target_name`: the name of the object to combine (as in the header keyword OCS ARM NAME). Default: 'all'.
-- `offset_filename`: the path to the file with the shift vectors for the combination. 
+The behavior of the task can be controlled further with the recipe parameters `ifus`, `name`, `filename` (task **object_combination**).
+- `ifus`: the indices of the IFU arms to combine. E.g.: '1;2;5'. Default: 'UseNames'.
+- `name`: the name of the object to combine (as in the header keyword OCS ARM NAME). Default: 'All'.
+- `filename`: the path to the file with the shift vectors for the combination. 
    Only applicable if the recipe parameter `method` is set to 'user'.
 
 With the recipe parameter `method`, the shifts that are applied in the object combination can be controlled. 

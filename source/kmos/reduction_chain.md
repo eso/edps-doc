@@ -121,7 +121,7 @@ In this step, the science data are corrected for telluric absorption using the t
 
 ## Object combination
 
-Task: **object_combination_molecfit** or **object_combination**. Recipe: **kmos_combine**.
+Task: **object_combination**. Recipe: **kmos_combine**.
 
 The different exposures for each object are combined. The final products are:
 - One combined data cube for each object in the dataset, coming in two different formats as
