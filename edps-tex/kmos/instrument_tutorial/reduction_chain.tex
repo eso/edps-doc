@@ -1,0 +1,139 @@
+\section{The \instname\ data reduction flow.}
+\label{sec:reduction_flow}
+\input{../common/common_reduction_flow}
+
+
+
+\subsection{Process dark exposure}
+
+This step is carried out by the task **dark** using the pipeline recipe {\tt kmos\_dark}. 
+It produces a MASTER\_DARK and a BADPIXEL\_DARK frame. Per default, only the bad pixel map from this step
+is used in the reduction chain.
+
+\subsection{Create Master Flat}
+
+Task: {\bf lamp\_flat}. Recipe: {\tt kmos\_flat}. 
+
+This step uses exposures with the flat-field lamp to create a MASTER\_FLAT, files that describe the geometry 
+of the IFU slitlets on the detector (XCAL, YCAL, and SLIT\_EDGE), and a BADPIXEL\_FLAT frame.
+
+\subsection{Wavelength Calibration}
+
+Task: {\bf arc}. Recipe: {\tt kmos\_wave\_cal}. 
+
+This step uses exposures with the Argon and Neon arc lamps to create the wavelength calibration LCAL.
+A useful product for verifying the wavelength calibration is DET\_IMG\_WAVE which contains the wavelength-calibrated
+images of the input frames.
+
+\subsection{Illumination Correction}
+
+Task: {\bf illumination}. Recipe: {\tt kmos\_illumination}. 
+
+This step can be run on lamp-flat or sky-flat exposures. It creates
+for each IFU an image (product: ILLUM\_CORR) for correcting the
+sensitivity variation within the IFU. It is recommended to execute
+this step on lamp flats (which is the default workflow setup).
+
+This step can be customized by setting the workflow parameter
+`use\_sky\_flats` to 'false' (default, recommended) or 'true'.
+
+\subsection{Standard star}
+
+Task: {\bf standard}. Recipe: {\tt kmos\_std\_star}. 
+
+This step processes a telluric standard exposure and extracts a spectrum for each IFU that was used.
+Products:
+\begin{itemize}
+\item STAR\_SPEC: extracted spectrum
+\item  TELLURIC: normalized telluric spectrum
+\item  STD\_IMAGE: reconstructed IFU field-of-view image
+\item  STD\_MASK: mask for extracting the standard star.
+\end{itemize}
+
+The further usage of the products is controlled via the workflow parameter `molecfit` which can have the values:
+
+\begin{itemize}
+\item  'standard': Atmospheric features are modeled with the molecfit algorithm using the telluric standard as
+                reference. The results are used to construct the full atmospheric transmission to correct
+                science exposures. A static response curve is used to correct the relative instrumental 
+                efficiency with wavelength. The zeropoint computed on the observed telluric standard is used for
+                absolute spectrophotometric calibration.
+\item  'science': Atmospheric features are modeled with the molecfit algorithm using the scientific exposure itself
+                as reference. To be used only if the science exposure has a bright continuum that allows
+                a proper fit to the atmospheric features. A static response curve is used to correct the
+                relative instrumental efficiency with wavelength. The zeropoint computed
+                on the observed telluric standard is used for absolute spectrophotometric calibration.
+\item  'false': The observations of the telluric standard stars are compared with a model spectrum for that star.
+                This generates a combined correction that includes response curve and telluric features, which is then
+                used to correct scientific exposures.
+\end{itemize}
+
+\subsection{Response}
+
+This step involves either the task {\bf response} or the task {\bf telluric\_and\_response}. Both use the pipeline recipe
+{\tt kmos\_gen\_telluric}.
+
+If the workflow parameter `molecfit` is set to 'false', then the task **telluric\_and\_response** is used. 
+The telluric spectrum as calculated from the {\bf standard} task and the response are passed to the science reduction.
+For this other values of the workflow parameter, only the response is used.
+
+\subsection{Science reduction}
+
+Task: {\bf object}. Recipe: {\tt kmos\_sci\_red}.
+
+In this step, the basic data reduction of the science data is executed. The data from the IFUs are extracted, 
+calibrated, and reconstructed into data cubes. If the workflow parameter `molecfit` is set to 'false', then the 
+products are flux-calibrated and corrected for telluric absorption. Otherwise, the products are only
+flux-calibrated. The telluric correction is then executed in the following workflow steps.
+
+Main products:
+\begin{itemize}
+
+\item SCI\_RECONSTRUCTED: one file for each exposure that contains
+  IFUs on objects (no file for pure sky exposures). Each file has 24
+  extensions with data cubes.
+  
+\item SCI\_RECONSTRUCTED\_COLL: files with 24 extensions containing
+  the reconstructed field-of-view images for each IFU.
+
+\end{itemize}
+
+\subsection{Telluric model}
+
+This step either involves the tasks {\bf model\_on\_standard} and {\bf transmission\_on\_standard}
+or the tasks {\bf model\_on\_science} and {\bf transmission\_on\_science}. The tasks are encapsulated in the
+sub workflows telluric\_on\_standard and telluric\_on science, respectively.
+The pipeline recipes {\tt kmos\_molecfit\_model},  {\tt kmos\_molecfit\_calctrans} are used.
+
+If the workflow parameter `molecfit` is set to 'standard', then 
+the atmospheric model is fit to the extracted spectra from the {\bf reponse} task. 
+With the parameter set to `science`, the fit is executed on the science data themselves.
+In both cases, the actual transmission curve is calculated using the model and the information from the science data.
+
+\subsection{Telluric correction}
+
+Task: {\bf telluric\_correction}. Recipe: {\tt kmos\_molecfit\_correct}.
+
+In this step, the science data are corrected for telluric absorption using the transmission from the previous step.
+
+\subsection{Object combination}
+\label{sec:object_combination}
+Task: {\bf object\_combination}. Recipe: {\tt kmos\_combine}.
+
+The different exposures for each object are combined. The final products are:
+\begin{itemize}
+\item One combined data cube for each object in the dataset, coming in two different formats as
+  `COMBINED\_CUBE` and `IDP\_COMBINED\_CUBE`. Both products have the same data content. 
+  The latter file has the needed metadata information for ingestion into the ESO archive.
+\item A field-of-view image `COMBINED\_IMAGE` and an exposure mask image `EXP\_MASK` for each object.
+\end{itemize}
+
+\subsection{Cubes combination}
+\label{sec:cubes_combination}
+Task: {\bf cubes\_combination}. Recipe: {\tt kmos\_combine}.
+
+If data have already been processed with the previous reduction then the resulting cubes can be combined
+for each object. This is useful for combining observations of the same targets which have been measured
+using different Observation Blocks.
+
+

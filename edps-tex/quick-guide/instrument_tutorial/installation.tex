@@ -1,0 +1,70 @@
+\section{Installation}
+\label{sec:installation}
+
+\subsection{Prerequisites}
+
+The software prerequisites to install \edps, \edpsgui\ and all the needed components are:
+
+\begin{itemize}
+\item Recent Firefox or Chrome browser, Python 3.11 or higher (but there are issues with Python 3.14).
+
+\item At least one ESO pipeline with EDPS workflow should be in your
+  system. To install the desired ESO pipelines, follow the
+  instructions in the \href{http://eso.org/pipelines}{ESO pipelines
+    pages}. NOTE: the `apptainer` installation method is currently not
+  supported. After the installation, the `esorex` command must be in
+  the path. To test whether the installation was successful, type
+
+\begin{verbatim}
+  esorex --recipes 
+\end{verbatim}
+
+A list of available recipes should appear.
+
+\item Install \href{https://graphviz.org/}{graphviz},
+  \href{https://heasarc.gsfc.nasa.gov/docs/software/ftools/fv/fv.html.5.0}{fv},
+  and
+  \href{https://sites.google.com/cfa.harvard.edu/saoimageds9/download}{ds9},
+  which have to be included in the system path (definying aliases not
+  enough). Graphviz can be easily installed via:
+
+\begin{verbatim}
+  sudo apt install graphviz (Debian, Ubuntu)
+  sudo dnf install graphviz (Fedora)
+\end{verbatim}
+
+fv and ds9, are optional. To install them, follow the instructions in corresponding webpages.
+   You can test whether these three packages are installed and their path are correctly set by typing on a terminal:
+
+\begin{verbatim}
+  dot -V
+  fv  -version
+  ds9 -version
+\end{verbatim}
+\end{itemize}
+
+\subsection{Installation steps}
+
+To install \edps\ follow these steps:
+
+\begin{itemize}
+
+\item Create a new Python virtual environment and activate it:
+
+\begin{verbatim}
+  python3 -m venv edpsgui
+  . edpsgui/bin/activate
+\end{verbatim}
+
+   Make sure the python3 version is 3.11 or higher, but not 3.14. 
+
+\item Install the required packages:
+
+\begin{verbatim}
+  pip install --extra-index-url  \
+     https://ftp.eso.org/pub/dfs/pipelines/repositories/stable/src \
+     edps edpsgui edpsplot adari_core 
+\end{verbatim}
+
+\end{itemize}
+

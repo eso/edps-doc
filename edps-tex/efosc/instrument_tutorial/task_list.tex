@@ -1,0 +1,32 @@
+\section{List of workflow tasks}
+
+This is the list of all the tasks and associated recipes in the
+\instname\ workflow.
+Note that the task {\bf photometric\_standard} is not directly associated to the process of science observations.
+
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\begin{tabular}{|l|l|c|p{7cm}|}
+\hline
+\textbf{TASK} & \textbf{RECIPE} & \textbf{Used in workflow} & \textbf{Notes} \\
+\hline
+bias                        & efosc\_bias           & both & Creates MASTER\_BIAS \\
+\hline
+photometric\_standard       & efosc\_zeropoint      & imaging & Computes photometric zeropoint and processes standard star \\
+\hline
+science\_imaging            & efosc\_img\_science   & imaging & Reduces raw images \\
+\hline
+science\_spectrum           & efosc\_science        & spectroscopy & Reduces raw spectra (long-slit and MOS) \\
+\hline
+sky\_flat                   & efosc\_img\_sky\_flat & imaging & Reduces sky flats \\
+\hline
+spectroscopic\_calibrations & efosc\_calib          & spectroscopy & Process spectroscopic calibrations (flats and arcs) \\
+\hline
+spectroscopic\_standard     & efosc\_science        & spectroscopy & Reduces raw standard stars \\
+\hline
+\end{tabular}
+\caption{EFOSC tasks and associated recipes.}
+\label{tab:efosc_tasks}
+\end{table}

@@ -1,0 +1,246 @@
+\section{The \instname\ data reduction flow.}
+\label{sec:reduction_flow}
+\input{../common/common_reduction_flow}
+
+
+\subsection{Generate Master Bias}
+This step is carried in the task {\bf bias}, which runs the recipe  {\tt xsh\_mbias}.
+
+Produces a master bias for UVB/VIS arms. NIR frames do not use bias frames.
+
+\bigskip
+{\bf Customization}
+\bigskip
+
+Recipe parameters:
+\begin{itemize}
+\item Choose stacking method (average, median) with {\tt stack-method}.
+\item Adjust sigma-clipping with {\tt klow} and {\tt khigh}.
+\end{itemize}
+
+\subsection{Generate Master Dark}
+This step is carried in the task {\bf dark}, which runs the recipe  {\tt xsh\_mdark}.
+
+Produces a master dark.
+Optional for UVB/VIS (dark current negligible).
+For NIR it is only needed for stare observations; 
+generally not used in nodding/offset where ON--OFF subtraction removes the dark. 
+
+\bigskip
+{\bf Customization}
+\bigskip
+
+Recipe parameters:
+\begin{itemize}
+\item Enable the use of darks for UVB/VIS data reduction with {\tt use\_optical\_dark}.
+\item Change {\tt stack-method} and {\tt klow} / {\tt khigh} thresholds to adjust stacking behaviour, e.g. for better cosmic-ray rejection.
+\end{itemize}
+
+\subsection{Fit Orders}
+
+Computes initial guesses for the wavelength solution and order positions.
+Performed in two steps, described hereafter.
+
+\subsubsection{Instrument Model Prediction}
+
+Recipe: {\tt xsh\_predict}
+
+Uses the instrument physical model and information about 
+ambient conditions during the observations 
+(e.g. atmospheric  pressure, temperature, instrument setting)
+to predict line positions and a first dispersion solution.
+
+\bigskip
+{\bf Customization}
+\bigskip
+
+Workflow parameters:
+\begin{itemize}
+\item Select between physical-model (recommended) and polynomial mode. 
+See {\tt configure\_reduction.md} for more information.
+\end{itemize}
+
+\subsubsection{Order Tracing (Determining Order Geometry)}
+
+Recipe: {\tt xsh\_orderpos}
+
+Uses pinhole order-definition frames (ORDERDEF\_*) 
+to trace the location and curvature of each echelle order on the detector. 
+Produces order tables that later help rectification and wavelength calibration.
+
+\bigskip
+{\bf Customization}
+\bigskip
+
+Recipe parameters:
+\begin{itemize}
+\item Tuning of detection thresholds can help when continuum levels are low or orders are partially vignetted.
+\end{itemize}
+
+\subsection{Generate Master Flat}
+
+Recipe: {\tt xsh\_mflat}
+
+Produces a master flat,
+refined version of the table from {\tt xsh\_orderpos}
+and a bad pixel map for each arm. 
+The flat defines the detector response and 
+updates the true geometry of the orders from slit illumination.
+For IFU flat fields the edges of the slices are traced.
+
+\bigskip
+{\bf Customization}
+\bigskip
+
+Recipe parameters:
+\begin{itemize}
+\item Adjust bad-pixel handling (via {\tt decode-bp}) if master flats saturate or raise quality control errors.
+\item Change {\tt stack-method} and {\tt klow} / {\tt khigh} thresholds to adjust stacking behaviour, e.g. for better cosmic-ray rejection.
+\end{itemize}
+
+\subsection{Wavelength Calibration}
+
+The wavelength calibration creates the wavelength and spatial resampling solutions 
+and computes the arc-line tilts and instrumental resolution.
+It is done in two steps:
+
+\subsubsection{2D Mapping}
+
+Recipe: {\tt xsh\_2dmap}
+
+Determines the two-dimensional wavelength solution needed to resample the orders.
+Creates {\tt WAVE\_TAB\_2D\_ARM}, 
+which provides a full mapping from detector coordinates to wavelength+slit coordinates, 
+and {\tt SPECTRAL\_FORMAT\_TAB\_ARM},
+which defines, for each order, the wavelength range, pixel boundaries, predicted order edge traces,
+and spatial-to-spectral coordinate conversion.
+
+\bigskip
+{\bf Customization}
+\bigskip
+
+Workflow parameters:
+\begin{itemize}
+\item Select between physical-model (recommended) and polynomial mode.
+\end{itemize}
+
+Recipe parameters:
+\begin{itemize}
+\item Adjust line-detection thresholds for weak arcs via {\tt detectarclines-fit-win-hsize} and {\tt detectarclines-search-win-hsize}. 
+These parameters have to be small enough not to include a doublet but large
+enough to be able to detect and fit the line.
+\end{itemize}
+
+\subsubsection{Wavelength Calibration}
+
+Recipe: {\tt xsh\_wavecal}
+
+Computes arc lines tilt and resolving power.
+
+\bigskip
+{\bf Customization}
+\bigskip
+
+Workflow parameters:
+\begin{itemize}
+\item Select between physical-model (recommended) and polynomial mode.
+\end{itemize}
+
+\subsection{Flexure Compensation}
+
+Recipe: {\tt xsh\_flexcomp}
+
+Refines the wavelength solution to account for flexure, 
+especially when arcs are not taken at the same rotator angle as science.
+
+\bigskip
+{\bf Customization}
+\bigskip
+
+Workflow parameters:
+\begin{itemize}
+\item Select between physical-model (recommended) and polynomial mode.
+\end{itemize}
+
+\subsection{Flat Strategy}
+
+This allows the user to choose between two strategies 
+to select a flat field for the flux calibrator.
+The default strategy is to use the same flat as for the science observation.
+The alternative is to use the flat field selected by the rules, 
+i.e., those taken closest in time to the flux calibrator.
+
+\bigskip
+{\bf Customization}
+\bigskip
+
+Workflow parameters:
+\begin{itemize}
+\item By default, the {\tt use\_flat} parameter is set to {\tt science}, 
+meaning the flats used for science frames are also applied to standard stars.
+Set it to {\tt standard} to use the flats taken closest in time 
+to the standard-star observations.
+\end{itemize}
+
+\subsection{Instrument Response and Efficiency}
+
+Recipes: {\tt xsh\_respon\_slit\_stare}, {\tt xsh\_respon\_slit\_offset} and {\tt xsh\_respon\_slit\_nod}
+
+Use standard stars to derive the per-order and merged instrument response 
+(mapping detector counts to physical flux),
+the blaze correction and the telescope + instrument + detector efficiency.
+Used for flux calibration of science exposures. 
+The pipeline does not create response curves for IFU data, and they are therefore
+not flux-calibrated.
+
+\subsection{Science Reduction SLIT}
+
+Recipes: {\tt xsh\_scired\_slit\_stare}, {\tt xsh\_scired\_slit\_offset} and {\tt xsh\_scired\_slit\_nod}
+
+Perform the data reduction: 
+\begin{itemize}
+\item Prepare the science frame (bias/dark/inter-order background correction, flat-fielding).
+\item Rectify orders using the model and wavelength solution.
+\item Perform sky subtraction (mode-dependent).
+\item Localize the object and extract {\tt ORDER1D} and {\tt MERGE1D} products.
+\end{itemize}
+
+When several exposures are fed together, 
+the recipes stack them (mean/median) before extraction, 
+and you get one combined 2D and 1D spectrum per run, not one per exposure.
+To obtain one spectrum per exposure (or per AB pair in nodding), 
+you must run {\tt xsh\_scired\_slit\_*} separately on each exposure or nod pair.
+
+\bigskip
+{\bf Customization}
+\bigskip
+
+Workflow parameters:
+\begin{itemize}
+\item By default, {\tt telluric\_correction\_mode}={\tt standard} derives 
+the atmospheric parameters from the telluric standard.
+Set it to {\tt science} to derive them directly from the science frame, 
+or to {\tt none} to disable telluric correction.
+\item Select between physical-model (recommended) and polynomial mode.
+\end{itemize}
+
+Recipe parameters:
+\begin{itemize}
+\item Change {\tt stack-method} and {\tt klow} / {\tt khigh} thresholds to adjust stacking behaviour.
+\item Sky modelling: 
+Use {\tt sky-method} to select the method. 
+In the NIR, {\tt BSPLINE2} provides the best residuals,
+{\tt BSPLINE1} is faster and acceptable for UVB/VIS, 
+and {\tt MEDIAN} is the fatest but may leave residuals.
+\item Sky region selection:
+use parameters {\tt sky-position1}, {\tt sky-hheight1}, {\tt sky-position2}, and {\tt sky-hheight2} to manually select sky zones.
+Required when object not centered, multiple objects on slit, or strong NIR gradient.
+\item Spectroscopic extraction:
+Standard extraction 
+({\tt localize-method}={\tt MANUAL})
+recommended for faint sources.
+Automatic detection
+({\tt localize-method}={\tt AUTO})
+is usually fine for bright sources.
+\end{itemize}
+

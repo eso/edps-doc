@@ -1,0 +1,84 @@
+\section{The \instname\ data reduction flow.}
+\label{sec:reduction_flow}
+\input{../common/common_reduction_flow}
+
+\subsection{Imaging workflow}
+\subsubsection{Bias}
+
+The task {\bf bias} reduces bias frames and generates a master bias
+calibration. Typically, default parameters give satisfactory results.
+
+
+\subsubsection{Sky flat}
+The task {\bf bias} reduces sky flats and generates a master flat
+field calibration. Typically, default parameters give satisfactory
+results.  If the field does not contain bright stars, it might be
+advisable to set to the 'stack\_method' to 'mean' fron the
+configuration editor (Section \ref{sec:configuration_editor}).
+
+\subsubsection{Photometric Standard}
+
+The task {\bf photometric\_standard} runs the recipe {\tt
+  efosc\_zeropoint} to process observations of standard stars and
+compute the photometric zeropoint and exinction coefficient. The
+recipe runs sextractor to identify objects and perform aperture
+photometry. Typically, default recipe parameters deliver good
+results. Standard stars are used to determine the zeropoint only for
+filters “U\#640” (using catalogue from Landolt 1992, 2007), and filters
+“B\#639”, “V\#641”, “R\#642”, “i\#705” (using catalogs from Stetson 2000).
+
+This extinction coefficient may not be the correct one for a given
+night. In such a case the zeropoint will reflect the mismatch of the
+extinction. If the airmass differs between the observations of the
+standard star and that of the science the mismatch will not be fully
+corrected by the zeropoint. Please refer to the EFOSC2 pipeline user
+manual (Izzo et al. 2016: Sections 9 and 10) for the details of this
+recipe and the extraction algorithms employed.
+
+Note that the results of this task are not used to calibrate the
+scientific exposure.
+
+
+\subsubsection{Science image}
+
+The task {\bf science\_imaging} runs the recipe {\bf
+  efosc\_img\_science} to reduce the raw image, and compiles a
+catalogue of extracted sources using sextractor.
+
+If zeropoint and exinction coefficient determined from the standard
+star have to be applied, they have to be applied outside the workflow, as the feature is not yet supported by the pipeline.
+
+
+\subsection{Spectroscopic workflow}
+
+
+\subsubsection{Bias}
+
+The task {\bf bias} reduces bias frames and generate a master bias
+calibration. Typically, default parameters give satisfactory results.
+
+
+\subsubsection{Spectroscopic calibrations}
+
+The task {\bf Spectroscopic\ calibrations} runs the recipe {\tt
+  efosc\_calib} to process arc lamps and flat fiels to determine the
+wavelength calibration, spectral distortion, and the flat fielding of
+spectroscopic calibrations. All spectroscopic modes are supported.
+Typically, default parameters give satisfactory results.
+
+\subsubsection{Spectroscopic standard}
+
+The task {\bf spectroscopic\_standard} runs the recipe {\tt
+  efosc\_science} on the standar stars and produces a response curve,
+which will subsequently be used to flux-calibrate the science
+observation. Typically, default recipe parameters deliver good
+results.
+
+\subsubsection{Science spectrum}
+
+The task {\bf Science spectrum} reduces scinetific spectroscopic
+observations for all spectroscopic modes. The \instname\ workflow will
+flux-calibrate the science observation using the instrument response
+curve derived from the standard star observation if it exists in the
+current DataSet. If no standard star observation exists in the current
+DataSet, then the science observation will not be flux-calibrated.

@@ -1,0 +1,118 @@
+\documentclass[pdftex,a4paper,twoside,11pt]{article}
+\NeedsTeXFormat{LaTeX2e}
+% check whether we are running pdflatex
+\usepackage[dvips]{graphicx}
+\usepackage{picinpar}
+\usepackage{float}
+\usepackage{graphics}
+\usepackage{varioref}
+\usepackage{natbib}
+\usepackage{afterpage}
+\usepackage[shortlabels]{enumitem}
+%\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\definecolor{red}{rgb}{1,0,0}
+\definecolor{green}{rgb}{0,1,0}
+\definecolor{orange}{rgb}{1,0.5,0}
+
+\newcommand{\black}[1]{\color{black}{#1}\color{black}\ }
+\newcommand{\yellow}[1]{\color{yellow}{#1}\color{black}\ }
+\newcommand{\orange}[1]{\color{orange}{#1}\color{black}\ }
+\newcommand{\red}[1]{\color{red}{#1}\color{black}\ }
+
+%\newcommand{\green}[1]{\color{green}{#1}\color{black}\ }
+
+  %include hyperref for pdf
+\usepackage[pdftex,colorlinks=true,
+                     pdfstartview=FitV,
+                     linkcolor=darkblue,
+                     citecolor=darkblue,
+                     urlcolor=darkblue,
+                     plainpages=false,
+                     pdfpagelabels,
+                     linktocpage,
+                     backref,pagebackref]{hyperref}
+%  \usepackage{thumbpdf}
+%  \pdfinfo{%
+%     /Title      (Reflex XShooter Tutorial)
+%     /Author     (Daniel Bramich, Sabine Moehler)
+%     /Keywords   (ESO Manual)
+  %  }
+
+\def\author{Lodovico Coccato}
+\def\pdftitle{EDPS-GUI manual}
+\def\releasedateedpstutorial{May 16 2026}
+\def\issue{1}
+\def\rev{rev. 20260516}
+\hypersetup{
+pdfpagemode = {None}, 
+pdftitle = {\pdftitle},
+pdfauthor = {\author},
+%pdfsubject= {Reflex HARPS Tutorial, Internal Release, Confidential, Not for public release}
+pdfsubject= {pdftitle}
+}
+\input{layout}
+\input{shortcut}
+
+%% Remember to update shortcut.tex
+\def\reldate{\releasedateedpstutorial}
+\def\pipeno{\pipelinevers}
+\def\kitno{\pipeno}
+\def\docno{\pipelinemanualvers}
+\def\qfitsno{\qfitsvers}
+\def\cplno{\cplvers}
+\def\esorexno{\esorexvers}
+\def\reflexno{\reflexvers}
+\def\gasganono{\gasganovers}
+\def\jdkno{\jdkvers}
+\def\dmdissue{1}
+\def\reflexinteract{}
+
+
+\dmdTitle{\pdftitle}
+\dmdIssue{\issue}
+\dmdDocId{\issue\ \rev}
+\dmdDate{\releasedateedpstutorial}
+
+\dmdPreparedBy{\author}
+\dmdPreparedOn{\releasedateedpstutorial}
+\dmdApprovedBy{}
+%\dmdApprovedBy{Not Yet: For Internal Use Only}
+\dmdApprovedOn{}
+\dmdReleasedBy{}
+%\dmdReleasedBy{Not Yet: For Internal Use Only}
+\dmdReleasedOn{}
+
+
+\setlongtables
+\makeindex
+\renewcommand{\thefigure}{\arabic{figure}}
+
+\begin{document}
+\pagenumbering{arabic}
+\dmdmaketitle
+\emptypage{This page was intentionally left blank}
+\begin{center}
+  \textbf{Change record}
+
+  \tablehead{\hline
+    \multicolumn{1}{|c|}{Issue/Rev.}\tbspa &
+    \multicolumn{1}{|c|}{Date} &
+    \multicolumn{1}{|c|}{Section/Parag.\ affected} &
+    \multicolumn{1}{|c|}{Reason/Initiation/Documents/Remarks}\tbspb \\
+    \hline}
+  \tabletail{\hline}
+
+  \begin{supertabular}{|l|l|l|l|}
+    %0.1.0\tbspa & 18/06/2018   & all & First internal release \\
+    1 \tbspa & 15/05/2026   & all & First public release for \pipelinevers  \\
+  \end{supertabular}
+\end{center}
+\emptypage{This page was intentionally left blank}
+
+\tableofcontents
+\cleardoublepage
+\input{intro}  %1
+\input{gui}
+\end{document}

@@ -1,0 +1,40 @@
+
+\section{Reducing demo data}
+\label{sec:reducing_demo_data}
+
+\input{../common/common_reducing_demo_data}
+
+ 
+\subsubsection{Quality plots}
+\input{../common/quality_plots}
+
+\subsection{Exporting the final products}
+\label{sec:export_final_products}
+
+
+\input{../common/common_export}
+ 
+ 
+Exported products are organized by `DATASET` (named as the first
+scientific exposure of the dataset), and `TIMESTAMP` (time of start of
+reduction)
+
+The final products saved in the specified directory are: 
+
+
+
+\begin{itemize}
+
+ \item One combined data cube for each object in the dataset, coming
+   in two different formats as `COMBINED\_CUBE` and
+   `IDP\_COMBINED\_CUBE`. Both products have the same data content.
+   The latter file has the needed metadata information for ingestion
+   into the ESO archive.
+
+ \item A field-of-view image `COMBINED\_IMAGE` and an exposure mask
+   image `EXP\_MASK` for each object.
+
+
+\end{itemize}
+
+Individual reconstructed cubes that contributed to each combined cube (telluric corrected or not) are saved in sub-directories.

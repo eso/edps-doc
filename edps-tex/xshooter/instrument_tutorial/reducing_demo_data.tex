@@ -1,0 +1,42 @@
+
+\section{Reducing demo data}
+\label{sec:reducing_demo_data}
+
+\input{../common/common_reducing_demo_data}
+
+ 
+\subsubsection{Quality plots}
+\input{../common/quality_plots}
+
+\subsection{Exporting the final products}
+\label{sec:export_final_products}
+
+
+\input{../common/common_export}
+ 
+ 
+Exported products are organized by `DATASET` (named as the first
+scientific exposure of the dataset), and `TIMESTAMP` (time of start of
+reduction)
+
+The final products saved in the specified directory are: 
+
+\begin{itemize}
+
+\item The 1D spectrum, telluric corrected, obtained from the
+  combination of individual exposures. Its name format is:
+  SPECTRUM\_COMBINED\_<target\_name>, where target name is read from
+  the header.
+
+\item The individual 1D spectra prior to combination (either telluric
+  corrected or not). They are in a subdirectory of the combined
+  spectrum they refer to their name formats are
+  SPECTRUM\_<arm>\_<arcfile> or SPECTRUM\_TELLCORR\_<arm>\_<arcfile>
+  if telluric corrected. The values of arm (UVB, VIS, NIR) and arcfile
+  (the file name of the raw science exposure) are read from the file
+  header.
+
+\item The datacubes obtained from individual exposures for IFU
+  observations. Its name format is: DATACUBE\_<arm>\_<arcfile>.
+
+\end{itemize}

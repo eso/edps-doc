@@ -1,0 +1,36 @@
+
+\section{Reducing demo data}
+\label{sec:reducing_demo_data}
+
+In this Section we show how to reduce EFOSC demo data with the generic
+{\tt efos.efosc\_wkf} workflow. The same procedure applies for imaging
+data and spectroscopic datasets. More details on the individual
+instrument modes will be given in Sections \ref{sec:efosc_imaging} and
+\ref{sec:efos_spectroscopy}, respectively.
+
+\input{../common/common_reducing_demo_data}
+
+ 
+\subsubsection{Quality plots}
+\input{../common/quality_plots}
+
+\subsection{Exporting the final products}
+\label{sec:export_final_products}
+
+
+\input{../common/common_export}
+ 
+ 
+Exported products are organized by `DATASET` (named as the first
+scientific exposure of the dataset), and `TIMESTAMP` (time of start of
+reduction)
+
+The final products saved in the specified directory are: 
+
+
+\begin{itemize}
+\item IMAGE\_{\tt arcfile}. Reduce image corresponding to the exposure specified by the {\tt arcfile} keyword, imaging workflow only.
+\item  CATALOG\_{\tt arcfile}. Catalogue of detected sources in IMAGE\_{\tt arcfile}, imaging worlflow only.
+\item SPECTRUM\_MOS\_{\tt arcfile}. Reduced spectra extracted from the exposure specified by  the {\tt arcfile} keyword, spectroscopic workflow only.
+\end{itemize}
+

@@ -1,0 +1,39 @@
+\section{Reducing demo data}
+\label{sec:muse_reducing_demo_data}
+\input{reducing_demo_data_common}
+
+\section{Final products}
+
+By default, \edps\ saves all the recipe products for all the
+executions in the directory specified a the first execution (default:
+\$HOME/EDPS\_data).  However, it is possible to save only the final
+products into a desired location. This can be achieved by exporting
+archieved data reduction: press the `Export` button in the `Archieved
+Data` tab (see \verb|[here](the-reduction-archive-tab.md), or consult the [Frequently Asked Questions](faq.md) |).
+
+To archieve a data reduction, press the button `Archive` in the
+`Reduction Queue` tab.
+
+Products are organized by {\tt DATASET} (named as the first scientific
+exposure of the dataset), and {\tt TIMESTAMP} (time of start of
+reduction)
+
+The final products saved in the specified directory are:
+
+\begin{itemize}
+\item Datacubes and reconstructed images of mosaics, when combination of multiple exposures has been perfomed. Their name
+  format are
+  {\tt DATACUBE\_COMBINED\_} and {\tt IMAGE\_COMBINED\_} followed by the target name (as obtained from the header
+  keyword {\tt OBS TARG NAME} of the first exposure)
+\item Datacubes and reconstructed images of individual exposures. Their name format are
+  {\tt DATACUBE\_} and {\tt IMAGE\_} followed by the exposure identifier (header keyword {\tt ARCFILE}).
+  They are stored in the subdirectory `individual\_exposures`
+
+\end{itemize}
+Additionally, if specified by the reduction target, also products
+of sky exposures (treated as regular science exposures) are saved. They product names have the same convention as
+regular science exposures.
+
+\section{Quality plots}
+\input{quality_plots}
+

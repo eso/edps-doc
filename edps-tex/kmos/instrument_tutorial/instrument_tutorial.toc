@@ -1,0 +1,45 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Introduction}{7}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Scope}{7}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}What is {\tt EDPS}?}{7}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Main concepts}{7}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Installation}{8}{subsection.1.4}%
+\contentsline {subsubsection}{\numberline {1.4.1}Prerequisites}{8}{subsubsection.1.4.1}%
+\contentsline {subsubsection}{\numberline {1.4.2}Installation steps}{9}{subsubsection.1.4.2}%
+\contentsline {section}{\numberline {2}Reducing demo data}{10}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Setting the workflow}{10}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Selecting the input data}{11}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Start the reduction}{11}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Quality plots}{12}{subsubsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.4}Exporting the final products}{14}{subsection.2.4}%
+\contentsline {section}{\numberline {3}The KMOS\ data reduction flow.}{17}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Process dark exposure}{17}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Create Master Flat}{17}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Wavelength Calibration}{17}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Illumination Correction}{17}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Standard star}{19}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Response}{19}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Science reduction}{20}{subsection.3.7}%
+\contentsline {subsection}{\numberline {3.8}Telluric model}{20}{subsection.3.8}%
+\contentsline {subsection}{\numberline {3.9}Telluric correction}{20}{subsection.3.9}%
+\contentsline {subsection}{\numberline {3.10}Object combination}{20}{subsection.3.10}%
+\contentsline {subsection}{\numberline {3.11}Cubes combination}{21}{subsection.3.11}%
+\contentsline {section}{\numberline {4}Overview of all the data reduction configuration options}{22}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Selection of most appropriate calibrations}{22}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Configuration of parameters: the configuration editor}{22}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Wavelength calibration}{24}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Illumination correction}{26}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Science reduction}{26}{subsection.4.5}%
+\contentsline {subsubsection}{\numberline {4.5.1}Science reduction: grouping of input data}{26}{subsubsection.4.5.1}%
+\contentsline {subsubsection}{\numberline {4.5.2}Science reduction: level correction}{26}{subsubsection.4.5.2}%
+\contentsline {subsubsection}{\numberline {4.5.3}Science reduction: optimizing sky removal with recipe parameters}{27}{subsubsection.4.5.3}%
+\contentsline {subsubsection}{\numberline {4.5.4}Science reduction: object/sky association for sky subtraction}{28}{subsubsection.4.5.4}%
+\contentsline {subsection}{\numberline {4.6}Object combination}{29}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}Combination of pre-reduced cubes}{30}{subsection.4.7}%
+\contentsline {subsection}{\numberline {4.8}Telluric correction}{30}{subsection.4.8}%
+\contentsline {subsubsection}{\numberline {4.8.1}Using a telluric model from a standard star observation}{31}{subsubsection.4.8.1}%
+\contentsline {subsubsection}{\numberline {4.8.2}Using a telluric model from a science observation}{31}{subsubsection.4.8.2}%
+\contentsline {subsubsection}{\numberline {4.8.3}Improving the telluric model}{32}{subsubsection.4.8.3}%
+\contentsline {subsubsection}{\numberline {4.8.4}Computation of atmospheric transmission: running calctrans}{34}{subsubsection.4.8.4}%
+\contentsline {section}{\numberline {5}List of workflow tasks}{35}{section.5}%
+\contentsline {section}{\numberline {6}Frequently Asked Questions}{36}{section.6}%

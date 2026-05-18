@@ -1,0 +1,50 @@
+\section{List of workflow tasks}
+
+This is the list of all the tasks and associated recipes in the \instname\
+workflow.  Only some of them are needed for scientific reduction, they
+are indicated by the flag "yes" (triggered by default) or "optional"
+(triggered only if requested by a workflow parameter). Other tasks are
+not used for scientific reduction (they are indicated by the flag
+"no"), they are mainly used for instrument monitoring and they can be
+executed only by specifying them as target. Note that, when a task is
+specified as target, all the tasks that generate the calibrations
+needed for it are automatically executed.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\begin{tabular}{|l|l|c|p{7cm}|}
+\hline
+\textbf{TASK} & \textbf{RECIPE} & \textbf{Used in science reduction} & \textbf{Notes} \\
+\hline 
+alignment                          & muse\_alignment     & yes      & Aligns a set of exposures for combination using source list. \\
+alignment\_sky                     & muse\_alignment     & no       & Aligns a set of sky exposures for combination using source list. \\
+astrometry                         & muse\_astrometry    & no       & Computes astrometry. \\
+autocalibration\_from\_object\_sky & none                & no       & Selects sky exposures for additional slice-to-slice flat fielding. \\
+bias                               & muse\_bias          & yes      & Computes the master bias. \\
+dark                               & muse\_dark          & optional & Computes the master dark. \\
+geometry                           & muse\_geometry      & optional & Generates geometry calibrations. \\
+lamp\_flat                         & muse\_flat          & yes      & Computes master flat field. \\
+line\_spread\_function\_arc        & muse\_lsf           & yes      & Computes LSF from arc exposures. \\
+line\_spread\_function\_lsf        & muse\_lsf           & optional & Computes LSF from dedicated calibrations. \\
+linearity\_and\_gain               & muse\_lingain       & no       & Computes linearity and gain correction. \\
+object                             & muse\_scipost       & yes      & Creates a datacube from individual scientific observations. \\
+object\_combination                & muse\_exp\_combine  & yes      & Creates a datacube from combined scientific observations. \\
+object\_sky                        & muse\_scipost       & no       & Processes sky exposures as they were science exposures. \\
+preprocess\_astrometry             & muse\_scibasic      & optional & Reduces astrometric calibrations. \\
+preprocess\_science                & muse\_scibasic      & yes      & Reduces science exposures. \\
+preprocess\_sky                    & muse\_scibasic      & yes      & Reduces sky exposures. \\
+preprocess\_sky\_sci               & muse\_scibasic      & no       & Reduces sky exposures as they were science exposures. \\
+preprocess\_standard               & muse\_scibasic      & yes      & Reduces standard star observations. \\
+response                           & muse\_standard      & yes      & Computes the response function and atmospheric transmission. \\
+sky                                & muse\_create\_sky   & yes      & Computes the sky background from dedicated sky exposures. \\
+sky\_combination                   & muse\_exp\_combine  & no       & Combines sky frames as they were science exposures. \\
+sky\_flat                          & muse\_twilight      & optional & Processes sky flats for illumination correction. \\
+source\_detection                  & muse\_detection     & yes      & Detects sources in the datacube and creates a source catalog. \\
+source\_detection\_sky             & muse\_detection     & no       & Detects sources in the datacube of sky exposure and creates a source catalog. \\
+throughput                         & muse\_ampl          & no       & Computes the throughput. \\
+wavelength                         & muse\_wavecal       & yes      & Computes wavelength calibration. \\
+\hline
+\end{tabular}
+\caption{\instname\ pipeline tasks overview}
+\end{table}

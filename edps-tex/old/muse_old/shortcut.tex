@@ -1,0 +1,89 @@
+%% $Id: shortcut.tex,v 1.34 2013-10-21 16:52:03 amodigli Exp $
+%% Abbreviations and extra command definitions
+%%
+
+%%
+%% Additional commands
+%%
+\newcommand{\cm}[1]{\marginpar{\scriptsize #1}}
+
+\newcommand{\tbspa}{\rule[1ex]{0pt}{1.1ex}}
+\newcommand{\tbspb}{\rule[-1.0ex]{0pt}{1.0ex}}
+\newcommand{\instname}{MUSE}
+\newcommand{\pipename}{muse}
+
+
+
+%%
+%% Abbreviations
+%%
+
+\newcommand{\eg}{{e.g.~}}
+\newcommand{\ie}{{i.e.~}}
+
+\newcommand{\degr}{\hbox{$^\circ$}}
+\newcommand{\arcmin}{\hbox{$^\prime$}}
+\newcommand{\arcsec}{\hbox{$^{\prime\prime}$}}
+
+\newcommand{\CPL}{\textit{Common Pipeline Library}}
+
+\newcommand{\tcen}{\raisebox{-7pt}[7pt][0pt]}
+\newcommand{\http}[1]{\href{http://#1}{\textit{http://#1}}}
+\newcommand{\wkffilename}{muse\_wkf.py}
+
+\newcommand{\reflex}{{\tt esoreflex}}
+\newcommand{\Reflex}{{\tt Esoreflex}}
+\newcommand{\edps}{{\tt EDPS}}
+\newcommand{\edpsgui}{{\tt edps-gui}}
+\newcommand{\wkfn}{{\tt muse.muse\_wkf}}
+\newcommand{\wkfname}{{\tt muse.muse\_wkf}}
+%\newcommand{\instname}{ESPRESSO}
+%%
+%% Dependencies
+%%
+\newcommand{\releasedate}{May 15 2026}
+\newcommand{\releaseday}{2026-05-15}
+\newcommand{\releasetime}{15/05/2026}
+\newcommand{\pipelinevers}{2.10.6}
+\newcommand{\pipelinemanualvers}{\pipelinevers}
+\newcommand{\tutovers}{\pipelinevers}
+
+\newcommand{\cplvers}{7.1.3}
+\newcommand{\cfitsiovers}{3450}
+\newcommand{\gslvers}{2.1}
+\newcommand{\esorexvers}{3.13.3}
+\newcommand{\gasganovers}{3.1.6}
+\newcommand{\reflexvers}{2.11}
+\newcommand{\jdkvers}{1.8}
+
+\newcommand{\putgraph}[4]{
+    \begin{figure}[ht]
+        \subfigure
+        \begin{center}
+    \includegraphics[width=#1truecm]{figures/#2}
+    \end{center}
+    \caption{\it #4.}
+    \label{fig:#3}
+    \end{figure}
+}
+
+\newcommand{\putgraphhere}[4]{
+    \begin{figure}[h!]
+        \subfigure
+        \begin{center}
+    \includegraphics[width=#1truecm]{figures/#2}
+    \end{center}
+    \caption{\it #4.}
+    \label{fig:#3}
+    \end{figure}
+}
+
+\newcommand{\putgraphlands}[4]{
+    \begin{figure}[ht]
+        \begin{center}
+    \includegraphics[angle=270,width=#1truecm]{figures/#2}
+    \end{center}
+    \caption{\it #4.}
+    \label{fig:#3}
+    \end{figure}
+}

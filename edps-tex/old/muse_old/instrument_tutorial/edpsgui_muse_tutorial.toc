@@ -1,0 +1,9 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Introduction}{7}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Scope}{7}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Reducing demo data}{8}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Setting the workflow}{8}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Selecting the input data}{9}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Start the reduction}{9}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Final products}{10}{section.3}%
+\contentsline {section}{\numberline {4}Quality plots}{11}{section.4}%

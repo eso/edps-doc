@@ -1,0 +1,366 @@
+\section{Overview of all the data reduction configuration options}
+\label{sec:configuretion_overview}
+
+\subsection{Selection of most appropriate calibrations}
+
+\input{../common/appropriate_calibrations}
+
+\subsection{Configuration of parameters: the configuration editor}
+\label{sec:configuration_editor}
+\input{../common/configuration_editor}
+
+
+\subsection{Parametrization of the Line Spread Function}
+\label{sec:configuration_lsf}
+
+The \instname\ pipeline uses a model of the Line Spread Function (LSF)
+to model emission sky lines for the sky subtraction.  An accurate
+knowledge of the LSF is crucial for a good removal of sky lines. The
+strategy for computing the LSF is set by the workflow parameter
+{\bf lsfmode}.  The best results are generally obtained by setting it
+to `arc`, which uses the arc lines of the wavelength calibrations
+taken the same day to model the line spread function.
+
+If the model of the line spread function is not accurate, residual sky
+lines have to be expected. In particular, residuals with Pcygni
+profiles, or wings. In this case, it could be worth trying other
+methods Possible values of {\bf lsfmode} are:
+
+\begin{itemize}
+\item {\bf any}.  Characterize the LSF from dedicated lsf raw
+  exposures. If not available, use arc raw exposures. If not
+  available, use static calibration from the pipeline distribution.
+
+\item {\bf lsf}.  Characterize the LSF from dedicated lsf raw
+  exposures. If not available, use static calibration from the
+  pipeline distribution. Dedicated lsf calibrations usually provide a
+  better characterization of the LSF with respect to the regular arc
+  calibrations, because they are more numerous. However, they are
+  taken every few months, therefore they might not describe exaclty
+  the LSF profile of the night where the observations were taken.
+
+\item {\bf arc}.  Characterize the LSF from dedicated arc raw
+  exposures. If not available, use static calibration from the
+  pipeline distribution.
+
+\item{\bf static}. Use static calibration from the pipeline
+  distribution. Use this option in combination with master calibration
+  for fast, but potentially less accurate, reduction.
+
+\end{itemize}
+
+\subsection{Sky subtraction}
+\label{sec:configuration_sky_subtraction}
+
+
+A crucial aspect of the \instname\ data reduction is the sky
+subtraction. The workflow supports several strategies, which are
+determined by the value of the workflow parameter {\bf
+  skysubtraction}.  By default {\bf skysubtraction} is set to {\bf
+  model}.
+
+In this configuration the \instname\ workflow uses dedicated sky
+exposures (if available) to compute the SKY\_CONTINUUM and the
+SKY\_LINES calibrations. The SKY\_CONTINUUM is the directly subtracted
+from the target field of view, whereas the intensities of the sky
+emission lines are refitted (using a small portion of the target field
+of view) to compensate the time variation between scientific exposure
+and dedicated sky observations.  In some rare cases, this strategy
+could lead to over-subtracted sky lines, especially for objects that
+have intense spectral features that coincide with some isolated sky
+lines. In this case, it might be worth setting the parameter {\bf
+  skysubtraction} to {\bf subtract-model}. Note that {\bf
+  skysubtraction}={\bf subtract-model} fails if no dedicated sky
+observations are present.
+
+If dedicated sky exposures are not present, the sky (continuum and
+emission lines) is evaluated directly on the target field.
+
+
+If the region used to compute the sky (either in the dedicated sky
+exposure or in the target field) contain astronomical objects, you
+might notice spurious absorption lines or distorted or surprisingly
+weak emission lines in your final spectrum.  The region where the sky
+has to be computed can be set by dedicated recipe parameters ({\bf
+  fraction}, and {\bf fraction\_ignore}, see below) or by including a
+SKY\_MASK among input files.
+
+Possible values of {\bf skysubtraction} are:
+\begin{itemize}
+  
+\item {\bf model} (default). It uses fluxes indicated in an input
+  SKY\_LINES table (either static calibration, or coming from a
+  dedicated sky exposures) as starting estimates, but re-fits them on
+  the global sky spectrum created from the science exposure. If a
+  SKY\_CONTINUUM is computed from dedicated sky exposures, it is
+  directly subtracted from the data. Otherwise, the sky continuum is
+  computed directly from teh science exposure. The portion of the
+  field of view of the science exposures it uses to fit the sky lines
+  and compute the continuum is regulated by the recipe parameters {\bf
+    skymodel\_fraction} and {\bf skymodel\_ignore}. Select this option
+  if no dedicated sky exposures are available (sky lines and sky
+  continuum will be computed on the target field of view), or if
+  dedicated sky exposures are present and enough empty sky regions are
+  available in the target field of view (sky continumm is computed on
+  dedicated sky exposures, sky lines are re-fitted on the target field
+  of view). To discard completely dedicated sky exposures, remove them
+  from the pool of input data.
+
+\item {\bf subtract-model}. It uses sky emission lines and sky
+  continuum determined on the field of view of dedicated sky
+  exposures. Select this option only if {\bf model} fails. This method
+  works only if dedicated sky exposures are present.
+
+\item {\bf auto}. It automatically set the parameter {\bf
+  skysubtraction} to {\bf model} if no dedicated sky exposures are
+  present in the dataset, and to {\bf subtract-model} if dedicated sky
+  exposures are present.
+
+\item {\bf simple}. It creates a sky spectrum from the science data,
+  and directly subtracts it, without taking the LSF into account
+  (LSF\_PROFILE and input SKY files are ignored).
+
+\item {\bf none}. It does not perform a sky subtraction.
+\end{itemize}
+
+
+The following recipe parameters of the tasks {\bf object} and
+{\bf object\_sky}, also have an impact on the quality of the sky
+subtraction. They can be accessed by selecting the corresponding task
+from the `Recipe parameters` section of the configuration window.
+\begin{itemize}
+  
+\item {\bf skymodel\_fraction}. It specifies the fraction of the field of
+  view (or of the SKY\_MASK, if present among the inputs) to be used
+  when calculating the sky continuum and sky emission lines.
+
+\item {\bf skymodel\_ignore}. It specifies the fraction of the field
+  of view (or of the SKY\_MASK, if present among the inputs) to
+  exclude when calculating the sky continuum and sky emission lines.
+  These parameters are applied to the histogram of the flux values of
+  the pixels. For example, if {\bf skymodel\_ignore=0.05} and
+  {\bf skymodel\_fraction=0.8}, then the brighter 80\% of the pixels,
+  with the exclusion of the fainter 5\%, are included in the
+  computation. They refer to the full field of view of the input
+  frame, or only to the part specified by the input sky mask.
+\end{itemize}
+
+The following recipe parameters of the task {\bf sky}, also have an
+impact on the quality of the sky subtraction. They can be accessed by
+selecting the corresponding task from the `Recipe parameters` section
+of the configuration window.
+
+\begin{itemize}
+
+\item {\bf fraction}. As {\bf skymodel\_fraction}, but it is applied to the
+  dedicated sky exposure.
+
+\item {\bf ignore}. As {\bf skymodel\_ignore}, but it is applied to the
+  dedicated sky exposure.
+  
+\end{itemize}
+
+{\it Important note}: The \instname\ \edps\ workflow automatically
+sets {\bf skymode-fraction} and {\bf skymodel-ignore} according to the
+following schema.
+
+\begin{itemize}
+\item {\bf skymodel-ignore=0.05} always.
+
+\item If no dedicated sky exposures are present: {\bf skymodel-fraction=0.4}.
+
+\item If {\bf skysubtraction=model} (or {\bf skysubtraction=auto} but
+  no dedicated sky exposures are present): {\bf
+    skymodel-fraction=0.75} (i.e. the majority of the field of view is
+  supposed to be free from object contamination).
+
+\item For all other cases, {\bf skymodel-fraction=0.2} (only 20\% of
+  the field of view is supposed to be free from object contamination).
+\end{itemize}
+
+To override these values, specify the values in the `Override value`
+field of the configuration window.
+
+\subsection{Creation of a SKY\_MASK}
+
+It is possible to specify a sky mask, e.g. a fits file per exposure
+that specifies the regions in the field of view to consider as pure
+sky.  The best way for doing it is to start the reduction without sky
+mask and specify the targets {\bf object} and {\bf sky}. The product
+folder will contain the SKY\_MASK automatically computed by the
+pipeline. Edit them with your favourite fits editor and copy them in
+the input directory. Restart the reduction. \edps\ will associate to
+each target and dedicated sky frame the SKY\_MASK with the same
+mjd-obs (so, make sure you have the correct mjd-obs correspondence).
+To use the entire SKY\_MASK set {\bf skymodel\_fraction} and {\bf
+  fraction} to 1, and {\bf skymodel\_ignore} and {\bf ignore} to 0 in
+the desired actor (e.g.: {\bf object} for regular science frames, {\bf
+  sky} for the dedicated sky exposures), of the configuration panel.
+
+
+\subsection{Combination of exposures}
+\label{sec:configuration_combination}
+
+The \instname\ pipeline allows to align and combine scientific
+exposures belonging to the same target.  It is possible to specify the
+method how to identify the exposures that are meant to be combined,
+this is regulated by the workflow parameters {\bf combine\_science},
+{\bf max\_diameter\_WFM}, {\bf max\_separation\_WFM}, {\bf max\_diameter\_NFM},
+{\bf max\_separation\_NFM}.
+
+\edps\ first groups the scientific exposures present in the input
+directories by the header keyword specified by the workflow parameter
+{\bf combine\_science}. Most useful values are:
+
+\begin{itemize}
+
+\item {\bf obs.targ.name} groups all those exposures that have the
+  same target name and instrumental setup.
+
+\item {\bf obs.id} groups all those exposures that have the same OB
+  identification and instrumental setup.
+  
+\item {\bf tpl.start} groups all
+  those exposures that have the same template start and instrumental
+  setup.
+
+\item {\bf exptime} groups all those exposures that have the same
+  exposure time and instrumental setup.
+
+\item {\bf night} groups all exposures of the same night and the same
+  instrumental setup.
+
+\item {\bf instrume} groups all exposures of the same instrumental
+  setup.
+\end{itemize}
+
+Then, within each group, \edps\ creates sub-groups on the basis of
+their sky coordinates. Exposures in the same sub-group are aligned and
+combined together.  The keywords that regulates how exposures in each
+group are clustered by sky position are: {\bf max\_diameter\_WFM} and
+{\bf max\_separation\_WFM}, for the Wide Field Mode, and {\bf
+  max\_diameter\_WFM} and {\bf max\_separation\_WFM}, for the Narrow
+Field Mode.
+
+\begin{itemize}
+
+\item {\bf max\_diameter\_WFM}. It specifies the maximum projected
+  diameter of the sub-group of exposures to combine, in degrees.  If
+  an exposure would make the sub-group bigger than this value, it is
+  not included in this sub-group.
+
+\item {\bf max\_separation\_WFM}. Is specifies the maximum separation on
+  the sky from an exposure and a sub-group, in degrees. If the
+  exposure is more distant than this threshold, it is not included in
+  the sub-group. If it is closer, and if its inclusion does not make
+  the sub-group size to exceed {\bf max\_diameter\_WFM}, then it is added
+  to the sub-group.
+\end{itemize}
+
+The default values ensures that exposures with an overlap of about 1/4
+of the field of view are grouped together, and that the resulting
+mosaic does not exceed 3 times the \instname\ field of view.
+
+Note: To process individual exposures without combining them together,
+specify the reduction target {\bf object} and remove {\bf
+  object\_combination} when creating the datasets in the `Raw Data`
+tab.
+
+\subsection{Sky flats}
+
+By default, the \instname\ pipeline uses sky flats exposures to
+account for large scale illumination variations within the field of
+view.  The workflow parameter {\bf use\_skyflats} specifies whether or
+not to use skyflats in the data reduction cascade. Possible values
+are:
+
+\begin{itemize}
+\item {\bf no}. Do not use sky flats in the reduction cascade. Set the
+  parameter to 'no' only if the skyflats are not available or if they
+  have bad quality.
+
+  \item {\bf yes} (default). Use sky flats in the reduction
+    cascade. This option requires the skyflats to be present. It is
+    the recommended strategy."
+\end{itemize}
+
+\subsection{Autocalibration}
+\label{sec:configuration_autocalibration}
+
+The \instname\ pipeline has an algorithm (autocalibration) designed to
+minimize the non-homogeneities in flux calibration between different
+IFUs and slices. It works under the assumption that the vaste majority
+of the field of view is dominated by the background sky (e.g., only
+few nearly point-like sources are present in the field) and that the
+sky bakground is constant within the field of view.
+
+The workflow supports several autocalibration strategies, that are
+defined by the workflow parameter {\bf autocalibration}.  Possible
+values are:
+
+\begin{itemize}
+\item {\bf none}. Does not apply self-calibration (default).
+
+\item {\bf deepfield}. Applies the self-calibration on the target
+  field itself, under the condition that the sky background is
+  constant and each IFU/slice is dominated by sky background
+  (exposures of small and sparse objects).
+
+\item {\bf closest\_sky}. It applies the self-calibration algorithm to
+  a sky exposure of the same night and instrument setup.  The
+  self-calibration coefficients determined on the sky exposure are
+  then applied to the scientific target exposure. If not available,
+  the dataset is reduced without autocalibration. Results are often
+  sub-optima, hence inspect the resulting field of view to assess the
+  outcome.
+
+\item {\bf user} It uses the closest in time user-provided calibration
+  table (from the same night). If not available among the input data
+  directory, the dataset is incomplete.
+\end{itemize}
+
+\subsection{Telluric correction}
+\label{sec:configuration_telluric_correction}.
+
+The \instname\ pipeline derives the atmospheric transmission
+(category: STD\_TELLURIC) from the standard star. The correction is
+then applied to the entire datacube. This is enabled by default.  If
+telluric lines are still present in the final product, one can skip
+the telluric correction (set the workflow parameter {\bf
+  telluric\_correction} to 'FALSE') and do it with external tool.
+
+
+\subsection{Wavelength range}
+
+It is possible to specify the wavelength range of the output by
+setting the parameters {\bf wavelength\_min} (default 4000 \AA) and
+{\bf wavelength\_max} (default 10000 \AA). If the full wavelength
+range is not needed for scientific analysis, one can speed up the
+reduction process by specifying a shorter wavelenght range , e.g. by
+concentrating only on the spectra features of scientific interest.
+
+
+\subsection{Geometric and astrometric calibrations}
+
+By default, the ESO archive provides the closer in time geometric and
+astrometric calibrations. Generally, they ensure the best reduction
+and there is no need to change them. However, if one wants to
+reprocess them, it has to download the corresponding raw calibrations
+(DPR.TYPE = WAVE,MASK and ASTROMETRY, respectively) from the archive
+and set the workflow parameters {\bf recompute\_geometry} and {\bf
+  recompute\_astrometry} to 'yes'.  Note that the computation of
+geometry calibration is expensive in terms of computation and RAM.
+
+\subsection{Removal of DARK currents}
+
+The DARK current in \instname\ detector is very low. Dark calibrations
+are taken as part of the instrument monitoring and calibration plan,
+but it is not advisable to process and remove a master dark from the
+scientific data, as it increase the noise in the product.  Therefore,
+darks are not used in scientific reduction. To reduce raw dark frames,
+specify the reduction target "dark" in the `Raw Input` tab, before
+creating the datasets.
+
+In case one wants to test the effects of including darks in the
+scientic reduction, set the workflow parameter {\bf use\_darks} to
+'yes'.

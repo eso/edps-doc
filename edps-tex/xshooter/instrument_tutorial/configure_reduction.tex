@@ -1,0 +1,198 @@
+\section{Overview of all the data reduction configuration options}
+\label{sec:configuretion_overview}
+
+\subsection{Selection of most appropriate calibrations}
+
+\input{../common/appropriate_calibrations}
+
+\subsection{Configuration of parameters: the configuration editor}
+\label{sec:configuration_editor}
+\input{../common/configuration_editor}
+For \instname\, the following workflow parameters can be adjusted when
+the {\tt Target Category} is set to {\tt science}:
+
+\begin{itemize}
+\item {\tt use\_flat}: 
+By default, this parameter is set to {\tt science}, 
+meaning the flats used for science frames are also applied to standard stars.
+Set it to {\tt standard} to use the flats taken closest in time 
+to the standard-star observations instead.
+
+\item {\tt telluric\_correction\_mode}: 
+Atmospheric parameters can be derived either from 
+a telluric standard or from the science frame itself.
+Set this parameter to {\tt standard} (default) to use a telluric star 
+observed the same night with the same instrument setup.
+Set it to {\tt science} to derive the parameters directly from the science.
+Use {\tt none} to disable telluric correction.
+
+\item {\tt response}:
+This parameter selects the response curve used for flux calibration.
+{\tt night} (default) uses the response from the standard star observed that night; 
+if unavailable, fall back to the master response.
+{\tt master} uses the master response from CalSelector, 
+built by combining standards from multiple nights.
+
+\item {\tt reduction-mode}:
+Select between the physical-model mode (recommended) 
+and the polynomial mode to map each wavelength onto the CCDs.
+The physical model derives the solution from the actual optical path, 
+while the polynomial method uses empirical multi-coefficient fits per order.
+If the reduction fails or the physical model appears inconsistent, 
+the polynomial mode can be used for troubleshooting or as a fallback.
+
+\item {\tt max\_diameter}:
+TODO
+
+\item {\tt max\_separation}:
+TODO
+
+\item {\tt use\_optical\_dark}:
+This parameter controls the use of a dark frame in the UVB/VIS data reduction.
+Because the dark current is negligible at these wavelengths, 
+it is set to {\tt FALSE} by default.
+Set it to {\tt TRUE} if you wish to enable dark correction.
+\end{itemize}
+
+\subsection{Troubleshooting}
+
+This section provides guidance for diagnosing and resolving 
+common issues encountered during the XSHOOTER data-reduction cascade.
+
+\subsubsection{Not enough arc lines detected}
+
+The recipe {\tt xsh\_2dmap} may fail with an error indicating that not enough arc lines were detected.
+Typical expected values for {\tt QC.NLINE.FOUND.CLEAN} are:
+\begin{itemize}
+\item UVB: $\sim 2550$ lines
+\item VIS: $\sim 3950$ lines
+\item NIR: $\sim 1300$ lines
+\end{itemize}
+
+Verify the quality and consistency of the input calibration products, in particular:
+\begin{itemize}
+\item {\tt ARC\_LINE\_LIST\_ARM}
+\item {\tt THEO\_TAB\_MULT\_ARM} (poly mode)
+\item {\tt ORDER\_TAB\_EDGES\_SLIT\_ARM}
+\item {\tt WAVE\_TAB\_GUESS\_ARM}
+\end{itemize}
+
+In addition, adjust the line-detection parameters:
+\begin{itemize}
+\item increase {\tt detectarclines-search-winhsize}
+\item decrease {\tt detectarclines-min-sn}
+\end{itemize}
+to ensure more arc lines are detected.
+
+\subsubsection{Sky subtraction residuals (especially NIR)}
+
+Residual tilts between the sky model and the observed 2D frame
+can introduce sky--subtraction artefacts, particularly in the NIR.
+In practice, this manifests as alternating under- and over-subtracted regions
+around OH emission lines.
+
+Possible workarounds:
+\begin{itemize}
+\item Verify the accuracy of the {\tt xsh\_2dmap} products.
+Run the reduction chain in physical-model mode, 
+which provides a more robust 2D geometry than the polynomial mode.
+Ensure that the residuals after model optimisation are small; 
+if needed, re-run {\tt xsh\_2dmap} with additional iterations.
+
+\item Try setting {\tt sky-method} = {\tt MEDIAN}.
+This can improve stability when the BSPLINE models fail 
+due to slight geometric mismatches.
+
+\item Apply flexure corrections computed by {\tt xsh\_flexcomp}.
+Flexure compensation can realign the sky model and 
+reduce systematic sky--subtraction residuals.
+\end{itemize}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{../instrument_tutorial/figures/NIR_residuals.jpg}
+\caption{Example of alternating under- and over-subtracted regions around OH emission lines, caused by a slight tilt of the sky lines relative to the object trace. The plot on the right shows the flux profile extracted along the green line in the 2D image.}
+\label{fig-res}
+\end{figure}
+
+\subsubsection{Trace-localization failures}
+
+{\tt xsh\_scired\_slit\_XXX} may fail when {\tt extraction-method} = {\tt LOCALIZATION} 
+and {\tt localize-method} is set to either {\tt GAUSSIAN} or {\tt MAXIMUM}.
+
+This issue typically occurs with low S/N science exposures, 
+where the object trace cannot be reliably detected using either 
+the Gaussian cross-order profile or the maximum-detection algorithm.
+
+The user should try adjusting
+{\tt localize-slit-position} and {\tt localize-slit-hheight}
+to guide the trace-localization process,
+or alternatively set {\tt extraction-method} = {\tt MANUAL},
+which avoids automatic trace detection altogether.
+
+\subsubsection{Two object traces in the slit}
+
+Reduce each object trace separately by providing appropriate values in
+the {\tt xsh\_scired\_slit\_XXX} recipe for the parameters
+{\tt sky-position1}, {\tt sky-hheight1}, {\tt sky-position2}, and {\tt sky-hheight2}.
+These parameters define the specific regions of the slit used 
+to estimate the sky during single-frame sky subtraction.
+
+By default, all four parameters are set to zero, meaning that the sky is taken from all
+pixels outside the object localization region (and outside the masked slit edges).
+However, when multiple objects are present along the slit, or when the default choice is not
+appropriate, the user should manually adjust these positions.
+
+Both the central positions and the half-heights of the sky regions are expressed in arcseconds.
+
+\subsubsection{Order-edge artefacts in extracted spectra}
+
+Artefacts may affect the edges of the 2D and 1D orders, 
+degrading the quality of the merged extracted 2D and 1D spectra.
+
+In such case, use the appropriate reference format-check frames 
+and verify that the values of 
+{\tt WLMIN} and {\tt WLMAX} in {\tt xsh\_scired\_slit\_XXX} are correct.
+They should correspond to the last wavelength imaged 
+on the illuminated part of the order, divided by 1.007.
+
+\subsubsection{Small jumps between orders}
+
+Small discontinuities may appear between orders during merging, 
+typically caused by slit-edge artefacts introduced by the flat-field.
+To mitigate this, we recommend setting {\tt extract-method} = {\tt LOCALIZATION} 
+in {\tt xsh\_scired\_slit\_XXX}.
+
+\subsubsection{Overestimated uncertainties in the extracted spectrum}
+
+This issue is typically caused by slit-edge artefacts introduced by the flat-field.
+To mitigate it, set {\tt extract-method} = {\tt LOCALIZATION} in {\tt xsh\_scired\_slit\_XXX}.
+
+\subsubsection{The extracted merged 1D spectrum looks poor}
+
+The {\tt xsh\_respon\_slit\_xxx} and/or {\tt xsh\_scired\_slit\_xxx} recipes may have
+failed to localize the trace correctly during extraction.
+
+\subsubsection{Spectral regions of zero flux values}
+
+Large regions of zero-flux values in the final extracted 1D spectrum
+may be caused by spurious Cosmic-Ray (CR) detections.
+
+CR-contaminated pixels are identified using the van Dokkum algorithm 
+(2001, PASP, 113, 1420) applied to the input science frames.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{../instrument_tutorial/figures/CR_detections_bad.jpg}
+\caption{Here we show the VIS spectrum of the telluric standard star Hip089684, as displayed in the {\tt Graphical reports}. The observation was obtained on May 1, 2023 (OB identifier: {\tt XSHOO.2023-05-02T07:37:22.135}) under excellent seeing conditions (0.4''). With the default value {\tt removecrhsingle-sigmalim}=5.0, the algorithm produces spurious cosmic-ray detections, which in turn lead to extended wavelength intervals with zero flux in the extracted 1D spectrum.}
+\label{fig-cr}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{../instrument_tutorial/figures/CR_detections_good.jpg}
+\caption{Same as before, but with {\tt removecrhsingle-sigmalim}=7.0. In this case, this avoids the flagging of good pixels as CR-affected.}
+\label{fig-cr2}
+\end{figure}
+
+\subsubsection{IFU cube not well aligned}
