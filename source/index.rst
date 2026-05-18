@@ -35,6 +35,7 @@ EDPS documentation
 
    #crires/index.rst
    efosc/index.rst
+   #efosc_pdf.md
    #eris/index.rst
    espresso/index.rst
    #fors/index.rst
