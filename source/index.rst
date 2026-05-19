@@ -19,8 +19,8 @@ EDPS documentation
 .. toctree::
    :maxdepth: 1
 
-   edpsgui/index.rst
-
+   #edpsgui/index.rst
+   edpsgui_pdf.md
 **EDPS command line execution**
 
 .. toctree::
