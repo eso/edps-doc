@@ -1,2 +1,2 @@
 # EFOSC tutorial
-A PDF tutorial is available here: [efosc-tutorial](edps-tex/EDPS-EFOSC_tutorial/efosc-tutorial-1.0_20260515.pdf)
+A PDF tutorial is available [here.](https://raw.githubusercontent.com/eso/edps-doc/main/edps-tex/efosc/efosc-edpsgui_tutorial.pdf)

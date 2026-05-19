@@ -34,14 +34,15 @@ EDPS documentation
    :maxdepth: 1
 
    #crires/index.rst
-   efosc/index.rst
-   #efosc_pdf.md
+   #efosc/index.rst
+   efosc_pdf.md
    #eris/index.rst
    espresso/index.rst
    #fors/index.rst
    #giraffe/index.rst
    #hawki/index.rst
-   kmos/index.rst
+   #kmos/index.rst
+   kmos_pdf.md
    #matisse/index.rst
    muse/index.rst
    sphere-ifu/index.rst
