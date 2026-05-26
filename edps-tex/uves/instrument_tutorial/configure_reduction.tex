@@ -1,0 +1,328 @@
+\section{Overview of all the data reduction configuration options}
+\label{sec:configuretion_overview}
+
+\subsection{Selection of most appropriate calibrations}
+
+\input{../common/appropriate_calibrations}
+
+\subsection{Configuration of parameters: the configuration editor}
+\label{sec:configuration_editor}
+\input{../common/configuration_editor}
+
+\subsection{Optimizing spectrum extraction}
+\label{sect:optimizing_extraction}
+
+The default values of the recipe parameters for the spectrum extraction in task {\tt object}
+(pipeline recipe \newline {\tt uves\_obs\_scired}) 
+are optimized towards the extraction of the spectrum of 
+one point source centered on the slit. 
+The parameters {\tt reduce.slitlength}, {\tt reduce.objoffset}, and
+{\tt reduce.objslit} allow to fine-tune the extraction for other situations. The usage of the 
+parameters depends on the selected extraction mode in a complex way, as described below.
+
+By default ({\tt reduce.slitlength} $= -1$), the full slit length for the extraction is obtained 
+from the header
+keyword {\tt HIERARCH ESO INS SLIT2 LEN} (blue arm) or {\tt HIERARCH ESO INS SLIT3 LEN} (red arm)
+and the full slit is centered on the center of the order.\newline 
+\textbf{Warning}: if the value specified for {\tt reduce.slitlength}
+exceeds the value derived from the header keywords,
+inter-order regions may be included in the extraction.
+
+For \textbf{average/linear} extraction: 
+
+{\tt reduce.slitlength} specifies the full slit length within which one object window 
+and up to two sky windows will be defined.
+
+{\tt reduce.objoffset} (ignored if reduce.objslit $<0$ [default $-1$]) allows to offset the 
+object window away from the order center.
+
+{\tt reduce.objslit} if $>0$ {\tt reduce.objslit} specifies the size of the object window, 
+which can then be
+offset from the order center via {\tt reduce.objoffset}; if $\le 0$ (default), 
+the object window size will be $1/2$ of the full slit, 
+and its position will be defined by searching the object’s spectrum within the slit.
+
+In \textbf{optimal} extraction the full slit is used as extraction slit.
+
+{\tt reduce.slitlength} specifies the full slit length within which object 
+and sky spectra will be extracted simultaneously.
+
+{\tt reduce.objoff} allows to offset the full slit (= extraction slit) as specified by
+{\tt reduce.slitlength}.
+
+{\tt reduce.objslit} is completely ignored, because the full slit is used as extraction slit.
+
+Key differences between the three modes are:
+\begin{enumerate}
+    \item In average/linear extraction the full slit is always centered on the order center, 
+    whwereas in optimal extraction it can be offset away from the order center by the 
+    {\tt reduce.objoffset} parameter.
+    \item Optimal extraction always uses {\tt reduce.objoffset}  but completely ignores 
+    {\tt reduce.objslit},
+    whereas average/linear extraction uses {\tt reduce.objoffset} only if {\tt reduce.objslit} is $>0$.
+    \item In average/linear extraction, once a portion of the full slit has been reserved by 
+    the object window as described above, sky windows of size 
+    $0.5 \times ({\tt slitlength} - {\tt objslit}) \pm {\tt objoffset}$\newline
+    will be carved out of the remaining full slit (if any).
+\end{enumerate}
+
+If \textbf{more than one object trace is present},
+the optimal extraction can be used with a suitable combination
+of {\tt reduce.slitlength} and {\tt reduce.objoffset} to adapt the slit length and position
+for covering only one trace and the adjacent sky regions. 
+Obviously, the data have to be processed separately for each trace. It is not
+possible to extract multiple traces with linear or average extraction.
+
+\subsection{Optimizing the initial order and wavelength solution}
+\label{sec:initial-guess}
+
+The initial solution for the order tracing and wavelength calibration as calculated by the task
+{\tt predict} is usually determined in a very robust way by fitting a physical model of the
+spectrograph. In rare cases, e.g., after an earthquake, it may be necessary to adjust the model.
+
+A diagnostic graphical report is provided within the EDPS workflow. It can be obtained by clicking
+on the magnifying glass for the {\tt predict} job and then by clicking on "Graphical reports".
+If the reported has not been created before, it can be created by checking `Reduced data' and
+clicking on `Create reports'.
+
+The most important plot in the report shows the differences in pixels between the predicted and actual
+line positions for X and Y. An example is shown in Fig.~\ref{fig:predict_fit_residuals}.
+
+\begin{figure}[h!]
+\centering
+\includegraphics{../instrument_tutorial/figures/predict_fit_residuals.jpg}
+\caption{Fit residuals from the {\tt predict} task}
+\label{fig:predict_fit_residuals}
+\end{figure}
+
+For a good fit result, most points in the plot should form a cluster that may be offset from $(0, 0)$
+by a few pixels. The presence of a few outliers, like in the example, is usually not an issue.
+In a bad fit, no or only a very weak clustering could be seen.
+
+Recipe parameters that are useful for improving the fit are:
+\begin{itemize}
+    \item {\tt trans\_x} and {\tt trans\_y}: they shift the centre of the model in X and Y, respectively. Values of 5 to 20 pixels should be sufficient in general.
+    \item {\tt mbox\_x}  and {\tt mbox\_y}: they are used to define a search
+    box for matching the physical model line positions with the positions of the lines 
+    detected in the input arc-lamp frame. If the physical model prediction is poor, 
+    then larger values of 60 to 80 pixels could be tried.
+    Subsequent adjustment of {\tt trans\_x and} {\tt trans\_y} should then be performed 
+    and {\tt mbox\_x} and {\tt mbox\_y} should be set back to 40 pixels,
+    followed by a final adjustment of {\tt trans\_x} and {\tt trans\_y}
+    to arrive at the best initial guess wavelength solution.
+    \item {\tt ccd\_rot\_angle\_off}: it is usually not necessary to add an offset in the
+    CCD rotation angle. But if so, then a small rotation of 0.01 to 0.1 may make improvements.
+\end{itemize}
+
+\subsection{Optimizing the wavelength calibration}
+
+The wavelength calibration solutions produced by the task {\tt arc} are generally robust and of good
+quality, showing very few systematic errors in the wavelength residuals and demonstrating the correct
+identification and clipping of outliers. There are a number of parameters for the pipeline recipe
+{\tt uves\_cal\_wavecal} that might be
+tried to further improve the solution. An improvement should result in a 
+smaller RMS for the wavelength residuals, as reported, e.g., in the header keyword
+{\tt QC LINE RESIDRMS WLU}, without a significant decrease of the number of identified/used
+arc lines (header keywords {\tt QC LINTOT}, {\tt QC LINSEL}, and {\tt QC LINSOL}). The keywords can be
+inspected in the {\tt LINE\_TABLE\_<CHIP>} pipeline products.
+
+Recipe parameters that are useful for improving the fit:
+\begin{itemize}
+    \item {\tt range}: Twice the value of this parameter is the window width used for 
+    arc line detection (in pixels). Adjusting this parameter influences the number of arc lines 
+    that are detected. Varying this parameter in the range of 4 to 12 pixels is sometimes useful 
+    for optimizing the number of detected arc lines.
+    \item {\tt minlines}: The minimum number of arc lines to be detected. 
+    This parameter should only be adjusted in conjunction with the parameter {\tt maxlines}.
+    Adjusting this parameter will force the
+    pipeline recipe to find a minimum number of arc lines, if possible. This parameter is useful for
+    controlling the number of lines used in the wavelength calibration solution.
+    \item {\tt maxlines}: The maximum number of arc lines to be detected. This parameter should only be
+    adjusted in conjunction with the parameter {\tt minlines}. Adjusting this parameter will force
+    a maximum on the number of arc lines the pipeline recipe finds. 
+    This parameter is useful for controlling
+    the number of lines used in the wavelength calibration solution.
+    \item {\tt alpha}: This parameter ranges from 0.0 to 1.0 
+    and is used to control the line matches between
+    the detected arc lines and those in the reference line catalogue by rejecting line matches where
+    the distance to the next nearest neighbour (in the spectrum as well as in the catalogue) is smaller
+    than $\Delta\lambda / {\tt alpha}$, where $\Delta\lambda$ is the wavelength residual for the current line match candidate. This
+    parameter is best adjusted in conjunction with the parameter tolerance. Adjusting alpha in the
+    range of $\sim 0.03\ ...\ 0.3$ is useful for controlling the number of line identifications 
+    and hence the number of lines used in the wavelength calibration solution.
+    \item {\tt degree}. The degree of the polynomial model to be used in the wavelength 
+    calibration process. Usually the default value of 4 gives acceptable wavelength residuals 
+    with no systematics, but some
+    times higher degrees such as 5 or 6 give better results. It is also worth trying the value $-1$, 
+    which
+    instructs the pipeline recipe to determine the model degree based on the wavelength residuals.
+    \item {\tt tolerance}. This parameter is used to reject line identifications with 
+    wavelength residuals worse
+    than tolerance from the wavelength calibration solution. This parameter is best adjusted in
+    conjunction with the parameter alpha. Varying tolerance in the range of $0.1\ ...\ 1.0$ is sometimes
+    useful for optimizing the number of lines used in the wavelength calibration solution.
+    \item {\tt kappa}: The level of sigma-clipping to be performed in the final iteration 
+    of the fit of the wavelength calibration model. 
+    Suggested values for this parameter are in the range of $3.0\ ...\ 5.0$.
+\end{itemize}
+
+\subsection{Applying velocity correction}
+
+The velocity correction of the extracted spectra can be controlled in the task {\tt object} with:
+\begin{itemize}
+    \item {\tt velocity\_correction}. Specifies which velocity correction to apply to the products
+    and may be set to {\tt none} (the default), {\tt barycentric}, or {\tt heliocentric}.
+    The barycentric correction
+    value is taken from the {\tt HIERARCH ESO DRS BARYCORR} keyword, and the heliocentric
+    value is taken from the {\tt HIERARCH ESO DRS HELICORR} keyword. Note that the 
+    application of the correction implies an adjustment of the wavelength values. 
+    Therefore, if a combination the spectra of the same target is wanted,
+    the spectra must be interpolated to a common wavelength grid.
+\end{itemize}
+
+\subsection{Improving spectral extraction}
+
+There are ten recipe parameters for the {\tt object} task which could be used to improve the
+spectral extraction with the {\tt uves\_obs\_scired} recipe.
+\begin{itemize}
+    \item {\tt reduce.extract.method}: The method to be used for extracting the science spectrum.
+    It may be set to {\tt optimal}, {\tt average}, or {\tt linear}. In most cases, the default
+    optimal extraction is the desired method. If a 2D extraction is wanted, then the parameter needs
+    to be set to {\tt 2d}.
+    \item {\tt reduce.extract.kappa}: The level of sigma-clipping to be performed when rejecting pixels
+    suspected of being contaminated by cosmic ray hits. The default value of 10.0 should be reduced to
+    smaller values (down to $\sim3.0$) when an extracted spectrum shows sharp emission spikes that should
+    not be present
+    \item {\tt reduce.extract.profile}: The spatial profile model to be used when performing optimal
+    extraction. It may be set to {\tt auto}, {\tt virtual}, {\tt gauss}, or {\tt moffat}. The
+    default parameter value {\tt auto} instructs the pipeline recipe to automatically decide 
+    on the type of
+    spatial profile model to employ based on the S/N of the science spectrum. Sometimes it is worth
+    testing the other spatial profiles that are available.
+    \item {\tt reduce.extract.skymethod}: The method for calculating the sky level may be set to one of
+    two values: {\tt optimal} or {\tt median}. If set to {\tt optimal}, the sky level is included in the
+    optimal extraction model. If set to {\tt median}, the sky level is estimated via the median and
+    subtracted from the science spectrum before extraction. Sometimes the non-default median option
+    can give slightly better S/N than the default optimal option.
+    \item {\tt reduce.extract.oversample}: The oversampling factor to be used in the empirical spatial
+    profile. When the empirical spatial profile is employed by the pipeline recipe, the oversampling
+    factor is set by default to 5 for ${\rm S}/{\rm N} < 200$, and to 10 for ${\rm S}/{\rm N} > 200$. 
+    Sometimes a larger value
+    for the oversampling factor may give a higher S/N in the extracted spectrum, 
+    especially for very high S/N spectra.
+    \item {\tt reduce.slitlength}: This parameter may be used to control the slit length used to define 
+    the spatial profile in the spectrum extraction. 
+    The default negative value instructs the pipeline recipe to
+    read the slit length from the science object FITS header. Setting this parameter to smaller values
+    than the slit length in the header may sometimes be useful in avoiding problems at the order edges,
+    with the disadvantage that the maximum achievable S/N will be smaller (less pixels involved in the
+    extraction).
+    \item {\tt reduce.objoffset}: This parameter may be used in conjunction with the parameter\newline
+    {\tt reduce.slitlength} in order to extract the spectra of more than one object observed on the
+    slit in the same science image. 
+    \item {\tt reduce.objslit}: Object window size (in pixels). 
+    Its value must be less than the total slit length.
+    If negative, the default value (half of full slit length) is used. The upper and lower sky windows are
+    defined as the part of the full slit (if any) outside the object window. 
+    The center of the object window
+    is determined by the offset parameter. This parameter does not apply to optimal extraction.
+    \item {\tt reduce.rebin.wavestep}. The rebinning step size used for BLUE/REDL data in wavelength
+    units for the extracted science spectrum. The default negative value instructs the pipeline recipe
+    to use the optimal resolution. Setting this parameter to a positive value is useful for rebinning the
+    spectrum to a lower resolution while gaining a substantial increase in S/N. Hence this parameter is
+    more concerned with spectrum post-processing rather than extraction optimisation.
+    \item {\tt reduce.rebin.wavestep\_redu}. Identical to {\tt reduce.rebin.wavestep} except
+    that it applies to REDU data only.
+\end{itemize}
+
+\subsection{UVES (slit) tips and trouble shooting}
+
+\begin{itemize}
+    \item \textbf{To obtain best accuracy for flux calibration,
+    should I use the response curve obtained from the actual standard star data reduction or the master response curve?}
+    Both the response derived from the standard
+    star observed close in time to your data or the master response should give you a good relative flux
+    calibration. 
+    In rare cases the response derived from an individual standard star may have fit problems.
+    So, if you want to be absolutely sure that this does not happen use the master response.
+    If you are interested in an accurate absolute flux calibration the response derived from a 
+    standard star observed in
+    the same night as your science data should be better. 
+    Please note that for absolute flux calibration you
+    need to ensure photometric conditions and observe your science target with a wide slit, 
+    because otherwise wavelength-dependent slit losses occur.
+    \item \textbf{I have a standard star in my data set but it is not found in the standard star catalog.
+    Why?} 
+    Most likely you have one of the old UVES standard stars, for which no fine sampled high resolution 
+    reference data exist. If you want to use this specific star you can find the catalog and a 
+    table with fit points at
+    \hyperlink{https://ftp.eso.org/pub/dfs/pipelines/instruments/uves/uves_response_old_calib.tar.gz}{https://ftp.eso.org/pub/dfs/pipelines/instruments/uves/uves\_response\_old\_calib.tar.gz}. 
+    Please be aware
+    that these data are not well suited for the response determination (see next item).
+    \item \textbf{The response curve derived from my standard star looks very bad and 
+    the raw response shows huge residuals. Why?} 
+    The pipeline supports seven standard stars, for which high-resolution reference
+    data based on model spectra exists: EG21, EG274, Feige110, GD71, GD153, LTT3218, and LTT7987.
+    For other standard stars observed with UVES, 
+    the reference data were mostly derived from low-resolution
+    observations and are sampled at coarse intervals (typically 50 {\AA}).
+    For a solution to this problem, the points for the corresponding entry
+    in the static calibration file {\tt RESP\_FIT\_POINTS\_CATALOG.fits} need to be edited.
+    \item \textbf{I have data sets of extended objects. How can I reduce them?} 
+    UVES observations of extended objects can be reduced with the workflow. 
+    It can, however, not be guaranteed that the chosen reduction strategy is appropriate in this case.
+    \item \textbf{I want to have the two-dimensional rectified spectrum instead of the one-dimensional
+    extracted one. How can I get that?}
+    To get two-dimensional product, the {\tt extract\_method} parameter of the
+    {\tt uves\_obs\_scired} recipe needs to be set to {\tt 2d}. See Sect.~\ref{sec:extraction}. 
+    If both one- and two-dimensional spectra are wanted, then the workflow needs to be run twice
+    with two different values for\newline {\tt reduce.extract.method}.
+    \item \textbf{I have data sets of objects observed with the image slicer. How can I reduce them?}
+    Reduction of image slicer observations is fully supported within the pipeline and by the 
+    workflow. If the object is extended and the full spatial resolution shall be preserved,
+    then the recipe parameter {\tt reduce.extract.method} needs to be set to {\tt 2d}.
+    \item \textbf{I have data sets of objects observed with the the iodine cell. How can I reduce them?}
+    Reduction of iodine cell data is fully supported. The workflow default is to use the iodine
+    flats for flat fielding the science, if they are present. If this is not wanted, then the 
+    raw iodine flats need to be removed from the input data set or the workflow parameter
+    {\tt use\_iodine\_flat} needs to be set to {\tt NO}.
+    \item \textbf{Artifacts present in merged spectra of RED 760 nm (or beyond) settings. 
+    Can this be removed?} 
+    For data observed in the red settings (760 nm or beyond), we recommend to use \newline
+    {\tt reduce.ffmethod=“pixel”} together with {\tt reduce.merge.delt1=14} and \newline
+    {\tt reduce.merge.delt2=4}. Thereby avoiding
+    artifacts from residual flat-field fringes that have a noise-like structure and might
+    dominate the spectral structure and compromise the signal-to-noise ratio. The drawback of that method
+    are short spectral gaps between the orders in the REDU range. 
+    The described parameter setting are encoded in the workflow per default.
+    \item \textbf{The wavelength calibration fails. How I can recover this problem?}
+    A possible reason may be a large shift in the spectral format (mainly along cross order direction). In
+    this case the physical model plot that is available for the {\tt predict} task
+    usually shows a widely 
+    scattered distribution of residuals instead of a clear correlation. In this case, we
+    recommend to get format-check and wavelength calibration frames from previous dates 
+    (up to a few days before the problematic one) and compare them with the problematic one to 
+    derive the X and Y shifts.
+    Then re-reduce the data by setting the {\tt trans\_x} and {\tt trans\_y} to the found values 
+    (with sign) of the shift of the actual to the reference frame, 
+    and optimize the results of the model prediction as described in Sect.~\ref{sec:initial-guess}. 
+    This should allow to solve the problem.
+\end{itemize}
+
+\subsection{UVES-Fibre trouble shooting}
+
+There are a few cases where the reduction of UVES-Fibre data may fail. Two of those include:
+\begin{itemize}
+    \item \textbf{Spectrum extraction failing with error `Keyword ESO TEL GEOLAT does not exist'.}
+    From time to time the reduction of science frames may fail indicating that the
+    header keyword {\tt ESO TEL GEOLAT} does not exist. This keyword is required to measure heliocentric velocity correction. This issue can only be fixed by ensuring that
+    the input data have proper FITS headers, in particular containing the keywords 
+    {\tt RA}, {\tt DEC}, {\tt ESO TEL GEOLAT}, {\tt ESO TEL GEOLAT}, {\tt UTC}, and {\tt MJD-OBS}.
+    \item \textbf{Spectrum extraction failing with error `Input data do not match: Spectrum contains 12 
+    orders, but line table absolute order numbering is 70- 60' while reduction 860 setting data.} 
+    This problem is due to the fact that the wavelength calibration has switched off the generation 
+    of a solution for some fibres because it has not found the minimum number of searched lines
+    (minimum set to 1000). In this case we
+    recommend to set the parameter {\tt minlines} of {\tt flames\_cal\_wavecal} to 600 (or less)
+    and repeat the {\tt arc\_mos} and {\tt object\_mos} steps.
+\end{itemize}

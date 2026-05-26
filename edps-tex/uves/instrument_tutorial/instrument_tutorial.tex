@@ -1,0 +1,106 @@
+\documentclass[pdftex,a4paper,twoside,11pt]{article}
+\NeedsTeXFormat{LaTeX2e}
+% check whether we are running pdflatex
+\usepackage[dvips]{graphicx}
+\usepackage{picinpar}
+\usepackage{float}
+\usepackage{graphics}
+\usepackage{varioref}
+\usepackage{natbib}
+\usepackage{afterpage}
+\usepackage[shortlabels]{enumitem}
+%\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+
+%\newcommand{\green}[1]{\color{green}{#1}\color{black}\ }
+
+  %include hyperref for pdf
+\usepackage[pdftex,colorlinks=true,
+                     pdfstartview=FitV,
+                     linkcolor=darkblue,
+                     citecolor=darkblue,
+                     urlcolor=darkblue,
+                     plainpages=false,
+                     pdfpagelabels,
+                     linktocpage,
+                     backref,pagebackref]{hyperref}
+
+
+\def\author{Burkhard Wolff}
+\def\pdftitle{UVES EDPS-GUI tutorial}
+\def\releasedateedpstutorial{May 29 2026}
+\def\issue{1}
+\def\rev{rev. 20260529}
+\hypersetup{
+pdfpagemode = {UseNone}, 
+pdftitle = {\pdftitle},
+pdfauthor = {\author},
+pdfsubject= {pdftitle}
+}
+
+\newcommand{\pipelinevers}{6.5.3}
+\newcommand{\instname}{UVES}
+\newcommand{\pipename}{{\tt uves}}
+\newcommand{\wkffilename}{uves\_wkf.py}
+\newcommand{\wkfname}{{\tt uves.uves\_wkf}}
+\newcommand{\edpsversion}{1.5.7}
+\newcommand{\edpsguiversion}{1.0}
+
+
+\input{../layout}
+\input{../shortcut}
+
+
+
+\dmdTitle{\pdftitle}
+\dmdIssue{\issue}
+\dmdDocId{\issue\ \rev}
+\dmdDate{\releasedateedpstutorial}
+
+\dmdPreparedBy{\author}
+\dmdPreparedOn{\releasedateedpstutorial}
+\dmdApprovedBy{}
+%\dmdApprovedBy{Not Yet: For Internal Use Only}
+\dmdApprovedOn{}
+\dmdReleasedBy{}
+%\dmdReleasedBy{Not Yet: For Internal Use Only}
+\dmdReleasedOn{}
+
+
+\setlongtables
+\makeindex
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thetable}{\arabic{table}}
+
+\begin{document}
+\pagenumbering{arabic}
+\dmdmaketitle
+\emptypage{This page was intentionally left blank}
+\begin{center}
+  \textbf{Change record}
+
+  \tablehead{\hline
+    \multicolumn{1}{|c|}{Issue/Rev.}\tbspa &
+    \multicolumn{1}{|c|}{Date} &
+    \multicolumn{1}{|c|}{Section/Parag.\ affected} &
+    \multicolumn{1}{|c|}{Reason/Initiation/Documents/Remarks}\tbspb \\
+    \hline}
+  \tabletail{\hline}
+
+  \begin{supertabular}{|l|l|l|l|}
+    %0.1.0\tbspa & 18/06/2018   & all & First internal release \\
+    1 \tbspa & 29/05/2026   & all & First public release for \pipelinevers  \\
+  \end{supertabular}
+\end{center}
+\emptypage{This page was intentionally left blank}
+
+\tableofcontents
+\cleardoublepage
+\input{intro}  
+\input{reducing_demo_data}
+\input{reduction_chain}
+\input{configure_reduction}
+\input{task_list}
+\input{faq}
+
+\end{document}

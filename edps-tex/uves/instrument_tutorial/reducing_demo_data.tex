@@ -1,0 +1,27 @@
+
+\section{Reducing demo data}
+\label{sec:reducing_demo_data}
+
+\input{../common/common_reducing_demo_data}
+
+ 
+\subsubsection{Quality plots}
+\input{../common/quality_plots}
+
+\subsection{Exporting the final products}
+\label{sec:export_final_products}
+
+
+\input{../common/common_export}
+ 
+ 
+Exported products are organized by `DATASET` (named as the first
+scientific exposure of the dataset), and `TIMESTAMP` (time of start of
+reduction)
+
+The final products saved in the specified directory are: 
+
+\begin{itemize}
+\item The 1D extracted spectra. One file for the blue spectroscopic arm, file name starting with `SPECTRUM\_1D\_BLUE\_'. And two files for the red spectroscopic arm, one file per chip, file names starting with `SPECTRUM\_1D\_REDL\_' and `SPECTRUM\_1D\_REDU\_', respectively.
+\item If individual exposures of the same target have been combined, then the combined spectra have file names starting with `SPECTRUM\_COMBINED\_'.
+\end{itemize}

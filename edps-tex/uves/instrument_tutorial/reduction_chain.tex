@@ -1,0 +1,223 @@
+\section{The \instname\ data reduction flow.}
+\label{sec:reduction_flow}
+\input{../common/common_reduction_flow}
+
+UVES can be operated standalone or together with the FLAMES instrument. If a
+destinction between these two operational modes is needed in this tutorial, then
+the former is referred to as `UVES (Slit)' and the latter as `UVES-Fibre'. 
+
+The two spectroscopic arms of UVES, i.e., the blue and the red arm, are processed separately. 
+For the blue arm, the pipeline recipes create one product per product category whereas for the
+red arm, usually two products are created, one for the `lower' and one for the `upper' chip. These
+different products can be distinguished by the tags {\tt \_BLUE}, {\tt \_REDL}, and {\tt \_REDU} in their
+{\tt PRO CATG} header keywords. For example, a complete set of raw blue and red bias calibrations
+gives three master calibrations having {\tt PRO CATG} values of {\tt MASTER\_BIAS\_BLUE}, {\tt MASTER\_BIAS\_REDL}, and
+{\tt MASTER\_BIAS\_REDU}, respectively. In the following description, {\tt <CHIP>} can be one of
+{\tt BLUE}, {\tt REDL}, or {\tt REDU}.
+
+\section{UVES (Slit) data reduction}
+\subsection{Master bias}
+
+Task: {\tt bias}. Recipe: {\tt uves\_cal\_mbias}. Output: {\tt MASTER\_BIAS\_<CHIP>}.
+
+This task creates a master bias for each chip. A minimum of three input frames is required.
+
+\subsection{Initial order and wavelength solution}
+
+Task: {\tt predict}. Recipe: {\tt uves\_cal\_predict}. Output: {\tt LINE\_GUESS\_TAB\_<CHIP>} and \newline
+{\tt ORDER\_GUESS\_TAB\_<CHIP>}.
+
+This task creates the initial guess for the order and wavelength identification.
+
+\subsection{Order positions}
+
+Task: {\tt orderpos}. Recipe: {\tt uves\_cal\_orderpos}. Output: {\tt ORDER\_TABLE\_<CHIP>}.
+
+This task creates the final identification of the Echelle orders.
+
+\subsection{Master flat field}
+
+Task: {\tt flat}. Recipe: {\tt uves\_cal\_mflat}. Main output: {\tt  MASTER\_FLAT\_<CHIP>}.
+
+This task creates the master flat for the `regular' lamp flat fields (which have {\tt DPR TYPE = 
+LAMP,FLAT}). The workflow also supports the usage of flat fields taken with the deuterium lamp
+({\tt DPR TYPE = LAMP,DFLAT}) and of flats where the iodine cell is inserted into the light path
+({\tt DPR TYPE = LAMP,IFLAT}). 
+
+The deuterium lamp flats are recommended for the spectral region shorter than 350 nm. 
+They are taken as supplementary calibrations for
+the UVES blue arm central wavelength setting of 346 nm. 
+If deuterium flats are present in the data set,
+then they are combined with the regular lamp flats into a combined master flat that provides much better
+S/N shorter than 350 nm. The tasks {\tt dflat} and {\tt combined\_flat} are executed in addition to the
+{\tt flat} task.
+
+The iodine cell flats are provided only for the red 600 nm setting. They contain the the iodine cell
+absorption lines superimposed on the flat-field spectrum. The task {\tt iflat} is executed then.
+
+\subsection{Wavelength calibration}
+
+Task: {\tt arc}. Recipe: {\tt uves\_cal\_wavecal}. Output: {\tt LINE\_TABLE\_<CHIP>}.
+
+The wavelength calibration is determined from Th-Ar arc-lamp exposures.
+
+\subsection{Response curve}
+
+Task: {\tt response}. Recipe: {\tt uves\_cal\_response}. Output: {\tt INSTR\_RESPONSE\_FINE\_<CHIP>}.
+
+Flux calibration can be obtained either by processing an observation of a flux standard or by
+applying a master response curve. If a raw standard star calibration is present in the data set,
+then this observation is processed by the {\tt response} task. The resulting response curve is then
+used during processing of the science data. Master response curves are available for a number of
+setups. If a raw standard star observation is not present but a matching master response is found, then
+the latter is used for the flux calibration. If neither a raw standard nor a master response is 
+present in the data set, then the extracted science spectrum is not flux calibrated.
+
+\subsection{Spectrum extraction}
+\label{sec:extraction}
+
+Task: {\tt object}. Recipe: {\tt uves\_obs\_scired}. 
+
+This task extracts the spectrum and wavelength calibrates it. If a response curve is available, then 
+the spectrum is also flux-calibrated. The main output files are listed in Table~\ref{tab:object-output}.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Product} & \textbf{Description} \\
+\hline 
+{\tt RED\_SCI\_<TYPE>\_<CHIP>}               &extracted, flat-fielded, wavelength-calibrated, \\
+                                             &order-merged, and sky-subtracted science spectrum\\
+{\tt ERRORBAR\_SCI\_<TYPE>\_<CHIP>}          &uncertainty on {\tt RED\_SCI\_<TYPE>\_<CHIP>}\\
+{\tt FLUXCAL\_SCI\_<TYPE>\_<CHIP>}           &flux-calibrated version of\\
+                                             &{\tt RED\_SCI\_<TYPE>\_<CHIP>}\\
+{\tt FLUXCAL\_ERRORBAR\_SCI\_<TYPE>\_<CHIP>} &uncertainty on {\tt FLUXCAL\_SCI\_<TYPE>\_<CHIP>}\\
+\hline
+\end{tabular}
+\caption{Main output products from the {\tt object} task. For the values of {\tt <TYPE>}, see Table~\ref{tab:object-types}}
+\label{tab:object-output}
+\end{table}
+
+The {\tt PRO CATG} depends on whether or not the image slicer and/or the absorption cell has been used.
+See Table~\ref{tab:object-types}. 
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{<TYPE>} & \textbf{Description} \\
+\hline 
+{\tt POINT}               &Regular slit observation\\
+{\tt SLICER}              &Observation using the image slicer\\
+{\tt ABSCELL}             &Observation using the absorption cell\\
+{\tt SLICABSCELL}         &Observation using the image slicer and the absorption cell\\
+\hline
+\end{tabular}
+\caption{Possible values for {\tt <TYPE>}}
+\label{tab:object-types}
+\end{table}
+
+The object spectrum is extracted using either {\tt optimal} extraction (default), 
+{\tt linear} extraction (summing the flux within the extraction slit), 
+{\tt average} extraction (averaging the flux within the extraction slit),
+or the {\tt 2d} method (resampling the full slit length to a 2-dimensional image,
+with wavelength along the x-axis and position along the slit along the y-axis, 
+best suited for extended sources). In the latter case, output products have an additional tag
+`{\tt 2D}' in their {\tt PRO CATG} values. The recipe parameter that controls the extraction
+method is {\tt reduce.extract.method}.
+More details on spectrum extraction can be found in Sect.~\ref{sect:optimizing_extraction}.
+
+If the spectrum is optimally extracted, cosmic rays are detected and rejected, 
+and the sky is fitted and subtracted during the extraction. 
+If linear/average extraction is used, then the sky is extracted in windows above and below
+the object and subsequently subtracted 
+(if the recipe parameter {\tt reduce.skysub} is set to the default value TRUE).
+
+\subsection{Phase 3 compatible science product}
+
+Task: {\tt science\_slit}. Recipe: {\tt uves\_utl\_idp}. \newline
+Output: {\tt RED\_SCI\_<TYPE>\_BLUE} or {\tt RED\_SCI\_<TYPE>\_RED} or 
+{\tt FLUXCAL\_SCI\_<TYPE>\_BLUE} or {\tt FLUXCAL\_SCI\_<TYPE>\_RED}.
+
+This task takes the output from {\tt object} and converts it into a single product that is
+compatible with the ESO Phase 3 standard. The files are converted from
+1D image format into a table with columns for the wavelength, the flux, the error, etc. Also,
+the two spectra for the red arm are merged into a single file.
+
+\subsection{Spectrum combination}
+
+Task: {\tt combine\_spectra}. Recipe: {\tt esotk\_spectrum1d\_combine}. \newline
+Output: {\tt ESOTK\_SPECTRUM\_IDP\_FORMAT}.
+
+This task stacks two or more spectra from the same target (and with the same setup).
+It requires as input the output from {\tt science\_slit}.
+
+\section{UVES-Fibre data reduction}
+
+In case of UVES-Fibre, <CHIP> can be `REDL' or `REDU'.
+
+\subsection{Master bias}
+
+Task: {\tt bias}. Recipe: {\tt uves\_cal\_mbias}. Output: {\tt MASTER\_BIAS\_<CHIP>}.
+
+This task creates a master bias for each chip. A minimum of three input frames is required.
+
+\subsection{Initial order and wavelength solution}
+
+Task: {\tt predict\_mos}. Recipe: {\tt flames\_cal\_predict}.
+\newline Output: {\tt FIB\_LIN\_GUE\_<CHIP>} and 
+{\tt FIB\_ORD\_GUE\_<CHIP>}.
+
+This task creates the initial guess for the order and wavelength identification.
+
+\subsection{Order positions}
+
+Task: {\tt orderpos\_mos}. Recipe: {\tt flames\_cal\_orderpos}. 
+\newline Output: {\tt FIB\_ORD\_TAB\_<CHIP>} and {\tt FIB\_ORDEF\_<CHIP>}.
+
+This task creates the final identification of the Echelle orders.
+
+\subsection{Master flat field}
+
+Task: {\tt flat\_mos}. Recipe: {\tt flames\_cal\_mkmaster}. Main output: {\tt  MASTER\_SFLAT\_<CHIP>}.
+
+This task creates the (slit) master flat fields for three different positions on
+the chip. Therefore, there are three files for each category.
+
+\subsection{Fibre flat field}
+
+Task: {\tt sff\_ofpos\_mos}. Recipe: {\tt flames\_cal\_prep\_sff\_ofpos}.\newline
+Main output: {\tt FIB\_ORDEF\_TABLE\_<CHIP>}.
+
+This task is used to determine the fibre order table and to construct several 
+master calibrations needed to extract the science fibres.
+
+\subsection{Wavelength calibration}
+
+Task: {\tt arc\_mos}. Recipe: {\tt flames\_cal\_wavecal}. Output: {\tt FIB\_LINE\_TABLE\_<CHIP>}.
+
+The wavelength calibration is determined from Th-Ar arc-lamp exposures.
+
+\subsection{Spectrum extraction}
+
+Task: {\tt object\_mos}. Recipe: {\tt flames\_obs\_scired}. 
+
+This task extracts the spectra for each fibre. The main output files are listed
+in Table~\ref{tab:mos_output}.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Product} & \textbf{Description} \\
+\hline 
+{\tt MWXB\_SCI\_<CHIP>}               &extracted, flat-fielded, wavelength-calibrated, order-merged,\\
+                                             &and fibre throughput corrected science spectrum;\\
+                                      &one file for each fibre\\
+{\tt ERR\_MWXB\_SCI\_<CHIP>}          &error for {\tt MWXB\_SCI\_<CHIP>}\\
+\hline
+\end{tabular}
+\caption{Main output products from the {\tt object\_mos} task}
+\label{tab:mos_output}
+\end{table}

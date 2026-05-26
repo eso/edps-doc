@@ -1,0 +1,52 @@
+\section{List of workflow tasks}
+
+This is the list of all the tasks and associated recipes in the
+\instname\ workflow.  Only some of them are needed for scientific
+reduction, they are indicated by the flag "yes" (triggered by default)
+or "optional" (triggered only if requested by a workflow
+parameter). Other tasks are not used for scientific reduction (they
+are indicated by the flag "no"), they are mainly used for instrument
+monitoring and they can be executed only by specifying them as
+target. Note that, when a task is specified as target, all the tasks
+that generate the calibrations needed for it are automatically
+executed.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\begin{tabular}{|l|l|l|p{7cm}|}
+\hline
+\textbf{TASK} & \textbf{RECIPE} & \textbf{Used in science} & \textbf{Notes} \\
+ & &\textbf{reduction} & \\
+\hline 
+arc              &uves\_cal\_wavecal &yes      &Computes the wavelength calibration (UVES Slit) \\
+arc\_mos         &flames\_cal\_wavecal &yes      &Computes the wavelength calibration for UVES-Fibre \\
+bias             &uves\_cal\_mbias     &yes      &Creates a master bias \\
+ccdtest          &detmon\_opt\_lg      &no       &Processes technical calibrations for detector monitoring\\
+cd\_align        &uves\_cal\_cd\_align &no       &Technical calibrations to check alignment of cross dispersers\\
+combine\_spectra &esotk\_spectrum1d\_combine &yes      &Combines spectra from different exposures on same target\\
+combined\_flat   &uves\_cal\_mflat\_combine  &optional &Combines regular and Deuterium master flat fields\\
+dark             &uves\_cal\_mdark           &no       &Computes the dark current\\
+dflat            &uves\_cal\_mflat           &optional &Creates a master flat from Deuterium flats\\
+efficiency       &uves\_cal\_response        &no       &Processes standard stars for efficiency monitoring\\
+flat             &uves\_cal\_mflat           &yes      &Creates a master flat (UVES Slit)\\
+flat\_mos        &flames\_cal\_mkmaster      &yes      &Creates a set of 3 master flats for UVES-Fibre\\
+iflat            &uves\_cal\_mflat           &yes      &Creates a master flat for the Iodine cell\\
+object           &uves\_obs\_scired          &yes      &Spectrum extraction (UVES slit)\\
+object\_mos      &flames\_obs\_scired        &yes      &Spectrum extraction (UVES-Fibre)\\
+orderpos         &uves\_cal\_orderpos        &yes      &Determines the order positions (UVES Slit)\\
+orderpos\_mos    &flames\_cal\_orderpos      &yes      &Determines the order positions (UVES-Fibre)\\
+pdark            &uves\_cal\_mdark           &no       &Computes the dark current from open-shutter dark exposures\\
+plot\_focus      &{\it none}                 &no       &Technical task for monitoring\\
+predict          &uves\_cal\_predict         &yes      &Computes first guess solutions for order and wavelength tables\\
+predict\_mos     &flames\_cal\_predict       &yes      &Computes first guess solutions (UVES-Fibre)\\
+response         &uves\_cal\_response        &yes      &Computes the response curve from a flux standard star\\
+science\_slit    &uves\_utl\_idp             &yes      &Creates a science product compatible with ESO Phase 3\\
+sff\_ofpos\_mos  &flames\_cal\_prep\_sff\_ofpos &yes   &Computes the final flats for UVES-Fibre\\
+solar            &uves\_obs\_scired          &optional &Spectrum extraction for reflected solar observations\\
+telluric         &uves\_cal\_response        &no       &Processes telluric standard stars for monitoring\\
+tflat            &uves\_cal\_tflat           &no       &Processes special lamp flats for monitoring\\
+\hline
+\end{tabular}
+\caption{\instname\ pipeline tasks overview}
+\end{table}

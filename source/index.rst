@@ -50,6 +50,7 @@ EDPS documentation
    sphere-irdis/index.rst
    sphere-zimpol/index.rst
    #uves/index.rst
+   uves_pdf.md
    #fors/index.rst
    #visir/index.rst
    xshooter/index.rst
