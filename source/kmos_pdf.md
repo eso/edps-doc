@@ -1,2 +1,2 @@
 # KMOS tutorial
-A PDF tutorial is available [here.](https://raw.githubusercontent.com/eso/edps-doc/main/edps-tex/kmos/kmos-edpsgui_tutorial.pdf)
+A PDF tutorial is available [here.](https://ftp.eso.org/pub/edps/kmos-edpsgui_tutorial.pdf)
