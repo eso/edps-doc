@@ -5,7 +5,7 @@ CURDIR :=$(shell pwd)
 PIPEDOC_COMMON :=$(CURDIR)/pipeline_user_man
 EDPSGUI_COMMON :=$(CURDIR)/common
 EDPSGUI_TUT_DIR :=$(CURDIR)/instrument_tutorial
-INSTRUMENT := UVES
+INSTRUMENT := uves
 .PHONY: all edpsgui clean view
 
 all: edpsgui
