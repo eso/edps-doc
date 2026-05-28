@@ -26,8 +26,8 @@ pdf_check: $(INSTRUMENT_EDPSGUI_TUT_DIR)/edpsgui_$(INSTRUMENT)_tutorial.pdf
 	perl -nle '$$done{$$1}++ or system("wget -q -O /dev/null $$1") ? die $$1 : print $$1 while s/\bURI\/URI\(([fht]+tp[^\)]+)\)//i' $(INSTRUMENT_EDPSGUI_TUT_DIR)/edpsgui_$(INSTRUMENT)_tutorial.pdf
 
 mv:
-	mv  edpsgui_$(INSTRUMENT)_tutorial.pdf ..
-
+	cp  edpsgui_$(INSTRUMENT)_tutorial.pdf ../$(INSTRUMENT)-tutorial-$(TUT_VERSION).pdf
+	mv  edpsgui_$(INSTRUMENT)_tutorial.pdf ../$(INSTRUMENT)-edpsgui_tutorial.pdf
 
 #  iiinstrument-pipe-recipes.html
 install: $(INSTRUMENT_EDPSGUI_TUT_DIR)/edpsgui_$(INSTRUMENT)_tutorial.pdf

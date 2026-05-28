@@ -1,12 +1,12 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.3.20)  30 APR 2026 12:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.3.20)  26 MAY 2026 14:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**/home/lcoccato/data/eso-pipelines/edps-tex/quick-guide/instrument_tutorial/..
-/instrument_tutorial/edpsgui_quick-guide_tutorial
+**/home/lcoccato/data/eso-pipelines/edps-doc/edps-tex/quick-guide/instrument_tu
+torial/../instrument_tutorial/edpsgui_quick-guide_tutorial
 
-(/home/lcoccato/data/eso-pipelines/edps-tex/quick-guide/instrument_tutorial/../
-instrument_tutorial/edpsgui_quick-guide_tutorial.tex
+(/home/lcoccato/data/eso-pipelines/edps-doc/edps-tex/quick-guide/instrument_tut
+orial/../instrument_tutorial/edpsgui_quick-guide_tutorial.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -297,8 +297,8 @@ Package hyperref Warning: Values of option `pdfpagemode':
 (hyperref)                Unknown value `None' on input line 53.
 
 
-(/home/lcoccato/data/eso-pipelines/edps-tex/quick-guide/instrument_tutorial/../
-layout.tex (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+(/home/lcoccato/data/eso-pipelines/edps-doc/edps-tex/quick-guide/instrument_tut
+orial/../layout.tex (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2024/01/07 v24.1 The Babel package
 \babel@savecnt=\count288
 \U@D=\dimen160
@@ -410,8 +410,8 @@ Package: epsfig 2017/06/25 v1.7b (e)psfig emulation (SPQR)
 \c@subfigure=\count299
 \c@docref=\count300
 ))
-(/home/lcoccato/data/eso-pipelines/edps-tex/quick-guide/instrument_tutorial/../
-shortcut.tex)
+(/home/lcoccato/data/eso-pipelines/edps-doc/edps-tex/quick-guide/instrument_tut
+orial/../shortcut.tex)
 \@indexfile=\write3
 \openout3 = `edpsgui_quick-guide_tutorial.idx'.
 
@@ -510,8 +510,8 @@ st/fonts/enc/dvips/base/8r.enc} <./eso-logo.png (PNG copy)>] [2] [3
 ] [6
 
 ] (./intro.tex
-(/home/lcoccato/data/eso-pipelines/edps-tex/quick-guide/instrument_tutorial/../
-common/what_is_edps.tex)) (./installation.tex [7
+(/home/lcoccato/data/eso-pipelines/edps-doc/edps-tex/quick-guide/instrument_tut
+orial/../common/what_is_edps.tex)) (./installation.tex [7
 
 ]
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 9
@@ -535,12 +535,12 @@ anged.
  ) 
 Here is how much of TeX's memory you used:
  11707 strings out of 474222
- 186056 string characters out of 5748733
+ 186155 string characters out of 5748733
  1937975 words of memory out of 5000000
  33744 multiletter control sequences out of 15000+600000
  592837 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,20n,93p,382b,482s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,20n,93p,391b,482s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type
