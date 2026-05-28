@@ -1,0 +1,104 @@
+The data reduction of each dataset can be configured according to the scientific needs using an appropriate configuration editor.
+
+
+The \edps\ workflows contain two types of parameters and they both
+have default values that can be modified to improve the data
+reduction.
+\begin{itemize}
+
+\item {\bf Workflow parameters} (for some workflows only) are global and they are applied to the entire workflow. They are accessible both in the `Raw Data`
+tab, prior to the creation og a dataset, and in the `Reduction
+Configuration` editor, in the `Reduction queue` tab.  Note: some
+workflow parameters were already configured before creating the
+dataset and sending it to the reduction queue.  Here, they can be
+changed again. Please, note that the parameters have an effect only on
+the files that are already in the dataset.  If one specifies a
+parameter that should include extra files in the dataset (e.g., the
+inclusion of more calibrations), files are not added and the reduction
+might fail.  If you need to change a parameter that modifies the
+dataset content, please go back to the Raw data tab and create a new
+dataset.
+
+\item {\bf Recipe parameters} are specific to the individual recipes and can be configured per task. They are accessible in the `Reduction Configuration` editor, in the `Reduction queue` tab.
+
+\end{itemize}
+
+This editor allows to configure the data reduction for a given dataset
+by specifying workflow and recipe parameters.
+
+
+
+Note: some workflow parameters were already configured before creating the dataset and sending it to the reduction queue.
+Here, they can be changed again. Please, note that the parameters have an effect only on the files that are already in the dataset. 
+If one specifies a parameter that should include extra files in the dataset (e.g., the inclusion of more calibrations), files are not added and the reduction might fail. 
+If you need to change a parameter that modifies the dataset content, please go back to the Raw data tab and create a new dataset.
+
+
+
+
+
+To open the editor, click on
+the wheel button \includegraphics[width=0.8cm]{../common/figures/configure_dataset.jpg} next to the dataset you desire to configure the reduction for. A window with the
+configuration editor appears as shown Figure \ref{fig:configuration_editor_0}.
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{../instrument_tutorial/figures/configuration_editor_0.jpg}
+\caption{The Reduction Configuration editor. It contains 4 sections, that indicate the current configuration, list of other configurations to set, comments to insert, and the parameters to modify.}
+\label{fig:configuration_editor_0}
+\end{figure}
+
+
+
+The editor is divided into 4 parts, which can be accessed pressing the corresponding expansion arrow. 
+\begin{itemize}
+
+\item {\bf Current configuration.} It indicates the name of the selected configuration for a given dataset (Figure \ref{fig:configuration_editor_1}).
+
+\item {\bf Other configurations.} It allows to specify other configurations, to which the changes shall be copied to (Figure \ref{fig:configuration_editor_2}.
+
+\item {\bf Comment} It allows to specify a comment to describe the configuration. It is possible to append or replace a comment (Figure \ref{fig:configuration_editor_3}).
+Comments can be changed on all configurations. It is possible to save the comment for the current configuration only, or for all
+the selected configurations.
+
+\item {\bf Parameters.} A window as in Figure \ref{fig:configuration_editor_4} appears.
+\input{../common/workflow_parameters}
+
+\end{itemize}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{../instrument_tutorial/figures/configuration_editor_1.jpg}
+\caption{The first part of the Reduction Configuration Editor, that indicates the selected configuration.}
+\label{fig:configuration_editor_1}
+\end{figure}
+ 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{../instrument_tutorial/figures/configuration_editor_2.jpg}
+\caption{The second part of the Reduction Configuration Editor, that indicates other configurations for which we'd like to apply the changes.}
+\label{fig:configuration_editor_2}
+\end{figure}
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{../instrument_tutorial/figures/configuration_editor_3.jpg}
+\caption{The third part of the Reduction Configuration Editor, that allows to specify a comment to the selected configurations.}
+\label{fig:configuration_editor_3}
+\end{figure}
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{../instrument_tutorial/figures/configuration_editor_4.jpg}
+\caption{The fourth part of the Reduction Configuration Editor, that allows to specify the parameters sets and the recipe parameter per task. These settings can be applied to the "Selected Configuration" (Fig. \ref{fig:configuration_editor_1}) or to the "Other Configurations (Fig. \ref{fig:configuration_editor_2}). }
+\label{fig:configuration_editor_4}
+\end{figure}
+
+
+
+
+

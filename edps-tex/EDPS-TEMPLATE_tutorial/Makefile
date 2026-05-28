@@ -1,5 +1,5 @@
-TUTORIAL_VERSION=0.9
-TUTORIAL_REVISION=20260515
+GUI_VERSION=0.91
+TUTORIAL_REVISION=20260615
 
 CURDIR :=$(shell pwd)
 PIPEDOC_COMMON :=$(CURDIR)/pipeline_user_man
@@ -17,13 +17,13 @@ edpsgui:
 
 view:
 
-	evince $(INSTRUMENT)-edpsgui-tutorial-$(TUTORIAL_VERSION)_$(TUTORIAL_REVISION).pdf &
+	evince $(INSTRUMENT)-edpsgui-tutorial-$(GUI_VERSION)_$(TUTORIAL_REVISION).pdf &
 
 clean:
 
 	cd  $(EDPSGUI_TUT_DIR)  && $(MAKE) clean
 
-	rm -f $(INSTRUMENT)--edpsgui-tutorial-$(TUTORIAL_VERSION)_$(TUTORIAL_REVISION).pdf
+	rm -f $(INSTRUMENT)--edpsgui-tutorial-$(GUI_VERSION)_$(TUTORIAL_REVISION).pdf
 
 
 .NOTPARALLEL:

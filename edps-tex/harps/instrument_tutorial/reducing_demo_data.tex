@@ -1,0 +1,43 @@
+
+\section{Reducing demo data}
+\label{sec:reducing_demo_data}
+
+\input{../common/common_reducing_demo_data}
+
+ 
+\subsubsection{Quality plots}
+\input{../common/quality_plots}
+
+{\bf Important note.} The current version of the \instname\ workflow (\pipelinevers) does not produce any plot. It is however possible to access other informations via the magnifying glass symbol, such as the list of input and output files (that can be visualized via fits viewers), the recipe parameters and logs.
+
+
+\subsection{Exporting the final products}
+\label{sec:export_final_products}
+
+
+\input{../common/common_export}
+ 
+ 
+Exported products are organized by `DATASET` (named as the first
+scientific exposure of the dataset), and `TIMESTAMP` (time of start of
+reduction)
+
+The final products saved in the specified directory are: 
+
+
+\begin{itemize}
+\item {\bf Combined spectra}If the data are combined, the extracted combined spectrum is saved with the name:
+\begin{itemize}
+\item SPECTRUM\_COMBINED\_<obs.targ.name>. Where obs.tar.name is the name of the target, as read from the header of the first spectrum in the stack. Note that the recipe {\tt esotk\_spectrum1d\_combine} from the eso-tk package needs to be installed together with the \pipename\ pipeline.
+\end{itemize}
+Note that for polarimetric data, the combination is not done, only individual exposures are saved.
+
+\item {\bf Individual exposures.}
+The individual exposures that contributed to the combination are saved in a sub-directory. The saved files are:
+\begin{itemize}
+\item SPECTRUM\_A\_<exposure\_name>.fits. Extracted spectrum on fibre A (target). Flux calibrated if 
+\item SPECTRUM\_B\_<exposure\_name>.fits. Extracted spectrum on fibre B (sky or calibration unit). Not flux calibrated.
+\end{itemize}
+For polarimetric data, the two spectra A and B show the different polarization channels of the same target. Please, compare the columns FLUX\_EL of the two spectra to have them in the same units (electrons).
+
+\end{itemize}

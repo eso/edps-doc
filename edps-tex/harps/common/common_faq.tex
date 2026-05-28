@@ -1,0 +1,96 @@
+\begin{itemize}
+\item {\bf Q1) Where can I find the final reduced data?}
+
+{\bf Answer:} all the products of all the datasets and the reductions are saved into the EDPS\_data directory, specified when
+executing the \edpsgui\ for the first time. One can decide to export only the final products for selected datasets and
+only for the desired reduction attempts into another location for further analysis. See Section \ref{sec:export_final_products} for further instructions.
+
+
+\item {\bf Q2) How do I stop the application?}
+
+{\bf Answer:} Proceed as follows:
+
+\begin{enumerate}
+\item Press “Stop EDPS” in the Dashboard.
+
+\item  Type Ctrl-C in the terminal where the application is running. If the
+   application doesn’t terminate, type Ctrl-C again.
+
+\item  Alternatively, kill the ‘panel serve’ process on your system, for example:
+\begin{verbatim}
+  ps -e | grep panel # get the process ID of the gui (<pid>).
+  kill -9 <pid>
+\end{verbatim}
+\end{enumerate}
+
+\item {\bf Q3) I have closed the browser window where the application is running. How can I reopen the application?}
+
+{\bf Answer:} Point your browser to: \verb|http://localhost:5006/edps-gui|
+
+\item {\bf Q4) Where can I find some data that I can use to test the application?}
+
+{\bf Answer:} Install the `datademo` package provided with the pipeline installation or download the “Demo Data” package from 
+\href{https://www.eso.org/sci/software/pipe_aem_table.html}{https://www.eso.org/sci/software/pipe\_aem\_table.html}.
+
+Please note that the demo data can be large (tens of Gigabytes).
+
+A convenient script to download demo data for any pipeline is also available and can be used from the command line:
+\begin{verbatim}
+	curl -O https://eso.org/sci/software/apptainer/eso_download_demodata.sh  
+	bash ./eso_download_demodata.sh 
+\end{verbatim}
+
+\item {\bf Q5) How can I start the edps-gui if the following message appears?}
+\begin{verbatim}
+	Cannot start Bokeh server, port 5006 is already in use
+\end{verbatim}
+
+
+{\bf Answer:} The panel server was not closed properly. Kill it by typing:
+\begin{verbatim}
+   	ps -e | grep panel # get the process ID of the gui (<pid>).
+   	kill -9 <pid>
+\end{verbatim}
+
+\item {\bf Q6) How do I get additional support on EDPS or data reduction in general?}
+
+{\bf Answer:} For suggestions, questions, or feedback in general, please open a ticket with the EDPS Support
+team. This 
+\href{https://support.eso.org/new-ticket?ticket%5Bticket_field_13%5D%5Bdata%5D=227}
+{https://support.eso.org/new-ticket?ticket\%5Bticket\_field\_13\%5D\%5Bdata\%5D=227}
+should take you directly to a webpage for creating and \edps\ feedback ticket, but
+in case you want to navigate there ’manually’, go to \href{https://support.eso.org}{https://support.eso.org}, login, click on
+"Submit Helpdesk Ticket", and specify the Help topic: "Post Observations", "ESO Data Processing
+System [EDPS]".
+
+\item {\bf Q7) I have a lot of disk space, but when I install \edps\ with {\tt pip} or an ESO pipeline with {\tt Homebrew} I get the error message: {\tt Cannot mkdir: No space left on device}. How do I fix it?}
+
+{\bf Answer:} This depends on how much disk space is allocated to the {\tt /home}, {\tt /var}, and {\tt /tmp} directories. The final solution would be
+to resize the space allocated to the in the organization of the filesystem. However, we list here few tricks that might do the job.
+\begin{itemize}
+   \item  Clearing the pip .cache to make space for new packages. Type the command:
+\begin{verbatim}
+    pip cache purge
+\end{verbatim}
+   before installing \edps.
+
+   \item Redirect the cache, {\tt Homebrew} temporary build directories into a partition with enough space. Set some of the following environmental variables in your {\tt .bashrc} file:
+\begin{verbatim}
+    export HOMEBREW_CACHE=<path_to_new_cache_directory>
+    export XDG_CACHE_HOME=<path_to_new_cache_directory>
+    export HOMEBREW_TEMP=<path_to_new_temporary_directory>
+    export TMPDIR=<path_to_new_temporary_directory>
+\end{verbatim}
+   The first moves only the location of {\tt Homebrew} cache, the second the cache of most applications (instead of the default {\tt /home/username/.cache}), the third moves the directory where {\tt Homebrew} builds, extracts, and saves temporary files (instead of the defaults {\tt /tmp} and {\tt /var/tmp}).
+The last changes the global system temporary directory and affects most of the linux commands.
+
+   \item  As extreme measure, one can move the {\tt /home/linuxbrew/.linuxbrew} directory somewhere else, and create a symbolic link in {\tt /home/linuxbrew}. For example:
+\begin{verbatim}
+    cd /home/linuxbrew
+    mv -f .linuxbrew <path_to_new_directory>
+    ln -s <path_to_new_directory> .linuxbrew
+\end{verbatim}
+   {\it Important note}: this operation might break some internal links. Recipes requiring external packages such as {\tt telluriccorr} might not work (impacts on KMOS, XSHOOTER, FORS2, and MOLECFIT pipelines). 
+
+\end{itemize}
+\end{itemize}

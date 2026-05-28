@@ -1,0 +1,104 @@
+\section{The \instname\ data reduction flow.}
+\label{sec:reduction_flow}
+\input{../common/common_reduction_flow}
+
+
+
+
+\subsection{Flats and Tracing}
+
+The subworkflow {\bf flats and tracing} is responsible to determine
+the traces of the various orders on the detector, determine the order
+profile, the pixel-to-pixel efficiency variations, and the blaze
+function. These steps are carried by the following 3 tasks within the
+subworflow:
+
+\subsubsection{Led flats}
+
+The task {\bf led\_flats} runs the recipe {\tt espdr\_led\_ff} to
+process led exposures and determine maps of bad pixels.  In a typical
+dataset, led flat fields are not present and static calibrations that
+map the bad pixels (whose location is very stable) are used instead.
+
+
+\subsubsection{Order Definition}
+
+The task {\bf order\_definition} runs the recipe {\tt espdr\_orderdef}
+to trace the various orders on the detector by using thungsten
+lamps. Typically, the default values give already good results. In
+some rare occasions, the presence of strong cosmic rays makes the
+recipe to fail; there are no recipe parameters that deal with cosmic
+rays rejection, therefore cleaning the input files before processing
+is the only option if the problem occurs.
+
+\subsubsection{Flat Fielding}
+
+The task {\bf lamp\_flats} runs the recipe espdr\_mflat and generates
+calibrations needed to correct for pixel to pixel variation and the
+blaze function. Typically, the default values give already good
+results. If ``suspicious bumps'' are seen in the masterflat or blaze
+function, it could be an indication that the intra-order background
+was badly subtracted (very rare). In this case, the recipe parameters
+that can be changed to improve the results are:
+
+\begin{verbatim}
+background_sw       : Background subtraction activation (on/off). [on]
+bkgr_grid_size_x    : Grid size in x used to calculate the background,
+                      between: 16 and 10000. [577]
+bkgr_grid_size_y    : Grid size in y used to calculate the background,
+\end{verbatim}
+
+\subsection{Wavelength calibration}
+
+The subworkflow {\bf wavelength\_calibration} executes two tasks {\bf
+  wave\_thar\_fp} {\bf wave\_thar\_thar}, which both run the recipe
+{\tt espdr\_wave\_TH\_drift}. They generate the wavelength solution to
+be applied to the science data using Thorium-Argon lamps and
+Fabry-Perot exposures.
+
+ Typically, the default values give already good results.  In some
+ rare occasions, the presence of strong cosmic rays makes the recipe
+ to fail; there are no recipe parameters that deal with cosmic rays
+ rejection, therefore cleaning the input files before processing is
+ the only option if the problem occurs.
+
+In some rare cases, the peaks of the emission lies are not enough
+intense and the recipe can miss some identifications. In the
+unfortunate event that none of the peaks that should be identified in
+both orders are detected, the recipe cannot "connect" the wavelenght
+solution between orders and it fails. The error message in the recipe
+log in this case is:
+
+\begin{verbatim}
+[ ERROR ] espdr\_wave_THAR: espdr_get_all_FP_ll_whole_image failed:
+Input data do not match
+\end{verbatim}
+
+In some cases, this situation can be avoided by changing the recipe
+parameter {\bf fp\_extraction\_ksigma}.
+
+\subsection{Contamination Thar and Contamination FP}
+
+These two tasks determines the amount of mutual contamination between
+the two fibres when exposes with Thorium-Argon or Fabry-Perot lamps by
+running the recipe {\tt espdr\_cal\_contam}. Typically, only data to
+determine the contamination from Thorium-Argon lamps are present.
+Default values give already good results.
+
+\subsection{Flux calibration}
+
+\subsection{Other tasks and workflow not associated to the scientific reduction}
+
+\subsubsection{Efficiency}
+\subsubsection{Detector properties}
+
+\begin{itemize}
+
+\item {\bf Detector\_monitoring}
+
+\item{\bf Dark} This task runs the recipe {\tt
+  espdr\_mdark} to determine hot pixel mask. In a typical scientific
+  dataset, raw darks are not present and static calibrations that map
+  the hot pixels (whose location is very stable) are used instead; the
+  reduction of dark frames is mainly used for instrument monitoring.
+\end{itemize}
