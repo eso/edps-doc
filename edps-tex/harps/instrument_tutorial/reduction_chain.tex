@@ -86,19 +86,172 @@ determine the contamination from Thorium-Argon lamps are present.
 Default values give already good results.
 
 \subsection{Flux calibration}
+The task {\bf flux\_calibration} runs the recipe {\tt
+  espdr\_cal\_flux} to reduce flux standards for the flux calibration
+of data. Default values give already good results, however, given flux
+standard are taken seldomly in the \instname\ calibration plan, it is
+common that a flux standard weeks apart from the data is
+associated. Therefore, while a relative flux calibration is still ok,
+the absolute flux calibration is very uncertain.
+
+\subsection{Object}
+
+The task {\bf Object} runs the recipe {\tt espdr\_sci\_red}, reduces
+science spectra by applying all the calibrations, corrects telluric
+absoprtion features (if requested), and computes the heliocentric
+radial velocity. Typicallt default values give the best
+results.
+
+By default, spectra are not telluric corrected. This is because the
+telluric correction step for \instname\ spectra is still sub-optimal and
+can leave residuals on the final 1D spectrum. To activate the telluric
+correction and assess whether its quality is good for the science
+needs, set the recipe paramters {\tt telluric\_corr\_sw} to 1 in this
+task.
+
+\subsubsection{Sky subtraction}
+
+For very low S/N regime, readout limited or close to it, it is
+recommended to use the option smooth for sky subtraction, thus
+reducing the readout noise contribution from the step of sky
+subtraction. This can be done by setting the recipe parameter {\tt
+  sky\_corr\_method} to {\tt smoothed} in the configuration editor.
+
+Note: sky subtraction is automatically switched off for
+polarimetric observations.
+\subsubsection{Background intra-order contamination}
+
+The recipe parameter {\tt background\_sw} removes the intra-order
+diffuse background contamination (it does not have to be
+mis-interpreted by sky background, which is regulated by {\tt
+  sky\_sub\_method} and active only for OB- JECT,SKY observations). It
+is evaluated on boxes of size {\tt sci\_bkgr\_grid\_size\_x} $\times$
+{\tt sci\_bkgr\_grid\_size\_y} and then interpolated all over the
+frame. The diffuse background is proportional to the dispersed light
+inside the spectrograph (and thus, to a good approximation, to the
+total flux recorded in the detector). If the diffuse back- ground is
+not measured correctly (as happens when is negligible), correcting for
+it will only add an additional source of noise to the
+flux. Fabry-Perot light contributes significantly to the inter-order
+background and as such exposures with FP on fiber B have the
+inter-order background correction flag by default at ON. In most
+cases, stellar light does not contribute significantly to inter-order
+background and as such exposures with SKY on fiber B have the
+inter-order background correction flag by default at OFF. If any
+exposure points to the SKY on fiber B and yet has a very large target
+flux in fiber A, the user should change the inter-order correction
+flag to ON.
+
+\subsubsection{Cosmic rays cleaning}
+
+The science recipe has two algorithms for cosmic ray cleaning. They user can decide to use none, one or both
+by setting the corresponding recipe parameter in the configuration editor.
+The parameters are:
+\begin{itemize}
+
+\item {\tt ksigma\_cosmic}. ksigma for removing cosmics on fiber A or
+  SKY; Set it to -1 to deactivate it. Default: 3.5. The algorithm
+  operates on the extracted spectrum and flags pixels that deviate
+  more than a certain factor.
+  
+\item {\tt cosmic\_detection\_sw}. Use the LA Cosmic detection (van
+  Dokkum 2001, PASP 113, 1420). Set it to 0 to disable, 1 to enable.
+  {\tt cosmic\_detection\_sw} to 1 or 0, respectively. Pixels that are flagged
+  are ignored during the extraction of the one-dimensional
+  spectrum. The tab “LACOSMIC” in the interactive window allows the
+  user to specify the recipe parameters that control the algorithm. By
+  default, the workflow switches on/off the algorithm and loads the
+  optimal recipe parameters for a given observing mode. We refer the
+  user to the pipeline manual for more information on the recipe
+  parameters. The user might want to inspect the products with
+  category CRH\_MAP and CCD\_CORR\_SCIENCE to assess the quality of
+  the flagging process. These products are available by pressing the
+  magnifying glass of the corresponding job.
+ 
+\end{itemize}
+
+The general recommendation is to switch on both algorithms, but pay
+attention whether very intense targets or very intense exposures of
+fibre B (in particular with high binning modes), do generate too many
+false positive detections. In this case, it is recommended either to
+switch the LA Cosmic algorithm off, or to increase the {\tt f\_lim}
+{\tt sigma\_lim} thresholds, regulated by the corresponding recipe paramters.
+
+If a cosmic ray is only partially detected, one might dilate the
+cosmic-ray mask by setting recipe parameters {\tt post-filter-x} and
+{\tt post-filter-y} parameters to 1 or 2 (higher values are not
+recommended).
+
+
+The user has the option to provide a mask with cosmic rays detection (category CRH\_MAP). If provided, it will
+switch off the execution of the LA Cosmic algorithm. In order to be used by the workflow and the recipes, the
+user-provided mask has to:
+\begin{itemize}
+\item be present amon the inputs.
+\item have the category {\tt CRH\_MAP} (header keyword HIERARCH ESO PRO CATG).
+\item have the same format of {\tt CRH\_MAP} produced by switching on the LA Cosmic algorithm. The convention is: pixels
+with value of 1 are cosmic rays, other pixels have value 0 (integers).
+\item have the header keyword ARCFILE of the same value of the science frame it is supposed to be associated
+  to.
+  \end{itemize}
+It is therefore recommended to first run the reduction with the LA Cosmic algorithm turned on, with the option
+{\tt extra\_products\_sw}, and then edit the CRH\_MAP produced by the workflow according to the needs. It
+is also possible to run a third-party cosmic ray detection algorithm on CCD\_CORR\_SCIENCE and record the
+flagged pixel into CRH\_MAP.
+Note that the inclusion of an user-provided CRH\_MAP replaces the LA Cosmic algorithm in the science recipe,
+but the “k-sigma clipping” algorithm can still be executed.
+
+
+
+\subsubsection{Radial velocity}
+The computation of radial velocity is a key-feature in the
+\pipename\ pipeline. One might decide to fine-tune the recipe
+parameters to improve the calculation or to run a dedicated esoreflex
+workflow and recipe to execute only this step: they are available as
+part of the ESPRESSO-DAS pipeline, which is capable of dealing also
+with \instname\ data. We refer the user to the ESPRESSO-DAS
+documentation for this option.
+
+The recipe parameters that optimize the computation of radial velocity
+are: {\tt rv\_range} and {\tt rv\_step}.  he general recommendation is
+to start with a large range {\tt rv\_range} and a course grid {\tt
+  rv\_step} to locate the minimum. Then a fine-tuning of the range and
+grid are necessary to increase the precision of the measurement.
+However, M-dwarfs are particularly prone to bad convergence in the CCV
+computation if the RV range is large.  It is not recommended to derive
+RVs using an RV range larger than 20 km/s for M dwarfs.  When
+computing the radial velocity of the same target over a certain period
+of time, it is important to use the same template (mask\_table\_id) to
+remove systematic effects between measurements at different epochs.
+
+\subsection{Combine science}
+The task {\bf combine\_science} combines together science spectra
+taken within the same template (same header keyword {\tt TPL.START})
+by running the recipe {\tt esotk\_spectrum1d\_combine}. The {\tt
+  esotk} needs to be installed. This task is not executed for
+polarimetric observations.  Do not select this task if your science
+requires inspection of individual spectra.
 
 \subsection{Other tasks and workflow not associated to the scientific reduction}
 
 \subsubsection{Efficiency}
-\subsubsection{Detector properties}
 
+The task {\bf efficiency} runs the recipe {\tt espdr\_cal\_eff\_ab} to
+correct for the relative efficiency between fibre A and B. During
+science reduction, the correction is done by using pre-processed
+calibrations provided by the archive, therefore this task does not
+enter in the reduction cascade of science data.
+
+\subsubsection{Detector properties}
+This is a subworkflow that contains the two following tasks. There tasks or their products are not used in the reduction cascade of scientific data.
 \begin{itemize}
 
-\item {\bf Detector\_monitoring}
+\item {\bf Detector\_monitoring}. This task runs the recipe {\tt
+  detmon\_opt\_lg\_mr} to compute the linearity of the detector. The
+  {\tt detmon} pipeline has to be installed to run this task. 
 
 \item{\bf Dark} This task runs the recipe {\tt
   espdr\_mdark} to determine hot pixel mask. In a typical scientific
   dataset, raw darks are not present and static calibrations that map
-  the hot pixels (whose location is very stable) are used instead; the
-  reduction of dark frames is mainly used for instrument monitoring.
+  the hot pixels (whose location is very stable) are used instead.
 \end{itemize}

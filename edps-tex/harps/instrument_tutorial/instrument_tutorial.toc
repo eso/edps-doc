@@ -20,6 +20,18 @@
 \contentsline {subsection}{\numberline {3.2}Wavelength calibration}{18}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Contamination Thar and Contamination FP}{19}{subsection.3.3}%
 \contentsline {subsection}{\numberline {3.4}Flux calibration}{19}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Other tasks and workflow not associated to the scientific reduction}{19}{subsection.3.5}%
-\contentsline {subsubsection}{\numberline {3.5.1}Efficiency}{19}{subsubsection.3.5.1}%
-\contentsline {subsubsection}{\numberline {3.5.2}Detector properties}{19}{subsubsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5}Object}{19}{subsection.3.5}%
+\contentsline {subsubsection}{\numberline {3.5.1}Sky subtraction}{19}{subsubsection.3.5.1}%
+\contentsline {subsubsection}{\numberline {3.5.2}Background intra-order contamination}{20}{subsubsection.3.5.2}%
+\contentsline {subsubsection}{\numberline {3.5.3}Cosmic rays cleaning}{20}{subsubsection.3.5.3}%
+\contentsline {subsubsection}{\numberline {3.5.4}Radial velocity}{21}{subsubsection.3.5.4}%
+\contentsline {subsection}{\numberline {3.6}Combine science}{21}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Other tasks and workflow not associated to the scientific reduction}{21}{subsection.3.7}%
+\contentsline {subsubsection}{\numberline {3.7.1}Efficiency}{21}{subsubsection.3.7.1}%
+\contentsline {subsubsection}{\numberline {3.7.2}Detector properties}{22}{subsubsection.3.7.2}%
+\contentsline {section}{\numberline {4}Overview of all the data reduction configuration options}{23}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Selection of most appropriate calibrations}{23}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Configuration of parameters: the configuration editor}{23}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Apply the same parameters to multiple datasets and configurations}{25}{subsubsection.4.2.1}%
+\contentsline {section}{\numberline {5}List of workflow tasks}{28}{section.5}%
+\contentsline {section}{\numberline {6}Frequently Asked Questions}{29}{section.6}%

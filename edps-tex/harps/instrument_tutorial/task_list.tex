@@ -18,10 +18,23 @@ executed.
 \hline
 \textbf{TASK} & \textbf{RECIPE} & \textbf{Used in science reduction} & \textbf{Notes} \\
 \hline 
-task1                              & recipe1             & yes      & comment 1.       \\
-task2                              & recipe2             & no       & comment 2.          \\
-task3                              & recipe3             & optional & comment 3.         \\
+combine\_science     & esotk\_spectrum1d\_combine  & yes & Combines reduced 1D spectra of the same target\\ 
+contamination\_fp    & espdr\_cal\_contam          & yes & Computes mutual contamination of fibres with Fabry-Perot spectra\\
+contamination\_thar  & espdr\_cal\_contam          & yes & Computes mutual contamination of fibres with Th-Ar spectra\\
+dark                 & espd\_mdark                 & no  & Computes masterdark and hot pixel table\\
+detector\_monitoring & detmon\_opt\_lg\_mr         & no  & Computes detector linearity\\
+efficency            & espdr\_cal\_eff\_ab         & no  & Computes fibres relative efficiency\\
+flux\_calibration    & espdr\_cal\_flux            & yes & Computes flux calibration\\
+lamp\_flats          & espdr\_mflat                & yes & Computes flat-fielding and blaze-function corrections\\
+led\_flats           & espdr\_led\_ff              & yes & Computes bad pixels mask \\
+object               & espd\_sci\_red              & yes & Reduces science spectra and computes radial velocity\\ 
+order\_definition    & espdr\_orderdef             & yes & Traces the orders on the detector\\
+wave\_thar\_fp       & espdr\_wave\_TH\_drift      & yes & Performs one step of the wavelength calibration\\
+wave\_thar\_thar     & epdr\_wave\_TH\_drift       & yes & Performs one step of the wavelength calibration\\
 \hline
 \end{tabular}
 \caption{\instname\ pipeline tasks overview}
 \end{table}
+
+
+
