@@ -3,13 +3,17 @@
 \contentsline {subsection}{\numberline {1.1}Scope}{7}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}What is {\tt EDPS}?}{7}{subsection.1.2}%
 \contentsline {subsection}{\numberline {1.3}Main concepts}{7}{subsection.1.3}%
-\contentsline {section}{\numberline {2}{\tt edps-gui}: the EDPS dashboard}{9}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Settings}{10}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}The Workflow tab}{12}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}The Raw Data tab}{14}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}The Reduction Queue tab}{18}{subsection.2.4}%
-\contentsline {subsection}{\numberline {2.5}The Reduction Archive tab}{20}{subsection.2.5}%
-\contentsline {section}{\numberline {3}How to configure a reduction}{23}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Association levels}{23}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Configuration editor}{23}{subsection.3.2}%
-\contentsline {section}{\numberline {4}Frequently Asked Questions}{28}{section.4}%
+\contentsline {subsection}{\numberline {1.4}Installation}{8}{subsection.1.4}%
+\contentsline {subsubsection}{\numberline {1.4.1}Prerequisites}{8}{subsubsection.1.4.1}%
+\contentsline {subsubsection}{\numberline {1.4.2}Installation steps}{9}{subsubsection.1.4.2}%
+\contentsline {section}{\numberline {2}{\tt edps-gui}: the {\tt EDPS}\ dashboard}{10}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Settings}{11}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}The Workflow tab}{13}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}The Raw Data tab}{15}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}The Reduction Queue tab}{19}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}The Reduction Archive tab}{21}{subsection.2.5}%
+\contentsline {section}{\numberline {3}How to configure a reduction}{24}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Association levels}{24}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Configuration editor}{24}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Apply the same parameters to multiple datasets and configurations}{26}{subsubsection.3.2.1}%
+\contentsline {section}{\numberline {4}Frequently Asked Questions}{29}{section.4}%
