@@ -23,7 +23,7 @@ clean:
 
 	cd  $(EDPSGUI_TUT_DIR)  && $(MAKE) clean
 
-	rm -f $(INSTRUMENT)--edpsgui-tutorial-$(GUI_VERSION)_$(TUTORIAL_REVISION).pdf
+	rm -f $(INSTRUMENT)-edpsgui-tutorial-$(GUI_VERSION)_$(TUTORIAL_REVISION).pdf
 
 
 .NOTPARALLEL:
