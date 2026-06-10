@@ -37,7 +37,8 @@ EDPS documentation
    #efosc/index.rst
    efosc_pdf.md
    #eris/index.rst
-   espresso/index.rst
+   espresso_pdf.md
+   #espresso/index.rst
    #fors/index.rst
    #giraffe/index.rst
    #hawki/index.rst

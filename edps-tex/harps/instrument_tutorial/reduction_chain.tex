@@ -119,12 +119,13 @@ subtraction. This can be done by setting the recipe parameter {\tt
 
 Note: sky subtraction is automatically switched off for
 polarimetric observations.
+
 \subsubsection{Background intra-order contamination}
 
 The recipe parameter {\tt background\_sw} removes the intra-order
 diffuse background contamination (it does not have to be
 mis-interpreted by sky background, which is regulated by {\tt
-  sky\_sub\_method} and active only for OB- JECT,SKY observations). It
+  sky\_sub\_method} and active only for OBJECT,SKY observations). It
 is evaluated on boxes of size {\tt sci\_bkgr\_grid\_size\_x} $\times$
 {\tt sci\_bkgr\_grid\_size\_y} and then interpolated all over the
 frame. The diffuse background is proportional to the dispersed light
@@ -213,7 +214,7 @@ with \instname\ data. We refer the user to the ESPRESSO-DAS
 documentation for this option.
 
 The recipe parameters that optimize the computation of radial velocity
-are: {\tt rv\_range} and {\tt rv\_step}.  he general recommendation is
+are: {\tt rv\_range} and {\tt rv\_step}. The general recommendation is
 to start with a large range {\tt rv\_range} and a course grid {\tt
   rv\_step} to locate the minimum. Then a fine-tuning of the range and
 grid are necessary to increase the precision of the measurement.
@@ -223,6 +224,7 @@ RVs using an RV range larger than 20 km/s for M dwarfs.  When
 computing the radial velocity of the same target over a certain period
 of time, it is important to use the same template (mask\_table\_id) to
 remove systematic effects between measurements at different epochs.
+
 
 \subsection{Combine science}
 The task {\bf combine\_science} combines together science spectra

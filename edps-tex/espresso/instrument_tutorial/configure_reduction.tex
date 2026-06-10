@@ -9,4 +9,19 @@
 \label{sec:configuration_editor}
 \input{../common/configuration_editor}
 
-{\bf OTHER CONFIGURATIONS}
+\subsection{WORKFLOW PARAMETERS}
+
+The current \wkfname\ has only one workflow parameter {\tt is\_idp}
+that is used only for the automatic reduction for the ESO science
+archive.  If set to true it does not use Laser Frequency Combes
+calibrations (not supported yet in the ESO archive products), and it
+consider a flux standard mandatory (current is optional).
+
+
+\subsubsection{Combination of spectra}
+
+By default, the \wkfname\ combines the extracted spectra obtained
+within the same observing template. If this is not the desired
+behavior, deselect the task {\bf combine\_science} from the list of
+reduction tasks in the Raw Data tab, before pressing the button to
+create the datasets.

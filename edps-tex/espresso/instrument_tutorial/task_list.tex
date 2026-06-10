@@ -1,7 +1,7 @@
 \section{List of workflow tasks}
 
 This is the list of all the tasks and associated recipes in the
-\instname\ workflow.  Only some of them are needed for scientific
+\wkfname\ workflow.  Only some of them are needed for scientific
 reduction, they are indicated by the flag "yes" (triggered by default)
 or "optional" (triggered only if requested by a workflow
 parameter). Other tasks are not used for scientific reduction (they
@@ -16,11 +16,27 @@ executed.
 \scriptsize
 \begin{tabular}{|l|l|c|p{7cm}|}
 \hline
-\textbf{TASK} & \textbf{RECIPE} & \textbf{Used in science reduction} & \textbf{Notes} \\
+\textbf{TASK} & \textbf{RECIPE} & \textbf{Used in science} & \textbf{Notes} \\
+              &                 & \textbf{reduction} &                \\
 \hline 
-task1                              & recipe1             & yes      & comment 1.       \\
-task2                              & recipe2             & no       & comment 2.          \\
-task3                              & recipe3             & optional & comment 3.         \\
+bias             & espdr\_mbias                & Y & Generates a masterbias and residuals.\\
+combine\_science & esotk\_spectrum1d\_combine  & Y & Combines extracted spectra. \\
+contam\_fp       & espdr\_cal\_contam          & Y & Computes the contamination from Fabry Perot exposures.\\
+contam\_thar     & espdr\_cal\_contam          & Y & Computes the contamination from Thorium-Argon exposures.\\
+dark             & espdr\_mbias                & Y & Generates a masterdark and hot pixel mask. \\
+detmon           & detmon\_opt\_lg\_mr         & N & Computes linearity correction. \\
+eff\_ab          & espdr\_cal\_eff\_ab         & Y & Computes relative efficiency between fibres. \\
+flat             & espdr\_mflat                & Y & Computes the profiles and flat field correction of orders.\\
+flux             & espdr\_cal\_flux            & Y & Computes flux calibration.\\
+led\_ff          & espdr\_led\_ff              & Y & Computes bad pixel mask. \\
+object           & espdr\_sci\_red             & Y & Reduces science observations and computes radial velocity. \\
+orderdef         & espdr\_orderdef             & Y & Traces the various orders on the detector. \\
+rv\_stars        & espdr\_sci\_red             & N & Reduces science observations of radial velocity standards.\\
+wave\_fp\_fp     & espdr\_wave\_FP             & Y & Creates an extracted spectrum table and wavelength solution matrix from Fabry-Perrot calibrations.\\
+wave\_fp\_lfc    & espdr\_wave\_LFC            & Y & Creates an extracted spectrum table and wavelength solution matrix from LFC calibrations.\\
+wave\_fp\_thar   & espdr\_wave\_THAR           & Y & Creates an extracted spectrum table and wavelength solution matrix from Thorium-Argon lamp.\\
+wave\_lfc\_fp    & espdr\_wave\_LFC            & Y & Creates an extracted spectrum table and wavelength solution matrix from LFC calibrations.\\
+wave\_thar\_fp   & espdr\_wave\_THAR           & Y & Creates an extracted spectrum table and wavelength solution matrix from Thorium-Argon lamp.\\
 \hline
 \end{tabular}
 \caption{\instname\ pipeline tasks overview}
