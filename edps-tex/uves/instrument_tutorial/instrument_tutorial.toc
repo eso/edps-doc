@@ -34,12 +34,14 @@
 \contentsline {section}{\numberline {6}Overview of all the data reduction configuration options}{23}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Selection of most appropriate calibrations}{23}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}Configuration of parameters: the configuration editor}{23}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Optimizing spectrum extraction}{26}{subsection.6.3}%
-\contentsline {subsection}{\numberline {6.4}Optimizing the initial order and wavelength solution}{28}{subsection.6.4}%
-\contentsline {subsection}{\numberline {6.5}Optimizing the wavelength calibration}{29}{subsection.6.5}%
-\contentsline {subsection}{\numberline {6.6}Applying velocity correction}{30}{subsection.6.6}%
-\contentsline {subsection}{\numberline {6.7}Improving spectral extraction}{30}{subsection.6.7}%
-\contentsline {subsection}{\numberline {6.8}UVES (slit) tips and trouble shooting}{31}{subsection.6.8}%
-\contentsline {subsection}{\numberline {6.9}UVES-Fibre trouble shooting}{32}{subsection.6.9}%
-\contentsline {section}{\numberline {7}List of workflow tasks}{34}{section.7}%
-\contentsline {section}{\numberline {8}Frequently Asked Questions}{35}{section.8}%
+\contentsline {subsubsection}{\numberline {6.2.1}Apply the same parameters to multiple datasets and configurations}{26}{subsubsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.3}Flux calibration}{27}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Optimizing spectrum extraction}{28}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Optimizing the initial order and wavelength solution}{29}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}Optimizing the wavelength calibration}{30}{subsection.6.6}%
+\contentsline {subsection}{\numberline {6.7}Applying velocity correction}{31}{subsection.6.7}%
+\contentsline {subsection}{\numberline {6.8}Improving spectral extraction}{31}{subsection.6.8}%
+\contentsline {subsection}{\numberline {6.9}UVES (slit) tips and trouble shooting}{32}{subsection.6.9}%
+\contentsline {subsection}{\numberline {6.10}UVES-Fibre trouble shooting}{33}{subsection.6.10}%
+\contentsline {section}{\numberline {7}List of workflow tasks}{35}{section.7}%
+\contentsline {section}{\numberline {8}Frequently Asked Questions}{36}{section.8}%

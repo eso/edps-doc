@@ -8,6 +8,10 @@
 \subsection{Configuration of parameters: the configuration editor}
 \label{sec:configuration_editor}
 \input{../common/configuration_editor}
+\input{../common/how_to_copy_parameters_to_other_datasets}
+
+
+\subsection{\instname\ workflow parameters}
 For \instname\, the following workflow parameters can be adjusted when
 the {\tt Target Category} is set to {\tt science}:
 
@@ -42,10 +46,15 @@ If the reduction fails or the physical model appears inconsistent,
 the polynomial mode can be used for troubleshooting or as a fallback.
 
 \item {\tt max\_diameter}:
-TODO
+It specifies the maximum projected diameter of the sub-group of exposures to
+combine, in degrees. If an exposure would make the sub-group bigger than this value, it is not included
+in this sub-group.
 
 \item {\tt max\_separation}:
-TODO
+Is specifies the maximum separation on the sky from an exposure and a sub-
+group, in degrees. If the exposure is more distant than this threshold, it is not included in the sub-group.
+If it is closer, and if its inclusion does not make the sub-group size to exceed {\tt max\_diameter\_WFM}, then
+it is added to the sub-group.
 
 \item {\tt use\_optical\_dark}:
 This parameter controls the use of a dark frame in the UVB/VIS data reduction.

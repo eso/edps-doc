@@ -65,13 +65,10 @@ The wavelength calibration is determined from Th-Ar arc-lamp exposures.
 
 Task: {\tt response}. Recipe: {\tt uves\_cal\_response}. Output: {\tt INSTR\_RESPONSE\_FINE\_<CHIP>}.
 
-Flux calibration can be obtained either by processing an observation of a flux standard or by
-applying a master response curve. If a raw standard star calibration is present in the data set,
-then this observation is processed by the {\tt response} task. The resulting response curve is then
-used during processing of the science data. Master response curves are available for a number of
-setups. If a raw standard star observation is not present but a matching master response is found, then
-the latter is used for the flux calibration. If neither a raw standard nor a master response is 
-present in the data set, then the extracted science spectrum is not flux calibrated.
+This task processes an observation of a flux standard star and creates a response curve that can
+be used for flux-calibrating science spectra.
+
+Details about flux calibration can be found in Sect.~\ref{sect:flux_calibration}.
 
 \subsection{Spectrum extraction}
 \label{sec:extraction}

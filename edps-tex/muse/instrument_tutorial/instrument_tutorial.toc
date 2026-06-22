@@ -11,7 +11,7 @@
 \contentsline {subsection}{\numberline {2.2}Selecting the input data}{11}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Start the reduction}{12}{subsection.2.3}%
 \contentsline {subsubsection}{\numberline {2.3.1}Quality plots}{13}{subsubsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.4}Exporting the final products}{15}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.4}Exporting the final products}{14}{subsection.2.4}%
 \contentsline {section}{\numberline {3}The MUSE\ data reduction flow.}{18}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Bias subtraction}{19}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Computation of dark current}{19}{subsection.3.2}%
@@ -25,15 +25,16 @@
 \contentsline {section}{\numberline {4}Overview of all the data reduction configuration options}{24}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Selection of most appropriate calibrations}{24}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Configuration of parameters: the configuration editor}{24}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Parametrization of the Line Spread Function}{26}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Sky subtraction}{27}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}Creation of a SKY\_MASK}{29}{subsection.4.5}%
-\contentsline {subsection}{\numberline {4.6}Combination of exposures}{29}{subsection.4.6}%
-\contentsline {subsection}{\numberline {4.7}Sky flats}{30}{subsection.4.7}%
-\contentsline {subsection}{\numberline {4.8}Autocalibration}{30}{subsection.4.8}%
-\contentsline {subsection}{\numberline {4.9}Telluric correction}{31}{subsection.4.9}%
-\contentsline {subsection}{\numberline {4.10}Wavelength range}{31}{subsection.4.10}%
-\contentsline {subsection}{\numberline {4.11}Geometric and astrometric calibrations}{31}{subsection.4.11}%
-\contentsline {subsection}{\numberline {4.12}Removal of DARK currents}{31}{subsection.4.12}%
+\contentsline {subsubsection}{\numberline {4.2.1}Apply the same parameters to multiple datasets and configurations}{26}{subsubsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.3}Parametrization of the Line Spread Function}{27}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Sky subtraction}{28}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Creation of a SKY\_MASK}{30}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Combination of exposures}{30}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}Sky flats}{31}{subsection.4.7}%
+\contentsline {subsection}{\numberline {4.8}Autocalibration}{31}{subsection.4.8}%
+\contentsline {subsection}{\numberline {4.9}Telluric correction}{32}{subsection.4.9}%
+\contentsline {subsection}{\numberline {4.10}Wavelength range}{32}{subsection.4.10}%
+\contentsline {subsection}{\numberline {4.11}Geometric and astrometric calibrations}{32}{subsection.4.11}%
+\contentsline {subsection}{\numberline {4.12}Removal of DARK currents}{32}{subsection.4.12}%
 \contentsline {section}{\numberline {5}List of workflow tasks}{34}{section.5}%
 \contentsline {section}{\numberline {6}Frequently Asked Questions}{35}{section.6}%

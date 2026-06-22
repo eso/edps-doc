@@ -1,4 +1,4 @@
-TUT_VERSION=1.0_20260515
+TUT_VERSION=0.91_20260620
 
 TOPDIR :=$(shell pwd)/..
 PIPEDOC_COMMON :=$(TOPDIR)/common
@@ -22,7 +22,8 @@ clean:
 #	perl -nle '$$done{$$1}++ or system("wget -q -O /dev/null $$1") ? die $$1 : print $$1 while s/\bURI\/URI\(([fht]+tp[^\)]+)\)//i' $(EDPSGUI_TUT_DIR)/edpsgui_tutorial.pdf
 #
 mv:
-	mv  instrument_tutorial.pdf ../$(INSTRUMENT)-tutorial-$(TUT_VERSION).pdf
+	cp  instrument_tutorial.pdf ../$(INSTRUMENT)-tutorial-$(TUT_VERSION).pdf
+	mv  instrument_tutorial.pdf ../$(INSTRUMENT)-edpsgui_tutorial.pdf
 
 
 #  iiinstrument-pipe-recipes.html

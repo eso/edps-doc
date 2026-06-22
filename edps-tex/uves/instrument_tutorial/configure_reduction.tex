@@ -8,6 +8,37 @@
 \subsection{Configuration of parameters: the configuration editor}
 \label{sec:configuration_editor}
 \input{../common/configuration_editor}
+\input{../common/how_to_copy_parameters_to_other_datasets}
+
+\subsection{Flux calibration}
+\label{sect:flux_calibration}
+
+The \instname\ workflow offers two different ways for flux-calibrating science data.
+They can be selected by the
+workflow parameter {\tt response}. See Sect.~\ref{sec:configuration_editor} for details
+on how to change workflow parameters.
+
+With the default value of 'master', the {\tt object} task uses a master response curve
+for flux-calibrating the extracted spectrum. 
+Raw standard stars that might
+be present in the data set are not processed in this case. 
+Spectra from setups without a matching master response are not
+flux calibrated.
+Master response curves are available for a number of setups and can be downloaded from the ESO
+archive by requesting associated calibrations in the download portal.
+
+Please note that master response curves that might have been downloaded before 2020 
+shall not be used with the current pipeline version. They have much less data points than current
+response curves and give the response per {\AA} (which is not the case for current response curves).
+Response curves that can be used with pipeline version 6 or later have a DATE header keyword of
+2020 or later.
+
+Flux calibration can also be obtained by processing a standard star observation and applying the
+resulting response curve for the science spectra. The workflow parameter {\tt response} needs to be
+set to 'night' in this case. 
+If a raw standard star calibration is present in the data set,
+then this observation is processed by the {\tt response} task and the resulting response curve is 
+used by the {\tt object} task. 
 
 \subsection{Optimizing spectrum extraction}
 \label{sect:optimizing_extraction}

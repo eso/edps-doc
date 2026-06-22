@@ -29,16 +29,18 @@
 \contentsline {section}{\numberline {4}Overview of all the data reduction configuration options}{24}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Selection of most appropriate calibrations}{24}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Configuration of parameters: the configuration editor}{24}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Troubleshooting}{28}{subsection.4.3}%
-\contentsline {subsubsection}{\numberline {4.3.1}Not enough arc lines detected}{28}{subsubsection.4.3.1}%
-\contentsline {subsubsection}{\numberline {4.3.2}Sky subtraction residuals (especially NIR)}{29}{subsubsection.4.3.2}%
-\contentsline {subsubsection}{\numberline {4.3.3}Trace-localization failures}{30}{subsubsection.4.3.3}%
-\contentsline {subsubsection}{\numberline {4.3.4}Two object traces in the slit}{30}{subsubsection.4.3.4}%
-\contentsline {subsubsection}{\numberline {4.3.5}Order-edge artefacts in extracted spectra}{30}{subsubsection.4.3.5}%
-\contentsline {subsubsection}{\numberline {4.3.6}Small jumps between orders}{30}{subsubsection.4.3.6}%
-\contentsline {subsubsection}{\numberline {4.3.7}Overestimated uncertainties in the extracted spectrum}{30}{subsubsection.4.3.7}%
-\contentsline {subsubsection}{\numberline {4.3.8}The extracted merged 1D spectrum looks poor}{31}{subsubsection.4.3.8}%
-\contentsline {subsubsection}{\numberline {4.3.9}Spectral regions of zero flux values}{31}{subsubsection.4.3.9}%
-\contentsline {subsubsection}{\numberline {4.3.10}IFU cube not well aligned}{31}{subsubsection.4.3.10}%
-\contentsline {section}{\numberline {5}List of workflow tasks}{33}{section.5}%
-\contentsline {section}{\numberline {6}Frequently Asked Questions}{34}{section.6}%
+\contentsline {subsubsection}{\numberline {4.2.1}Apply the same parameters to multiple datasets and configurations}{27}{subsubsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.3}XSHOOTER\ workflow parameters}{28}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Troubleshooting}{29}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Not enough arc lines detected}{29}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}Sky subtraction residuals (especially NIR)}{30}{subsubsection.4.4.2}%
+\contentsline {subsubsection}{\numberline {4.4.3}Trace-localization failures}{30}{subsubsection.4.4.3}%
+\contentsline {subsubsection}{\numberline {4.4.4}Two object traces in the slit}{31}{subsubsection.4.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.5}Order-edge artefacts in extracted spectra}{31}{subsubsection.4.4.5}%
+\contentsline {subsubsection}{\numberline {4.4.6}Small jumps between orders}{31}{subsubsection.4.4.6}%
+\contentsline {subsubsection}{\numberline {4.4.7}Overestimated uncertainties in the extracted spectrum}{31}{subsubsection.4.4.7}%
+\contentsline {subsubsection}{\numberline {4.4.8}The extracted merged 1D spectrum looks poor}{31}{subsubsection.4.4.8}%
+\contentsline {subsubsection}{\numberline {4.4.9}Spectral regions of zero flux values}{31}{subsubsection.4.4.9}%
+\contentsline {subsubsection}{\numberline {4.4.10}IFU cube not well aligned}{32}{subsubsection.4.4.10}%
+\contentsline {section}{\numberline {5}List of workflow tasks}{34}{section.5}%
+\contentsline {section}{\numberline {6}Frequently Asked Questions}{35}{section.6}%
