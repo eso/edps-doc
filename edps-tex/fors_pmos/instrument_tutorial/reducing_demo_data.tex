@@ -1,0 +1,28 @@
+
+\section{Reducing demo data}
+\label{sec:reducing_demo_data}
+
+\input{../common/common_reducing_demo_data}
+
+ 
+\subsubsection{Quality plots}
+\input{../common/quality_plots}
+
+\subsection{Exporting the final products}
+\label{sec:export_final_products}
+
+
+\input{../common/common_export}
+ 
+ 
+Exported products are organized by `DATASET` (named as the first
+scientific exposure of the dataset), and `TIMESTAMP` (time of start of
+reduction)
+
+The final products saved in the specified directory are: 
+
+\begin{itemize}
+\item Multi-extension science fits file, where the individual spectra are provided as rows. There are as many extensions as input scientific exposures. 
+Their name format is SPECTRUM\_PMOS\_ followed by the exposure identifier (header keyword ‘arcfile‘).
+\item Fits files with or without extensions and fits tables. Their name format is e.g. STD\_ followed by the product identifier (header keyword 'pro.catg')
+\end{itemize}

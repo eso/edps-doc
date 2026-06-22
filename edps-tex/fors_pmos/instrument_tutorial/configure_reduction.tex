@@ -1,0 +1,37 @@
+\section{Overview of all the data reduction configuration options}
+\label{sec:configuration_overview}
+
+\subsection{Selection of most appropriate calibrations}
+
+\input{../common/appropriate_calibrations}
+
+\subsection{Configuration of parameters: the configuration editor}
+\label{sec:configuration_editor}
+\input{../common/configuration_editor}
+
+\input{../common/how_to_copy_parameters_to_other_datasets}
+
+\subsection{Producing optimal Master Bias}
+\label{sec:configuration_bias}
+
+Figure \ref{fig:master_bias} shows an example of the quality plot for the MASTER\_BIAS Output file created with the recipe parameters as in Figure \ref{fig:configuration_editor_4}. The image should be smooth, without visible flux gradient. If it is not, check the input raw files. Exclude the visible "bad" ones if there are any.
+
+
+\subsection{Configuring fors\_pmos\_calib and improving results}
+\label{sec:configuration_calibration_pmos}
+
+The creation of the FORS PMOS master flat, wavelength solution and other calibration products (task: {\bf calibration\_pmos}, recipe: {\bf fors\_pmos\_calib}) can be configured with the parameters as in Figure \ref{fig:configuration_editor_5}.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{../instrument_tutorial/figures/configuration_editor_5.jpg}
+\caption{The fourth part of the Reduction Configuration Editor, that allows to specify the parameters sets and the recipe parameters for task {\bf calibration\_pmos}. These settings can be applied to the "Selected Configuration" (Fig. \ref{fig:configuration_editor_1}) or to the "Other Configurations (Fig. \ref{fig:configuration_editor_2}). }
+\label{fig:configuration_editor_5}
+\end{figure}
+
+The recipe produces many products in different formats, with or without extensions. They can be examined as explained in Figure \ref{fig:master_flat_pmos_1}.
+
+The ways to improve the results depend on the instrumental setup of the data. Figure \ref{fig:master_flat_pmos_2} shows the wavelength-calibrated arc lamp frame for the grism 300V setup (product SPECTRA\_DETECTION\_PMOS). In this plot the arc lamp lines should run straight from top to bottom without any empty rows between them. Particular attention should be given to lines at the blue and red ends of each spectrum, where the polynomial fit is more sensitive to small variations of the signal. Some arc lines may show gaps due to the placement of the slits, but empty rows without any lines point towards problems with the detection of the arc lamp lines. Varying the parameter {\bf peakdetection} (increasing to e.g. 450 to detect only the strongest arc lines, or decreasing to e.g. 10 to see all, even the weakest lines) usually solves this problem.
+
+The Figure \ref{fig:master_flat_pmos_3} shows the example of the grism 300V MASTER\_NORM\_FLAT\_PMOS product where the slits were not properly traced (at y around 700). Increasing the tolerance for outliers {\bf wreject} to 2 (for some setups also try 3) recovers all slitlets, but may leave some instabilities in the wavelength calibration. This can be further fixed by increasing the search window for lines {\bf wradius} to 12 (for some setups also try 4, which is a default).
+
