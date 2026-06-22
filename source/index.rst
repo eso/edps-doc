@@ -50,7 +50,8 @@ EDPS documentation
    muse_pdf.md
    sphere-ifu/index.rst
    sphere-irdis/index.rst
-   sphere-zimpol/index.rst
+   #sphere-zimpol/index.rst
+   sphere_zimpol_pdf.md
    #uves/index.rst
    uves_pdf.md
    #fors/index.rst

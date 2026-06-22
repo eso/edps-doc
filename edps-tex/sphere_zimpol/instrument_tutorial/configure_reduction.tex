@@ -1,0 +1,24 @@
+\section{Overview of all the data reduction configuration options}
+\label{sec:configuration_overview}
+
+\subsection{Selection of most appropriate calibrations}
+
+\input{../common/appropriate_calibrations}
+
+\subsection{Configuration of parameters: the configuration editor}
+\label{sec:configuration_editor}
+\input{../common/configuration_editor}
+
+\subsection{Troubleshooting}
+
+This section provides guidance for diagnosing and resolving common issues encountered during the SPHERE-ZIMPOL Imaging data-reduction cascade.
+
+
+\subsubsection{Image Incorrectly Rotated / Signal Smeared out}
+
+The task \textbf{zimpol\_coronagraph\_center\_imaging} uses the instrument pipeline recipe \texttt{sph\_zpl\_star\_center\_img}
+to identify waffle spots and determine the position of the target behind the coronagraph.
+In some cases the detection threshold of 10$\sigma$ is too high and the recipe cannot identify
+the target’s position. In such a case the science recipe (\texttt{sph\_zpl\_science\_imaging})
+will rotate the frames around an incorrect position which will smear out the signal.
+If you see such behaviour you may try to reduce \texttt{star\_center\_img.sigma} to 5.

@@ -1,0 +1,24 @@
+
+\section{Reducing demo data}
+\label{sec:reducing_demo_data}
+
+\input{../common/common_reducing_demo_data}
+
+ 
+\subsubsection{Quality plots}
+\input{../common/quality_plots}
+
+\subsection{Exporting the final products}
+\label{sec:export_final_products}
+
+
+\input{../common/common_export}
+
+ \clearpage
+ 
+Exported products are organized by `DATASET` (named as the first scientific exposure of the dataset), and `TIMESTAMP` (time of start of reduction). 
+
+The final products saved in the specified directory are the reduced and combined images from the two ZIMPOL cameras,
+with name format \texttt{ZIMPOL\_} followed by the observing mode (\texttt{IMAGE\_}), camera number (\texttt{CAM1\_} or \texttt{CAM2\_}),
+and archive file name (corresponding to header keyword \texttt{ARCFILE}).
+Each file contains eight FITS extensions. The first four correspond to the combined science intensity image and include the science image itself, a bad-pixel map, a number-of-combined-frames (ncomb) map, and an RMS map. The remaining four extensions contain the combined dark-current image together with its associated bad-pixel map, ncomb map, and RMS map.

@@ -1,0 +1,38 @@
+\section{List of workflow tasks}
+
+This is the list of all the tasks and associated recipes in the \instname\ workflow.
+Only some of them are needed for scientific reduction, they are indicated by the flag ``yes'' (triggered by default) or ``optional'' (triggered only if requested
+by a workflow parameter). Other tasks are not used for scientific reduction (they are indicated by the flag ``no''), they are mainly used
+for instrument monitoring and they can be executed only by specifying them as target. Note that, when a task is specified as target, all the
+tasks that generate the calibrations needed for it are automatically executed.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\begin{tabular}{|l|l|c|p{7cm}|}
+\hline
+\textbf{TASK} & \textbf{RECIPE} & \textbf{Used in science} & \textbf{Notes} \\
+              &                 & \textbf{reduction} &                \\
+\hline 
+zimpol\_bias\_imaging & sph\_zpl\_master\_bias\_imaging & no &
+Creates master bias for both cameras. \\
+zimpol\_dark\_imaging & sph\_zpl\_master\_dark\_imaging & optional &
+Produces master dark for both cameras. \\
+zimpol\_flat\_imaging\_cam1 & sph\_zpl\_intensity\_flat\_imaging & optional &
+Generates intensity flat-field for camera 1. \\
+zimpol\_flat\_imaging\_cam2 & sph\_zpl\_intensity\_flat\_imaging & optional &
+Generates intensity flat-field for camera 2. \\
+zimpol\_standard\_astrometry\_imaging & sph\_zpl\_science\_imaging & optional &
+Reduces astrometric standard-field observations. \\
+zimpol\_standard\_flux\_imaging & sph\_zpl\_science\_imaging & no &
+Reduces photometric standard-star observations. \\
+zimpol\_coronagraph\_center\_imaging & sph\_zpl\_star\_center\_img & optional &
+Determines stellar position behind the coronagraph. \\
+zimpol\_science\_flux\_imaging & sph\_zpl\_science\_imaging & optional &
+Reduces off-axis flux frames. \\
+zimpol\_science\_imaging & sph\_zpl\_science\_imaging & yes &
+Reduces ZIMPOL imaging science. \\
+\hline
+\end{tabular}
+\caption{\instname\ pipeline tasks overview}
+\end{table}
