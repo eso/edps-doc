@@ -2,7 +2,7 @@
 \contentsline {section}{\numberline {1}Introduction}{7}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Scope}{7}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}What is {\tt EDPS}?}{7}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}Main concepts}{7}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.3}Main concepts}{8}{subsection.1.3}%
 \contentsline {subsection}{\numberline {1.4}Installation}{8}{subsection.1.4}%
 \contentsline {subsubsection}{\numberline {1.4.1}Prerequisites}{8}{subsubsection.1.4.1}%
 \contentsline {subsubsection}{\numberline {1.4.2}Installation steps}{9}{subsubsection.1.4.2}%
