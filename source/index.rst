@@ -52,6 +52,8 @@ EDPS documentation
    sphere-irdis/index.rst
    #sphere-zimpol/index.rst
    sphere_zimpol_pdf.md
+   sphere_zimpol_pol_pdf.md
+   sphere_ifu_pdf.md
    #uves/index.rst
    uves_pdf.md
    #fors/index.rst
