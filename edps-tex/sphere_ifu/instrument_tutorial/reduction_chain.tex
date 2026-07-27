@@ -1,0 +1,426 @@
+\section{The \instname\ data reduction flow.}
+
+The overall data flow of the \instname\ pipeline is displayed in Figure \ref{fig:reduction_cascade}.
+
+ 
+\begin{figure}[]
+\centering
+\includegraphics[width=0.9\textwidth]{../instrument_tutorial/figures/reduction_cascade.jpg}
+\caption{The data reduction cascade of the \instname\ workflow.}
+\label{fig:reduction_cascade}
+\end{figure}
+
+The reduction cascade is organized in tasks, which represent well-defined steps in the process. Tasks can be grouped
+inside sub-workflows.
+Each task runs a recipe; the detailed description of the algorithms,
+input, outputs and recipe parameters used in each recipe are available
+in the pipeline manual. Here, we present only the description of most
+important features.
+
+The EDPS workflow is designed to execute the tasks that deliver
+the final reduced data for each dataset. It can be either the product of a single exposure, or the combination of
+multiple exposures. Only calibrations needed by the selected scientific exposures are processed.
+
+It is possible to set EDPS to perform the data reduction until a certain step of the reduction chain (e.g. to reduce
+only standard stars, or only flat fields).
+This is done by specifying the desired tasks in the field \textbf{Select reduction target} of the \textbf{Raw Data} tab.
+
+The reduction steps of the workflow are listed below. Before starting the reduction,
+the parameters of the recipes associated to each task can be configured by pressing the button \includegraphics{figures/configure_dataset.jpg} close to each dataset configuration.
+See Section \ref{sec:configuration_overview} for more information.
+
+The reduction steps are:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Subworkflow: Dark Background}
+
+Recipes:
+\texttt{sph\_ifs\_cal\_background},
+\texttt{sph\_ifs\_master\_dark}
+
+This subworkflow generates the instrumental-background and dark-current calibration products. It consists of the following tasks:
+
+\begin{itemize}
+    \item \textbf{ifs\_instrument\_background}
+    \item \textbf{ifs\_sky\_background}
+    \item \textbf{ifs\_dark}
+    \item \textbf{ifs\_static\_bad\_pixel\_map}
+\end{itemize}
+
+The tasks \textbf{ifs\_instrument\_background} and
+\textbf{ifs\_sky\_background} use the recipe
+\texttt{sph\_ifs\_cal\_background} to generate instrumental- or
+sky-background calibration frames expressed in counts~s$^{-1}$~pixel$^{-1}$.
+The output is a multi-extension FITS file containing the background image,
+a bad-pixel map, an RMS map, and a weight map.
+
+The task \textbf{ifs\_dark} uses the recipe
+\texttt{sph\_ifs\_master\_dark} to generate the detector master dark
+(\texttt{IFS\_MASTER\_DARK}) by combining the input raw dark exposures
+using the selected collapse algorithm.
+
+The task \textbf{ifs\_static\_bad\_pixel\_map} runs the same recipe,
+\texttt{sph\_ifs\_master\_dark}, 
+and exports the
+
+\texttt{IFS\_STATIC\_BADPIXELMAP} product, which is also stored in the
+second extension of the master dark.
+
+Bad pixels are identified in three successive steps:
+
+\begin{enumerate}
+\item Initial thresholding using the
+\texttt{min\_acceptable} and
+\texttt{max\_acceptable} parameters.
+\item Smoothing the master dark with a Gaussian kernel and subtracting the
+smoothed frame to remove large-scale variations.
+\item Sigma clipping of the residual image using the
+\texttt{sigma\_clip} parameter.
+\end{enumerate}
+
+The final master dark is written as a multi-extension FITS file containing the dark image, bad-pixel map, RMS map, and a weight map recording the number of contributing raw frames.
+
+When a background correction is required elsewhere in the workflow, EDPS preferentially associates a sky background, then an instrumental background, and finally a master dark if no dedicated background calibration is available.
+
+\paragraph{Customization}
+
+Recipe parameters:
+
+\begin{itemize}
+\item \texttt{ifs.master\_dark.coll\_alg}: Collapse algorithm
+(\texttt{0} = Mean,
+ \texttt{1} = Median,
+ \texttt{2} = Clean Mean; default).
+
+\item \texttt{ifs.master\_dark.min\_acceptable},
+\texttt{ifs.master\_dark.max\_acceptable}:
+Lower and upper pixel-value thresholds used during bad-pixel detection.
+
+\item \texttt{ifs.master\_dark.sigma\_clip}:
+Sigma-clipping threshold used to identify bad pixels
+(default: \texttt{3}; increasing the value to
+\texttt{5} results in fewer rejected pixels).
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Spectra Positions}
+
+Recipe:
+\texttt{sph\_ifs\_spectra\_positions}
+
+The task \textbf{ifs\_spectra\_positions} generates the initial mapping
+between detector pixels and IFS lenslets, and assigns a first-order
+wavelength solution to each detector pixel.
+
+Spectral traces are detected through thresholding and their centroid
+positions are measured. These positions are compared with those predicted
+by a scaled and shifted lenslet model, allowing refinement of the model
+scale and position. Optionally, a two-dimensional distortion model can be
+fitted and incorporated into the lenslet model to improve the subsequent
+wavelength calibration.
+
+The main output product is \texttt{IFS\_SPECPOS}, a pixel description table (PDT), stored as a multi-extension FITS file containing:
+
+\begin{itemize}
+\item Wavelength
+\item Spectral region identifier
+\item Lenslet identifier
+\item Wavelength width
+\item Second derivative of the wavelength
+\item Illumination fraction
+\end{itemize}
+
+%\paragraph{Customization}
+
+%Recipe parameters:
+
+%\begin{itemize}
+%\item \texttt{ifs.spectra\_positions.coll\_alg}:
+%Collapse algorithm
+%(\texttt{0} = Mean,
+% \texttt{1} = Median,
+% \texttt{2} = Clean Mean; default).
+%\end{itemize}
+% Parameter not found in EDPS code
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Wavelength Calibration}
+
+Recipe:
+\texttt{sph\_ifs\_wave\_calib}
+
+The task \textbf{ifs\_wavelength\_calibration} performs the wavelength
+calibration by refining the pixel-to-wavelength associations produced by
+\textbf{ifs\_spectra\_positions} using wavelength calibration exposures
+and the existing lenslet model.
+
+One-dimensional spectra are extracted for each spectral region and the
+positions of known calibration lines are measured using a flux-weighted
+centroid within a configurable fitting window. The measured line positions
+are fitted with a polynomial defining the wavelength solution for each
+spectrum. If the derived solution is inconsistent with the expected
+dispersion, the original model wavelengths are retained or the affected
+spectral region is flagged as invalid.
+
+From the final wavelength solutions, the recipe computes quality-control
+parameters for each spectrum, including the minimum, maximum, and central
+wavelengths, as well as the spectral resolving power derived from the local wavelength gradient.
+
+The main output product is \texttt{IFS\_WAVECALIB}, which contains the
+updated wavelength calibration derived from the initial
+\texttt{IFS\_SPECPOS} product.
+
+%\paragraph{Customization}
+
+%Recipe parameters:
+
+%\begin{itemize}
+%\item \texttt{ifs.wave\_calib.coll\_alg}:
+%Collapse algorithm
+%(\texttt{0} = Mean,
+% \texttt{1} = Median,
+% \texttt{2} = Clean Mean; default).
+%\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Subworkflow: Detector Flat}
+
+Recipe:
+\texttt{sph\_ifs\_master\_detector\_flat}
+
+This subworkflow generates detector flat-field calibrations from narrow-
+and broadband lamp exposures. It consists of the following tasks:
+
+\begin{itemize}
+\item \textbf{ifs\_det\_flat\_narrow\_band1}
+\item \textbf{ifs\_det\_flat\_narrow\_band2}
+\item \textbf{ifs\_det\_flat\_narrow\_band3}
+\item \textbf{ifs\_det\_flat\_narrow\_band4} (only associated for the \texttt{PRI\_YJH} disperser.)
+\item \textbf{ifs\_det\_flat\_broad\_band}
+\end{itemize}
+
+The recipe produces several detector flat-field components, including a
+standard detector flat, a large-scale (smoothed) flat, and a
+preamplifier-correction flat. In most applications, the standard
+\texttt{IFS\_MASTER\_DFF\_LONG*} products are sufficient to correct
+pixel-to-pixel detector response variations.
+
+Raw frames are first corrected for dark current and preamplifier
+variations. The detector flat is then derived by fitting, for each pixel,
+a linear relation between its signal and the mean illumination level of
+the corresponding exposure. The slope of this fit represents the relative
+pixel response.
+
+Optional products include a detector non-linearity map and a smoothed
+large-scale flat-field image.
+
+\paragraph{Customization}
+
+Recipe parameters:
+
+\begin{itemize}
+%\item \texttt{ifs.master\_detector\_flat.coll\_alg}:
+%Collapse algorithm
+%(\texttt{0} = Mean,
+% \texttt{1} = Median,
+% \texttt{2} = Clean Mean; default).
+
+\item \texttt{ifs.master\_detector\_flat.robust\_fit}:
+Controls the fitting method. By default
+(\texttt{TRUE}) a maximum-likelihood fit is used. Setting the parameter to
+\texttt{FALSE} enables a robust linear fit that is more resistant to
+outliers such as cosmic rays.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{IFU Flat}
+
+Recipe:
+\texttt{sph\_ifs\_instrument\_flat}
+
+The task \textbf{ifs\_ifu\_flat} uses the pipeline recipe to generate
+flat-field calibrations for the IFS. The underlying recipe supports two operating modes. Within the EDPS workflow, the IFU-flat mode is used to generate the calibration products required by subsequent reductions.
+
+In detector-flat (or total-flat) mode, raw calibration frames are combined
+to generate a flat field that includes the detector response. This product
+can subsequently be used by the
+\textbf{ifs\_spectra\_positions} and
+\textbf{ifs\_wavelength\_calibration} tasks.
+
+In IFU-flat mode, the recipe removes the detector response using the pixel
+description table (PDT) and wavelength calibration products in order to
+isolate the transmission of the IFU lenslet array.
+
+A wavelength-dependent ``super-flat'' is first constructed from the master
+detector flats and applied to the combined calibration frames. Using the
+lenslet model provided by the wavelength calibration, spectra are extracted
+for every lenslet and collapsed along the wavelength direction to derive a
+single flat-field value for each lenslet.
+
+The main outputs are:
+
+\begin{itemize}
+\item \texttt{IFS\_INSTRUMENT\_FLAT\_FIELD}: detector flat-field product
+containing the flat-field image, bad-pixel map, RMS map, and weight map.
+
+\item \texttt{IFS\_IFU\_FLAT\_FIELD}: IFU flat-field product containing
+the flat-field image, bad-pixel map, RMS map, weight map, together with
+a binary-table extension listing the lenslet flat-field values.
+
+\end{itemize}
+
+%\paragraph{Customization}
+
+%Recipe parameters:
+
+%\begin{itemize}
+%\item \texttt{ifs.instrument\_flat.coll\_alg}:
+%Collapse algorithm
+%(\texttt{0} = Mean,
+% \texttt{1} = Median,
+% \texttt{2} = Clean Mean; default).
+%\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Distortion Map}
+
+Recipe:
+\texttt{sph\_ifs\_distortion\_map}
+
+The task \textbf{ifs\_distortion\_map} measures the geometric distortion
+of the SPHERE IFS lenslet grid.
+
+Raw calibration frames are first reduced in a manner similar to science
+data using the master dark. Instrumental background, wavelength calibration, detector flats and IFU flat may additionally be used when available. The resulting monochromatic images are collapsed along the
+wavelength axis and point sources are identified using a user-defined
+detection threshold.
+
+If no reference point pattern is provided, the recipe derives one from the
+detected sources and writes it as an output product. Otherwise, the supplied
+reference pattern is used directly.
+
+The distortion is measured by comparing the detected and expected source
+positions. Vectors larger than a configurable threshold are rejected before
+the remaining offsets are fitted with a two-dimensional polynomial model.
+
+Optionally, the derived distortion solution can be applied to the data to
+produce a residual distortion map, providing a diagnostic of the quality of
+the distortion correction.
+
+The outputs are:
+
+\begin{itemize}
+\item \texttt{IFS\_POINT\_PATTERN}: reference point pattern that may be
+reused as input for subsequent executions of the recipe.
+
+\item \texttt{IFS\_DISTORTION\_MAP}: multi-extension FITS file containing
+the distortion maps in both detector coordinates. For each coordinate, the
+product includes the distortion image, bad-pixel map, RMS map, and weight
+map.
+\end{itemize}
+
+\paragraph{Customization}
+
+Recipe parameters:
+
+\begin{itemize}
+%\item \texttt{ifs.distortion\_map.coll\_alg}:
+%Collapse algorithm
+%(\texttt{0} = Mean,
+% \texttt{1} = Median,
+% \texttt{2} = Clean Mean; default).
+
+\item \texttt{ifs.distortion\_map.threshold}:
+Detection threshold used to identify calibration spots
+(default: \texttt{3.0}).
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Subworkflow: Science Data Reduction}
+
+Recipe:
+\texttt{sph\_ifs\_science\_dr}
+
+This subworkflow performs the reduction of IFS science observations. It
+consists of the following tasks:
+
+\begin{itemize}
+\item \textbf{ifs\_science\_flux}
+\item \textbf{ifs\_coronagraph\_center}
+\item \textbf{ifs\_science}
+\end{itemize}
+
+The workflow reduces science observations with sky-, instrument background-, or dark-subtraction and preamplifier stripe correction.
+
+It also processes \textbf{FLUX} frames obtained during coronagraphic
+observations, in which the telescope is offset to move the target away
+from the coronagraphic mask in order to measure the stellar flux.
+
+The workflow also processes \textbf{CENTER} frames used to determine the stellar position behind the coronagraph. The resulting products are primarily intended for later analysis rather than subsequent EDPS processing.
+
+Large-scale flat-field variations are corrected using a wavelength-dependent ``super-flat'' derived from multi-colour lamp flats and the wavelength calibration, while small-scale detector response variations are corrected using the broadband detector flat.
+
+The recipe also supports automatic post-processing through spectral
+deconvolution (Mesa et al. 2015) and Angular Differential Imaging (ADI),
+which can be enabled or disabled through recipe parameters.
+
+The processing is currently done file-by-file because the pipeline does not stack science data.
+
+\paragraph{Customization}
+
+Workflow parameters:
+
+\begin{itemize}
+\item \texttt{force\_distortion\_correction}: Force the association of distortion calibration to IFU scientific task. Possible values are \texttt{TRUE}/\texttt{FALSE}. QC0 process requires this parameter set to \texttt{TRUE}. In the current EDPS workflow, the associated distortion calibration is not propagated to the science recipe.
+\end{itemize}
+
+Recipe parameters:
+
+\begin{itemize}
+%\item \texttt{ifs.science\_dr.coll\_alg}:
+%Collapse algorithm
+%(\texttt{0} = Mean,
+% \texttt{1} = Median,
+% \texttt{2} = Clean Mean; default).
+
+\item \texttt{ifs.science\_dr.use\_adi}:
+Controls the use of Angular Differential Imaging
+(\texttt{0} = disabled,
+ \texttt{1} = always enabled,
+ \texttt{2} = automatically enabled when the total field rotation exceeds
+ 
+ \texttt{ifs.science\_dr.min\_adi\_angle}).
+
+\item \texttt{ifs.science\_dr.min\_adi\_angle}:
+Minimum field rotation required for the automatic ADI mode.
+
+\item \texttt{ifs.science\_dr.spec\_deconv}:
+Controls the use of spectral deconvolution
+(\texttt{0} = disabled,
+ \texttt{1} = enabled).
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Subworkflow: Standard Data Reduction}
+
+Recipe:
+\texttt{sph\_ifs\_science\_dr}
+
+This subworkflow consists of the following tasks:
+
+\begin{itemize}
+\item \textbf{ifs\_standard\_astrometry}
+\item \textbf{ifs\_standard\_flux}
+\end{itemize}
+
+At present, astrometric-standard and flux-standard observations are reduced using the same workflow and recipe as science observations. Consequently, the same calibration steps, reduction algorithms, and recipe parameters described in the previous section are applied.

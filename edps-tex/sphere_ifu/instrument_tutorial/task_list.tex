@@ -1,0 +1,132 @@
+\section{List of workflow tasks}
+
+This table lists all the tasks and associated recipes in the \instname\ workflow.
+Only some tasks are involved in the scientific reduction. These are marked as
+``yes'' (executed by default) or ``optional'' (executed only when required by
+the workflow). Tasks marked as ``no'' are not part of the default science
+reduction; they are intended primarily for instrument monitoring and can be
+executed only when explicitly selected as the reduction target. When a task is
+selected as the target, all prerequisite tasks required to generate its input
+calibrations are executed automatically.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\begin{tabular}{|l|l|c|p{7cm}|}
+\hline
+\textbf{TASK} & \textbf{RECIPE} & \textbf{Used in science} & \textbf{Notes} \\
+              &                 & \textbf{reduction} & \\
+\hline
+ifs\_coronagraph\_center &
+sph\_ifs\_science\_dr &
+optional &
+Determines the stellar position behind the coronagraph. \\
+\hline
+ifs\_dark &
+sph\_ifs\_master\_dark &
+yes &
+Creates the master dark (\texttt{IFS\_MASTER\_DARK}). \\
+\hline
+ifs\_det\_flat\_broad\_band &
+sph\_ifs\_master\_detector\_flat &
+yes &
+Generates the broadband detector flat used for small-scale pixel-to-pixel response correction. \\
+\hline
+ifs\_det\_flat\_narrow\_band1 &
+sph\_ifs\_master\_detector\_flat &
+yes &
+Produces the first narrow-band detector flat component. \\
+\hline
+ifs\_det\_flat\_narrow\_band2 &
+sph\_ifs\_master\_detector\_flat &
+yes &
+Produces the second narrow-band detector flat component. \\
+\hline
+ifs\_det\_flat\_narrow\_band3 &
+sph\_ifs\_master\_detector\_flat &
+yes &
+Produces the third narrow-band detector flat component. \\
+\hline
+ifs\_det\_flat\_narrow\_band4 &
+sph\_ifs\_master\_detector\_flat &
+yes &
+Produces the fourth narrow-band detector flat component (associated only for the \texttt{PRI\_YJH} disperser). \\
+\hline
+ifs\_distortion\_map &
+sph\_ifs\_distortion\_map &
+no &
+Measures the geometric distortion of the IFS lenslet grid. Produces \texttt{IFS\_DISTORTION\_MAP} and, when needed, \texttt{IFS\_POINT\_PATTERN}. \\
+\hline
+ifs\_ifu\_flat &
+sph\_ifs\_instrument\_flat &
+yes &
+Produces the IFU (lenslet) flat-field calibration used by subsequent reductions. \\
+\hline
+ifs\_instrument\_background &
+sph\_ifs\_cal\_background &
+yes &
+Produces the instrumental background calibration. \\
+\hline
+ifs\_science &
+sph\_ifs\_science\_dr &
+yes &
+Main science reduction task applying background subtraction, flat-fielding, wavelength calibration and optional ADI or spectral deconvolution. \\
+\hline
+ifs\_science\_flux &
+sph\_ifs\_science\_dr &
+optional &
+Processes FLUX observations obtained with the target offset from the coronagraph to measure the stellar flux. \\
+\hline
+ifs\_sky\_background &
+sph\_ifs\_cal\_background &
+yes &
+Produces the sky-background calibration. \\
+\hline
+ifs\_spectra\_positions &
+sph\_ifs\_spectra\_positions &
+yes &
+Associates detector pixels with lenslets and generates the initial Pixel Description Table (\texttt{IFS\_SPECPOS}). \\
+\hline
+ifs\_standard\_astrometry &
+sph\_ifs\_science\_dr &
+optional &
+Processes astrometric standard observations. \\
+\hline
+ifs\_standard\_flux &
+sph\_ifs\_science\_dr &
+optional &
+Processes spectrophotometric standard observations. \\
+\hline
+ifs\_static\_bad\_pixel\_map &
+sph\_ifs\_master\_dark &
+no &
+Produces the static bad-pixel map (\texttt{IFS\_STATIC\_BADPIXELMAP}). \\
+\hline
+ifs\_wavelength\_calibration &
+sph\_ifs\_wave\_calib &
+yes &
+Refines the wavelength calibration and produces \texttt{IFS\_WAVECALIB}. \\
+\hline
+\end{tabular}
+\caption{Tasks and associated recipes of the \instname\ workflow.}
+\label{tab:ifs_workflow_tasks}
+\end{table}
+
+
+\paragraph{Notes}
+
+\begin{itemize}
+
+\item Background calibrations are associated in the following priority order:
+\texttt{SKY\_BG}
+$\rightarrow$
+\texttt{INS\_BG}
+$\rightarrow$
+\texttt{MASTER\_DARK}.
+
+\item The science reduction is performed on a file-by-file basis. The pipeline does not combine multiple science exposures; any stacking or post-processing of multiple reduced frames must be performed afterwards.
+
+\item The \texttt{force\_distortion\_correction} workflow parameter is set to
+\texttt{FALSE} by default for science and IDP reductions (see Section~\ref{sec:distortion_map}). Although a distortion calibration may be associated by EDPS, it is not propagated to the science recipe. For QC0 processing, this parameter is set to \texttt{TRUE}.
+
+\end{itemize}
