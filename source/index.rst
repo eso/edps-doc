@@ -58,4 +58,5 @@ EDPS documentation
    uves_pdf.md
    #fors/index.rst
    #visir/index.rst
-   xshooter/index.rst
+   #xshooter/index.rst
+   xshooter_pdf.md
