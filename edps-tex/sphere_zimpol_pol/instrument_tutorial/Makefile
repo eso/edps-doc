@@ -4,7 +4,7 @@ TOPDIR :=$(shell pwd)/..
 PIPEDOC_COMMON :=$(TOPDIR)/common
 EDPSGUI_TUT_DIR :=$(TOPDIR)/instrument_tutorial
 TEXINPUTS :=.:$(TOPDIR):$(TOPDIR)/figures:$(EDPSGUI_TUT_DIR):$(EDPSGUI_TUT_DIR)/figures:$(PIPEDOC_COMMON):
-INSTRUMENT := SPHERE_ZIMPOL
+INSTRUMENT := SPHERE_ZIMPOL_POL
 .PHONY: all clean mv
 
 all: $(EDPSGUI_TUT_DIR)/instrument_tutorial.pdf mv
