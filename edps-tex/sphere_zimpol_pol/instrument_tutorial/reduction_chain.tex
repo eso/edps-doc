@@ -1,0 +1,331 @@
+\section{The \instname\ data reduction flow.}
+
+The overall data flow of the \instname\ pipeline is displayed in Figure \ref{fig:reduction_cascade}.
+
+ 
+\begin{figure}[]
+\centering
+\includegraphics[width=0.9\textwidth]{../instrument_tutorial/figures/reduction_cascade-pol.jpg}
+\caption{The data reduction cascade of the \instname\ workflow.}
+\label{fig:reduction_cascade}
+\end{figure}
+
+The reduction cascade is organized in tasks, which represent well-defined steps in the process. Tasks can be grouped
+inside sub-workflows.
+Each task runs a recipe; the detailed description of the algorithms,
+input, outputs and recipe parameters used in each recipe are available
+in the pipeline manual. Here, we present only the description of most
+important features.
+
+The EDPS workflow is designed to execute the tasks that deliver
+the final reduced data for each dataset. It can be either the product of a single exposure, or the combination of
+multiple exposures. Only calibrations needed by the selected scientific exposures are processed.
+
+It is possible to set EDPS to perform the data reduction until a certain step of the reduction chain (e.g. to reduce
+only standard stars, or only flat fields).
+This is done by specifying the desired tasks in the field \textbf{Select reduction target} of the \textbf{Raw Data} tab.
+
+The reduction steps of the workflow are listed below. Before starting the reduction,
+the parameters of the recipes associated to each task can be configured by pressing the button \includegraphics{figures/configure_dataset.jpg} close to each dataset configuration.
+See Section \ref{sec:configuration_overview} for more information.
+
+The reduction steps are:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Subworkflow Internal Calibrations Polarimetry}
+
+Recipes:
+
+\texttt{sph\_zpl\_master\_bias}
+
+\texttt{sph\_zpl\_master\_dark}
+
+\texttt{sph\_zpl\_intensity\_flat}
+
+\texttt{sph\_zpl\_modem\_efficiency}
+
+This subworkflow produces the internal calibration products required for ZIMPOL polarimetric data reduction.
+It generates the master bias, master dark, intensity flat fields,
+and the modulation--demodulation (modem) efficiency calibration for the two ZIMPOL cameras.
+
+The processing proceeds in four steps:
+
+\begin{itemize}
+\item \textbf{zimpol\_bias\_polarimetry}: uses the pipeline recipe \texttt{sph\_zpl\_master\_bias} to create the master bias.
+This calibration is associated with downstream tasks only in FastPolarimetry readout mode.
+
+\item \textbf{zimpol\_dark\_polarimetry}: uses \texttt{sph\_zpl\_master\_dark} to generate the master dark.
+This calibration is used only for SlowPolarimetry exposures longer than or equal to 30 s,
+and may use the master bias when applicable.
+
+\item \textbf{zimpol\_flat\_polarimetry\_cam1} and \textbf{zimpol\_flat\_polarimetry\_cam2} use \texttt{sph\_zpl\_intensity\_flat} to
+produce the intensity flat fields (pixel-to-pixel sensitivity calibrations) for each ZIMPOL camera.
+
+\item \textbf{zimpol\_modem\_efficiency\_cam1} and \textbf{zimpol\_modem\_efficiency\_cam2} use \texttt{sph\_zpl\_modem\_efficiency} to
+produce the modem efficiency calibration.
+Modem-efficiency calibration frames (FLAT,POL100) are processed to measure the efficiency of the detector modulation--demodulation cycle.
+The modem efficiency is computed from the measured Stokes signals as the ratio P/I.
+The resulting modem efficiency products for both cameras are used as calibration inputs by the subsequent ZIMPOL polarimetric reduction recipes.
+\end{itemize}
+
+\paragraph{Customization}
+
+Recipe parameters:
+\begin{itemize}
+\item \texttt{zpl.flat\_polarimetry\_cam?.coll\_alg}: collapse algorithm
+(0 = Mean, 1 = Median, 2 = Clean Mean; default).
+\item \texttt{zpl.modem\_efficiency\_cam?.coll\_alg}: collapse algorithm
+(0 = Mean, 1 = Median, 2 = Clean Mean; default).
+\end{itemize}
+
+
+\subsection{Coronagraph Center}
+
+Recipe: \texttt{sph\_zpl\_star\_center\_pol}
+
+The task \textbf{zimpol\_coronagraph\_center\_polarimetry} executes the pipeline recipe
+to determine the stellar center position behind the coronagraph in polarimetric mode
+and produce calibrated star-center frames.
+
+The task processes raw polarimetric star-center frames (\texttt{ZPL\_STAR\_CENTER\_POL\_RAW}).
+%The input frames may be either raw polarimetric star-center frames
+%(\texttt{ZPL\_STAR\_CENTER\_POL\_RAW})
+%or pre-processed frames
+%(\texttt{ZPL\_STAR\_CENTER\_POL\_PREPROC\_CAM1} and/or
+%\texttt{ZPL\_STAR\_CENTER\_POL\_PREPROC\_CAM2}).
+%Optional calibration inputs include master bias, master dark, intensity flat-field, polarization flat-field, and modulation/demodulation efficiency (modem) calibrations.
+Optional calibration inputs include master bias, master dark, and intensity flat-field frames.
+
+The recipe first performs a pre-processing step using
+\texttt{sph\_zpl\_preproc}
+to generate pre-processed frames for both ZIMPOL cameras.
+The calibrated frames are then de-dithered (if required) and saved as intermediate products.
+All calibrated frames are then combined using a collapse mean algorithm,
+producing a DOUBLE IMAGE product (8 FITS extensions) containing:
+
+\begin{itemize}
+\item a combined intensity image (I) with its bad-pixel map, number-of-combined frames map, and RMS map;
+\item a combined polarimetric image (P) with its bad-pixel map, number-of-combined frames map, and RMS map.
+\end{itemize}
+
+The combined star-center image is analyzed using an aperture detection algorithm
+that identifies bright regions (e.g., waffle satellite spots or a single star)
+and computes their geometric center, which defines the frame center.
+
+The detected center coordinates are stored in the FITS headers for each camera:
+
+\begin{itemize}
+\item \texttt{DRS ZPL STAR CENTER IFRAME XCOORD}
+\item \texttt{DRS ZPL STAR CENTER IFRAME YCOORD}
+\item \texttt{DRS ZPL STAR CENTER PFRAME XCOORD}
+\item \texttt{DRS ZPL STAR CENTER PFRAME YCOORD}
+\end{itemize}
+
+The star-center products are used in subsequent science polarimetric reductions
+to define the rotation center during frame combination.
+
+\paragraph{Customization}
+
+Recipe parameters:
+\begin{itemize}
+\item \texttt{zpl.star\_center.coll\_alg}: collapse algorithm
+(0 = Mean; default, 1 = Median, 2 = Clean Mean).
+\item \texttt{zpl.star\_center.sigma}: the sigma threshold for source detection
+(default = 10.0).
+\item \texttt{zpl.star\_center.save\_interprod}: enable to produce
+a field center table containing the calculated center positions
+(default = FALSE).
+\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Subworkflow Standard Polarimetry}
+
+Recipe: \texttt{sph\_zpl\_science\_p1}
+
+This subworkflow processes polarimetric standard-star observations used for calibration monitoring.
+It reduces observations of unpolarized and highly polarized standard stars in order to assess
+the instrument's polarimetric performance.
+
+Two tasks are executed:
+
+\begin{itemize}
+\item \textbf{zimpol\_standard\_polarimetry\_unpolarized}: Processes observations of unpolarized standard stars
+to measure the level of instrumental polarization introduced by the instrument.
+\item \textbf{zimpol\_standard\_polarimetry\_polarized}: Processes observations of highly polarized standard stars
+to determine possible offsets in polarization degree and polarization angle.
+\end{itemize}
+
+Both tasks run the polarimetric science recipe (\texttt{sph\_zpl\_science\_p1}) and use the relevant calibration products,
+including bias, dark, intensity flat, and modulation--demodulation efficiency (modem) calibrations,
+as well as the polarimetric correction and filter tables. For polarized standards,
+an additional reference table of polarized stars is used.
+
+The resulting products are used for quality control and instrument monitoring
+(qc1calib, calchecker)
+and are not required for the reduction of science observations.
+
+\paragraph{Customization}
+
+Recipe parameters:
+\begin{itemize}
+\item \texttt{zpl.science\_p1.coll\_alg}: collapse algorithm
+(0 = Mean; default, 1 = Median, 2 = Clean Mean).
+\item \texttt{zpl.science\_p1.save\_interprod}: enable to produce
+a field center table containing the calculated center positions
+(default = FALSE).
+\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Subworkflow Science Polarimetry P1}
+
+Recipe: \texttt{sph\_zpl\_science\_p1}
+
+The subworkflow contains two tasks:
+
+\begin{itemize}
+\item \textbf{zimpol\_science\_flux\_p1}, which reduces flux frames obtained with the star moved off the coronagraph;
+\item \textbf{zimpol\_science\_p1}, which reduces the science polarimetric observations themselves.
+\end{itemize}
+
+Both tasks use the pipeline recipe \texttt{sph\_zpl\_science\_p1} and process polarimetric frames obtained in ZIMPOL P1 mode.
+
+Optional calibration inputs include master bias, master dark, intensity flat-field, and modulation--demodulation efficiency (modem) calibration frames for each camera.
+A pre-processing step on the raw cubes is performed with \texttt{sph\_zpl\_preproc} to generate pre-processed frames.
+
+The pre-processed science frames are organized into measurement groups corresponding to the Stokes parameters
+(Q measurements: Qplus and Qminus and U measurements: Uplus and Uminus).
+
+The frames in each group are calibrated by subtracting the master bias and master dark frames and dividing by the appropriate intensity flat field, if available.
+The demodulation step then computes the intensity (I) and polarization component (P) frames.
+The polarization flat-field and modem efficiency corrections are subsequently applied.
+
+The calibrated frames are then de-dithered and de-rotated, and saved as intermediate products.
+The center of rotation is taken from the star-center calibration frames
+(\texttt{ZPL\_STAR\_CENTER\_POL\_CAM1} and
+\texttt{ZPL\_STAR\_CENTER\_POL\_CAM2}) when available;
+otherwise, the geometric center of the frame (\texttt{xc = yc = 512}) is used.
+
+In the next step, the calibrated frames of each measurement group are combined using the collapse mean algorithm,
+producing DOUBLE IMAGE products (8 FITS extensions) for each group containing:
+
+\begin{itemize}
+\item a combined intensity image (I) with its bad-pixel map, number-of-combined (ncomb) frames map, and RMS map;
+\item a combined polarimetric image (P) with its bad-pixel map, ncomb map, and RMS map.
+\end{itemize}
+
+Finally, the Qplus and Qminus frames (and similarly Uplus and Uminus) are combined polarimetrically:
+
+\textbf{Q:}
+\[
+I = \frac{I(+Q) + I(-Q)}{2}
+\]
+
+\[
+P = \frac{P(+Q) - P(-Q)}{2}
+\]
+
+\textbf{U:}
+\[
+I = \frac{I(+U) + I(-U)}{2}
+\]
+
+\[
+P = \frac{P(+U) - P(-U)}{2}
+\]
+
+The reduced products from \textbf{zimpol\_science\_flux\_p1} are used to measure the flux of the target in non-coronagraphic frames and are not themselves the final science products.
+The task \textbf{zimpol\_science\_p1} produces the final reduced Q and/or U DOUBLE IMAGE products for both cameras.
+
+\paragraph{Customization}
+
+Recipe parameters:
+\begin{itemize}
+\item \texttt{zpl.science\_p1.coll\_alg}: collapse algorithm
+(0 = Mean; default, 1 = Median, 2 = Clean Mean).
+\item \texttt{zpl.science\_p1.save\_interprod}: enable to produce
+a field center table containing the calculated center positions
+(default = FALSE).
+\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Subworkflow Science Polarimetry P2}
+
+Recipe: \texttt{sph\_zpl\_science\_p23}
+
+The subworkflow contains two tasks:
+
+\begin{itemize}
+\item \textbf{zimpol\_science\_flux\_p2}, which reduces flux frames obtained with the star moved off the coronagraph;
+\item \textbf{zimpol\_science\_p2}, which reduces the science polarimetric observations themselves.
+\end{itemize}
+
+Both tasks use the pipeline recipe \texttt{sph\_zpl\_science\_p23} and process polarimetric frames obtained in ZIMPOL P23 modes.
+
+Optional calibration inputs include master bias, master dark, intensity flat-field, and modulation--demodulation efficiency (modem) calibration frames for each camera.
+A pre-processing step on the raw cubes is performed with \texttt{sph\_zpl\_preproc} to generate pre-processed frames.
+
+The pre-processed science frames are organized into measurement groups corresponding to the Stokes parameters
+(Q measurements: Qplus and Qminus and U measurements: Uplus and Uminus).
+
+The frames in each group are calibrated by subtracting the master bias and master dark frames and dividing by the appropriate intensity flat field, if available.
+The demodulation step then computes the intensity (I) and polarization component (P) frames.
+The polarization flat-field and modem efficiency corrections are subsequently applied.
+
+The calibrated frames are then de-dithered and saved as intermediate products.
+
+In the next step, the calibrated frames of each measurement group are combined using the collapse mean algorithm,
+producing DOUBLE IMAGE products (8 FITS extensions) for each group containing:
+
+\begin{itemize}
+\item a combined intensity image (I) with its bad-pixel map, number-of-combined (ncomb) frames map, and RMS map;
+\item a combined polarimetric image (P) with its bad-pixel map, ncomb map, and RMS map.
+\end{itemize}
+
+Finally, the Qplus and Qminus frames (and similarly Uplus and Uminus) are combined polarimetrically:
+
+\textbf{Q:}
+\[
+I = \frac{I(+Q) + I(-Q)}{2}
+\]
+
+\[
+P = \frac{P(+Q) - P(-Q)}{2}
+\]
+
+\textbf{U:}
+\[
+I = \frac{I(+U) + I(-U)}{2}
+\]
+
+\[
+P = \frac{P(+U) - P(-U)}{2}
+\]
+
+The reduced products from \textbf{zimpol\_science\_flux\_p2} are used to measure the flux of the target in non-coronagraphic frames and are not themselves the final science products.
+The task \textbf{zimpol\_science\_p2} produces the final reduced Q and/or U DOUBLE IMAGE products for both cameras.
+
+\paragraph{Customization}
+
+Recipe parameters:
+\begin{itemize}
+\item \texttt{zpl.science\_p23.coll\_alg}: collapse algorithm
+(0 = Mean; default, 1 = Median, 2 = Clean Mean).
+\item \texttt{zpl.science\_p23.save\_interprod}: enable to produce
+a field center table containing the calculated center positions
+(default = FALSE).
+\end{itemize}
+
+
+\subsection{Others}
+
+Additional quality-control tasks (zimpol\_flat\_polarimetry\_qc and zimpol\_modem\_efficiency\_qc) execute the same recipes for calibration monitoring and are not used directly in science reductions.

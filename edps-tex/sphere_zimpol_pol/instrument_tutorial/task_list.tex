@@ -1,0 +1,65 @@
+\section{List of workflow tasks}
+
+This table lists all the tasks and associated recipes in the \instname\ workflow.
+Only some tasks are involved in the scientific reduction. These are marked as
+``yes'' (executed by default) or ``optional'' (executed only when required by
+the workflow). Tasks marked as ``no'' are not part of the default science
+reduction; they are intended primarily for instrument monitoring and can be
+executed only when explicitly selected as the reduction target. When a task is
+selected as the target, all prerequisite tasks required to generate its input
+calibrations are executed automatically.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\begin{tabular}{|l|l|c|p{7cm}|}
+\hline
+\textbf{TASK} & \textbf{RECIPE} & \textbf{Used in science} & \textbf{Notes} \\
+              &                 & \textbf{reduction} &                \\
+\hline
+zimpol\_bias\_polarimetry & sph\_zpl\_master\_bias & no &
+Creates the polarimetric master bias for both cameras.\\
+zimpol\_dark\_polarimetry & sph\_zpl\_master\_dark & optional &
+Produces the polarimetric master dark for both cameras. \\
+zimpol\_flat\_polarimetry\_qc & sph\_zpl\_intensity\_flat & no &
+Produces intensity flat for QC and monitoring. \\
+zimpol\_flat\_polarimetry\_cam1 & sph\_zpl\_intensity\_flat & optional &
+Creates the polarimetric intensity flat field for camera 1. \\
+zimpol\_flat\_polarimetry\_cam2 & sph\_zpl\_intensity\_flat & optional &
+Creates the polarimetric intensity flat field for camera 2. \\
+zimpol\_modem\_efficiency\_qc & sph\_zpl\_modem\_efficiency & no &
+Computes modem efficiency for quality control. \\
+zimpol\_modem\_efficiency\_cam1 & sph\_zpl\_modem\_efficiency & optional &
+Creates the modem efficiency for camera~1. \\
+zimpol\_modem\_efficiency\_cam2 & sph\_zpl\_modem\_efficiency & optional &
+Creates the modem efficiency for camera~2. \\
+zimpol\_standard\_polarimetry\_unpolarized & sph\_zpl\_science\_p1 & no &
+Reduces unpolarized standard stars (monitoring). \\
+zimpol\_standard\_polarimetry\_polarized & sph\_zpl\_science\_p1 & no &
+Reduces highly polarized standard stars (monitoring). \\
+zimpol\_coronagraph\_center\_polarimetry & sph\_zpl\_star\_center\_pol & optional &
+Determines stellar position behind the coronagraph. \\
+zimpol\_science\_flux\_p1 & sph\_zpl\_science\_p1 & optional &
+Reduces off-axis flux frames for P1 observations. \\
+zimpol\_science\_p1 & sph\_zpl\_science\_p1 & yes &
+Polarimetric science reduction for P1 observations. \\
+zimpol\_science\_flux\_p2 & sph\_zpl\_science\_p23 & optional &
+Reduces off-axis flux frames for P23 observations. \\
+zimpol\_science\_p2 & sph\_zpl\_science\_p23 & yes &
+Polarimetric science reduction for P23 observations. \\
+\hline
+\end{tabular}
+\caption{\instname\ polarimetric workflow tasks overview.}
+\label{tab:zimpol_polarimetry_tasks}
+\end{table}
+
+
+\textbf{Notes}
+
+\begin{itemize}
+\item modem = modulation--demodulation.
+\item In FastPolarimetry, the master bias is associated when available.
+\item In SlowPolarimetry, the master dark is associated only for long exposures ($\geq$30 s).
+\item The coronagraph-center calibration is optional. When unavailable, the science recipes use the geometric frame center (\texttt{xc = yc = 512}) as the center of rotation.
+\item The workflow does not apply distortion-correction to the science.
+\end{itemize}

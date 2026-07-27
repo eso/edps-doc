@@ -1,0 +1,40 @@
+\section{Overview of all the data reduction configuration options}
+\label{sec:configuration_overview}
+
+\subsection{Selection of most appropriate calibrations}
+
+\input{../common/appropriate_calibrations}
+
+\subsection{Configuration of parameters: the configuration editor}
+\label{sec:configuration_editor}
+\input{../common/configuration_editor}
+
+\subsection{Troubleshooting}
+
+This section provides guidance for diagnosing and resolving common issues encountered during the \instname\ data-reduction cascade.
+
+\subsubsection{Vertical pairs of bright and dark pixels}
+
+For long exposure times (\texttt{DET.DIT1} $>$ 50 s), charge traps may appear in the ZIMPOL detector.
+Those are defects in the CCD lattice that temporarily capture electrons during the charge transfer
+and release them with a time delay, producing vertical pairs of dark and bright pixels.
+See Figure~\ref{fig:charges} as an example.
+
+Small errors in the charge transfer accumulate over time.
+The effect can appear at shorter exposure times in FastPolarimetry mode and may also be present in calibration frames such as \texttt{FLAT,LAMP} or \texttt{FLAT,POL100}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/charge_traps.jpg}
+\caption{Vertical pairs of bright and dark pixels marked in cyan caused by charge traps in the ZIMPOL detector.}
+\label{fig:charges}
+\end{figure}
+
+\subsubsection{Image Incorrectly Rotated / Signal Smeared out}
+
+The task \textbf{zimpol\_coronagraph\_center\_imaging} uses the instrument pipeline recipe \texttt{sph\_zpl\_star\_center\_img}
+to identify waffle spots and determine the position of the target behind the coronagraph.
+In some cases the detection threshold of 10$\sigma$ is too high and the recipe cannot identify
+the target’s position. In such a case the science recipe (\texttt{sph\_zpl\_science\_imaging})
+will rotate the frames around an incorrect position which will smear out the signal.
+If you see such behaviour you may try to reduce \texttt{star\_center\_img.sigma} to 5.
