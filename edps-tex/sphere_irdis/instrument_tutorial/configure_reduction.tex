@@ -1,0 +1,143 @@
+\section{Overview of all the data reduction configuration options}
+\label{sec:configuration_overview}
+
+\subsection{Selection of most appropriate calibrations}
+
+\input{../common/appropriate_calibrations}
+
+\subsection{Configuration of parameters: the configuration editor}
+\label{sec:configuration_editor}
+\input{../common/configuration_editor}
+
+\clearpage
+\subsection{Troubleshooting}
+
+This section provides guidance on configuring the reduction, as well as
+diagnosing and resolving common issues encountered during the
+\instname\ data-reduction cascade.
+
+\subsubsection{Dark regions in the background}
+\label{sec:dark-reg}
+
+Figure~\ref{fig:bkg} shows an example of dark regions appearing in the
+products of the imaging workflow. These features are caused by
+astrophysical sources present in the sky-background frames used for
+background subtraction.
+
+If sky-background frames are not provided to the pipeline, master darks
+are used instead for the background correction, which removes this
+pattern.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/bad_background.jpg}
+\caption{Dark regions in the final image product for
+\texttt{SPHER.2015-12-19T02:24:25.758\_tpl} (DPI).}
+\label{fig:bkg}
+\end{figure}
+
+\subsubsection{Fine tuning the instrument flat}
+\label{sec:ins_flat}
+
+The recipe \texttt{sph\_ird\_instrument\_flat} is executed using modified
+bad-pixel rejection thresholds. Instead of the default values of
+0.1 and 10 for
+\texttt{ird.instrument\_flat.badpix\_lowtolerance} and
+\texttt{ird.instrument\_flat.badpix\_uptolerance}, respectively,
+values of 0.75 and 1.25 are adopted.
+
+For K-band data, the High Contrast Data Center (HC-DC) recommends
+increasing
+
+\texttt{ird.instrument\_flat.badpix\_uptolerance}
+to 1.5.
+
+\subsubsection{Distortion maps are not used}
+\label{sec:distortion_map}
+
+The pipeline recipe \texttt{sph\_ird\_distortion\_map} determines the
+geometric distortion of IRDIS data using internal calibration
+observations obtained with a pinhole mask. The recipe can also measure
+the relative offset between the LEFT and RIGHT detector images when the
+workflow parameter
+\texttt{force\_distortion\_correction}
+is enabled.
+
+In practice, distortion solutions derived from internal calibration data
+have been found to be insufficiently robust for routine processing.
+Calibration sequences acquired close in time may produce noticeably
+different distortion solutions, including variations in the derived
+geometric mapping. When applied to science or astrometric observations,
+these solutions generally do not improve the calibration beyond what is
+achieved using a simple anamorphism correction alone, and in some cases
+may even degrade the data.
+
+For this reason, processing of internal distortion calibrations is
+disabled. A more robust approach is to correct only the dominant
+distortion component, which is a stable anamorphism of approximately
+0.6\%. This can be applied in a simple and reproducible manner by
+rescaling the detector coordinates, multiplying the X and Y axes by
+factors of 1.0059 and 1.0011, respectively.
+
+\subsubsection{Waffle spots cannot be detected}
+\label{sec:img_coro}
+
+In the task \textbf{irdis\_coronagraph\_center}, the recipe
+\texttt{sph\_ird\_star\_center} may require parameter adjustments
+depending on the observing setup.
+
+For K-band data, detection of the waffle spots can be challenging owing
+to the high thermal background. Increasing
+\texttt{ird.star\_center.sigma}
+to 100 may improve the detection. Alternatively, the background can be
+removed manually before running the recipe.
+
+The default parameters are optimized for detecting waffle spots in
+coronagraphic observations. For data acquired without a coronagraph, the
+following parameters should be modified:
+
+\begin{itemize}
+    \item \texttt{ird.star\_center.use\_waffle = FALSE};
+    \item \texttt{ird.star\_center.sigma = 500} (the stellar PSF is
+    typically very bright in this configuration).
+\end{itemize}
+
+\subsubsection{Angular Differential Imaging and Spectral Differential Imaging}
+\label{sec:highcontrast}
+
+The recipe \texttt{sph\_ird\_science\_dbi} runs with both Angular
+Differential Imaging (ADI) and Spectral Differential Imaging (SDI)
+disabled by default.
+
+If SDI processing is enabled, the Data Centre (DC) recommends setting
+
+\begin{center}
+\texttt{ird.science\_dbi.minr = 20}
+\qquad
+and
+\qquad
+\texttt{ird.science\_dbi.maxr = 70},
+\end{center}
+
+instead of the default values of 4 and 40.
+
+These values are calibrated for a wavelength of
+$\lambda = 1.6\,\mu$m and should be scaled linearly with wavelength for
+other observing bands.
+
+\subsubsection{Getting additional data products}
+\label{sec:img_prod}
+
+The recipe \texttt{sph\_ird\_science\_dbi} is used to process both
+Classical Imaging (CI) and Dual-Band Imaging (DBI) data. The workflow is
+configured to save stacked products for each detector arm
+
+(\texttt{ird.science\_dbi.save\_addprod = TRUE}), while intermediate
+products are not retained by default.
+
+To generate and preserve all intermediate products that may be useful
+for further analysis, set the recipe parameter
+
+\begin{center}
+\texttt{ird.science\_dbi.save\_interprod = TRUE}.
+\end{center}

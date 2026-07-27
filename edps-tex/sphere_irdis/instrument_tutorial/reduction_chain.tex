@@ -1,0 +1,528 @@
+\section{The \instname\ data reduction flow.}
+
+The overall data flow of the \instname\ pipeline is displayed in Figure \ref{fig:reduction_cascade}.
+
+ 
+\begin{figure}[]
+\centering
+\includegraphics[width=0.9\textwidth]{../instrument_tutorial/figures/reduction_cascade.jpg}
+\caption{The data reduction cascade of the \instname\ workflow.}
+\label{fig:reduction_cascade}
+\end{figure}
+
+The reduction cascade is organized in tasks, which represent well-defined steps in the process. Tasks can be grouped
+inside sub-workflows.
+Each task runs a recipe; the detailed description of the algorithms,
+input, outputs and recipe parameters used in each recipe are available
+in the pipeline manual. Here, we present only the description of most
+important features.
+
+The EDPS workflow is designed to execute the tasks that deliver
+the final reduced data for each dataset. It can be either the product of a single exposure, or the combination of
+multiple exposures. Only calibrations needed by the selected scientific exposures are processed.
+
+It is possible to set EDPS to perform the data reduction until a certain step of the reduction chain (e.g. to reduce
+only standard stars, or only flat fields).
+This is done by specifying the desired tasks in the field \textbf{Select reduction target} of the \textbf{Raw Data} tab.
+
+The reduction steps of the workflow are listed below. Before starting the reduction,
+the parameters of the recipes associated to each task can be configured by pressing the button \includegraphics{figures/configure_dataset.jpg} close to each dataset configuration.
+See Section \ref{sec:configuration_overview} for more information.
+
+The reduction steps are:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Subworkflow: Dark Background}
+
+Recipes:
+\texttt{sph\_ird\_master\_dark}, 
+\texttt{sph\_ird\_ins\_bg}, 
+\texttt{sph\_ird\_sky\_bg}
+
+This subworkflow generates the dark-current, instrumental-background, and
+sky-background calibration products. It consists of the following tasks:
+
+\begin{itemize}
+    \item \textbf{irdis\_dark\_imaging}
+    \item \textbf{irdis\_static\_bad\_pixel\_map}
+    \item \textbf{irdis\_instrument\_background}
+    \item \textbf{irdis\_sky\_background}
+\end{itemize}
+
+First, \textbf{irdis\_dark\_imaging} uses recipe \texttt{sph\_ird\_master\_dark} to create the master dark frame by
+combining raw dark exposures using the selected collapse algorithm (typically
+Clean Mean). 
+
+The task \textbf{irdis\_static\_bad\_pixel\_map} runs the same recipe,
+\texttt{sph\_ird\_master\_dark}, 
+
+and exports the
+\texttt{IRD\_STATIC\_BADPIXELMAP} product.
+
+Next, \textbf{irdis\_instrument\_background} uses \texttt{sph\_ird\_ins\_bg} to generate the instrumental-background
+calibration frame by combining raw background exposures using the selected
+collapse algorithm. Unlike the master dark recipe, no bad-pixel map is created.
+
+Finally, \textbf{irdis\_sky\_background} uses \texttt{sph\_ird\_sky\_bg} to produce the sky-background calibration frame
+by combining raw sky-background exposures. As for the instrumental background
+recipe, no bad-pixel map is generated.
+
+The resulting \texttt{MASTER\_DARK}, \texttt{INS\_BG}, and
+\texttt{SKY\_BG} products are intended for subtraction from raw science or calibration frames. They are neither flat-fielded nor corrected
+using other dark or background calibrations.
+
+The output products are multi-extension FITS files containing the calibration image, a bad-pixel map, a weight map recording the number of input frames contributing to each pixel, and an RMS map.
+
+\paragraph{Customization}
+
+Recipe parameters:
+
+\begin{itemize}
+\item \texttt{ird.sky\_bg.coll\_alg} / \texttt{ird.master\_dark.coll\_alg} / \texttt{ird.ins\_bg.coll\_alg}: Collapse algorithm used to combine the input frames
+(\texttt{0} = Mean,
+ \texttt{1} = Median,
+ \texttt{2} = Clean Mean; default).
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Master Flat}
+
+Recipe: \texttt{sph\_ird\_instrument\_flat}
+
+The task \textbf{irdis\_flat\_field} uses the pipeline recipe to generate the IRDIS detector flat field from narrow- or broadband lamp exposures acquired at different illumination
+levels. 
+
+Background inputs are optional. Raw dark frames with matching detector integration times (DITs) may be provided. 
+If no suitable raw darks are available, EDPS may use the following calibration products in decreasing order of priority
+\texttt{SKY\_BG}
+$\rightarrow$
+\texttt{INS\_BG}
+$\rightarrow$
+\texttt{MASTER\_DARK}.
+
+
+\paragraph{Customization}
+
+Recipe parameters:
+
+\begin{itemize}
+\item \texttt{ird.instrument\_flat.coll\_alg}:
+Collapse algorithm
+(\texttt{0} = Mean,
+ \texttt{1} = Median,
+ \texttt{2} = Clean Mean; default).
+\item \texttt{ird.instrument\_flat.robust\_fits:}
+Enables robust linear fitting. The default value is
+\texttt{FALSE}. Setting this parameter to \texttt{TRUE} can improve rejection of outliers such as cosmic rays.
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Distortion Map}
+
+Recipe: \texttt{sph\_ird\_distortion\_map}
+
+The task \textbf{irdis\_distortion\_map} uses the recipe to derive the IRDIS geometric distortion
+map from calibration observations that have been reduced as standard
+field-stabilized science images without dithering. The reduction may optionally
+include dark subtraction and flat-field correction.
+
+After combining the input frames, point sources are detected using a
+user-defined detection threshold. If no reference point pattern is provided,
+the recipe generates one automatically. Otherwise, the detected source
+positions are compared with the reference pattern to measure the optical
+distortion.
+
+The distortion map is written as a multi-extension FITS file containing
+16 extensions:
+
+\begin{itemize}
+
+\item Extensions 1--4 contain the distortion map, bad-pixel map, RMS map,
+and weight map for the left field of view in the detector
+$x$ direction.
+
+\item Extensions 5--8 contain the corresponding products for the left field
+of view in the detector $y$ direction.
+
+\item Extensions 9--12 contain the distortion map, bad-pixel map, RMS map,
+and weight map for the right field of view in the detector
+$x$ direction.
+
+\item Extensions 13--16 contain the corresponding products for the right field
+of view in the detector $y$ direction.
+
+\end{itemize}
+
+Optional quality-control products include images of the detected point
+patterns, distortion-corrected detector and field-of-view images, and residual
+distortion maps. For a successful solution, the residual distortion is
+typically below 0.1 pixels.
+
+The estimated optical-axis position and the polynomial coefficients describing
+the distortion solution are recorded in the FITS header for quality monitoring
+and verification.
+
+\paragraph{Customization}
+
+Recipe parameters:
+
+\begin{itemize}
+
+\item \texttt{ird.distortion\_map.coll\_alg:} 
+Collapse algorithm
+(\texttt{0} = Mean,
+ \texttt{1} = Median,
+ \texttt{2} = Clean Mean; default).
+
+\item \texttt{ird.distortion\_map.threshold:} 
+Detection threshold for point sources (default: \texttt{3.0}).
+
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Subworkflow: Standard Imaging}
+
+This subworkflow processes photometric and astrometric standard-star
+observations using the following tasks:
+
+\begin{itemize}
+    \item \textbf{irdis\_standard\_flux\_imaging}
+    \item \textbf{irdis\_standard\_astrometry\_imaging}
+\end{itemize}
+
+These tasks execute the pipeline recipes
+\texttt{sph\_ird\_science\_imaging} (classical imaging, CI) 
+
+and
+\texttt{sph\_ird\_science\_dbi} (dual-band imaging, DBI), respectively, described hereafter.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Standard Flux Imaging}
+
+Recipe: \texttt{sph\_ird\_science\_imaging}
+
+The task \textbf{irdis\_standard\_flux\_imaging} uses the recipe to reduce photometric standard-star observations for zero-point calibration.
+
+Raw frames are dark-subtracted, optionally flat-fielded, and a combined bad-pixel map is generated. The left and right detector regions are
+extracted using the IRDIS instrument model. Individual exposures are then
+combined using one of the available collapse algorithms.
+
+The output product is a multi-extension FITS file containing eight extensions:
+the image, bad-pixel map, weight map, and RMS map for both the left and
+right fields of view.
+
+\paragraph{Customization}
+
+Recipe parameters:
+
+\begin{itemize}
+
+\item \texttt{ird.science\_imaging.coll\_alg:} 
+Collapse algorithm
+(\texttt{0} = Mean,
+ \texttt{1} = Median,
+ \texttt{2} = Clean Mean; default).
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Standard Astrometry Imaging}
+
+Recipe: \texttt{sph\_ird\_science\_dbi}
+
+The task \textbf{irdis\_standard\_astrometry\_imaging} uses the recipe to reduce astrometric standard observations.
+
+The processing is identical to that of the photometric standard recipe. Raw
+frames are dark-subtracted, optionally flat-fielded, combined with an updated
+bad-pixel map, and split into left and right detector regions using the IRDIS
+instrument model. The individual exposures are combined using the selected
+collapse algorithm.
+
+The final product is a multi-extension FITS file containing the image,
+bad-pixel map, weight map, and RMS map for both detector fields of view.
+
+\paragraph{Customization}
+
+Recipe parameters:
+
+\begin{itemize}
+
+\item \texttt{ird.science\_dbi.coll\_alg:}
+Collapse algorithm
+(\texttt{0} = Mean,
+ \texttt{1} = Median,
+ \texttt{2} = Clean Mean; default).
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Subworkflow: On-Sky Science Calibrations}
+
+Recipes: 
+\texttt{sph\_ird\_science\_dpi},
+\texttt{sph\_ird\_science\_dbi},
+\texttt{sph\_ird\_star\_center}
+
+This subworkflow processes on-sky calibration observations acquired in IRDIS
+imaging (classical, dual band) and polarimetry modes.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Imaging Flux Standard}
+
+The task \textbf{irdis\_science\_flux\_imaging} executes the recipe \texttt{sph\_ird\_science\_dbi} to reduce flux-calibration frames acquired for coronagraphic observations, in which the target star is intentionally offset outside the coronagraphic mask.
+
+These products are intended for quality control only and are not used during the science reduction, since no absolute flux calibration is applied to the final science products.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Polarimetry Flux Standard}
+
+The task \textbf{irdis\_science\_flux\_polarimetry} executes the recipe \texttt{sph\_ird\_science\_dpi} to reduce flux-calibration observations acquired for coronagraphic polarimetric observations.
+
+As for imaging mode, these products are not propagated into the science reduction and serve only as quality-control products.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Coronagraph Centre}
+
+Recipe: \texttt{sph\_ird\_star\_center}
+
+The task \textbf{irdis\_coronagraph\_center} determines the stellar position
+behind the coronagraph by analysing waffle calibration images.
+
+The illuminated left and right detector regions are processed independently
+using a source-detection algorithm with a user-defined detection threshold.
+For each exposure, the output table records:
+
+\begin{itemize}
+    \item the exposure start time,
+    \item the measured stellar centre coordinates,
+    \item the IRDIS DMS position converted from microns to detector pixels.
+\end{itemize}
+
+The output consists of a binary FITS table containing the measured centre
+positions for all processed frames.
+
+\paragraph{Customization}
+
+Recipe parameters:
+
+\begin{itemize}
+
+\item \texttt{ird.star\_center.coll\_alg:} 
+Collapse algorithm
+(\texttt{0} = Mean,
+ \texttt{1} = Median,
+ \texttt{2} = Clean Mean; default).
+
+\item \texttt{ird.star\_center.sigma:} 
+Sigma threshold used for source detection
+(default: \texttt{10.0}).
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Subworkflow: Wavelength Calibration}
+
+Recipe: \texttt{sph\_ird\_wave\_calib}
+
+In long-slit spectroscopy (IRDIS-LSS) mode, the task
+\textbf{irdis\_wavecal\_spectroscopy} derives the wavelength calibration using
+the recipe \texttt{sph\_ird\_wave\_calib}.
+
+The input calibration frames are combined, dark-subtracted, flat-fielded, and
+cleaned of bad pixels. The resulting image is sliced along the dispersion
+direction, and calibration emission lines are searched for within a window of
+$\pm$\texttt{ird.wave\_calib.line\_tolerance} around their expected detector
+positions.
+
+The measured line positions are matched to their reference wavelengths and
+fitted with a polynomial. This polynomial defines the wavelength solution and
+provides the interpolation between calibration lines. The final solution is
+written to the Pixel Description Table (PDT).
+
+The output product is a FITS file containing six image extensions
+corresponding to the PDT columns:
+
+\begin{itemize}
+    \item wavelength,
+    \item spectrum identifier,
+    \item slit identifier,
+    \item wavelength width (or uncertainty),
+    \item second derivative,
+    \item illumination fraction.
+\end{itemize}
+
+Additional extensions contain the combined calibration image, a bad-pixel map,
+and an RMS map.
+
+The wavelength-calibration task produces \texttt{IRD\_WAVECALIB} products.
+These products are associated with spectroscopy science observations for
+calibration-selection purposes only and are filtered out from the recipe input
+of \texttt{sph\_ird\_science\_spectroscopy}.
+
+\paragraph{Customization}
+
+Recipe parameters:
+
+\begin{itemize}
+
+\item \texttt{ird.wave\_calib.coll\_alg:}
+Collapse algorithm
+(\texttt{0} = Mean,
+ \texttt{1} = Median,
+ \texttt{2} = Clean Mean; default).
+
+\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Science Imaging}
+
+Recipe: \texttt{sph\_ird\_science\_dbi}
+
+The task \textbf{irdis\_science\_imaging} reduces IRDIS imaging science observations, including classical, dual-band, coronagraphic, and SAM modes, using the recipe \texttt{sph\_ird\_science\_dbi}.
+The recipe supports observations obtained with
+or without dithering and optionally performs Angular Differential Imaging (ADI)
+and Spectral Differential Imaging (SDI) processing.
+
+Raw frames are dark-subtracted, optionally flat-fielded, and
+combined with the static bad-pixel information derived from the calibration
+products. The left and right detector regions are extracted using the IRDIS
+instrument model before the individual exposures are combined using the selected
+collapse algorithm.
+
+A dark or background calibration frame is required. If several suitable
+products are available, they are selected according to the following priority:
+\texttt{SKY\_BG}
+$\rightarrow$
+\texttt{INS\_BG}
+$\rightarrow$
+\texttt{MASTER\_DARK}.
+
+The output is a multi-extension FITS file containing eight extensions, namely, for each detector image (right and left): the science image, the bad-pixel map, the weight map (ncomb), and the RMS map.
+
+When the required calibration tables are available, the recipe can also compute quality-control parameters such as the Strehl ratio.
+
+\paragraph{Customization}
+
+Recipe parameters:
+
+\begin{itemize}
+
+\item \texttt{ird.science\_dbi.coll\_alg:}
+Collapse algorithm
+(\texttt{0} = Mean,
+ \texttt{1} = Median,
+ \texttt{2} = Clean Mean; default).
+
+\item \texttt{ird.science\_dbi.use\_adi:}
+Enables Angular Differential Imaging processing
+(\texttt{0} = disabled; default,
+ \texttt{1} = enabled).
+
+\item \texttt{ird.science\_dbi.use\_sdi:}
+Enables Spectral Differential Imaging processing
+(\texttt{0} = disabled; default,
+ \texttt{1} = enabled).
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Science Polarimetry}
+
+Recipe: \texttt{sph\_ird\_science\_dpi}
+
+The task \textbf{irdis\_science\_polarimetry} reduces science observations
+acquired in IRDIS Dual-Polarization Imaging (DPI) mode using the pipeline
+recipe \texttt{sph\_ird\_science\_dpi}.
+
+The reduction procedure is essentially identical to that of the DBI science
+recipe. Raw frames are dark-subtracted, optionally flat-fielded, corrected for
+bad pixels, and combined using the selected collapse algorithm. The principal
+difference lies in the format of the final products, which are provided as
+polarization and intensity images rather than left and right detector images.
+
+The standard output is a multi-extension FITS file containing eight extensions:
+
+\begin{itemize}
+    \item Intensity image:
+    \begin{itemize}
+        \item science image,
+        \item bad-pixel map,
+        \item weight map (ncomb),
+        \item RMS map.
+    \end{itemize}
+    
+    \item Polarization image:
+    \begin{itemize}
+        \item science image,
+        \item bad-pixel map,
+        \item weight map (ncomb),
+        \item RMS map;
+    \end{itemize}
+\end{itemize}
+
+When ADI processing is enabled, only the polarization products are written,
+resulting in a FITS file with four extensions.
+
+\paragraph{Customization}
+
+Recipe parameters:
+
+\begin{itemize}
+
+\item \texttt{ird.science\_dpi.coll\_alg:}
+Collapse algorithm
+(\texttt{0} = Mean,
+ \texttt{1} = Median,
+ \texttt{2} = Clean Mean; default).
+
+\item \texttt{ird.science\_dpi.use\_adi:}
+Enables Angular Differential Imaging processing
+(\texttt{0} = disabled; default,
+ \texttt{1} = enabled).
+
+\item \texttt{ird.science\_dpi.use\_sdi:}
+Enables Spectral Differential Imaging processing
+(\texttt{0} = disabled; default,
+ \texttt{1} = enabled).
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Science Spectroscopy}
+
+Recipe: \texttt{sph\_ird\_science\_spectroscopy}
+
+The task \textbf{irdis\_science\_spectroscopy} reduces science observations obtained in IRDIS Long-Slit Spectroscopy (LSS) mode using the pipeline recipe
+\texttt{sph\_ird\_science\_spectroscopy}.
+
+The reduction consists of dark subtraction, optional flat-field correction, bad
+pixel handling, and combination of the individual exposures using the selected
+collapse algorithm. EDPS subtracts an associated background calibration (sky background preferred, otherwise instrumental background, otherwise master dark).
+
+The output product is a multi-extension FITS file containing the reduced
+two-dimensional spectrum for one detector field of view (left or right,
+depending on the selected slit). The FITS file contains four extensions: the science image, the bad-pixel map, the weight map (ncomb), and the RMS map.
+
+For observations in which both left and right spectra are recorded, separate
+products are generated for each detector field of view.
+
+\paragraph{Customization}
+
+Recipe parameters:
+
+\begin{itemize}
+
+\item \texttt{ird.science\_spectroscopy.coll\_alg:}
+Collapse algorithm
+(\texttt{0} = Mean,
+ \texttt{1} = Median,
+ \texttt{2} = Clean Mean; default).
+
+\end{itemize}

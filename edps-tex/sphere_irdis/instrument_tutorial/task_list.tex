@@ -1,0 +1,116 @@
+\section{List of workflow tasks}
+
+This table lists all the tasks and associated recipes in the \instname\ workflow.
+Only some tasks are involved in the scientific reduction. These are marked as
+``yes'' (executed by default) or ``optional'' (executed only when required by
+the workflow). Tasks marked as ``no'' are not part of the default science
+reduction; they are intended primarily for instrument monitoring and can be
+executed only when explicitly selected as the reduction target. When a task is
+selected as the target, all prerequisite tasks required to generate its input
+calibrations are executed automatically.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\begin{tabular}{|l|l|c|p{7cm}|}
+\hline
+\textbf{TASK} & \textbf{RECIPE} & \textbf{Used in science} & \textbf{Notes} \\
+              &                 & \textbf{reduction} &                \\
+\hline
+irdis\_coronagraph\_center &
+sph\_ird\_star\_center &
+yes (coro.) &
+Determines the stellar position behind the coronagraph. \\
+\hline
+irdis\_dark\_imaging &
+sph\_ird\_master\_dark &
+yes &
+Creates the master dark. \\
+\hline
+irdis\_distortion\_map &
+sph\_ird\_distortion\_map &
+no &
+Derives the geometric distortion solution. \\
+\hline
+irdis\_flat\_field &
+sph\_ird\_instrument\_flat &
+yes &
+Generates the detector master flat. \\
+\hline
+irdis\_instrument\_background &
+sph\_ird\_ins\_bg &
+yes &
+Produces the instrumental background calibration. \\
+\hline
+irdis\_science\_flux\_imaging &
+sph\_ird\_science\_dbi &
+optional &
+Reduces off-axis flux observations used for coronagraphic imaging. \\
+\hline
+irdis\_science\_flux\_polarimetry &
+sph\_ird\_science\_dpi &
+optional &
+Reduces off-axis flux observations for polarimetric mode. \\
+\hline
+irdis\_science\_imaging &
+sph\_ird\_science\_dbi &
+yes (imaging) &
+Science reduction for classical, dual-band, coronagraphic, and SAM imaging observations. \\
+\hline
+irdis\_science\_polarimetry &
+sph\_ird\_science\_dpi &
+yes (DPI) &
+Science reduction for dual-polarization imaging observations. \\
+\hline
+irdis\_science\_spectroscopy &
+sph\_ird\_science\_spectroscopy &
+yes (LSS) &
+Reduces long-slit spectroscopy observations. \\
+\hline
+irdis\_sky\_background &
+sph\_ird\_sky\_bg &
+optional &
+Creates the sky-background calibration. \\
+\hline
+irdis\_standard\_astrometry\_imaging &
+sph\_ird\_science\_dbi &
+optional &
+Processes astrometric standard observations. \\
+\hline
+irdis\_standard\_flux\_imaging &
+sph\_ird\_science\_imaging &
+optional &
+Processes photometric standard observations used for zero-point calibration. \\
+\hline
+irdis\_static\_bad\_pixel\_map &
+sph\_ird\_master\_dark &
+yes &
+Produces the static bad-pixel map. \\
+\hline
+irdis\_wavecal\_spectroscopy &
+sph\_ird\_wave\_calib &
+optional &
+Computes the wavelength calibration for LSS observations. \\
+\hline
+\end{tabular}
+\caption{Tasks and associated recipes of the \instname\ workflow.}
+\label{tab:irdis_workflow_tasks}
+\end{table}
+
+\paragraph{Notes}
+
+\begin{itemize}
+\item For science tasks, background calibrations are associated in the following priority order:
+\texttt{SKY\_BG}
+$\rightarrow$
+\texttt{INS\_BG}
+$\rightarrow$
+\texttt{MASTER\_DARK}.
+
+\item For polarimetric science reductions, coronagraph-centre calibrations are associated only if they were obtained before the corresponding science observation.
+
+\item For science and IDP reductions, \texttt{force\_distortion\_correction} is set to
+\texttt{FALSE} by default (see Section\,\ref{sec:distortion_map}). The distortion calibration may still be associated by EDPS, but it is not used by the scientific recipe. For QC0 processing, this
+parameter is set to \texttt{TRUE}.
+
+\end{itemize}

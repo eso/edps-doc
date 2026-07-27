@@ -1,0 +1,33 @@
+
+\section{Reducing demo data}
+\label{sec:reducing_demo_data}
+
+\input{../common/common_reducing_demo_data}
+
+ 
+\subsubsection{Quality plots}
+\input{../common/quality_plots}
+
+\subsection{Exporting the final products}
+\label{sec:export_final_products}
+
+
+\input{../common/common_export}
+
+\clearpage
+ 
+Exported products are organized by `DATASET` (named as the first scientific exposure of the dataset), and `TIMESTAMP` (time of start of reduction). 
+
+The final products are written to the specified output directory. Their filenames follow the convention:
+
+\texttt{IRDIS\_<MODE>\_<ARCFILE>.fits}, 
+
+where \texttt{<MODE>} identifies the observing mode 
+
+(e.g., \texttt{IMAGE}, \texttt{POLARIMETRY}, \texttt{SPECTROSCOPY\_LEFT}, \texttt{SPECTROSCOPY\_RIGHT}, or \texttt{STAR\_CENTER}) and \texttt{<ARCFILE>} is the archive filename stored in the FITS header keyword \texttt{ARCFILE}.
+
+For imaging and spectroscopy modes, the output is a calibrated science image together with associated quality maps: bad-pixel map, number of input frames contributing to each pixel (ncomb) and RMS map.
+
+For polarimetric observations, the product contains eight FITS extensions. The first four correspond to the reduced science intensity image and include the science image itself, a bad-pixel map, a ncomb map, and an RMS map. The remaining four extensions contain the reduced polarization image together with its associated bad-pixel map, ncomb map, and RMS map.
+
+Finally, a binary table listing the measured stellar centre coordinates is provided for star-centre observations.
