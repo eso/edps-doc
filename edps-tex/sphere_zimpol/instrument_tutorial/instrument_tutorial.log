@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.3.20)  22 JUN 2026 09:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.3.20)  27 JUL 2026 12:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -698,22 +698,9 @@ Package pdftex.def Info: figures/configure_dataset.jpg  used on input line 29.
 
  <./figures/configure_dataset.jpg>] [19 <../instrument_tutorial/figures/reducti
 on_cascade-img.jpg>] [20]
-Overfull \hbox (8.0198pt too wide) in paragraph at lines 127--129
+Overfull \hbox (8.0198pt too wide) in paragraph at lines 133--135
 []\T1/ptm/m/n/10.95 The re-sult-ing prod-ucts are used pri-mar-ily for qual-ity
  con-trol and in-stru-ment mon-i-tor-ing (qc0, qc1calib, calchecker)
- []
-
-
-Overfull \hbox (1.2656pt too wide) in paragraph at lines 144--147
-\T1/ptm/m/n/10.95 frames are pro-vided, a pre-processing step on the raw cubes 
-is per-formed with \T1/pcr/m/n/10.95 sph_zpl_preproc_imaging
- []
-
-
-Overfull \hbox (42.6671pt too wide) in paragraph at lines 151--154
-\T1/ptm/m/n/10.95 ter of ro-ta-tion is taken from the star-center cal-i-bra-tio
-n frames (\T1/pcr/m/n/10.95 SPH_ZPL_TAG_STAR_CENTER_IMG_CALIB_CAM*\T1/ptm/m/n/1
-0.95 /2)
  []
 
 [21]) (./configure_reduction.tex [22] (../common/appropriate_calibrations.tex)
@@ -725,7 +712,7 @@ File: ../common/figures/configure_dataset.jpg Graphic file (type jpg)
 Package pdftex.def Info: ../common/figures/configure_dataset.jpg  used on input
  line 41.
 (pdftex.def)             Requested size: 22.76228pt x 22.39204pt.
-<../instrument_tutorial/figures/configuration_editor_0.jpg, id=326, 1018.80624p
+<../instrument_tutorial/figures/configuration_editor_0.jpg, id=332, 1018.80624p
 t x 544.0325pt>
 File: ../instrument_tutorial/figures/configuration_editor_0.jpg Graphic file (t
 ype jpg)
@@ -735,7 +722,7 @@ jpg  used on input line 47.
 (pdftex.def)             Requested size: 437.88509pt x 233.8298pt.
  (../common/workflow_parameters.tex
 [24 <../instrument_tutorial/figures/configuration_editor_0.jpg>])
-<../instrument_tutorial/figures/configuration_editor_1.jpg, id=341, 818.05624pt
+<../instrument_tutorial/figures/configuration_editor_1.jpg, id=347, 818.05624pt
  x 87.32625pt>
 File: ../instrument_tutorial/figures/configuration_editor_1.jpg Graphic file (t
 ype jpg)
@@ -743,7 +730,7 @@ ype jpg)
 Package pdftex.def Info: ../instrument_tutorial/figures/configuration_editor_1.
 jpg  used on input line 72.
 (pdftex.def)             Requested size: 437.88509pt x 46.74373pt.
-<../instrument_tutorial/figures/configuration_editor_2.jpg, id=342, 953.5625pt 
+<../instrument_tutorial/figures/configuration_editor_2.jpg, id=348, 953.5625pt 
 x 362.35374pt>
 File: ../instrument_tutorial/figures/configuration_editor_2.jpg Graphic file (t
 ype jpg)
@@ -751,7 +738,7 @@ ype jpg)
 Package pdftex.def Info: ../instrument_tutorial/figures/configuration_editor_2.
 jpg  used on input line 80.
 (pdftex.def)             Requested size: 437.88509pt x 166.39723pt.
-<../instrument_tutorial/figures/configuration_editor_3.jpg, id=343, 1232.605pt 
+<../instrument_tutorial/figures/configuration_editor_3.jpg, id=349, 1232.605pt 
 x 283.0575pt>
 File: ../instrument_tutorial/figures/configuration_editor_3.jpg Graphic file (t
 ype jpg)
@@ -763,7 +750,7 @@ jpg  used on input line 88.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<../instrument_tutorial/figures/configuration_editor_4.jpg, id=344, 886.31125pt
+<../instrument_tutorial/figures/configuration_editor_4.jpg, id=350, 886.31125pt
  x 503.8825pt>
 File: ../instrument_tutorial/figures/configuration_editor_4.jpg Graphic file (t
 ype jpg)
@@ -786,9 +773,9 @@ tutorial/figures/configuration_editor_2.jpg>] [26 <../instrument_tutorial/figur
 es/configuration_editor_3.jpg> <../instrument_tutorial/figures/configuration_ed
 itor_4.jpg>]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 12.
+(Font)              <5> on input line 15.
 
-Overfull \hbox (34.83998pt too wide) in paragraph at lines 12--37
+Overfull \hbox (34.83998pt too wide) in paragraph at lines 15--40
  [][] 
  []
 
@@ -828,22 +815,24 @@ Package rerunfilecheck Info: File `instrument_tutorial.out' has not changed.
 ### simple group (level 1) entered at line 7 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 12096 strings out of 474222
- 198514 string characters out of 5748733
+ 12100 strings out of 474222
+ 198554 string characters out of 5748733
  1939975 words of memory out of 5000000
  34010 multiletter control sequences out of 15000+600000
  598362 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,21n,93p,576b,759s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,21n,93p,576b,760s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/urw/times/utmri8a.pfb>
-Output written on instrument_tutorial.pdf (29 pages, 4581334 bytes).
+mmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
+/times/utmri8a.pfb>
+Output written on instrument_tutorial.pdf (29 pages, 4598559 bytes).
 PDF statistics:
- 433 PDF objects out of 1000 (max. 8388607)
- 357 compressed objects within 4 object streams
- 96 named destinations out of 1000 (max. 500000)
+ 448 PDF objects out of 1000 (max. 8388607)
+ 368 compressed objects within 4 object streams
+ 100 named destinations out of 1000 (max. 500000)
  316 words of extra memory for PDF output out of 10000 (max. 10000000)
 

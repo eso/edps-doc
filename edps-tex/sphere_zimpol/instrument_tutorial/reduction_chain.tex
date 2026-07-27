@@ -54,21 +54,27 @@ This subworkflow generates the camera master flats, the master dark and bias. It
 
 Each time, the calibration (flat, dark or bias) is generated separately for the odd (informative) and even (dark current)
 ZIMPOL sub-frames and stored in a DOUBLE IMAGE FITS format.
-Inputs can be raw frames, or pre-processed frames.
-If raw frames are provided, a pre-processing step on the raw cubes is performed with \texttt{sph\_zpl\_preproc\_imaging} to generate pre-processed frames.
+%Inputs can be raw frames, or pre-processed frames.
+%If raw frames are provided, 
+A pre-processing step on the raw cubes is performed with \texttt{sph\_zpl\_preproc\_imaging} to generate pre-processed frames.
 Outputs include the master calibration (flat, dark or bias),
 as well as a bad-pixel map, a number-of-combined (ncomb) frames map, and an RMS map.
 
-In practice, bias and darks are rarely used in the current workflow:
+In practice, master bias and master dark frames are rarely used in the current imaging workflow:
 
 \begin{itemize}
-\item Bias frames are used only for Fast Polarimetry readout mode (\texttt{DET.READ.CURNAME} = FastPolarimetry).
-\item Dark frames are used only for long exposures, defined as \texttt{EXPTIME} > 30 s.
+\item Bias frames are not used for the reduction of science imaging observations.
+In the current imaging workflow, they are required only for the photometric
+standard-star task, \textbf{zimpol\_standard\_flux\_imaging}, and are otherwise
+used mainly for detector monitoring.
+\item Dark frames are associated only with long exposures, defined as
+\texttt{EXPTIME} $\geq 30$\,s.
 \end{itemize}
 
-\textbf{Customization}
+\paragraph{Customization}
 
 Recipe parameters:
+
 \begin{itemize}
 \item \texttt{zpl.intensity\_flat.coll\_alg}: collapse algorithm
 (0 = Mean, 1 = Median; default, 2 = Clean Mean).
@@ -81,14 +87,14 @@ Recipe parameters:
 Recipe: \texttt{sph\_zpl\_star\_center\_img}
 
 The task \textbf{zimpol\_coronagraph\_center\_imaging} executes the pipeline recipe to
-determine the stellar center position behind the coronagraph and produce a table of frame centers.
+determine the stellar position behind the coronagraph and produce calibrated star-center products.
 If raw frames are provided, a pre-processing step on the raw cubes is performed with \texttt{sph\_zpl\_preproc\_imaging} to generate pre-processed frames.
 
 The combined images are analyzed with an aperture detection algorithm that identifies bright regions
 (e.g., waffle satellite spots or a single star) and computes their geometric center, which defines the frame center.
 The resulting center coordinates are stored in the FITS header.
 
-\textbf{Customization}
+\paragraph{Customization}
 
 Recipe parameters:
 \begin{itemize}
@@ -109,8 +115,8 @@ Recipe: \texttt{sph\_zpl\_science\_imaging}
 
 This subworkflow processes imaging standard-star observations used for calibration
 and monitoring of the ZIMPOL imaging mode.
-It reduces observations of astrometric and photometric (flux) standard stars
-to verify the instrument’s astrometric and photometric performance.
+%It reduces observations of astrometric and photometric (flux) standard stars
+%for astrometric and photometric calibration purposes.
 
 Two tasks are executed:
 \begin{itemize}
@@ -127,7 +133,7 @@ These calibrations are optional, as the pipeline can process the data without th
 The resulting products are used primarily for quality control and instrument monitoring
 (qc0, qc1calib, calchecker) and are not required for the reduction of science imaging observations.
 
-\textbf{Customization}
+\paragraph{Customization}
 
 Recipe parameters:
 \begin{itemize}
@@ -141,15 +147,23 @@ a field center table containing the calculated center positions (default = FALSE
 
 Recipe: \texttt{sph\_zpl\_science\_imaging}
 
-The task \textbf{zimpol\_science\_flux\_imaging} uses the pipeline recipe to reduce and combine science frames.
-Optional calibration inputs include master bias, master dark, and intensity flat-field frames for each camera.
-If raw frames are provided, a pre-processing step on the raw cubes is performed with \texttt{sph\_zpl\_preproc\_imaging} to generate pre-processed frames.
+The subworkflow contains two tasks:
 
-The pre-processed science frames are then calibrated by subtracting the master bias and master dark frames
+\begin{itemize}
+\item \textbf{zimpol\_science\_imaging}, which reduces the science imaging observations;
+\item \textbf{zimpol\_science\_flux\_imaging}, which reduces off-axis flux observations when available.
+\end{itemize}
+
+The products from zimpol\_science\_flux\_imaging are used to measure the target flux in off-axis observations and are not themselves the final science products.
+
+Optional calibration inputs include master dark, and intensity flat-field frames for each camera.
+A pre-processing step on the raw cubes is performed with \texttt{sph\_zpl\_preproc\_imaging} to generate pre-processed frames.
+
+The pre-processed science frames are then calibrated by subtracting the master dark frames
 and dividing by the appropriate flat field, if available.
 
 The calibrated frames are subsequently de-dithered and de-rotated, and saved as intermediate products.
-The center of rotation is taken from the star-center calibration frames (\texttt{SPH\_ZPL\_TAG\_STAR\_CENTER\_IMG\_CALIB\_CAM*}/2) when available;
+The center of rotation is taken from the star-center calibration frames (\texttt{ZPL\_STAR\_CENTER\_IMG\_CAM1/2}) when available;
 otherwise, the geometric center of the frame (xc=512, yc=512) is used.
 
 In the final step, all calibrated, de-dithered, and de-rotated frames are combined using a mean algorithm.
@@ -160,12 +174,13 @@ The resulting products for each camera are written in DOUBLE IMAGE format (8 FIT
 \item a combined dark-current image, with corresponding bad-pixel map, ncomb map, and RMS map.
 \end{itemize}
 
-These outputs constitute the final reduced science products for both ZIMPOL cameras.
+The task zimpol\_science\_imaging produces the final reduced science products for both ZIMPOL cameras.
 
 For point sources, the recipe can also estimate the Strehl ratio if a filter-table calibration frame is available.
 When successful, Strehl-related quality-control parameters are written into the product headers.
 
-\textbf{Customization}
+
+\paragraph{Customization}
 
 Recipe parameters:
 \begin{itemize}

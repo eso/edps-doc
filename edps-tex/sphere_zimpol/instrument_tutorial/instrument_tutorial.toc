@@ -14,9 +14,13 @@
 \contentsline {subsection}{\numberline {2.4}Exporting the final products}{14}{subsection.2.4}%
 \contentsline {section}{\numberline {3}The SPHERE ZIMPOL Imaging\ data reduction flow.}{18}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Subworkflow Internal Calibrations Imaging}{18}{subsection.3.1}%
+\contentsline {paragraph}{Customization}{20}{section*.2}%
 \contentsline {subsection}{\numberline {3.2}Coronagraph Center}{20}{subsection.3.2}%
+\contentsline {paragraph}{Customization}{20}{section*.3}%
 \contentsline {subsection}{\numberline {3.3}Subworkflow Standard Imaging}{20}{subsection.3.3}%
+\contentsline {paragraph}{Customization}{21}{section*.4}%
 \contentsline {subsection}{\numberline {3.4}Subworkflow Science Imaging}{21}{subsection.3.4}%
+\contentsline {paragraph}{Customization}{22}{section*.5}%
 \contentsline {section}{\numberline {4}Overview of all the data reduction configuration options}{23}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Selection of most appropriate calibrations}{23}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Configuration of parameters: the configuration editor}{23}{subsection.4.2}%
