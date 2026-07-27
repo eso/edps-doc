@@ -48,8 +48,8 @@ EDPS documentation
    #matisse/index.rst
    #muse/index.rst
    muse_pdf.md
-   sphere-ifu/index.rst
-   sphere-irdis/index.rst
+   #sphere-ifu/index.rst
+   #sphere-irdis/index.rst
    #sphere-zimpol/index.rst
    sphere_zimpol_pdf.md
    sphere_zimpol_pol_pdf.md

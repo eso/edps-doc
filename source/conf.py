@@ -50,43 +50,43 @@ html_sidebars = {
  #   'eris/**':[
  #       'globaltoc.html',  # Global Table of contents
  #       ],
-     'efosc/**':[
-        'globaltoc.html',  # Global Table of contents
-        ],
-    'espresso/**':[
-        'globaltoc.html',  # Global Table of contents
-        ],
+ #    'efosc/**':[
+ #       'globaltoc.html',  # Global Table of contents
+ #       ],
+ #   'espresso/**':[
+ #       'globaltoc.html',  # Global Table of contents
+ #       ],
  #   'fors/**':[
  #       'globaltoc.html',  # Global Table of contents
  #       ],
  #   'giraffe/**':[
  #       'globaltoc.html',  # Global Table of contents
  #       ],
-    'kmos/**':[
-        'globaltoc.html',  # Global Table of contents
-        ],
-    'muse/**':[
-        'globaltoc.html',  # Global Table of contents
-        'pdf.html',        #Link to full pdf documentation
-        ],
-    'sphere-ifu/**':[
-        'globaltoc.html',  # Global Table of contents
-       ],
-    'sphere-irdis/**': [
-        'globaltoc.html',  # Global Table of contents
-    ],
-    'sphere-zimpol/**': [
-        'globaltoc.html',  # Global Table of contents
-    ],
+ #   'kmos/**':[
+ #       'globaltoc.html',  # Global Table of contents
+ #       ],
+#    'muse/**':[
+#        'globaltoc.html',  # Global Table of contents
+#        'pdf.html',        #Link to full pdf documentation
+ #       ],
+#    'sphere-ifu/**':[
+#        'globaltoc.html',  # Global Table of contents
+#       ],
+#    'sphere-irdis/**': [
+#        'globaltoc.html',  # Global Table of contents
+#    ],
+#    'sphere-zimpol/**': [
+#        'globaltoc.html',  # Global Table of contents
+#    ],
     #   'uves/**':[
  #       'globaltoc.html',  # Global Table of contents
  #       ],
  #   'visir/**':[
  #       'globaltoc.html',  # Global Table of contents
  #       ],
-    'xshooter/**':[
-        'globaltoc.html',  # Global Table of contents
-        ],
+ #   'xshooter/**':[
+ #       'globaltoc.html',  # Global Table of contents
+ #       ],
     '**': [
         'globaltoc.html',  # Global Table of contents
         'searchbox.html',  # search box
