@@ -13,22 +13,23 @@
 \contentsline {subsubsection}{\numberline {2.3.1}Quality plots}{14}{subsubsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.4}Exporting the final products}{14}{subsection.2.4}%
 \contentsline {section}{\numberline {3}The HARPS\ data reduction flow.}{17}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Flats and Tracing}{18}{subsection.3.1}%
-\contentsline {subsubsection}{\numberline {3.1.1}Led flats}{18}{subsubsection.3.1.1}%
-\contentsline {subsubsection}{\numberline {3.1.2}Order Definition}{18}{subsubsection.3.1.2}%
-\contentsline {subsubsection}{\numberline {3.1.3}Flat Fielding}{18}{subsubsection.3.1.3}%
-\contentsline {subsection}{\numberline {3.2}Wavelength calibration}{18}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Contamination Thar and Contamination FP}{19}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Flux calibration}{19}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Object}{19}{subsection.3.5}%
-\contentsline {subsubsection}{\numberline {3.5.1}Sky subtraction}{19}{subsubsection.3.5.1}%
-\contentsline {subsubsection}{\numberline {3.5.2}Background intra-order contamination}{20}{subsubsection.3.5.2}%
-\contentsline {subsubsection}{\numberline {3.5.3}Cosmic rays cleaning}{20}{subsubsection.3.5.3}%
-\contentsline {subsubsection}{\numberline {3.5.4}Radial velocity}{21}{subsubsection.3.5.4}%
-\contentsline {subsection}{\numberline {3.6}Combine science}{21}{subsection.3.6}%
-\contentsline {subsection}{\numberline {3.7}Other tasks and workflow not associated to the scientific reduction}{21}{subsection.3.7}%
-\contentsline {subsubsection}{\numberline {3.7.1}Efficiency}{21}{subsubsection.3.7.1}%
-\contentsline {subsubsection}{\numberline {3.7.2}Detector properties}{22}{subsubsection.3.7.2}%
+\contentsline {subsection}{\numberline {3.1}Bias and Darks}{18}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Flats and Tracing}{18}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Led flats}{18}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Order Definition}{18}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Flat Fielding}{18}{subsubsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.3}Wavelength calibration}{18}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Contamination Thar and Contamination FP}{19}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Flux calibration}{19}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Object}{19}{subsection.3.6}%
+\contentsline {subsubsection}{\numberline {3.6.1}Sky subtraction}{20}{subsubsection.3.6.1}%
+\contentsline {subsubsection}{\numberline {3.6.2}Background intra-order contamination}{20}{subsubsection.3.6.2}%
+\contentsline {subsubsection}{\numberline {3.6.3}Cosmic rays cleaning}{20}{subsubsection.3.6.3}%
+\contentsline {subsubsection}{\numberline {3.6.4}Radial velocity}{21}{subsubsection.3.6.4}%
+\contentsline {subsection}{\numberline {3.7}Combine science}{21}{subsection.3.7}%
+\contentsline {subsection}{\numberline {3.8}Other tasks and workflow not associated to the scientific reduction}{22}{subsection.3.8}%
+\contentsline {subsubsection}{\numberline {3.8.1}Efficiency}{22}{subsubsection.3.8.1}%
+\contentsline {subsubsection}{\numberline {3.8.2}Detector properties}{22}{subsubsection.3.8.2}%
 \contentsline {section}{\numberline {4}Overview of all the data reduction configuration options}{23}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Selection of most appropriate calibrations}{23}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Configuration of parameters: the configuration editor}{23}{subsection.4.2}%

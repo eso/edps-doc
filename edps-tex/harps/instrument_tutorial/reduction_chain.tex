@@ -2,8 +2,15 @@
 \label{sec:reduction_flow}
 \input{../common/common_reduction_flow}
 
+\subsection{Bias and Darks}
 
-
+The subworkflow {\bf detector properties} reduces raw biases and raw
+darks. Typically, the default parameters gives the best results.  The
+bias reduction generates master biases (used only to process darks),
+and residuals (used only for data taken after 20 May 2026).  The dark
+reduction generates hot pixel masks. If darks are not present, static
+calibrations of hot pixel masks are used.
+   
 
 \subsection{Flats and Tracing}
 
@@ -50,9 +57,18 @@ bkgr_grid_size_y    : Grid size in y used to calculate the background,
 
 \subsection{Wavelength calibration}
 
-The subworkflow {\bf wavelength\_calibration} executes two tasks {\bf
-  wave\_thar\_fp} {\bf wave\_thar\_thar}, which both run the recipe
-{\tt espdr\_wave\_TH\_drift}. They generate the wavelength solution to
+The subworkflow {\bf wavelength\_calibration} executes
+\begin{itemize}
+\item two tasks for data taken prior to 20/05/2026 {\bf
+  wave\_thar\_fp\_drift} {\bf wave\_thar\_thar\_drift}, which both run the recipe
+  {\tt espdr\_wave\_TH\_drift}.
+
+\item 3 tasks for data taken after 20/05/2026 {\bf wave\_fp\_fp}, {\bf
+  wave\_thar\_fp} and {\bf wave\_fp\_thar}, which run the recipes {\tt
+  espdr\_wave\_FP} and {\tt espdr\_wave\_THAR}
+\end{itemize}
+
+  They generate the wavelength solution to
 be applied to the science data using Thorium-Argon lamps and
 Fabry-Perot exposures.
 
@@ -108,6 +124,7 @@ can leave residuals on the final 1D spectrum. To activate the telluric
 correction and assess whether its quality is good for the science
 needs, set the recipe paramters {\tt telluric\_corr\_sw} to 1 in this
 task.
+
 
 \subsubsection{Sky subtraction}
 
