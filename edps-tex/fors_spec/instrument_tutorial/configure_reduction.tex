@@ -1,0 +1,293 @@
+\section{Overview of all the data reduction configuration options}
+\label{sec:configuration_overview}
+
+\subsection{Selection of most appropriate calibrations}
+
+\input{../common/appropriate_calibrations}
+
+\subsection{Configuration of parameters: the configuration editor}
+\label{sec:configuration_editor}
+\input{../common/configuration_editor}
+
+\input{../common/how_to_copy_parameters_to_other_datasets}
+
+\subsection{Producing optimal Master Bias}
+\label{sec:configuration_bias}
+
+Figure \ref{fig:master_bias} shows an example of the quality plot for the MASTER\_BIAS Output file created with the recipe parameters as in Figure \ref{fig:configuration_editor_4}. The image should be smooth, without visible flux gradient. If it is not, check the input raw files. Exclude the visible "bad" ones if there are any.
+
+
+\subsection{Configuring processing of calibrations and improving results}
+\label{sec:configuration_calibration}
+
+The tasks: {\bf calibration\_lss}, {\bf calibration\_mos}, {\bf calibration\_mxu} and {\bf calibration\_std} run the same recipe {\bf fors\_calib}, so they share the same recipe parameters.
+
+The parameters can be divided into three groups - dealing with the normalization of the combined flat, with the creation of the master flat, and with the wavelength calibration, distortion.
+
+
+\begin{enumerate}
+
+\item Flat field normalization
+
+Following recipe parameters deal with the normalization of the combined flat
+field along the dispersion and/or spatial axis. The fitting or smoothing is performed on 1-dimensional data
+created by collapsing the 2-dimensional frame along the other axis.
+
+\begin{itemize}
+\item {\tt sradius} and {\tt dradius}: provide the half-width of the smoothing boxes along the spatial and dispersion axis, respectively. The smoothing is performed by calculating the median across the full
+box width. A value greater than $-1$ for {\tt dradius\_aver} defines the half-width of a smoothing box along the dispersion axis, using the average instead of the median. This is useful for spectra
+covering wavelength below 4000 Å, where the detector shows significant pixel to-pixel variations that should be kept in the normalized flat field to enable their correction in the science data.
+
+\item {\tt s\_degree}: provides the degree of a polynomial to be fit to the average variation along the spatial axis.
+
+\item {\tt d\_knots}: provides the number of knots for a spline to be fit to the average variation along the dispersion axis.
+
+\end{itemize}
+
+\item Creation of a master flat
+
+\begin{itemize}
+\item {\tt stack\_method}: offers various methods to combine the flat fields: a simple sum (sum), an average (mean), a median (median), or an average with $\kappa$ - $\sigma$ clipping (ksigma). The default value sum is usually fine.
+
+\item {\tt kiter}: number of iterations (only for {\tt stack\_method} = ksigma)
+
+\item {\tt ksigma}: value for $\kappa$ (only for {\tt stack\_method} = ksigma)
+
+\item {\tt slit\_ident}: If activated the pipeline tries to match the detected slitlets with slit position information from the header (not applicable to long-slit data). Activating this matching may improve
+the accuracy of the preliminary spectra detection. If the slit identification fails the parameter is forced to false.
+
+\end{itemize}
+
+
+\item Wavelength calibration, distortions
+
+\begin{itemize}
+\item {\tt startwavelength} and {\tt endwavelength}: define the maximum 
+wavelength range covered by the extracted spectra.
+
+\item {\tt wdegree}: defines the maximum order of the polynomial fitted to the dispersion relation.
+\item {\tt wdradius}: defines the search radius for detected lines around predicted positions after the first run of the pattern matching. A larger radius allows to find more lines, but also increases the risk for false
+or spurious identifications.
+
+\item {\tt wreject}: sets the maximum acceptable difference between the calculated wavelength for a line and the value from the line catalog during the fit of the dispersion relation.
+
+\item {\tt wmode}: (long slit data only) defines the interpolation mode along the spatial axis to cover missing rows. A value of 0 means no interpolation and is useful to check the spatial coverage of identified
+lines. A value of 1 will interpolate locally across gaps, while a value of 2 will perform a global fit.
+
+\item {\tt wmosmode}: (multi-object spectroscopy data only) defines the interpolation mode along the spatial axis to cover missing rows. A value of 0 means no interpolation and is useful to check the spatial coverage of identified lines. A value of 1 will interpolate locally (within a given slit only) across gaps, while a value of 2 will perform a global fit.
+
+\item {\tt dispersion}: provides the first guess of the dispersion in Å/pixel (for binning 1×1) that is used for the pattern matching.
+
+\item {\tt peakdetection}: sets the threshold to detect spectral lines. If there are issues with the detection of slits or the number of lines, varying this parameter will often solve them.
+
+\item {\tt ignore-lines}: enables the removal of deviating lines from the fit. Please keep in mind that the solution may look better without such lines, but may not be a closer approximation to the real dispersion solution.
+
+\item {\tt used\_linesets}: For some grisms the arc lamp lines are clustered in certain regions. In order to avoid a fit to the dispersion relation that is dominated by these regions only a subsample of the
+arc lamp lines is used if {\tt used\_linesets} = standard. Setting instead {\tt used\_linesets} = standard, extended will include all lines in the catalog.
+
+\end{itemize}
+\end{enumerate}
+
+
+Below we provide information on how to improve your results by changing the parameters of the {\bf fors\_calib} recipe.
+
+\subsubsection{Slit Tracing}
+
+If you find that the slits in your data were not well traced you may want to change the parameter {\tt cdegree}. 
+Alternatively the slitlets in your data may be too tightly packed. As a default, the {\bf fors\_calib} recipe tries
+to recover untraceable edges by interpolating a global curvature model based on other traceable edges (if they are available). Using this global description of the spectral curvature helps to extract also those spectra whose edges cannot be traced. In some cases however the recipe may find and accept a bad tracing as if it were good, producing a bad global curvature model, and therefore a bad spectral extraction. Setting {\tt cmode} to 0
+will suppress the usage of the global curvature model. In this case the recovery strategy of lost spectral edges will consist in replicating the trace of the other available spectral edge (opportunely shifted) of the same slit spectrum. This may improve the results in some cases: however, if a tracing is missing for both edges of a slit spectrum, the spectrum will not be extracted.
+
+\subsubsection{Wavelength Calibration}
+To verify the quality of the wavelength calibration the user should check the displays of the "Graphical Report" and quality plots.
+While the parameters in the grism tables should generally provide good results some grisms are sensitive to the
+positions of the slits on the CCD, the line intensities, etc. In these cases it may make sense to try changing certain parameters to improve the results. For problematic cases setting {\tt wmode} (LSS/LSS-like) or {\tt wmosmode} (MOS/MXU) to 0 can be helpful as then only lines that are actually found and detected are used, without interpolation along the spatial axis.
+
+
+Below we list suggestions to solve problems that may occur during wavelength calibration:
+
+{\bf Problems with line detection and identification}
+
+Setting {\tt wradius} to 0 will force the pipeline to use only those lines for wavelength calibration that were identified by pattern-matching. This can sometimes help to understand why some lines were not correctly identified.
+
+{\bf Faint arc lamp lines}
+
+If some of the reference lines listed in the catalog do not peak above a given threshold, they are not used by the pattern-matching task. This can be solved by lowering the value for {\tt peakdetection}. If the faint lines are too close to the noise level you may remove them by specifying their wavelengths in the parameter {\tt ignore\_lines}.
+
+{\bf Incorrect spectral dispersion}
+
+The actual mean spectral dispersion can differ significantly from the default read from the GRISM\_TABLE, for instance due to temperature effects or extreme slit positions. In general the
+pattern-recognition algorithm is quite robust against changes of the spectral dispersion of up to 20\%, but for some grisms good results can only be obtained within a very close first-guess. Check for information on {\bf Individual Grisms} below.
+
+{\bf Spectra at very large offsets}
+
+The observation may include spectra at large offsets along the dispersion axis, so that only part (red or blue) of their full wavelength range is observed. If the line catalog contains too few
+reference lines in this region (say, less than 5), they might not be enough to define an unambiguous pattern
+to detect. Setting {\tt used\_linesets} to standard,extracted will make additional lines available for a more complete coverage of the bluest/reddest parts of the complete spectral range, which might
+solve this problem. If there are no extra lines to be used as a reference (as is the case for some grisms), the truncated spectra will be definitely lost.
+
+
+{\bf Valid reference lines are rejected}
+Sometimes the peak detection algorithm may return inaccurate positions of the detected reference arc lamp lines. Outliers are automatically rejected by the fitting algorithm, but if those lines were properly identified, not
+rejecting their positions may really improve the overall accuracy of the wavelength calibration.
+In such cases increase the value of the {\tt wreject} parameter, but check the results carefully: a tolerant line
+identification may provide an apparently good fit, but if this is based on misidentified lines the calibration will include unknown systematic errors.
+
+{\bf Systematic trends in the wavelength calibration residuals}
+
+This problem may be solved by increasing {\tt wdegree} to 16, but one should be careful to avoid overfitting. This happens preferably at the red and blue ends of the spectra, where the polynomial is so poorly constrained that
+it also fits the uncertainties of the line positions, incorporating this noise into the solution: the corresponding
+residuals will be very small, but the calibrated spectra will look very noisy at the edges of the wavelength range.
+An extreme case of overfitting is, for instance, fitting 4 points with a 3rd degree polynomial: the residuals will
+be exactly zero, and yet the obtained model will be highly inaccurate. To reduce the influence of noise on the
+solution one may set {\tt wmosmode} to 1 or 2 (for MOS/MXU data). {\tt wmode} is already set to 2 by default for LSS and LSS-like data.
+
+{\bf The calibrated spectra look "noisy" at their ends}
+
+This is a consequence of overfitting (see above for details). Here {\tt wdegree} should be reduced. If this introduces systematic residuals one may try to increase {\tt wradius}.
+
+{\bf The calibrated LSS spectrum looks distorted}
+
+This happens if the global wavelength calibration model is bad, either due to some bad local solutions or due to
+too few local solutions for global modeling. Rerunning the recipe with {\tt wmode} set to 0 will show the result without any interpolation. The situation can be improved by varying {\tt dispersion} and/or {\tt peakdetection} to
+maximise the number of obtained local solutions and to get more uniform results in the reduced\_lamp\_lss.fits image. If the problems persist, setting {\tt wradius} to 0 will limit the lines used to those detected solely by pattern
+matching. Once a new set of parameters is found that yields good results set {\tt wmode} again to 2 and rerun the recipe. Also {\tt wradius} may now be set back to its default value of 4.
+
+{\bf Individual Grisms}
+
+Here we list tips for individual grisms. The grisms are sorted by increasing resolution. Keep in mind that the pipeline does not allow {\tt wdegree} $\geq 5$.
+
+\begin{itemize}
+\item GRIS\_150I+OG590 - This grism may need tailored parameter settings for each setup. Increasing {\tt peakdetection} to 300–400 and/or changing {\tt wradius} to higher or lower values may provide better results for certain masks. Changing the {\tt dispersion} within the range 2.9 to 3.8 may be helpful as well.
+
+\item GRIS\_300V+GG435 - Reducing {\tt wdegree} from 5 to 4 produces in some cases more stable results. In some cases increasing {\tt peakdetection} to 350 can improve the slit tracing.
+
+\item GRIS\_300I+OG590 - Bad slit tracing can often be improved by increasing {\tt peakdetection} to 400. Changing {\tt wdegree} to higher or lower values can also help.
+
+\item GRIS\_600B - Setting {\tt wdegree} to 5 sometimes gives better results for both wavelength calibration and slit tracings. Also changing {\tt wradius} to lower or higher values can help.
+
+\item GRIS\_600RI+GG435 - In some cases the solution can be improved by changing {\tt wdegree} to 3 or 5.
+
+\item GRIS\_1200B - For this grism it is sometimes impossible to find a solution for all slitlets, especially if the slitlets are widely distributed along the dispersion direction. The user may have to process the data twice, once optimizing for the redder slitlets and once for the bluer ones. In that case varying {\tt dispersion} between 0.32 (blue slits) and 0.38 (red slits) may give good results for extreme slits. The wavelength calibration reacts very sensitively to the presence or absence of the line 4077 Å. If results stay unstable the user should ignore one or more of the following lines via the {\tt ignore\_lines} parameter: 3466, 3611, 3965, 4026, 5331, 5401.
+
+\item GRIS\_1400V - Decreasing wradius to 2 and/or increasing peakdetection to 90 or 120 can help to improve unstable solutions. Some solutions especially for MOS/MXU data can be improved by increasing wdegree to 4.
+
+\item GRIS\_1028z+OG590 - The solution can be improved in some cases by increasing {\tt wdegree} to 4. Decreasing {\tt wradius} to 2 may improve unstable solutions.
+
+\end{itemize}
+
+\subsubsection{Flat Field Normalization}
+
+In general the user will want to remove all traces of the flat field lamp but keep the slit profile (spatial illumination) together with the pixel-to-pixel variation of the detector. The default parameters of the flat field
+normalization are optimized for this situation ({\tt sradius}, {\tt s\_degree}, {\tt d\_knots} set to $-1$, {\tt dradius} set to $10$). The spline fit along the dispersion axis {\tt d\_knots} $\geq 0$ is not well suited for data with very steep slopes due to order separation filters (e.g. GRIS\_150I+OG590).
+Avoiding normalization along the slit (i.e. setting both {\tt sradius} and {\tt s\_degree} to $-1$) keeps the slit illumination and thus allows the user to correct the illumination profile of the science data. This facilitates the fitting of the sky background, which should then be flat along the spatial axis.
+
+
+
+
+
+\subsection{Response Determination}
+
+To verify the quality of the response curve determined by the {\bf fors\_science} recipe the user should check the corresponding "Graphical report" reduced\_std\_mos.png of the task {\bf standard\_mods}, recipe {\bf fors\_science} as in Figure \ref{fig:reduced_std_mos}.
+
+The reference data for the flux standard stars have entries that identify the presence of strong stellar features (column {\tt STLLR\_ABSORP} set to T(rue)). These regions will be ignored during the response fit if {\tt resp\_ignore\_mode}
+is set to {\tt stellar\_absorption}. Depending on the resolution of the grism such masking may or may not be necessary. If additional regions need to be ignored {\tt resp\_ignore\_mode} set to {\tt stellar\_absorption,command\_line} allows the user to specify the additional points (e.g. 4750, 4900) and/or regions (e.g.
+8900-9850) with {\tt resp\_ignore\_points}.
+
+In order to avoid the fitting of regions affected by telluric absorption (whose strength may differ between reference spectra and FORS2 data) the static calibration table fors2\_telluric\_regions.fits contains such regions (per grism, as their width depends on spectral resolution). These can be masked by setting {\tt resp\_ignore\_mode} to telluric. If additional regions need
+to be ignored {\tt resp\_ignore\_mode} set to {\tt telluric,command\_line} allows to specify the additional points/regions with {\tt resp\_ignore\_points}. This is especially useful for data with very strong variations at the edges of the response.
+
+By default {\tt resp\_ignore\_mode} is set to stellar\_absorption,telluric,command\_line.
+
+In order to take small scale variations into account when fitting the response the pipeline uses a spline fit with
+the number of knots defined with {\tt resp\_fit\_nknots}. For grisms with a small wavelength range and/or only moderate large-scale variation in their response a small number of knots can be sufficient. For grisms with small-scale variations a higher number of knots may be necessary (e.g. fifth demo dataset, see above). One
+should keep in mind that the maximum number of knots for the spline is the number of unmasked data points – 2 (entering a higher number will cause the pipeline to reduce it to the allowed maximum). Since the knots are distributed at equal distances this means that the distance between two knots is always larger than the distance between two data points. This explains why even at a maximum number of knots the fit may not go through all data points.
+
+
+\subsection{Telluric Correction}
+
+The two strong O2 features at about 6870 Å and 7630 Å often show residuals after the telluric correction. This is due to the fact that they are often saturated, which is not noticeable in the low-resolution FORS spectra because
+the signal is smeared out.
+
+
+
+
+
+\subsection{Science data reduction}
+
+\begin{enumerate}
+
+\item Sky subtraction
+
+Sky subtraction {\tt skylocal} and {\tt skyglobal} work on 2-dimensional images, which have been corrected for bias and flat field, but neither wavelength calibrated nor distortion corrected. {\tt skymedian} works on
+2-dimensional image which have been wavelength calibrated and distortion corrected.
+
+\begin{itemize}
+
+\item {\tt skyglobal}: activates the sky determination using the curvature of the sky lines to create a super-sampled sky spectrum. It does not work well in the presence of significant gradients in flux or resolution along the slit, but may give good results for ling-slit data.
+
+\item {\tt skylocal}: activates the modeling of the sky along each column within a slit in the unmapped data (neither wavelength calibrated nor distortion corrected). It works best for short slits (a few tens of arc seconds) with negligible curvature of sky lines. For long-slit data it therefore should be set to skymedian.
+
+\item {\tt skymedian}: determines the sky by taking the median value along the slit for each wavelength column, which is obviously not a good choice in the case of significant gradients in flux or resolution along the slit. {\tt skymedian} is most robust method of the three.
+
+\item {\tt cosmics}: performs a cosmic ray rejection on the 2-dimensional frame (only if {\tt skylocal} or {\tt skyglobal} are activated), which is not very robust. Usually the optimum extraction removes all cosmic ray hits. If {\tt cosmics} is used the results should be compared to the results without using {\tt cosmics} to check for artefacts.
+
+\end{itemize}
+
+\item Spectra extraction 
+
+The values for this section recipe parameters are all provided in unbinned pixels.
+
+\begin{itemize}
+
+\item {\tt slit\_margin}: defines the number of pixels to be excluded at the upper and lower slit edge during detection and extraction of objects.
+
+\item {\tt ext\_radius}: sets the maximum extraction radius for detected spectra. The default value corresponds to an aperture of 3", which might not be sufficient to cover the spatial extent of an object.
+For the optimum extractions this parameter can be set to a large value as long as no other spectra are inside the radius.
+
+ \item {\tt cont\_radius}: sets the minimum distance at which 2 objects of similar brightness do not contaminate each other’s spectrum. This parameter is important in crowded regions.
+
+ \item {\tt ext\_mode}: sets the extraction mode of the 1-dimensional spectra (0 for a straight sum, 1 optimum extraction using the Horne algorithm).
+ 
+\item {\tt generate\_idp} activates the creation of VO/Phase3 compliant FITS tables for each extracted spectrum.
+
+\end{itemize}
+
+\item Wave Calibration
+
+\begin{itemize}
+\item {\tt skyalign}: activates the refinement of the wavelength calibration using sky lines, which is by default switched off (-1), because it should be used only with careful checking. A value greater than $-1$ gives the order of the polynomial to fit the wavelength offsets.
+
+\end{itemize}
+
+\end{enumerate}
+
+
+Also for the science data some useful checks can be made, for which examining them via "Output Files"  can be very helpful.
+
+{\bf Were all spectra properly wavelength calibrated?}
+
+The overall quality of the wavelength calibration can be examined in the MAPPED\_ALL\_SCI\_LSS/MOS/MXU product. It displays the scientific spectra from each slit after removing the optical and spectral distortions. The visible sky lines should all appear perfectly aligned and vertical.
+
+{\bf Were all spectra extracted?}
+
+For very faint sources or sources with emission lines only the pipeline may not extract the spectra. In some cases changing the sky subtraction from {\tt skylocal=true} and {\tt skyglobal=false} to {\tt skyglobal=true}
+and {\tt skylocal=false} helps. Alternatively you can try to increase the extraction radius via {\tt ext\_radius} or change the masking of the slit edges via {\tt slit\_margin}. In the worst case you will have to extract the
+spectra manually with some other software of your choice.
+
+{\bf Spurious objects detected at the slit edges}
+
+As a default the {\bf fors\_science} recipe excludes objects that are detected within 3 pixels from the slit ends.
+This might not be enough in some cases and increasing {\tt slit\_margin} might help.
+
+{\bf Sky subtraction for resolved sources}
+
+In case of extended objects filling most or all of the slit, the evaluation of the sky may be strongly biased by the inclusion of signal that actually belongs to the object to extract. Subtracting this contaminated
+background would actually destroy the object spectrum.
+For extended objects one should set {\tt skyglobal} to {\tt true} and {\tt skylocal} to {\tt false}. Then the pipeline subtracts a supersampled model of the median sky spectrum observed in all slits from all spectra. This
+method requires very similar spectral resolution for all slits and will not work well if this is not the case. It is always possible to process the scientific exposures in both ways, one for processing point-like sources
+and the other for processing spatially resolved sources.
+
+{\bf Sky subtraction for curved or tilted slits}
+
+Obvious residuals related to the sky subtraction are visible on the extracted slit spectra. In this case one should set {\tt skymedian} to {\tt true} and {\tt skylocal} to {\tt false}. While {\tt skylocal} subtracts the sky before, {\tt skymedian} subtracts after the rectification of the spectral data. The second method performs poorly in comparison to the first, but in the case of curved or slanted slits there is at the moment no other choice than using it.

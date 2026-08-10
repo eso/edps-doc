@@ -4,8 +4,8 @@ The main document is instrument_tutorial/instrument_tutorial.tex
 2. In the Makefile and instrument_tutorial/Makefile
 
  Change INSTRUMENT value in Makefile (line 8) and instrument_tutorial/Makefile (line 7)
- Change GUI_VERSION and TUTORIAL_REVISION in  Makefile only. GUI_VERSION is 0.91, TUTORIAL_REVISION is yyyymmdd (e.g. 20260710)
- Change TUT_VERSION in instrument_tutorial/Makefile . Make it GUI_VERSION.TUTORIAL_REVISION
+ Change TUTORIAL_VERSION and TUTORIAL_REVISION in  Makefile only
+ Change TUT_VERSION in instrument_tutorial/Makefile only
 
 The logic is to have the tutorial version matching the EDPS_GUI version and the revision matching the date of the last revision.
 
@@ -14,16 +14,16 @@ The logic is to have the tutorial version matching the EDPS_GUI version and the 
 author          : your name
 pdftitle        : title of the tutorial (e.g. FORS IMAGING EDPS-GUI tutorial)
 releasedate     : released date
-issue           : issue number (integer; increase only after major modifications)
-revision        : revision number(must match GUI_VERSION.TUTORIAL_REVISION)
+issue           : issue number (I "think" it must match TUTORIAL_VERSION)
+revision        : revision number(must match TUTORIAL_REVISION)
 
 pipelinevers    : the version of the pipeline the tutorial refers to, e.g. 2.3.1
 instname        : the name of the instrument, e.g. FORS2
 pipename        : the name of the pipeline, e.g. fors
 wkffilename     : the name of the python file the tutorial is for, e.g. fors_imaging_wkf.py
 wkfname         : the name of the workflow the tutorial is for, e.g. fors.fors_imaging_wkf
-edpsversion     : version of edps (currently 1.7.2)
-edpsguiversion  : version of edps-gui (currently 0.9.1)
+edpsversion     : version of edps
+edpsguiversion  : version of edps-gui 
 
 
 Still in instrument_tutorial/instrument_tutorial.tex, edit the change records (line 79) accordingly

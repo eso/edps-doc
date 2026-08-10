@@ -1,10 +1,10 @@
-TUT_VERSION=0.91_20260801
+TUT_VERSION=0.91_20260811
 
 TOPDIR :=$(shell pwd)/..
 PIPEDOC_COMMON :=$(TOPDIR)/common
 EDPSGUI_TUT_DIR :=$(TOPDIR)/instrument_tutorial
 TEXINPUTS :=.:$(TOPDIR):$(TOPDIR)/figures:$(EDPSGUI_TUT_DIR):$(EDPSGUI_TUT_DIR)/figures:$(PIPEDOC_COMMON):
-INSTRUMENT := espresso
+INSTRUMENT := fors_spec
 .PHONY: all clean mv
 
 all: $(EDPSGUI_TUT_DIR)/instrument_tutorial.pdf mv
@@ -22,6 +22,7 @@ clean:
 #	perl -nle '$$done{$$1}++ or system("wget -q -O /dev/null $$1") ? die $$1 : print $$1 while s/\bURI\/URI\(([fht]+tp[^\)]+)\)//i' $(EDPSGUI_TUT_DIR)/edpsgui_tutorial.pdf
 #
 mv:
+
 	cp  instrument_tutorial.pdf ../$(INSTRUMENT)-tutorial-$(TUT_VERSION).pdf
 	mv  instrument_tutorial.pdf ../$(INSTRUMENT)-edpsgui_tutorial.pdf
 

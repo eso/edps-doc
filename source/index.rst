@@ -41,6 +41,7 @@ EDPS documentation
    #espresso/index.rst
    #fors/index.rst
    fors2_pmos_pdf.md
+   fors2_spec.pdf.md
    #giraffe/index.rst
    #hawki/index.rst
    #kmos/index.rst

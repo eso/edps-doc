@@ -1,11 +1,11 @@
-GUI_VERSION=0.91
-TUTORIAL_REVISION=20260801
+TUTORIAL_VERSION=0.91
+TUTORIAL_REVISION=20260811
 
 CURDIR :=$(shell pwd)
 PIPEDOC_COMMON :=$(CURDIR)/pipeline_user_man
 EDPSGUI_COMMON :=$(CURDIR)/common
 EDPSGUI_TUT_DIR :=$(CURDIR)/instrument_tutorial
-INSTRUMENT := espresso
+INSTRUMENT := template
 .PHONY: all edpsgui clean view
 
 all: edpsgui

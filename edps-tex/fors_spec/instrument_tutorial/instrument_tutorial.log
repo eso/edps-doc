@@ -1,12 +1,12 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.3.20)  30 JUL 2026 15:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.3.20)  10 AUG 2026 15:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**/home/lcoccato/data/eso-pipelines/edps-doc/edps-tex/nirps/instrument_tutorial
-/../instrument_tutorial/instrument_tutorial
+**/home/lcoccato/data/eso-pipelines/edps-doc/edps-tex/fors_spec/instrument_tuto
+rial/../instrument_tutorial/instrument_tutorial
 
-(/home/lcoccato/data/eso-pipelines/edps-doc/edps-tex/nirps/instrument_tutorial/
-../instrument_tutorial/instrument_tutorial.tex
+(/home/lcoccato/data/eso-pipelines/edps-doc/edps-tex/fors_spec/instrument_tutor
+ial/../instrument_tutorial/instrument_tutorial.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -475,7 +475,7 @@ Package hyperref Info: Link coloring ON on input line 74.
 \@outlinefile=\write4
 \openout4 = `instrument_tutorial.out'.
 
-<eso-logo.png, id=136, 79.29625pt x 99.37125pt>
+<eso-logo.png, id=144, 79.29625pt x 99.37125pt>
 File: eso-logo.png Graphic file (type png)
 <use eso-logo.png>
 Package pdftex.def Info: eso-logo.png  used on input line 76.
@@ -517,104 +517,110 @@ File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 ])
 (../common/installation.tex [8])) (./reducing_demo_data.tex [9]
 (../common/common_reducing_demo_data.tex
-<../common/figures/dashboard.jpg, id=229, 631.09013pt x 184.51915pt>
+Overfull \hbox (167.84358pt too wide) in paragraph at lines 3--9
+\T1/ptm/m/n/10.95 For gen-eral in-struc-tions on how to in-stall \T1/pcr/m/n/10
+.95 EDPS \T1/ptm/m/n/10.95 and the pipeline, see Sec-tion [][]1.4[][] or please
+ visit: [][]https://www.eso.org/sci/software/pipe_aem_main.html[][]. 
+ []
+
+<../common/figures/dashboard.jpg, id=239, 631.09013pt x 184.51915pt>
 File: ../common/figures/dashboard.jpg Graphic file (type jpg)
 <use ../common/figures/dashboard.jpg>
 Package pdftex.def Info: ../common/figures/dashboard.jpg  used on input line 25
 .
 (pdftex.def)             Requested size: 437.88509pt x 128.03348pt.
-<../common/figures/help_settings.jpg, id=231, 623.45598pt x 103.0232pt>
+<../common/figures/help_settings.jpg, id=241, 623.45598pt x 103.0232pt>
 File: ../common/figures/help_settings.jpg Graphic file (type jpg)
 <use ../common/figures/help_settings.jpg>
 Package pdftex.def Info: ../common/figures/help_settings.jpg  used on input lin
 e 34.
 (pdftex.def)             Requested size: 437.88509pt x 72.35939pt.
-<../common/figures/start_edps.jpg, id=232, 631.09013pt x 184.51915pt>
+<../common/figures/start_edps.jpg, id=242, 631.09013pt x 184.51915pt>
 File: ../common/figures/start_edps.jpg Graphic file (type jpg)
 <use ../common/figures/start_edps.jpg>
 Package pdftex.def Info: ../common/figures/start_edps.jpg  used on input line 4
 3.
 (pdftex.def)             Requested size: 437.88509pt x 128.03348pt.
 
-
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<../instrument_tutorial/figures/select_workflow.jpg, id=234, 273.1806pt x 222.3
-507pt>
+<../instrument_tutorial/figures/select_workflow.jpg, id=244, 923.45pt x 850.176
+25pt>
 File: ../instrument_tutorial/figures/select_workflow.jpg Graphic file (type jpg
 )
 <use ../instrument_tutorial/figures/select_workflow.jpg>
 Package pdftex.def Info: ../instrument_tutorial/figures/select_workflow.jpg  us
 ed on input line 57.
-(pdftex.def)             Requested size: 437.88509pt x 356.43675pt.
+(pdftex.def)             Requested size: 437.88509pt x 403.13739pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<../instrument_tutorial/figures/raw_data.jpg, id=236, 767.99599pt x 160.9417pt>
-
+<../instrument_tutorial/figures/raw_data.jpg, id=246, 2618.78375pt x 311.1625pt
+>
 File: ../instrument_tutorial/figures/raw_data.jpg Graphic file (type jpg)
 <use ../instrument_tutorial/figures/raw_data.jpg>
 Package pdftex.def Info: ../instrument_tutorial/figures/raw_data.jpg  used on i
 nput line 72.
-(pdftex.def)             Requested size: 437.88509pt x 91.76472pt.
+(pdftex.def)             Requested size: 437.88509pt x 52.02805pt.
 [10
 
  <../common/figures/dashboard.jpg> <../common/figures/help_settings.jpg>]
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+LaTeX Warning: Text page 11 contains only floats.
 
-
-Underfull \vbox (badness 1062) has occurred while \output is active []
-
- [11 <../common/figures/start_edps.jpg> <../instrument_tutorial/figures/select_
-workflow.jpg>]
-<../instrument_tutorial/figures/select_input.jpg, id=259, 765.9602pt x 234.2368
-pt>
+[11 <../common/figures/start_edps.jpg> <../instrument_tutorial/figures/select_w
+orkflow.jpg>]
+<../instrument_tutorial/figures/select_input.jpg, id=267, 2622.79875pt x 520.94
+624pt>
 File: ../instrument_tutorial/figures/select_input.jpg Graphic file (type jpg)
 <use ../instrument_tutorial/figures/select_input.jpg>
 Package pdftex.def Info: ../instrument_tutorial/figures/select_input.jpg  used 
 on input line 82.
-(pdftex.def)             Requested size: 437.88509pt x 133.9095pt.
-<../instrument_tutorial/figures/create_datasets.jpg, id=262, 333.8874pt x 103.8
-279pt>
+(pdftex.def)             Requested size: 437.88509pt x 86.96988pt.
+
+
+LaTeX Warning: Reference `sec:configuretion_overview' on page 12 undefined on i
+nput line 88.
+
+<../instrument_tutorial/figures/create_datasets.jpg, id=269, 3147.76pt x 956.57
+375pt>
 File: ../instrument_tutorial/figures/create_datasets.jpg Graphic file (type jpg
 )
 <use ../instrument_tutorial/figures/create_datasets.jpg>
 Package pdftex.def Info: ../instrument_tutorial/figures/create_datasets.jpg  us
 ed on input line 97.
-(pdftex.def)             Requested size: 437.88509pt x 136.17238pt.
-<../instrument_tutorial/figures/send.jpg, id=264, 335.8146pt x 104.3097pt>
+(pdftex.def)             Requested size: 437.88509pt x 133.05823pt.
+<../instrument_tutorial/figures/send.jpg, id=271, 3149.7675pt x 987.69pt>
 File: ../instrument_tutorial/figures/send.jpg Graphic file (type jpg)
 <use ../instrument_tutorial/figures/send.jpg>
 Package pdftex.def Info: ../instrument_tutorial/figures/send.jpg  used on input
  line 105.
-(pdftex.def)             Requested size: 437.88509pt x 136.0148pt.
-
+(pdftex.def)             Requested size: 437.88509pt x 137.29604pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[12 <../instrument_tutorial/figures/raw_data.jpg> <../instrument_tutorial/figur
-es/select_input.jpg> <../instrument_tutorial/figures/create_datasets.jpg>]
-<../instrument_tutorial/figures/processing_queue.jpg, id=278, 328.3467pt x 63.1
-158pt>
+<../instrument_tutorial/figures/processing_queue.jpg, id=273, 2338.7375pt x 394
+.47375pt>
 File: ../instrument_tutorial/figures/processing_queue.jpg Graphic file (type jp
 g)
 <use ../instrument_tutorial/figures/processing_queue.jpg>
 Package pdftex.def Info: ../instrument_tutorial/figures/processing_queue.jpg  u
 sed on input line 123.
-(pdftex.def)             Requested size: 437.88509pt x 84.17119pt.
-<../common/figures/configure_dataset.jpg, id=279, 21.88458pt x 21.52724pt>
+(pdftex.def)             Requested size: 437.88509pt x 73.85529pt.
+[12 <../instrument_tutorial/figures/raw_data.jpg> <../instrument_tutorial/figur
+es/select_input.jpg> <../instrument_tutorial/figures/create_datasets.jpg>]
+<../common/figures/configure_dataset.jpg, id=288, 21.88458pt x 21.52724pt>
 File: ../common/figures/configure_dataset.jpg Graphic file (type jpg)
 <use ../common/figures/configure_dataset.jpg>
 Package pdftex.def Info: ../common/figures/configure_dataset.jpg  used on input
  line 131.
 (pdftex.def)             Requested size: 22.76228pt x 22.39204pt.
-<../instrument_tutorial/figures/reduce.jpg, id=282, 335.0919pt x 170.0754pt>
+<../instrument_tutorial/figures/reduce.jpg, id=291, 2611.7575pt x 959.585pt>
 File: ../instrument_tutorial/figures/reduce.jpg Graphic file (type jpg)
 <use ../instrument_tutorial/figures/reduce.jpg>
 Package pdftex.def Info: ../instrument_tutorial/figures/reduce.jpg  used on inp
 ut line 141.
-(pdftex.def)             Requested size: 437.88509pt x 222.26578pt.
+(pdftex.def)             Requested size: 437.88509pt x 160.8724pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -622,150 +628,277 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 ) (../common/quality_plots.tex [13 <../instrument_tutorial/figures/send.jpg> <.
 ./instrument_tutorial/figures/processing_queue.jpg> <../common/figures/configur
 e_dataset.jpg>]
-<../instrument_tutorial/figures/show_reports.jpg, id=296, 291.9708pt x 170.3163
+<../instrument_tutorial/figures/show_reports.jpg, id=305, 2384.91pt x 621.32124
 pt>
 File: ../instrument_tutorial/figures/show_reports.jpg Graphic file (type jpg)
 <use ../instrument_tutorial/figures/show_reports.jpg>
 Package pdftex.def Info: ../instrument_tutorial/figures/show_reports.jpg  used 
 on input line 15.
-(pdftex.def)             Requested size: 437.88509pt x 255.43222pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
+(pdftex.def)             Requested size: 437.88509pt x 114.0799pt.
 ) (../common/common_export.tex
-<../instrument_tutorial/figures/archive.jpg, id=297, 299.4387pt x 130.5678pt>
+<../instrument_tutorial/figures/archive.jpg, id=306, 2542.49875pt x 1279.78125p
+t>
 File: ../instrument_tutorial/figures/archive.jpg Graphic file (type jpg)
 <use ../instrument_tutorial/figures/archive.jpg>
 Package pdftex.def Info: ../instrument_tutorial/figures/archive.jpg  used on in
 put line 17.
-(pdftex.def)             Requested size: 389.23532pt x 169.72215pt.
+(pdftex.def)             Requested size: 389.23532pt x 195.92307pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<../instrument_tutorial/figures/export1.jpg, id=298, 295.8252pt x 103.8279pt>
+[14 <../instrument_tutorial/figures/reduce.jpg> <../instrument_tutorial/figures
+/show_reports.jpg>]
+<../instrument_tutorial/figures/export1.jpg, id=314, 2370.8575pt x 1337.99875pt
+>
 File: ../instrument_tutorial/figures/export1.jpg Graphic file (type jpg)
 <use ../instrument_tutorial/figures/export1.jpg>
 Package pdftex.def Info: ../instrument_tutorial/figures/export1.jpg  used on in
 put line 31.
-(pdftex.def)             Requested size: 389.23532pt x 136.61755pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../instrument_tutorial/figures/export2.jpg, id=299, 165.0165pt x 138.7584pt>
+(pdftex.def)             Requested size: 389.23532pt x 219.65779pt.
+<../instrument_tutorial/figures/export2.jpg, id=315, 1276.77pt x 1068.99374pt>
 File: ../instrument_tutorial/figures/export2.jpg Graphic file (type jpg)
 <use ../instrument_tutorial/figures/export2.jpg>
 Package pdftex.def Info: ../instrument_tutorial/figures/export2.jpg  used on in
 put line 39.
-(pdftex.def)             Requested size: 340.57811pt x 286.4108pt.
+(pdftex.def)             Requested size: 340.57811pt x 285.14151pt.
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-) [14 <../instrument_tutorial/figures/reduce.jpg>]
-Overfull \hbox (21.33682pt too wide) in paragraph at lines 27--28
-\T1/ptm/m/n/10.95 from the header of the first spec-trum in the stack. Note tha
-t the recipe \T1/pcr/m/n/10.95 esotk_spectrum1d_combine
- []
-
-[15 <../instrument_tutorial/figures/show_reports.jpg> <../instrument_tutorial/f
-igures/archive.jpg>] [16 <../instrument_tutorial/figures/export1.jpg> <../instr
-ument_tutorial/figures/export2.jpg>]) (./reduction_chain.tex [17]
-(../common/common_reduction_flow.tex
-<../instrument_tutorial/figures/reduction_cascade.jpg, id=327, 270.7716pt x 199
-.4652pt>
+) [15 <../instrument_tutorial/figures/archive.jpg> <../instrument_tutorial/figu
+res/export1.jpg>]) (./reduction_chain.tex [16 <../instrument_tutorial/figures/e
+xport2.jpg>] (../common/common_reduction_flow.tex
+<../instrument_tutorial/figures/reduction_cascade.jpg, id=331, 338.4645pt x 196
+.0926pt>
 File: ../instrument_tutorial/figures/reduction_cascade.jpg Graphic file (type j
 pg)
 <use ../instrument_tutorial/figures/reduction_cascade.jpg>
 Package pdftex.def Info: ../instrument_tutorial/figures/reduction_cascade.jpg  
 used on input line 8.
-(pdftex.def)             Requested size: 437.88509pt x 322.59312pt.
+(pdftex.def)             Requested size: 437.88509pt x 253.71152pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 File: ../common/figures/configure_dataset.jpg Graphic file (type jpg)
 <use ../common/figures/configure_dataset.jpg>
 Package pdftex.def Info: ../common/figures/configure_dataset.jpg  used on input
  line 37.
 (pdftex.def)             Requested size: 22.76228pt x 22.39204pt.
-) [18
+)
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- <../instrument_tutorial/figures/reduction_cascade.jpg>] [19]
-Overfull \hbox (19.27673pt too wide) in paragraph at lines 88--96
-[]\T1/ptm/m/n/10.95 There is also an op-tion of laser fre-quency comb-based wav
-e-length cal-i-bra-tion via the tasks \T1/ptm/b/n/10.95 wave_fp_lfc\T1/ptm/m/n/
-10.95 , \T1/ptm/b/n/10.95 wave_lfc_fp
+ [17
+
+]
+<../instrument_tutorial/figures/examining_products.jpg, id=345, 1867.97874pt x 
+1299.85625pt>
+File: ../instrument_tutorial/figures/examining_products.jpg Graphic file (type 
+jpg)
+<use ../instrument_tutorial/figures/examining_products.jpg>
+Package pdftex.def Info: ../instrument_tutorial/figures/examining_products.jpg 
+ used on input line 38.
+(pdftex.def)             Requested size: 437.88509pt x 304.69273pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../instrument_tutorial/figures/master_bias.jpg, id=346, 1194.4625pt x 1205.503
+75pt>
+File: ../instrument_tutorial/figures/master_bias.jpg Graphic file (type jpg)
+<use ../instrument_tutorial/figures/master_bias.jpg>
+Package pdftex.def Info: ../instrument_tutorial/figures/master_bias.jpg  used o
+n input line 45.
+(pdftex.def)             Requested size: 437.88509pt x 441.92744pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[18 <../instrument_tutorial/figures/reduction_cascade.jpg>] [19 <../instrument_
+tutorial/figures/examining_products.jpg>]
+Overfull \hbox (28.7375pt too wide) in paragraph at lines 82--83
+\T1/ptm/m/n/10.95 row cor-re-sponds to the SED (Spec-tral En-ergy Dis-tri-bu-ti
+on) of one slit or-dered as in the SLIT_LOCATION_MXU
  []
 
-[20]
-Overfull \hbox (52.08197pt too wide) in paragraph at lines 136--156
-\T1/ptm/m/n/10.95 OB-JECT,SKY ob-ser-va-tions). It is eval-u-ated on boxes of s
-ize \T1/pcr/m/n/10.95 sci_bkgr_grid_size_x $\OMS/cmsy/m/n/10.95 ^^B$ \T1/pcr/m/
-n/10.95 sci_bkgr_grid_size_y
+[20 <../instrument_tutorial/figures/master_bias.jpg>]
+<../instrument_tutorial/figures/reduced_lamp_mxu.jpg, id=365, 1324.95pt x 1401.
+235pt>
+File: ../instrument_tutorial/figures/reduced_lamp_mxu.jpg Graphic file (type jp
+g)
+<use ../instrument_tutorial/figures/reduced_lamp_mxu.jpg>
+Package pdftex.def Info: ../instrument_tutorial/figures/reduced_lamp_mxu.jpg  u
+sed on input line 113.
+(pdftex.def)             Requested size: 437.88509pt x 463.09319pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../instrument_tutorial/figures/reduced_lamp_mos.jpg, id=366, 2176.13pt x 1488.
+56125pt>
+File: ../instrument_tutorial/figures/reduced_lamp_mos.jpg Graphic file (type jp
+g)
+<use ../instrument_tutorial/figures/reduced_lamp_mos.jpg>
+Package pdftex.def Info: ../instrument_tutorial/figures/reduced_lamp_mos.jpg  u
+sed on input line 120.
+(pdftex.def)             Requested size: 437.88509pt x 299.52406pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../instrument_tutorial/figures/master_norm_flat_mxu.jpg, id=369, 1290.8225pt x
+ 1291.82625pt>
+File: ../instrument_tutorial/figures/master_norm_flat_mxu.jpg Graphic file (typ
+e jpg)
+<use ../instrument_tutorial/figures/master_norm_flat_mxu.jpg>
+Package pdftex.def Info: ../instrument_tutorial/figures/master_norm_flat_mxu.jp
+g  used on input line 136.
+(pdftex.def)             Requested size: 437.88509pt x 438.20982pt.
+[21]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [22 <../instrument_tutorial/figures/reduced_lamp_mxu.jpg>] [23 <../instrument_
+tutorial/figures/reduced_lamp_mos.jpg>]
+<../instrument_tutorial/figures/reduced_std_mos.jpg, id=391, 1641.13126pt x 184
+3.88875pt>
+File: ../instrument_tutorial/figures/reduced_std_mos.jpg Graphic file (type jpg
+)
+<use ../instrument_tutorial/figures/reduced_std_mos.jpg>
+Package pdftex.def Info: ../instrument_tutorial/figures/reduced_std_mos.jpg  us
+ed on input line 173.
+(pdftex.def)             Requested size: 437.88509pt x 491.97632pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Overfull \hbox (14.75363pt too wide) in paragraph at lines 180--181
+[]\T1/ptm/m/n/10.95 Figure [][]21[][] is an ex-am-ple of the cre-ated "Graph-i-
+cal re-port" for the rel-e-vant task: \T1/ptm/b/n/10.95 stan-dard_mos\T1/ptm/m/
+n/10.95 , recipe: \T1/ptm/b/n/10.95 fors_science\T1/ptm/m/n/10.95 .
  []
 
-[21]) (./configure_reduction.tex [22] (../common/appropriate_calibrations.tex)
-(./configuration_editor_nirps.tex [23
+[24 <../instrument_tutorial/figures/master_norm_flat_mxu.jpg>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [25 <../instrument_tutorial/figures/reduced_std_mos.jpg>]
+Overfull \hbox (1.62773pt too wide) in paragraph at lines 190--192
+\T1/ptm/m/n/10.95 and/or de-gree via \T1/pcr/m/n/10.95 resp_fit_degree \T1/ptm/
+m/n/10.95 (poly-no-mial de-gree) or \T1/pcr/m/n/10.95 resp_fit_nknots \T1/ptm/m
+/n/10.95 (num-ber of spline knots).
+ []
+
+
+Overfull \hbox (44.08864pt too wide) in paragraph at lines 218--222
+\T1/ptm/m/n/10.95 these rows and the 2-dimensional frames and/or slit iden-ti-f
+i-ca-tions can be ob-tained from OB-JECT_TABLE_SCI_MOS.fits.
+ []
+
+[26] [27] [28] [29]) (./configure_reduction.tex [30]
+(../common/appropriate_calibrations.tex) (../common/configuration_editor.tex
+[31
 
 ]
 File: ../common/figures/configure_dataset.jpg Graphic file (type jpg)
 <use ../common/figures/configure_dataset.jpg>
 Package pdftex.def Info: ../common/figures/configure_dataset.jpg  used on input
- line 32.
+ line 41.
 (pdftex.def)             Requested size: 22.76228pt x 22.39204pt.
-<../instrument_tutorial/figures/configuration_editor_0.jpg, id=363, 243.5499pt 
-x 130.8087pt>
+<../instrument_tutorial/figures/configuration_editor_0.jpg, id=449, 1361.085pt 
+x 710.655pt>
 File: ../instrument_tutorial/figures/configuration_editor_0.jpg Graphic file (t
 ype jpg)
 <use ../instrument_tutorial/figures/configuration_editor_0.jpg>
 Package pdftex.def Info: ../instrument_tutorial/figures/configuration_editor_0.
-jpg  used on input line 38.
-(pdftex.def)             Requested size: 437.88509pt x 235.20197pt.
- (../common/workflow_parameters.tex
-[24 <../instrument_tutorial/figures/configuration_editor_0.jpg>])
-<../instrument_tutorial/figures/configuration_editor_1.jpg, id=378, 242.1045pt 
-x 35.4123pt>
+jpg  used on input line 47.
+(pdftex.def)             Requested size: 437.88509pt x 228.62874pt.
+ (../common/workflow_parameters.tex [32 <../instrument_tutorial/figures/configu
+ration_editor_0.jpg>])
+<../instrument_tutorial/figures/configuration_editor_1.jpg, id=463, 1357.07pt x
+ 227.85126pt>
 File: ../instrument_tutorial/figures/configuration_editor_1.jpg Graphic file (t
 ype jpg)
 <use ../instrument_tutorial/figures/configuration_editor_1.jpg>
 Package pdftex.def Info: ../instrument_tutorial/figures/configuration_editor_1.
-jpg  used on input line 63.
-(pdftex.def)             Requested size: 437.88509pt x 64.05112pt.
-<../instrument_tutorial/figures/configuration_editor_2.jpg, id=379, 242.3454pt 
-x 59.9841pt>
+jpg  used on input line 72.
+(pdftex.def)             Requested size: 437.88509pt x 73.51883pt.
+<../instrument_tutorial/figures/configuration_editor_2.jpg, id=464, 1320.935pt 
+x 518.93875pt>
 File: ../instrument_tutorial/figures/configuration_editor_2.jpg Graphic file (t
 ype jpg)
 <use ../instrument_tutorial/figures/configuration_editor_2.jpg>
 Package pdftex.def Info: ../instrument_tutorial/figures/configuration_editor_2.
-jpg  used on input line 71.
-(pdftex.def)             Requested size: 437.88509pt x 108.38313pt.
-<../instrument_tutorial/figures/configuration_editor_3.jpg, id=380, 552.71281pt
- x 121.98766pt>
+jpg  used on input line 80.
+(pdftex.def)             Requested size: 437.88509pt x 172.0263pt.
+<../instrument_tutorial/figures/configuration_editor_3.jpg, id=465, 1326.9575pt
+ x 344.28625pt>
 File: ../instrument_tutorial/figures/configuration_editor_3.jpg Graphic file (t
 ype jpg)
 <use ../instrument_tutorial/figures/configuration_editor_3.jpg>
 Package pdftex.def Info: ../instrument_tutorial/figures/configuration_editor_3.
-jpg  used on input line 79.
-(pdftex.def)             Requested size: 437.88509pt x 96.64839pt.
+jpg  used on input line 88.
+(pdftex.def)             Requested size: 437.88509pt x 113.60956pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<../instrument_tutorial/figures/configuration_editor_4.jpg, id=381, 244.7544pt 
-x 194.1654pt>
+<../instrument_tutorial/figures/configuration_editor_4.jpg, id=466, 1322.9425pt
+ x 976.64874pt>
 File: ../instrument_tutorial/figures/configuration_editor_4.jpg Graphic file (t
 ype jpg)
 <use ../instrument_tutorial/figures/configuration_editor_4.jpg>
 Package pdftex.def Info: ../instrument_tutorial/figures/configuration_editor_4.
-jpg  used on input line 87.
-(pdftex.def)             Requested size: 437.88509pt x 347.38205pt.
+jpg  used on input line 96.
+(pdftex.def)             Requested size: 437.88509pt x 323.26373pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-)) (./task_list.tex [25 <../instrument_tutorial/figures/configuration_editor_1.
-jpg> <../instrument_tutorial/figures/configuration_editor_2.jpg>] [26 <../instr
-ument_tutorial/figures/configuration_editor_3.jpg> <../instrument_tutorial/figu
-res/configuration_editor_4.jpg>]
+) (../common/how_to_copy_parameters_to_other_datasets.tex [33 <../instrument_tu
+torial/figures/configuration_editor_1.jpg> <../instrument_tutorial/figures/conf
+iguration_editor_2.jpg>] [34 <../instrument_tutorial/figures/configuration_edit
+or_3.jpg> <../instrument_tutorial/figures/configuration_editor_4.jpg>])
+Overfull \hbox (18.18079pt too wide) in paragraph at lines 23--24
+\T1/ptm/m/n/10.95 The tasks: \T1/ptm/b/n/10.95 cal-i-bra-tion_lss\T1/ptm/m/n/10
+.95 , \T1/ptm/b/n/10.95 cal-i-bra-tion_mos\T1/ptm/m/n/10.95 , \T1/ptm/b/n/10.95
+ cal-i-bra-tion_mxu \T1/ptm/m/n/10.95 and \T1/ptm/b/n/10.95 cal-i-bra-tion_std 
+\T1/ptm/m/n/10.95 run the same recipe \T1/ptm/b/n/10.95 fors_calib\T1/ptm/m/n/1
+0.95 ,
+ []
+
+[35] [36] [37] [38]
+Overfull \hbox (45.85287pt too wide) in paragraph at lines 161--162
+[]\T1/ptm/m/n/10.95 GRIS_150I+OG590 - This grism may need tai-lored pa-ram-e-te
+r set-tings for each setup. In-creas-ing \T1/pcr/m/n/10.95 peakdetection
+ []
+
+[39]
+Overfull \hbox (19.37634pt too wide) in paragraph at lines 193--196
+\T1/ptm/m/n/10.95 umn \T1/pcr/m/n/10.95 STLLR_ABSORP \T1/ptm/m/n/10.95 set to T
+(rue)). These re-gions will be ig-nored dur-ing the re-sponse fit if \T1/pcr/m/
+n/10.95 resp_ignore_mode
+ []
+
+
+Overfull \hbox (67.64522pt too wide) in paragraph at lines 193--196
+\T1/ptm/m/n/10.95 nec-es-sary. If ad-di-tional re-gions need to be ig-nored \T1
+/pcr/m/n/10.95 resp_ignore_mode \T1/ptm/m/n/10.95 set to \T1/pcr/m/n/10.95 stel
+lar_absorption,command_line
+ []
+
+
+Overfull \hbox (73.80878pt too wide) in paragraph at lines 193--196
+\T1/ptm/m/n/10.95 al-lows the user to spec-ify the ad-di-tional points (e.g. 47
+50, 4900) and/or re-gions (e.g. 8900-9850) with \T1/pcr/m/n/10.95 resp_ignore_p
+oints\T1/ptm/m/n/10.95 . 
+ []
+
+[40] [41]) (./task_list.tex [42]
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 17.
-) (./faq.tex [27
+) (./faq.tex [43
 
 ] (../common/common_faq.tex
 Overfull \hbox (13.8722pt too wide) in paragraph at lines 39--39
@@ -773,7 +906,7 @@ Overfull \hbox (13.8722pt too wide) in paragraph at lines 39--39
 ad_demodata.sh[] 
  []
 
-[28
+[44
 
 ]
 Overfull \hbox (5.87563pt too wide) in paragraph at lines 84--86
@@ -782,37 +915,66 @@ o-rary files (in-stead of the de-faults \T1/pcr/m/n/10.95 /tmp \T1/ptm/m/n/10.9
 5 and \T1/pcr/m/n/10.95 /var/tmp\T1/ptm/m/n/10.95 ).
  []
 
-)) [29] 
+)
+(/home/lcoccato/data/eso-pipelines/edps-doc/edps-tex/fors_spec/instrument_tutor
+ial/../instrument_tutorial/faq_fors.tex [45] [46]
+Overfull \hbox (50.52887pt too wide) in paragraph at lines 51--52
+[]\T1/ptm/m/n/10.95 There are cur-rently no mas-ter re-sponse curves for the gr
+isms GRIS_1200g, GRIS_200I+OG590, GRIS_600I+OG590,
+ []
+
+
+Overfull \hbox (92.7121pt too wide) in paragraph at lines 89--92
+\T1/pcr/m/n/10.95 startwavelength, endwavelength, resp_use_flat_sed, resp_fit_d
+egree, resp_fit_nknots,
+ []
+
+[47] [48] [49]
+Overfull \hbox (19.28857pt too wide) in paragraph at lines 176--177
+[]\T1/ptm/m/n/10.95 The recipe can-not de-tect the slit edges with de-fault val
+ue of \T1/pcr/m/n/10.95 peakdetection\T1/ptm/m/n/10.95 , stored in the GRISM_TA
+BLE.
+ []
+
+)) [50] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./instrument_tutorial.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `instrument_tutorial.out' has not changed.
-(rerunfilecheck)             Checksum: C2144252B17EE3987AD1D07F5BE30232;5531.
+(rerunfilecheck)             Checksum: B382A36380BEED847AB83F376B0781FE;7002.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 7 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 12112 strings out of 474222
- 198781 string characters out of 5748733
- 1943975 words of memory out of 5000000
- 34015 multiletter control sequences out of 15000+600000
- 598362 words of font info for 76 fonts, out of 8000000 for 9000
+ 12262 strings out of 474222
+ 203057 string characters out of 5748733
+ 1940975 words of memory out of 5000000
+ 34086 multiletter control sequences out of 15000+600000
+ 598866 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 90i,21n,93p,568b,845s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,21n,93p,924b,839s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-msy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/urw/times/utmri8a.pfb>
-Output written on instrument_tutorial.pdf (29 pages, 4906452 bytes).
+mmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
+rw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8
+a.pfb>
+Output written on instrument_tutorial.pdf (50 pages, 10405855 bytes).
 PDF statistics:
- 468 PDF objects out of 1000 (max. 8388607)
- 399 compressed objects within 4 object streams
- 104 named destinations out of 1000 (max. 500000)
- 375 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 687 PDF objects out of 1000 (max. 8388607)
+ 581 compressed objects within 6 object streams
+ 174 named destinations out of 1000 (max. 500000)
+ 421 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,0 +1,183 @@
+\subsection{FORS specific questions}
+\label{sec:faq_fors}
+
+\begin{enumerate}
+\item {\bf Be aware that some of the FORS-SPECTROSCOPY instrumental setups do not have corresponding GLOBAL\_DISTORTION\_TABLE.} 
+
+You can process the data also without this calibration. In such cases, the spatial distortion of your LSS data is not corrected, which is of importance mainly if you are interested in the spatial
+information about your targets. The extraction quality of the spectra is generally affected only at the very edges of the field.
+
+The GLOBAL\_DISTORTION\_TABLEs do not exist for the FORS2 grisms GRIS\_200I, GRIS\_600V, GRIS\_600R nor for any FORS1 grism. It exists for the grisms GRIS\_300V and GRIS\_300I that have been in use in FORS2 since April 2009.
+
+\item {\bf Some of the slitlets in my science data look badly traced}
+
+This is most likely caused by an imperfect tracing of the slitlets in the calibration data. Usually an incompletely traced slit can well be seen in normalized master flat field. Because the pipeline detects the
+slit edges first in the arc lamp frame a probable culprit is the {\tt peakdetection} recipe parameter of the {\bf fors\_calib} recipe, which may be too low or too high.
+
+\item {\bf My long-slit spectra show curved sky lines}
+This is caused by a bad wavelength calibration. Most likely the recipe parameter {\tt peakdetection} in the {\bf fors\_calib} recipe was set too low so that spurious lines were detected.
+
+\item {\bf My reduced spectra do not cover the wavelength range I expected}
+
+Some low-resolution grisms (e.g., GRIS\_300V) are subject to second order contamination, even if used with an order separation filter (e.g., GG435). The pipeline will limit the wavelength range of the reduced spectra to the range not affected by the second order contamination (=twice the bluest wavelength present
+in the observed data).
+
+Users can adjust the wavelength range following the steps below:
+\begin{itemize}
+    \item (a) If the old response determination was used (recipe {\bf fors\_science}).
+
+One can change the wavelength range in the interactive window of the {\bf calibration\_std} task , by editing the {\tt startwavelength} and/or {\tt endwavelength} values or by specifying these parameters on the command line.
+
+\item (b) If the new response determination was used (recipe {bf fors\_response}).
+The response is computed by using fit-points defined in the table with the tag FIT\_POINT\_CATALOG, and they cover only the wavelength region unaffected by second order contamination. To extend the
+wavelength range it is therefore necessary to edit the table before starting the reduction and insert extra fit points according to the needs.
+
+\end{itemize}
+
+When extending the wavelength range for the flux standard star (to get flux-calibrated spectra across the extended wavelength range) please note that many flux standard stars are hot stars, for which the second order contamination may distort the response shape.
+Note also, that if master response curves are used, only the wavelength range without second order contamination is covered.
+
+\item {\bf Why do I see blank (flux=0) regions in the left and right side of my mapped files?}
+
+The nominal wavelength range used by default by the pipeline has been chosen to allow covering the registered range in the CCD for slits placed both to the very left or to the very right. For high resolution grisms and no filter (Free), the registered wavelength range in the CCD is in fact smaller than the default
+values, therefore the pipeline pads with 0 values to complete up to nominal range.
+
+\item {\bf Although I am experimenting with different flux standard stars for my observation the flux calibrated spectra do not change. Why?}
+
+If your dataset contains a master response curve (MASTER\_SPECPHOT\_TABLE) the pipeline will use that one instead of the response curves derived from individual standard stars. In order to see the effect of the different standard stars you have to remove the master response curve from the input data pool.
+
+\item {\bf There is no master response curve in my datasets - why?}
+
+There are currently no master response curves for the grisms GRIS\_1200g, GRIS\_200I+OG590, GRIS\_600I+OG590, GRIS\_600R+GG435, GRIS\_600V+GG435, nor for any spectra observed before January 1, 2015.
+
+\item {\bf There is no flux standard star for my LSS observations - why?}
+
+The ESO calSelector delivers for LSS data only those flux standard stars that were observed at the same position on the detector as your long-slit spectrum to ensure the same wavelength coverage. In earlier times this rule was not followed strictly and sometimes the standard star was observed at the center of the field-of-view
+instead. You can look for the additional observations at the ESO Archive instrument specific query forms for FORS2 and FORS1 by setting the following constraints:
+
+{\tt Start The date of your observations: - 5 days
+
+End The date of your observations: + 5 days
+
+DPR.CATG: CALIB
+
+INS.MODE: MOS
+
+INS.FILT1.NAME:} the order-separating filter of your observations (use {\tt Any} if you had no filter)
+
+{\tt INS.GRIS1.NAME:} The grism of your observations and selecting for display in addition
+
+{\tt DP.ID
+
+OBS.TARG.NAME
+
+DPR.TYPE:} to identify the standard star (STD) and its calibrations (FLAT,LAMP and WAVE,LAMP)
+
+{\tt DET.CHIP1.ID:} to identify the correct chip for mosaic data
+
+{\tt SEQ.SPEC.TARG:} position at which a MOS standard star has been taken
+
+For FORS1 data after April 1, 2007 and FORS2 data after April 1, 2002, you will always find 2 files per observations. You need the ones with {\tt DET.CHIP1.ID = CCID20-14-5-3} or {\tt Norma III}.
+
+
+\item {\bf Part of my flux calibrated spectrum has flux=$-1$. Why?}
+
+The response curve may cover a different wavelength region than the science spectrum. Pixels not covered by the response curve are set to $-1$ in the flux calibrated data.
+
+\item {\bf If I modify the parameters' values, some changes are ignored}
+
+The FORS pipeline has a special way to handle the parameters which are in the grism tables. Basically, the initial values are always taken from the grism table. Still, during the loop execution, the parameters can be changed to the desired values. If you want to use different values as initial values for those parameters, edit the grism tables (FORS2\_GRS\_*) to create your own version. The parameters affected are: {\tt dispersion, peakdetection, wdegree,
+cdegree, reference, startwavelength, endwavelength, resp\_use\_flat\_sed,
+resp\_fit\_degree, resp\_fit\_nknots,} and {\tt dradius\_aver}.
+
+\item {\bf I am using the maximum number of knots for the spline fit of the response but the fit still does not go through all data points.}
+
+The maximum number of knots for the spline is the number of unmasked data points – 2 (entering a higher number will cause the pipeline to reduce it to the allowed maximum). Since the knots are distributed at equal distances this means that the distance between two knots is always larger than the distance between
+two data points. This explains why even at a maximum number of knots the fit may not go through all data points. A polynomial of very high degree might achieve that, but is rather unstable.
+
+\item {\bf The fit to the response curve shows very strong deviations in the masked regions - how can I avoid that?}
+
+Some grisms have a very steep slope and/or cover small-scale variations of the detector response so that spline fit with a high number of knots is needed to fit their response. This fit is unconstrained in the masked regions, which can result in very strong deviations. The masking regions have been defined very
+conservatively. It may well be that the response in the masked regions does not show any significant deviations or only at very few points. In such a case set {\tt resp\_ignore\_mode} to {\tt command\_line} only and add the deviating points at {\tt resp\_ignore\_points}. Alternatively you can try to exclude the
+steep part of the response via {\tt resp\_ignore\_points} and/or use a polymonial fit of lower order, that will not take into account small-scale variations of the response (via {\tt resp\_fit\_degree} instead of {\tt resp\_fit\_nknots}).
+
+\item {\bf I used {\tt use\_flat\_sed=}true for my GRIS\_1200B data but the flux-calibrated data look very bad.}
+
+Unfortunately the spectral energy distribution of the flat field lamp use for GRIS\_1200B data can vary considerably on short timescales. In such cases the FLAT\_SED\_<mode> used to correct the effect of
+the position-dependent response will differ even if they were taken at the same position on the CCD.
+
+So it will be impossible to correct the effect. If you have LSS data it is very likely that the flux standard star was observed at the same position on the CCD as your science target, so that you may use {\tt use\_flat\_sed=}false. In the case of MOS/MXU data there is unfortunately no solution for this problem. With {\tt use\_flat\_sed=}true you can correct the small scale variations of the detector response at the price of introducing spurious flux variations. Setting {\tt use\_flat\_sed=}false, however, will not correct for the position dependency of the response, which can severely distort the SED of your targets, up to reversing the slope of the spectra (i.e. making a hot spectrum look cool and vice versa).
+
+\item {\bf There are no extracted spectra - why?}
+
+While this may happen for observations of extremely faint targets the most common case for this behavior are LSS observations from the lower chip, as the main target is usually placed close to the center of the field-of-view, which is on the upper chip.
+
+\item {\bf The coordinates reported by the pipeline for my extracted spectra show offsets - why?}
+
+There can be several causes for such offsets:
+
+\begin{itemize}
+\item (a) Imprecise coordinates for the guide star, which introduce an offset in the world coordinate system recorded in the header of the raw data. This effect causes a rigid shift in right ascension and/or declination.
+
+\item (b) An incorrect value of the reference wavelength recorded in the keyword HIERARCH ESO INS GRIS1 WLEN. The pipeline assumes that this keyword gives the value of the undeviated wavelength for the corresponding grism. An incorrect value will introduce an offset of
+
+\begin{equation}
+{{{\tt INS.GRIS1.WLEN} - \lambda \_{true}}/ step\_size} * pixel\_scale
+\end{equation}
+
+An offset 10.5 Å for GRIS\_1200B for instance corresponds to 15 steps [0.7Å/px] in wavelength and thus for binning 2×2 and standard collimator to an offset of 15px $\times$ 0.25"/px, i.e 3.8", on sky.
+
+Depending on the angle on sky with which you data were taken this offset along the dispersion axis will affect right ascension and/or declination.
+
+\item (c) An incorrect wavelength calibration. Errors in the wavelength calibration should be below 1 pixel and thus usually not be noticeable in the derived coordinates. For multi-object spectroscopic data, however, such errors might introduce small shifts between spectra from different slits, which may again affect right ascension and/or declination, depending on the angle on sky of the observations.
+
+\end{itemize}
+
+\item {\bf The spectra in my rectified LSS data are tilted - why?}
+
+In rare cases the use of the GLOBAl\_DISTORION\_TABLE results in tilted instead of horizontal spectra in the MAPPED... data. We are still looking into the causes for this behavior.
+
+\item {\bf Why do my flux-calibrated data not agree with independent photometric measurements?}
+
+In order to have a true absolute flux calibration several requirements need to be fulfilled:
+
+\begin{itemize}
+\item  (a) The fraction of the total flux of an object that is contained in the slit depends on the shape of the object, the width and orientation of the slit, and the seeing. Absolute flux calibration requires that all the flux of both the object and the standard star has been collected.
+
+\item (b) The flux that arrives at the telescope depends on the transparency of the sky. Absolute flux calibration requires the same transparency for the observations of the target and the standard star. A change between the flux standard observation and the science object observations of any of the parameters mentioned above will change the flux scale in the final spectrum. To compare the flux calibrated spectrum to other measurements, differences in slit losses and atmospheric conditions have to be taken into account.
+
+\end{itemize}
+
+With respect to the faction of flux contained within the slit one should keep in mind that the flux standard stars are observed with a 5” wide slit, while science data are typically observed with slit widths of 0.8” to 1”. For a point source a slit width of 0.8”/1.0” used with a seeing of 0.8” means that some 33\%/24\%,
+respectively, of the target flux are lost (see also Fig. 17). This results in a too low flux for the flux calibrated spectrum of the target.
+If the standard star or the target or both are observed under non-photometric conditions (e.g. CLR or THN) their observed flux will be lower than it should be. If the standard star is observed under photometric conditions but the science target is not the flux in the flux calibrated target spectrum will be too low.
+The opposite happens if the target is observed under photometric conditions but the standard star is not. CLR/THN conditions allow for transparency variations of 10\%/20\%, respectively.
+
+
+\item {\bf Does the pipeline combine different detectors chips into a common product?}
+
+No. The spectroscopic pipeline and EDPS workflow works only on files from the same detector chip. Files from different detectors must not be mixed in processing.
+
+
+\item {\bf fors\_calib - The slit identification fails}
+
+In case of the MOS/MXU observations with few (usually three or fewer) slitlets the slit identification may fail. Using {\tt slit\_ident=}false allows the user to process such data.
+
+\item {\bf fors\_calib - The pipeline fails with the error message “The wavelength solution at row <number> does not increase monotonically, which is physically impossible. Try with new parameters”.}
+
+Non-monotonic dispersion relations are often due to spurious detections. In such cases try to decrease {\tt wdegree} and/or increase {\tt peakdetection}. A further possibility is to decrease {\tt wradius}.
+
+\item {\bf fors\_calib  - The pipeline fails for wide slit data}
+
+If very wide slits are used, the reference lines become accordingly wider (and display a box-like, flat-top profile). The calibration recipe can handle this in case of well isolated lines, but if nearby lines blend together it is impossible to safely determine their positions. There is no solution for such data.
+
+ \item {\bf fors\_calib - The pipeline fails with error "No slits could be detected".}
+ 
+The recipe cannot detect the slit edges with default value of {\tt peakdetection}, stored in the GRISM\_TABLE. In such cases try to change {\tt peakdetection}.
+
+\item {\bf fors\_science (Response) - What can I do if I get a problem with fors\_calib recipe stating that there is no good wavelength solution for a list?}
+
+This is a side effect of a wrong slit position determination. In fact, this problem occurs during the refinement of the slit positions if slit identification has been performed. The problem will likely be addressed in future releases. For a workaround in the meantime, try running the pipeline with parameter
+{\tt slit\_ident} set to false.
+
+\end{enumerate}
