@@ -1,0 +1,92 @@
+\section{The \instname\ data reduction flow.}
+\label{sec:reduction_flow}
+\input{../common/common_reduction_flow}
+
+\subsection{Imaging, Coronography, Sparse aperture masking}
+\begin{itemize}
+\item Data repacking and dark/sky subtraction 
+({\tt visir\_util\_repack}). 
+The input data is first split – the science images and, if present, 
+the photometric standards are sent to be decoded, this step 
+transforms the input FITS files into a format (still FITS) that 
+makes the subsequent processing easier. The chop/nod background 
+subtraction is applied.
+\item Detecting objects and calculating shifts
+({\tt visir\_util\_detect\_shift}). This is critical for the 
+subsequent image alignment. A sky background 
+frame is created during this step, after applying a kappa-sigma 
+clipping algorithm to the chop-nod corrected data, and finally the 
+sky-subtracted images will be aligned with the appropriate offsets 
+and co-added together to produce a final image.
+\item Shifting and adding individual frames together 
+({\tt visir\_util\_run\_swarp}).
+\item Optional photometric calibration that is carried out only 
+if the input Data Set contains a photometric standard. Only the 
+final combined image is calibrated, so if the users want to study 
+the variability of a source during the observations, they must 
+split the data into separate Data Sets, process them separately, 
+and they will be calibrated individually.
+The stellar flux is corrected for the background, and the error 
+budget includes the sky error. The aperture that maximizes the 
+signal-to-noise ratio is used. The measured standard star flux 
+is compared with the cataloged flux, in Jy. The final 
+reported sensitivity is computed in units of mJy at 10-$\sigma$ 
+level in 1\,hr (the conversion factor is the reciprocal of this 
+value). If a conversion factor is derived for the Data Set, then 
+the final fits are converted from ADU sec$^{-1}$ into physical 
+units Jy.
+For more details see the \instname\ pipeline manual.
+\end{itemize}
+
+\subsection{Spectroscopy modes}
+\begin{itemize}
+\item Data repacking ({\tt visir\_util\_repack}): the same as
+the imaging case above.
+\item Distortion Correction ({\tt visir\_util\_undistort}) is 
+based on analytical parametrization. The parametrization was 
+derived from an instrument model. The correction is applied 
+directly by interpolating the distortion corrected pixel value 
+from the source pixels. The pixels that are marked as bad are 
+ignored during the interpolation.
+\item Wavelength Calibration and Spectral Extraction
+({\tt visir\_util\_detect\_shift},\\ {\tt visir\_old\_spc\_wcal},
+{\tt visir\_old\_spc\_wcal\_ech}, {\tt visir\_old\_spc\_obs},\\ 
+{\tt visir\_old\_spc\_obs\_ech}), based on a polynomial that 
+describes the dispersion relation. The \instname\ physical 
+model -- represented by a first degree polynomial -- is used 
+as an initial guess. Experience has shown that only a linear 
+shift is required and this is achieved by cross-correlating a 
+sky spectrum derived from the data and a model of the atmospheric 
+emission. The derived offset is then applied to the model.
+By default the pipeline extracts a 1D spectrum of the brightest 
+source, applying the optimal extraction method. 
+%However, the 
+%users have options to define on each image multiple (up to 10) 
+%extraction apertures and to use different methods - optimal or 
+%aperture extraction - to obtain a 1D spectrum. Therefore, the 
+%pipeline allows simultaneous (in a single run) 1D spectra 
+%extraction from different objects that fall onto the slit or 
+%from different parts of the same object (e.g. core, jet, disk 
+%of a galaxy, etc.).
+\item Photometric Calibration ({\tt visir\_old\_spc\_phot}, 
+{\tt visir\_old\_spc\_phot\_ech}) is carried out by\\ comparing 
+a flux model (available in the static calibration database) of 
+the standard star with the observed flux. The final reported 
+sensitivity is computed in units of mJy at the 10-$\sigma$ level 
+in 1\,hr (the conversion factor is the reciprocal of this value). 
+The normalization per unit time is obtained calculating the 
+total integration time as follows: 
+{\tt DIT$\times$NDIT$\times$NFILES$\times$NCHOP$\times$2}. The 
+factor of two is due to the half-cycle chopping. For more 
+details, see the \instname\ pipeline manual.
+\end{itemize}
+
+For further details see \instname\ Pipeline User Manual, Sec.\,8.
+Note that the \instname\ pipeline cascade omits two steps that 
+the users might expect to see:
+\begin{itemize}
+\item separate dark subtraction step -- because the dark signal 
+is subtracted together with the sky emission;
+\item flat-fielding, -- because the detector is too unstable, 
+and the flat-fielding procedure would only add noise.
+\end{itemize}

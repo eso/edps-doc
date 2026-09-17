@@ -1,0 +1,30 @@
+\section{Overview of all the data reduction configuration options}
+\label{sec:configuretion_overview}
+
+\subsection{Selection of most appropriate calibrations}
+
+\input{../common/appropriate_calibrations}
+
+\subsection{Configuration of parameters: the configuration editor}
+\label{sec:configuration_editor}
+\input{../common/configuration_editor}
+
+{\bf OTHER CONFIGURATIONS}
+
+There are limited possibilities to improve the quality of the final 
+product during the processing, and the improvement on one aspect 
+may easily lead to a degradation in another. Perhaps, the most 
+promising is to experiment with the spectral extraction parameters.
+The recipes {\tt visir\_spc\_reduce} and {\tt visir\_old\_spc\_obs}
+accept an aperture file describing the options to extract spectra 
+from multiple objects along the slit. The file name and path is 
+defined in the parameter {\tt --apfile}. This has to be defined in 
+the parameter space of the workflow before running the workflow. 
+The aperture file defines one extraction aperture per line, there 
+can be many apertures/lines, each with its own extraction 
+extraction method, sky region and sky measurement method. For a 
+full description of the apfile see \instname\ Pipeline User Manual,
+Sec.\,9.3.2. 
+
+Other parameters to attempt adjusting are {\tt --bkgcorrect} (for a 
+column-based background subtraction) and {\tt --destripe}.

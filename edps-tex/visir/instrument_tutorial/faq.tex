@@ -1,0 +1,26 @@
+\section{Frequently Asked Questions}
+\label{sec:faq}
+\input{../common/common_faq}
+
+\begin{itemize}
+\item {\bf Q8) How can I manually run the recipes executed by EDPS?}\\
+{\bf Answer:} The directory {\tt $\sim$/EDPS\_data/VISIR/} contains individual subdirectories for each recipe, e.g., {\tt calibrate\_science\_echelle}, 
+{\tt calibrate\_science\_image},\\ {\tt calibrate\_science\_long\_slit}, 
+{\tt clip\_science}, {\tt clip\_standard},\\ {\tt destripe\_echelle\_science}, 
+etc. -- one for each recipe. They contain randomly named sub-directories 
+for each execution of the particular recipe, e.g.,\\ 
+{\tt 0ea47c20-26dd-4ffd-8de2-9cad4bbf515a},\\ 
+{\tt 2a73f7e3-aa4f-4853-baff-33de29c4395e}, etc.\\ 
+The users can find in those executable scripts names {\tt cmdline.sh}, together with the necessary parameter files {\tt *.rc} and lists of input fits files {\tt *.sof}. To manually start the execution type at the prompt: {\tt ./cmdline.sh}\\
+It is advisable to make copies of all files before making changes.
+\end{itemize}
+
+\begin{itemize}
+\item {\bf Q9) Are the \instname\ spectral products corrected for telluric absorption?}\\
+{\bf Answer:} Yes, during ``normal'' data processing the telluric correction is applied dividing the science spectrum by a telluric spectrum. The users can alternatively apply the {\tt Molecfit} tool\footnote{\url{https://www.eso.org/sci/software/pipelines/}} outside the \instname\ pipeline.
+\end{itemize}
+
+\begin{itemize}
+\item {\bf Q10) If the data set contains a spectrophotometric standard, and there are multiple apertures applied to the standard, then which apertures are used to correct the science target?}\\
+{\bf Answer:} As this opens up too many possibilities, we suggest keeping it simple and always using the aperture from layer 1 of the standard. This approach is robust. The users are free to define additional apertures on the standard, e.g. for data quality purposes, but the first one is always used. Also, the default values of {\tt rl} and {\tt rr} for this {\tt visir\_spc} workflow should be set to 75 to avoid the negative images.
+\end{itemize}

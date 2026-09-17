@@ -1,0 +1,46 @@
+
+\section{Reducing demo data}
+\label{sec:reducing_demo_data}
+
+\input{../common/common_reducing_demo_data}
+
+ 
+\subsubsection{Quality plots}
+\input{../common/quality_plots}
+
+\subsection{Exporting the final products}
+\label{sec:export_final_products}
+
+
+\input{../common/common_export}
+ 
+ 
+Exported products are organized by `DATASET` (named as the first
+scientific exposure of the dataset), and `TIMESTAMP` (time of start 
+of reduction)
+
+The final products saved in the specified directory are: 
+\begin{itemize}
+
+\item Imaging, Coronagraphy and Sparse aperture masking: 
+\begin{itemize}
+\item Multi-extension visir\_util\_join\_bCOMBINED\_001.fits file 
+({\tt PRO.CATG=IMG\_OBJ\_COMBINED} or {\tt IMG\_OBJ\_COMBINED\_BURST}) 
+that contains the following 2D extensions: flux, error, weights and a 
+bad pixel mask (good pixels - 0 and bad pixels - 1). For more details, 
+including a list of column names for the fits table, see the 
+\instname\ Pipeline User Manual, Sec.\,9.4.1.
+\end{itemize}
+
+\item All spectroscopic modes: 
+\begin{itemize}
+\item Multi-extension visir\_spc\_obs\_tab.fits file ({\tt 
+PRO.CATG=SPC\_OBS\_LMR\_TAB} or\\ {\tt SPC\_OBS\_HRG\_TAB}) that contains 
+for each order a 1D spectrum in a table and two 2D images with the flux 
+and weights. If multiple orders are extracted, then these three 
+extensions are replicated for each order. Finally, a 2D spectrum with 
+all orders is also stored in a separate extension. For more details
+see the \instname\ Pipeline User Manual, Sec.\,9.4.2.
+\end{itemize}
+
+\end{itemize}
