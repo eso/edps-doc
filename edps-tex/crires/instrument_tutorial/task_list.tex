@@ -1,0 +1,38 @@
+\section{List of workflow tasks}
+
+This is the list of all the tasks and associated recipes in the
+\instname\ workflow.  Only some of them are needed for scientific
+reduction, they are indicated by the flag "yes" (triggered by default)
+or "optional" (triggered only if requested by a workflow
+parameter). Other tasks are not used for scientific reduction (they
+are indicated by the flag "no"), they are mainly used for instrument
+monitoring and they can be executed only by specifying them as
+target. Note that, when a task is specified as target, all the tasks
+that generate the calibrations needed for it are automatically
+executed.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\begin{tabular}{|l|l|c|p{7cm}|}
+\hline
+\textbf{TASK} & \textbf{RECIPE} & \textbf{Used in science reduction} & \textbf{Notes} \\
+\hline 
+detector\_linearity        & cr2res\_cal\_detlin  & optional & \\
+dark                       & cr2res\_cal\_dark    & yes & \\
+flat                       & cr2res\_cal\_flat    & yes & \\
+wave\_uranium\_neon        & cr2res\_cal\_wave    & yes & \\
+wave\_gas\_cell            & cr2res\_cal\_wave    & yes & \\
+wave\_sky                  & cr2res\_cal\_wave    & optional & \\
+wave\_fabri\_perot\_etalon & cr2res\_cal\_wave    & yes & \\
+standard\_star             & cr2res\_util\_calib  & yes & \\
+standard\_star\_pol        & cr2res\_util\_calib  & yes & \\
+science\_staring           & cr2res\_obs\_staring & yes & \\
+science\_nodding           & cr2res\_obs\_nodding & yes & \\
+science\_2d                & cr2res\_obs\_2d      & yes & \\
+science\_polarimetry       & cr2res\_obs\_pol     & yes & \\
+science\_astrometry        & cr2res\_obs\_nodding & yes & \\
+\hline
+\end{tabular}
+\caption{\instname\ pipeline tasks overview}
+\end{table}

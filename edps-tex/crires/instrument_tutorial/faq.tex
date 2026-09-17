@@ -1,0 +1,18 @@
+\section{Frequently Asked Questions}
+\label{sec:faq}
+\input{../common/common_faq}
+
+\begin{itemize}
+\item {\bf Q8) How can I manually run the recipes executed by EDPS?}\\
+{\bf Answer:} The directory {\tt $\sim$/EDPS\_data/CRIRES/} contains individual subdirectories for each recipe, e.g., {\tt dark}, {\tt flat}, {\tt  wave\_gas\_cell}, {\tt science\_2d}, and {\tt science\_staring} -- one for each recipe. They contain randomly named sub-directories for each execution of the particular recipe, e.g.,\\ 
+{\tt 0ea47c20-26dd-4ffd-8de2-9cad4bbf515a},\\ 
+{\tt 2a73f7e3-aa4f-4853-baff-33de29c4395e}, etc.\\ 
+The users can find in those executable scripts names {\tt cmdline.sh}, together with the necessary parameter files {\tt *.rc} and lists of input fits files {\tt *.sof}. To manually start the execution type at the prompt: {\tt ./cmdline.sh}\\
+It is advisable to make copies of all files before making changes.
+\end{itemize}
+
+\begin{itemize}
+\item {\bf Q9) How can I correct \instname\ spectra for the telluric absorption?}\\
+{\bf Answer:} The telluric correction is not part of the \instname\ pipeline. 
+The users have two options: to carry out the correction externally with a telluric standard (if available; must be observed close in time and in airmass to the science target) or to run the {\tt Molecfit} tool\footnote{\url{https://www.eso.org/sci/software/pipelines/}}. For further information how to run {\tt Molecfit} on the \instname\ spectra consult with its own User Manual and with the \instname\ Pipeline Manual, Appendix C.
+\end{itemize}

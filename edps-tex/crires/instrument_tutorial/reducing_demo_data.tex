@@ -1,0 +1,77 @@
+
+\section{Reducing demo data}
+\label{sec:reducing_demo_data}
+
+\input{../common/common_reducing_demo_data}
+
+ 
+\subsubsection{Quality plots}
+\input{../common/quality_plots}
+
+\subsection{Exporting the final products}
+\label{sec:export_final_products}
+
+
+\input{../common/common_export}
+ 
+ 
+Exported products are organized by `DATASET` (named as the first
+scientific exposure of the dataset), and `TIMESTAMP` (time of start of
+reduction)
+
+The more important final products saved in the individual directories are: 
+\begin{itemize}
+
+\item Darks: 
+\begin{itemize}
+\item master dark ({\tt PRO.CATG = CAL\_DARK\_MASTER})
+\item bad pixel mask ({\tt PRO.CATG = CAL\_DARK\_BPM})
+\end{itemize}
+
+\item Flat: 
+\begin{itemize}
+\item master flat ({\tt PRO.CATG = CAL\_FLAT\_MASTER})
+\item blaze function ({\tt PRO.CATG = CAL\_FLAT\_EXTRACT\_1D})
+\item bad pixel mask ({\tt PRO.CATG = CAL\_FLAT\_BPM})
+\item slit function ({\tt PRO.CATG = CAL\_FLAT\_SLIT\_FUNC})
+\item 2D slit model ({\tt PRO.CATG = CAL\_FLAT\_SLIT\_MODEL})
+\item tracewave table with order tracing ({\tt PRO.CATG = CAL\_FLAT\_TW})
+\item tracewave merged table ({\tt PRO.CATG = CAL\_FLAT\_TW\_MERGED})
+\end{itemize}
+
+\item Wavelength: 
+\begin{itemize}
+\item tracewave table with order tracing and wavelength calibration ({\tt PRO.CATG = CAL\_FLAT\_TW})
+\item 2D wavelength map ({\tt PRO.CATG = CAL\_WAVE\_MAP})
+\item table with extracted multi-order 1D arc FP spectrum ({\tt PRO.CATG = CAL\_WAVE\_EXTRACT\_1D})
+\item fits table with diagnostics for individual detected lines ({\tt PRO.CATG =\\ CAL\_WAVE\_LINES\_DIAGNOSTICS})
+\end{itemize}
+
+\item Science Nodding: 
+\begin{itemize}
+\item combined 2D spectra for nodding positions A and B separately ({\tt PRO.CATG =\\ OBS\_NODDING\_COMBINEDA/B})
+\item table with extracted multi-order 1D spectrum for the two nodding positions separately, and for them combined together  ({\tt PRO.CATG = OBS\_NODDING\_EXTRACTA/B/\_COMB})
+\item model 2D spectrum for nodding positions A and B separately ({\tt PRO.CATG =\\ OBS\_NODDING\_SLITMODELA/B})
+\item slit function (slit profile) for nodding positions A and B separately ({\tt PRO.CATG =\\ OBS\_NODDING\_SLITFUNCA/B})
+\item extracted 1D IDP products (combining all orders) for the two nodding positions separately, and for them combined together ({\tt PRO.CATG = OBS\_NODDING\_EXTRACTA/B/C\_IDP})
+\item tracewave tables for nodding positions A and B separately ({\tt PRO.CATG = OBS\_NODDING\_TWA/B})
+\end{itemize}
+
+\item Science Staring: 
+\begin{itemize}
+\item combined 2D spectrum ({\tt PRO.CATG = OBS\_STARING\_COMBINED})
+\item table with extracted multi-order 1D spectrum ({\tt PRO.CATG = OBS\_STARING\_EXTRACT})
+\item model 2D spectrum ({\tt PRO.CATG = OBS\_STARING\_SLITMODEL})
+\item slit function (slit profile) ({\tt PRO.CATG = OBS\_STARING\_SLITFUNC})
+\item extracted 1D IDP product (combining all orders) ({\tt PRO.CATG = OBS\_STARING\_IDP})
+\end{itemize}
+
+\item Science 2D (offset mode observations): 
+\begin{itemize}
+\item calibrated 2D spectrum ({\tt PRO.CATG = OBS\_2D\_CALIBRATED})
+\item table with extracted multi-order 1D spectrum ({\tt PRO.CATG = OBS\_2D\_EXTRACT})
+\end{itemize}
+
+\end{itemize}
+
+For a full list of the products see Sec. 11.2 of the \instname\ Pipeline Manual.
