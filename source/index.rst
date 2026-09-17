@@ -35,6 +35,7 @@ EDPS documentation
 
    #crires/index.rst
    #efosc/index.rst
+   crires_plus_pdf.md
    efosc_pdf.md
    #eris/index.rst
    espresso_pdf.md
@@ -59,5 +60,6 @@ EDPS documentation
    uves_pdf.md
    #fors/index.rst
    #visir/index.rst
+   visir_pdf.md
    #xshooter/index.rst
    xshooter_pdf.md
