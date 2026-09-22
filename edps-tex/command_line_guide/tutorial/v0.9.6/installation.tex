@@ -1,0 +1,32 @@
+
+\section{Installation.}
+\label{sec:edps_installation}
+
+
+\subsection{Prerequisites}
+
+The installation of EDPS requires Python 3.9 (recommended) or higher. Linux and MacOS operating systems are supported. You can check the installed version of Python with the command
+\begin{verbatim}
+    python --version
+\end{verbatim}
+
+
+\subsubsection{Installation via Homebrew}
+
+\subsubsection{Installation via Python virtual environment.}
+
+
+\subsection{First Run: EDPS configuration}
+
+
+The first time EDPS is executed, it will ask for a location where intermediate data products, bookkeeping information and logs will be stored. This should be a location with sufficient disk space to store the output data for several executions of the pipeline and needs full write permission. This location will be stored in '\textasciitilde/.edps/application.properties' and used for further calls of EDPS. EDPS will exit after this initial setup. 
+
+
+
+\subsection{Update EDPS}
+Once  EDPS is installed, it can be updated with the following command:
+
+
+Note: if this is a re-installation, make sure that the EDPS server is not running in the background. To close the EDPS server, type 
+\verb|edps -shutdown |
+Alternatively, it can be killed with usual Linux commands.

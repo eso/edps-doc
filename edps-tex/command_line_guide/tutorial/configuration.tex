@@ -1,0 +1,133 @@
+
+\section{How to configure EDPS: the {\tt application.properties} file.}
+\label{sec:edps_application_properties}
+Several options in EDPS can be specified in a configuration file, named {\tt application.properties}. This file is located in the {\tt .edps/} directory in your HOME directory (see Section \ref{sec:edps_configuration}). 
+If a feature can be specified both in the command-line request and in the configuration file, the command line request has priority.
+Note: to make effective the changes done in application.properties, one must first restart the EDPS server. To close the server, type (from a terminal with the EDPS environment active):
+\begin{verbatim}
+    edps -shutdown
+\end{verbatim}
+
+\subsection{Association preference: {\tt RAW} vs {\tt MASTER} calibrations.}
+\label{sec:edps_association_preference}
+
+If the input directory contain both {\tt MASTER} (e.g., pre-reduced calibrations) and {\tt RAW} calibrations, it could happen that both of them fulfil the matching criteria and quality level (see Section \ref{sec:edps_quality}) for a certain task. In this case, one can specify to which type of calibration to give priority by setting the variable {\tt association\_preference} in the {\tt application.properties} configuration file. 
+
+Possible values of {\tt association\_preference} are:
+\begin{itemize}
+    \item {\tt raw}. First, EDPS checks if there are raw calibrations ensuring the first quality level of the products. If found, they are associated. If not found, raw calibrations ensuring the second quality level of the products are searched. If not found, the next level is searched until the last quality level permitted by the workflow parameter {\tt quality\_threshold} is reached (see Section \ref{sec:edps_quality}). If no raw calibrations are found for none of the quality levels, then EDPS searches for master calibrations, starting from those ensuring the first quality level.
+    If none are found, the second level is searched, and so forth. If no calibrations are found, the association is not done.
+    
+    \item {\tt master}. Same as {\tt raw}, but first master calibrations are looked for all the products quality levels permitted by the workflow parameter {\tt quality\_threshold} (see Section \ref{sec:edps_quality}). Then, if master calibrations are not found, the system looks for raw calibrations.
+    
+    \item {\tt raw\_per\_quality\_level} (default).  First, the system will check if there are raw calibrations ensuring the first quality level of the products. If not found, MASTER calibrations ensuring this level are searched for. If not found, RAW calibrations ensuring the second quality level are searched for, if not found MASTER calibrations matching the second quality level are searched for. The sequence goes on until the last level permitted by the workflow parameter {\tt quality\_threshold}.
+    
+    \item {\tt master\_per\_quality\_level}.  Same as {\tt raw\_per\_quality\_level}, but with inverted roles for MASTER and RAW calibrations.
+\end{itemize}
+
+If a combination of {\tt RAW} and {\tt MASTER} calibrations are present, the  value of {\tt association\_preference} might have an impact on the performances and the quality of the results. Typically, {\tt association\_preference = raw\_per\_quality\_level} delivers the best  quality products, at the price of speed. On the other hand, {\tt association\_preference = master} ensures faster performances, at cost of quality (e.g., a very old master calibration could be used instead a more recent raw calibration).
+If only {\tt RAW} or {\tt MASTER} calibrations are present in the input directories, then the value of {\tt association\_preference} has no impact.
+
+
+\subsection{Running recipes in parallel}
+One of the advantages of EDPS is that it can exploit of powerful hardware. 
+The following variables in the {\tt application.properties} file determine the parallelization of EDPS reduction.
+\begin{itemize}
+    \item {\tt processes} (default: 1). It specifies the maximum  number of jobs to run in parallel (e.g. {\tt esorex} parallel executions) .
+    
+    \item {\tt cores} (default: 1). It specifies the maximum numbers of computers cores to use, considering all the parallel jobs.
+    
+    \item {\tt default\_omp\_threads} (default: 1). The number of cores to use for each job. This can be overridden by specifying a recipe parameter {\tt OMP\_NUM\_THREADS} for a given task (e.g. {\tt -rp object OMP\_NUM\_THREADS 3} to assign a desired number of threads to the {\tt object} task, whereas all the others use the default value).
+\end{itemize}
+
+
+\subsection{Order of executions.}
+The variable {\tt ordering} in the {\tt application.properties} file specifies the priority to give to the reduction jobs. The most important values are:
+\begin{itemize}
+    \item {\tt dfs}. depth-first, gives preference to reaching final reduction target quicker. In other words, it finish the reduction of a dataset before moving to the next dataset.  This choice is less efficient in time but it gives priority to the reduction of individual datasets. 
+    
+    \item {\tt bfs}. breadth-first, follows the reduction cascade level by level.
+    
+    \item {\tt type}. It gives preference to following the reduction cascade level by level making sure to process same type of data together (eg. first all Biases).
+    
+    \item {\tt dynamic}. Immediately runs whichever job is ready (has all needed inputs), no stalling but the order is unpredictable. This is the most time efficient execution order.
+\end{itemize}
+
+
+\subsection{Renaming products file names}
+\label{sec:edps_product_names}
+
+If the user specified an output directory via the {\tt -o} option in the EDPS request (see Section \ref{sec:edps_reduction}), 
+the products of the target task(s) (i.e. the final steps in the processing cascade) are saved in the specified directory.  Their names are given by the {\tt pattern} variable in application.properties.
+
+
+The users can decide to copy or hard link certain product categories into a different location and with a different naming convention. This can be done by setting the following variables in the application.properties configuration file:
+\begin{itemize}
+
+\item {\tt mode}. (Values: {\tt copy}/{\tt link}/{\tt symlink}) Specifies if the products have to be copied, hard-linked, or symbolically linked into the output directory. Default: copy.
+\item {\tt categories}. List of categories (i.e. the {\tt HIERARCH ESO PRO CATG} header keywords of the recipe products) that have to be copied or linked.
+\item {\tt pattern}. Pattern to follow for the saving and naming convention. The default value is:\\
+{\tt pattern = \$DATASET/\$TIMESTAMP/\$object\$\_\$pro.catg\$.\$EXT}. 
+
+The following predefined variables can be used:\\
+{\tt \ \ \$TASK}: name of the task generating the product.\\
+{\tt \ \ \$DATASET}: name of the dataset.\\
+{\tt \ \ \$TIMESTAMP}: time of the request to EDPS.\\
+{\tt \ \ \$EXT}: file extension (.fits).\\
+{\tt \ \ \$NIGHT}: observing night (year-month-day).\\
+{\tt \ \ \$FILENAME}: original file name.\\
+
+{\tt object} and {\tt pro.catg} in the default values represents the {\tt OBJECT} and {\tt HIERARCH ESO PRO CATG} header keywords of the file.
+
+Values from header keywords and general text can be added, bracketed by {\tt \$}. For example, the following setup:
+
+\begin{verbatim}
+ package_base_dir=~/my_reduction/
+ mode=link
+ pattern=$TASK/$DATASET/$TIMESTAMP/\$object\$\_\$pro.catg\$_reduced.$EXT
+ categories=S1D_FINAL_A
+\end{verbatim}
+
+will (hard) link the category {\tt S1D\_FINAL\_A} produced by the pipeline recipe {\tt  espdr\_sci\_red} into the directory {\tt \textasciitilde/my\_reduction/}. Files are organised into subdirectories that specify task name, the dataset name, the creation date. The names of the files contain the value of the {\tt OBJECT} and {\tt HIERARCH ESO PRO CATG} keywords, as specified in the product header.
+\end{itemize}
+
+%\subsection{Renaming products file names: T. B. D.}
+%\label{sec:edps_breakpoints}
+%T. B. D.
+
+\subsection{Reprocessing a given set of datasets}
+\label{sec:edps_reprocess}
+
+If you want to test which combination of options in \verb|${HOME}/.edps/application.properties| config file works best for you by processing a given data set several times with different values of one or more parameters in the config file, you need to set the config parameter \verb|truncate| to \verb|True| and restart the server each time, or more precisely, shutdown the server after each invocation of edps. i.e.:
+
+\begin{enumerate}
+    \item edit \verb|${HOME}/.edps/application.properties|
+    \item run \verb|edps|, e.g.\ \newline
+    \verb|edps -w espresso.espresso_wkf -i <input_directory> \|\newline
+    \verb|  -o <output_directory> \|
+    \item stop the edps server,\ \newline
+    \verb|edps --shutdown|
+    \item repeat from step 1 for each combination of config parameter values you want to test
+\end{enumerate}
+
+%\subsubsection{Other parameters. T.B.D.}
+
+\subsection{Changing the pipeline}
+\label{sec:setup}
+EDPS runs the workflows associated to the {\tt esorex} command that is in the system path.
+ If the pipeline or the workflows that are intended to be executed are not in the system path (e.g. a customized version), it could be useful to change the location where edps assumes the pipelines and workflows are located. To do that, edit the following variables in the {\tt application.properties} file, so that they point to the location of the workflow and esorex command associated to the desired pipeline.
+\begin{verbatim}
+workflow_dir=        # path to workflow packages (leave empty to use
+                     # the workflows shipped with the pipeline)
+esorex_path=esorex   # insert path of the new executable
+\end{verbatim}
+
+For a pipeline installation, leaving {\tt workflow\_dir} empty is recommended: EDPS finds workflows next to the pipeline. For workflow development, set {\tt workflow\_dir} to the instrument repository root (the walker finds {\tt src/<package>/*\_wkf.py}) or to a directory of instrument packages. Names listed by {\tt edps -lw} have the form {\tt package.module} (the Python package may differ from the git directory: X-SHOOTER is {\tt xshooter.xshooter\_wkf}).
+
+In order for these changes to have effect, the edps server has to be shutdown.
+
+\verb| edps -shutdown|
+
+%\section{Launching the EDPS server. T.B.D.}
+%\label{sec:launching_edps_server}
+%T.B.D.

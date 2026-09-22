@@ -1,0 +1,114 @@
+\section{EDPS most useful options}
+To get the EDPS full list of options, type on the terminal where the EDPS environment is active: 
+\begin{verbatim}
+    edps -h
+\end{verbatim}. 
+
+In the following Sections, we describe the most useful options.
+
+\subsection{Graphic representation of a workflow.}
+\label{sec:edps_graphic}
+
+One convenient way to understand a workflow is to look at a graphical representation. EDPS supports 2 levels of graphic display. The first shows datasets, tasks, and subworkflow (general graph). The second shows tasks, subworkflows, the input categories and the recipes (detailed graph). These graphs can be produced with the {\tt -g} and {\tt -g2} options of EDPS. The graphs are produced in the {\tt dot} format. This format can be converted into a large range of formats by the {\tt dot} program. This program needs to be installed separately and is available in all commonly used Linux and MacOs versions.
+
+For example, to produce a workflow graph  for the ESPRESSO workflow in pdf format, type from a terminal where the edps environment is active:
+
+\begin{verbatim}
+  edps -w espresso.espresso_wkf -g | dot  -Tpdf > espresso.pdf
+\end{verbatim}
+
+For {\tt .ps} or  {\tt .png} format, use {\tt -Tps} or {\tt -Tpng}, respectively.
+
+ The program {\tt dot} \footnote{\url{https://graphviz.org/}} has many option that can be used to produce presentations of the workflow depending on the preferences of the user. 
+For example, to produce a detailed workflow graph for the ESPRESSO workflow, type from a terminal where the edps environment is active (single line command):
+\begin{verbatim}
+  edps -w espresso.espresso_wkf -g2 | dot  -Tpdf -O 
+\end{verbatim}
+
+This generally produces several output files, one with the workflow and the  other ones with details  of each sub-workflow\footnote{If a workflow does not contain any sub-workflows, then only one file is generated, i.e. noname.gv.pdf. In this case, the file can be simply renamed without the need to merge multiple .pdf files.}. A convenient way to to merge the various created files into a unique .pdf file is:
+\begin{verbatim}
+  gs -sDEVICE=pdfwrite -sOutputFile=espresso.pdf -dNOPAUSE -dBATCH noname*pdf
+  
+  rm noname*pdf
+\end{verbatim}
+
+
+\subsection{Classification of input data.}
+\label{sec:edps_classification}
+To show only the classification of the input data, type:
+ from a terminal where the edps environment is active:
+\begin{verbatim}
+  edps -w espresso.espresso_wkf -i <input_directory> -c
+\end{verbatim}
+
+EDPS inspects the {\tt <input\_directory>} recursively, and prints a list of the fits files and their classifications. In general, a file can have more than one classification.
+
+
+\subsection{Reduce the data until a certain step}
+\label{sec:edps_target}
+
+EDPS can perform the reduction up to a certain processing step, which we call the "target task". Only input data related to that task (and needed calibrations) will be processed.
+
+To reduce data until the task {\tt flat}, i.e., reduction of flat field raw calibrations (single line command):
+\begin{verbatim}
+    edps -w espresso.espresso_wkf -i <input_directory> 
+         -t flat -o <output_directory> 
+\end{verbatim}.
+
+To see the list of processing tasks, type on the terminal where the EDPS environment is active: 
+\begin{verbatim}
+    edps -w espresso.espresso_wkf -lt
+\end{verbatim}. 
+A list of tasks grouped by the so-called "metatargets" is shown.
+
+
+To process data of the tasks that belong to the same "metatarget" (single line command)
+\begin{verbatim}
+    edps -w espresso.espresso_wkf -i <input_directory>
+         -m <METATARGET> -o <output_directory>
+\end{verbatim}. 
+
+For example, :
+\begin{verbatim}
+    edps -w espresso.espresso_wkf -i <input_directory>
+         -m qc1calib -o <output_directory> 
+\end{verbatim}
+
+executes only calibration tasks. Other standard metatargets are {\tt science} (the default), {\tt qc0}, {\tt calchecker}, and {\tt idp}. By default, if no target tasks or metatargets are specified, EDPS assumes {\tt -m science}, i.e. all science tasks are considered targets of the reduction.
+
+If the EDPS server is not on the default port 5000, add {\tt -P <port>} to any command, for example {\tt edps -lt -w espresso.espresso\_wkf -P 5001}.
+
+Note: EDPS organises the data and reduces them (assuming {\tt -m science} as meta-target). It is possible to perform only the data classification in order to check the content of datasets.
+
+Note: when the output directory is specified with the {\tt -o} option, only the products of the (meta)target tasks are saved into the final directory. All other products, including logs and book-keeping, are stored in the general EDPS data directory, as specified during the configuration (Section \ref{sec:edps_configuration}).
+
+\subsection{Inspect the reduction cascade and datasets content (without starting the data reduction).}
+\label{sec:edps_cascade}
+
+By default,  if a workflow and the input data directories are specified, EDPS organises the data into datasets and processes them, according to the (meta)target tasks. It is possible to stop at the data organisation, and visualise the content of the datasets with the option {\tt -f}. The data organisation is done up to the (meta) target tasks (default is {\tt -m science}, i.e. all the science tasks).
+
+To perform the data organisation only: EDPS up to a certain task type (for example, up to the flat fielding):
+ 
+\begin{verbatim}
+    edps -w espresso.espresso_wkf -i <input_directory>  -t flat  -f 
+\end{verbatim}
+One can direct the output (json format) to a file and open it with a browser
+\begin{verbatim}
+    edps -w espresso.espresso_wkf -i <input_directory> 
+         -t flat -f  > flat_field_datasets.json
+         
+    firefox flat_field_datasets.json
+\end{verbatim}
+
+Notes:
+
+\begin{itemize}
+\item With the option {\tt -f}, the datasets are organised in a tree-like structure. If one replaces {\tt -f} with {\tt -od}, then each job is displayed independently with more information, but the associations between the various calibrations are not highlighted.
+
+\item If the {\tt -od} and {\tt -f} options are omitted in the previous example, EDPS processes all the flat fields (and needed calibrations) in the input directory. The steps after the reduction of flat fields are not executed.
+\end{itemize}
+
+\subsection{Quality-control reports}
+
+ADARI reports are generated with the reduction. The option {\tt -rt} selects which files are passed to the report templates: {\tt reduced} (default), {\tt raw}, {\tt all}, or {\tt none}.
+

@@ -1,0 +1,31 @@
+\appendix
+\appendix
+\section{Installing in a \texttt{conda} environment}
+\label{conda_install}
+
+Assuming that \texttt{conda} is installed and activated\ldots
+
+\begin{itemize}
+
+    \item define a new \texttt{conda} environment named {\tt edps}:\newline
+    \verb|conda create -n edps python=3.10|
+
+   \item activate the \texttt{edps} environment: \newline
+    \verb|conda activate edps|
+
+   \item upgrade {\tt pip}:\newline
+   \verb|python -m pip install --upgrade pip|
+
+   \item install EDPS (single line command): \newline
+   \verb|python -m pip install --extra-index-url \|\newline
+   \verb|   https://ftp.eso.org/pub/dfs/pipelines/libraries edps adari_core|
+
+   \item to remove the \texttt{edps} \texttt{conda} environment at anytime:\newline
+   \verb|conda env remove --name edps|
+
+\end{itemize}
+
+Then to run \texttt{edps} at any time in the future, activate the \texttt{edps} environment, if it is not already activated, and then simply invoke \texttt{edps}, e.g.\ the first time to create and setup the \texttt{applications.properties} config file:
+\begin{verbatim}
+    edps
+\end{verbatim}

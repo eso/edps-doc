@@ -1,0 +1,145 @@
+
+\section{Installation.}
+\label{sec:edps_installation}
+
+
+\subsection{Prerequisites}
+
+The installation of EDPS requires Python 3.11 or higher (Python 3.14 is not supported). Linux and MacOS operating systems are supported. You can check the installed version of Python with the command
+\begin{verbatim}
+    python --version
+\end{verbatim}
+
+EDPS is pre-configured to run workflows for ESO data reduction pipelines. Only pipelines that include an EDPS workflow can be used by EDPS. As of this writing, workflows are available for CRIRES, ERIS, ESPRESSO, FORS, GIRAFFE, GRAVITY, HARPS, HAWK-I, KMOS, MATISSE, MOONS, MUSE, NIRPS, OMEGACAM, PIONIER, QMOST, SPHERE, UVES, VISIR, and X-SHOOTER. The instrument pipeline has to be installed following the instructions at 
+\url{https://www.eso.org/sci/software/pipelines/}. That page also include a full up-to-date list of pipelines with EDPS workflow. The {\tt apptainer} installation method for pipelines is currently not supported with EDPS.
+
+The pipeline recipe executer {\tt esorex}, which is automatically installed with the pipeline, must be in the  path so that EDPS can find the pipelines. The command 
+\begin{verbatim}
+    which esorex
+\end{verbatim}
+ should return the full path to the installed {\tt esorex} binary. Check that recipes are visible with \verb|esorex --recipes|. EDPS will see only the workflows of the pipelines associated to that esorex binary.
+
+For workflow graphs (Section~\ref{sec:edps_graphic}), install {\tt graphviz} so that the {\tt dot} command is on the path (not only as a shell alias):
+\begin{verbatim}
+    sudo apt install graphviz     # Debian, Ubuntu
+    sudo dnf install graphviz     # Fedora
+    brew install graphviz         # MacOS
+\end{verbatim}
+
+\subsection{Installation Procedure}
+\label{sec:edps_installation_procedure}
+Installing EDPS is quite simple and requires only few steps. There are 2 main ways to install EDPS, the first with Homebrew (recommended), the second via a Python virtual environment.
+
+\subsubsection{Installation via Homebrew}
+
+\begin{enumerate}
+\item Install Homebrew. You can refer to the official documentation and Homebrew on Linux, but the installation is as simple as running the following command in your macOS Terminal or Linux shell prompt (single line):
+\begin{verbatim}
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/
+install/HEAD/install.sh)"
+\end{verbatim}
+Then follow the instructions on the terminal about how to add Homebrew to your path.
+
+\item Setup the ESO repository for Homebrew.
+The following command adds a custom Homebrew repository (Tap) which contains the pipeline packages.
+
+\begin{verbatim}
+  brew tap eso/pipelines
+\end{verbatim}
+
+Homebrew 6 requires taps to be trusted before packages from that tap can be installed. Trust the ESO tap once:
+
+\begin{verbatim}
+  brew trust --tap eso/pipelines
+\end{verbatim}
+
+Keep Homebrew itself up to date with {\tt brew update} before installing a new pipeline.
+
+\item Installing EDPS. Type:
+
+\begin{verbatim}
+  brew install edps adari
+\end{verbatim}
+\item Uninstalling EDPS. Type:
+  \begin{verbatim}
+  brew uninstall edps adari
+\end{verbatim}
+
+\item Installing a pipeline (e.g., ESPRESSO)
+
+\begin{verbatim}
+  brew install esopipe-espdr
+\end{verbatim}
+\end{enumerate}
+\subsubsection{Installation via Python virtual environment.}
+
+From a bash shell:
+\begin{itemize}
+
+    \item Define a new environment {\tt edps}:\newline 
+    \verb|python3 -m venv  <path_to_environment>/edps| \newline
+    where {\tt <path\_to\_environment>} is a directory where the environment named {\tt edps} is to be saved\footnote{In this example, we named the environment {\tt edps}, but any other name can be used. Use a Python 3.11--3.13 interpreter.}. 
+\medskip
+   \item Activate the  environment named {\tt edps}\footnote{\label{foot:cshfish}For csh or tcsh shells use {\tt source  <path\_to\_environment>/edps/bin/activate.csh}, and for fish shell use {\tt source  <path\_to\_environment>/edps/bin/activate.fish} instead}: \newline
+   \verb|. <path_to_environment>/edps/bin/activate|
+\medskip
+
+   \item Upgrade {\tt pip}:\newline
+   \verb|pip install --upgrade pip|
+\medskip
+
+   \item Install EDPS (single line command): \newline
+   \verb|pip install --extra-index-url | \newline
+   \verb| https://ftp.eso.org/pub/dfs/pipelines/repositories/stable/src|\newline
+   \verb| edps edpsgui edpsplot adari_core|
+
+\medskip
+
+This installs the command-line client, the optional graphical interface, the plot tools, and the ADARI reporting engine used for quality-control plots.
+
+Note: if this is a re-installation, make sure that the EDPS server is not running in the background. To close the EDPS server, type 
+\verb|edps --shutdown |
+Alternatively, it can be killed with usual Linux commands.
+
+\end{itemize}
+Alternatively, one can use a conda environment; instructions are provided in \ref{conda_install}.
+
+\subsection{First Run: EDPS configuration}
+\label{sec:edps_configuration}
+Once EDPS has been installed, it can be run with the commands
+\begin{itemize}
+
+\item If EDPS was not installed via Homebrew: activate the previously defined edps environment\textsuperscript{\ref{foot:cshfish}}:\newline
+{\tt . <path\_to\_environment>/edps/bin/activate} (Section \ref{sec:edps_installation_procedure}).
+
+\item   Run edps:\newline {\tt edps}
+\end{itemize}
+
+The first time EDPS is executed, it will ask for a location where intermediate data products, bookkeeping information and logs will be stored. This should be a location with sufficient disk space to store the output data for several executions of the pipeline and needs full write permission. This location will be stored in '\textasciitilde/.edps/application.properties' and used for further calls of EDPS. EDPS will exit after this initial setup. 
+
+List the workflows that EDPS can see:
+
+\begin{verbatim}
+    edps -lw
+\end{verbatim}
+
+Names have the form {\tt package.module}, for example {\tt espresso.espresso\_wkf}. An instrument may expose several workflows ({\tt fors.fors\_spec\_wkf}, {\tt fors.fors\_imaging\_wkf}, \ldots). If the list is empty, check that {\tt esorex --recipes} shows the pipeline and that {\tt esorex\_path} in {\tt application.properties} points to that binary (Section~\ref{sec:setup}).
+
+
+
+\subsection{Update EDPS}
+Once  EDPS is installed, it can be updated with the following command:
+\begin{itemize}
+
+\item If the installation was not done via Homebrew: activate the previously defined edps environment:\newline
+{\tt . <path\_to\_environment>/edps/bin/activate}
+\item type (one line command):\newline
+\verb |pip install --upgrade --extra-index-url |\newline
+\verb |  https://ftp.eso.org/pub/dfs/pipelines/repositories/stable/src | \newline
+\verb|  edps edpsgui edpsplot adari_core|
+\end{itemize}
+
+
+Note: if this is a re-installation, make sure that the EDPS server is not running in the background. To close the EDPS server, type 
+\verb|edps --shutdown |
+Alternatively, it can be killed with usual Linux commands.

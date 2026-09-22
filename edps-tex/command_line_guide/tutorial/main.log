@@ -1,0 +1,1239 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.3.20)  22 SEP 2026 09:00
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**main.tex
+(./main.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
+File: size11.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count187
+\c@section=\count188
+\c@subsection=\count189
+\c@subsubsection=\count190
+\c@paragraph=\count191
+\c@subparagraph=\count192
+\c@figure=\count193
+\c@table=\count194
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen141
+\Gin@req@width=\dimen142
+)
+(./picinpar.sty
+Pictures in Paragraphs. Version 1.2a, July 13, 1993
+\br=\count195
+\bl=\count196
+\na=\count197
+\nb=\count198
+\tcdsav=\count199
+\tcl=\count266
+\tcd=\count267
+\tcn=\count268
+\cumtcl=\count269
+\cumpartcl=\count270
+\lftside=\dimen143
+\rtside=\dimen144
+\hpic=\dimen145
+\vpic=\dimen146
+\strutilg=\dimen147
+\picwd=\dimen148
+\topheight=\dimen149
+\ilg=\dimen150
+\lpic=\dimen151
+\lwindowsep=\dimen152
+\rwindowsep=\dimen153
+\cumpar=\dimen154
+\twa=\toks18
+\la=\toks19
+\ra=\toks20
+\ha=\toks21
+\pictoc=\toks22
+\rawtext=\box51
+\holder=\box52
+\windowbox=\box53
+\wartext=\box54
+\finaltext=\box55
+\aslice=\box56
+\bslice=\box57
+\wbox=\box58
+\wstrutbox=\box59
+\picbox=\box60
+\waslice=\box61
+\wbslice=\box62
+\fslice=\box63
+) (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count271
+\float@exts=\toks23
+\float@box=\box64
+\@float@everytoks=\toks24
+\@floatcapt=\box65
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/varioref.sty
+Package: varioref 2022/01/09 v1.6f package for extended references (FMi)
+\c@vrcnt=\count272
+)
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip50
+\bibsep=\skip51
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count273
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/afterpage.sty
+Package: afterpage 2023/07/04 v1.08 After-Page Package (DPC)
+\AP@output=\toks25
+\AP@partial=\box66
+\AP@footins=\box67
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2022/01/06 v1.3d Standard LaTeX Color (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 149.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/dvipsnam.def
+File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2023-11-01 v4.19 Multi-page Table package (DPC)
+\LTleft=\skip52
+\LTright=\skip53
+\LTpre=\skip54
+\LTpost=\skip55
+\LTchunksize=\count274
+\LTcapwidth=\dimen155
+\LT@head=\box68
+\LT@firsthead=\box69
+\LT@foot=\box70
+\LT@lastfoot=\box71
+\LT@gbox=\box72
+\LT@cols=\count275
+\LT@rows=\count276
+\c@LT@tables=\count277
+\c@LT@chunks=\count278
+\LT@p@ftn=\toks26
+)
+(/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
+Package: enumitem 2019/06/20 v3.9 Customized lists
+\labelindent=\skip56
+\enit@outerparindent=\dimen156
+\enit@toks=\toks27
+\enit@inbox=\box73
+\enit@count@id=\count279
+\enitdp@description=\count280
+)
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2023/11/15 v3.01 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+LaTeX Info: Redefining \color on input line 758.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1350.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1354.
+Package xcolor Info: Model `RGB' extended on input line 1366.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1368.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1371.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1372.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2024/01/20 4.5c verbatim text (tvz,hv)
+\FV@CodeLineNo=\count281
+\FV@InFile=\read2
+\FV@TabBox=\box74
+\c@FancyVerbLine=\count282
+\FV@StepNumber=\count283
+\FV@OutFile=\write3
+) (./layout.tex
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2024/01/07 v24.1 The Babel package
+\babel@savecnt=\count284
+\U@D=\dimen157
+\l@unhyphenated=\language89
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@readstream=\read3
+\bbl@dirlevel=\count285
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel-english/english.ldf
+Language: english 2017/06/06 v3.3r English support from the babel system
+Package babel Info: Hyphen rules for 'canadian' set to \l@english
+(babel)             (\language0). Reported on input line 102.
+Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
+(babel)             (\language83). Reported on input line 105.
+Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
+(babel)             (\language83). Reported on input line 108.
+))
+(/usr/share/texlive/texmf-dist/tex/generic/babel/locale/en/babel-english.tex
+Package babel Info: Importing font and identification data for english
+(babel)             from babel-en.ini. Reported on input line 11.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty
+Package: times 2020/03/25 PSNFSS-v9.3 (SPQR) 
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2023/05/13 v2.17o AMS math features
+\@mathmargin=\skip57
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks28
+\ex@=\dimen158
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen159
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count286
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count287
+\leftroot@=\count288
+LaTeX Info: Redefining \overline on input line 399.
+LaTeX Info: Redefining \colon on input line 410.
+\classnum@=\count289
+\DOTSCASE@=\count290
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box75
+\strutbox@=\box76
+LaTeX Info: Redefining \big on input line 722.
+LaTeX Info: Redefining \Big on input line 723.
+LaTeX Info: Redefining \bigg on input line 724.
+LaTeX Info: Redefining \Bigg on input line 725.
+\big@size=\dimen160
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count291
+LaTeX Info: Redefining \bmod on input line 905.
+LaTeX Info: Redefining \pmod on input line 910.
+LaTeX Info: Redefining \smash on input line 940.
+LaTeX Info: Redefining \relbar on input line 970.
+LaTeX Info: Redefining \Relbar on input line 971.
+\c@MaxMatrixCols=\count292
+\dotsspace@=\muskip16
+\c@parentequation=\count293
+\dspbrk@lvl=\count294
+\tag@help=\toks29
+\row@=\count295
+\column@=\count296
+\maxfields@=\count297
+\andhelp@=\toks30
+\eqnshift@=\dimen161
+\alignsep@=\dimen162
+\tagshift@=\dimen163
+\tagwidth@=\dimen164
+\totwidth@=\dimen165
+\lineht@=\dimen166
+\@envbody=\toks31
+\multlinegap=\skip58
+\multlinetaggap=\skip59
+\mathdisplay@stack=\toks32
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/mathptmx.sty
+Package: mathptmx 2020/03/25 PSNFSS-v9.3 Times w/ Math, improved (SPQR, WaS) 
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 28.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/ztmcm/m/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/ztmcm/m/n on input line 28.
+LaTeX Font Info:    Redeclaring symbol font `letters' on input line 29.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/ztmcm/m/it on input line 29.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/ztmcm/m/it on input line 29.
+LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 30.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/ztmcm/m/n on input line 30.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/ztmcm/m/n on input line 30.
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 31.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/ztmcm/m/n on input line 31.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/ztmcm/m/n on input line 31.
+\symbold=\mathgroup4
+\symitalic=\mathgroup5
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/ptm/bx/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/ptm/bx/n on input line 34.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/ptm/m/it on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/ptm/m/it on input line 35.
+LaTeX Info: Redefining \hbar on input line 50.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
+
+\f@nch@headwidth=\skip60
+\f@nch@O@elh=\skip61
+\f@nch@O@erh=\skip62
+\f@nch@O@olh=\skip63
+\f@nch@O@orh=\skip64
+\f@nch@O@elf=\skip65
+\f@nch@O@erf=\skip66
+\f@nch@O@olf=\skip67
+\f@nch@O@orf=\skip68
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen167
+\captionmargin=\dimen168
+\caption@leftmargin=\dimen169
+\caption@rightmargin=\dimen170
+\caption@width=\dimen171
+\caption@indent=\dimen172
+\caption@parindent=\dimen173
+\caption@hangindent=\dimen174
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count298
+\c@continuedfloat=\count299
+Package caption Info: float package is loaded.
+Package caption Info: longtable package is loaded.
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+)
+Package caption Info: picinpar package is loaded.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/lastpage/lastpage.sty
+Package: lastpage 2023/10/14 v2.0e lastpage: 2.09 or 2e? (HMM)
+
+(/usr/share/texlive/texmf-dist/tex/latex/lastpage/lastpage2e.sty
+Package: lastpage2e 2023/10/14 v2.0e Decide which 2e lastpage version to use (H
+MM)
+
+(/usr/share/texlive/texmf-dist/tex/latex/lastpage/lastpagemodern.sty
+Package: lastpagemodern 2023-10-14 v2.0e Refers to last page's name (HMM; JPG)
+\c@lastpagecount=\count300
+) 
+)) (/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
+\multirow@colwidth=\skip69
+\multirow@cntb=\count301
+\multirow@dima=\skip70
+\bigstrutjot=\dimen175
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2023/07/08 v2.11c `tabularx' package (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2023/10/16 v2.5g Tabular extension package (FMi)
+\col@sep=\dimen176
+\ar@mcellbox=\box77
+\extrarowheight=\dimen177
+\NC@list=\toks33
+\extratabsurround=\skip71
+\backup@length=\skip72
+\ar@cellbox=\box78
+)
+\TX@col@width=\dimen178
+\TX@old@table=\dimen179
+\TX@old@col=\dimen180
+\TX@target=\dimen181
+\TX@delta=\dimen182
+\TX@cols=\count302
+\TX@ftn=\toks34
+)
+(/usr/share/texlive/texmf-dist/tex/latex/supertabular/supertabular.sty
+Package: supertabular 2020/02/02 v4.1g the supertabular environment
+\c@tracingst=\count303
+\ST@wd=\dimen183
+\ST@rightskip=\skip73
+\ST@leftskip=\skip74
+\ST@parfillskip=\skip75
+\ST@pageleft=\dimen184
+\ST@headht=\dimen185
+\ST@tailht=\dimen186
+\ST@pagesofar=\dimen187
+\ST@pboxht=\dimen188
+\ST@lineht=\dimen189
+\ST@prevht=\dimen190
+\ST@toadd=\dimen191
+\ST@dimen=\dimen192
+\ST@pbox=\box79
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2023-11-06 v1.5v LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks35
+\verbatim@line=\toks36
+\verbatim@in@stream=\read4
+)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2024-01-20 v7.01h Hypertext links for LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+)
+(/usr/share/texlive/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
+
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
+\c@section@level=\count304
+)
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count305
+)
+\@linkdim=\dimen193
+\Hy@linkcounter=\count306
+\Hy@pagecounter=\count307
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2024-01-20 v7.01h Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count308
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2024-01-20 v7.01h Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 4062.
+Package hyperref Info: Hyper figures OFF on input line 4179.
+Package hyperref Info: Link nesting OFF on input line 4184.
+Package hyperref Info: Hyper index ON on input line 4187.
+Package hyperref Info: Plain pages OFF on input line 4194.
+Package hyperref Info: Backreferencing OFF on input line 4199.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4446.
+\c@Hy@tempcnt=\count309
+LaTeX Info: Redefining \url on input line 4784.
+\XeTeXLinkMargin=\dimen194
+
+(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count310
+\Field@Width=\dimen195
+\Fld@charsize=\dimen196
+Package hyperref Info: Hyper figures OFF on input line 6063.
+Package hyperref Info: Link nesting OFF on input line 6068.
+Package hyperref Info: Hyper index ON on input line 6071.
+Package hyperref Info: backreferencing OFF on input line 6078.
+Package hyperref Info: Link coloring ON on input line 6081.
+Package hyperref Info: Link coloring with OCG OFF on input line 6088.
+Package hyperref Info: PDF/A mode OFF on input line 6093.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count311
+\c@Item=\count312
+\c@Hfootnote=\count313
+)
+Package hyperref Info: Driver: hpdftex.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2024-01-20 v7.01h Hyperref driver for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
+kage
+with kernel methods
+)
+\Fld@listcount=\count314
+\c@bookmark@seq@number=\count315
+
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+85.
+)
+\Hy@SectionHShift=\skip76
+)
+(./dmd-doc-edps.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/epsfig.sty
+Package: epsfig 2017/06/25 v1.7b (e)psfig emulation (SPQR)
+\epsfxsize=\dimen197
+\epsfysize=\dimen198
+)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/helvet.sty
+Package: helvet 2020/03/25 PSNFSS-v9.3 (WaS) 
+)
+\LogoWidth=\skip77
+\LogoHeight=\skip78
+\VLTheadWidth=\skip79
+\c@docref=\count316
+))
+\@indexfile=\write4
+\openout4 = `main.idx'.
+
+
+Writing index file main.idx
+LaTeX Font Info:    Trying to load font information for T1+phv on input line 46
+.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
+File: t1phv.fd 2020/03/25 scalable font definitions for T1/phv.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count317
+\l__pdf_internal_box=\box80
+)
+(./main.aux)
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+ (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count318
+\scratchdimen=\dimen199
+\scratchbox=\box81
+\nofMPsegments=\count319
+\nofMParguments=\count320
+\everyMPshowfont=\toks37
+\MPscratchCnt=\count321
+\MPscratchDim=\dimen256
+\MPnumerator=\count322
+\makeMPintoPDFobject=\count323
+\everyMPtoPDFconversion=\toks38
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/grfext/grfext.sty
+Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 504.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: hyperref package is loaded.
+Package caption Info: supertabular package is loaded.
+Package caption Info: End \AtBeginDocument code.
+Package hyperref Info: Link coloring ON on input line 46.
+
+(./main.out) (./main.out)
+\@outlinefile=\write5
+\openout5 = `main.out'.
+
+<figures/eso-logo-p3005cmyk.pdf, id=164, 236.57146pt x 308.14362pt>
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 49.
+
+(pdftex.def)             Requested size: 51.212pt x 64.01617pt.
+LaTeX Font Info:    Trying to load font information for OT1+ztmcm on input line
+ 49.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ztmcm.fd
+File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
+)
+LaTeX Font Info:    Trying to load font information for OML+ztmcm on input line
+ 49.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlztmcm.fd
+File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
+)
+LaTeX Font Info:    Trying to load font information for OMS+ztmcm on input line
+ 49.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsztmcm.fd
+File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
+)
+LaTeX Font Info:    Trying to load font information for OMX+ztmcm on input line
+ 49.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxztmcm.fd
+File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
+)
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 4
+9.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 49.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 49.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 49.
+
+Overfull \hbox (85.65211pt too wide) in paragraph at lines 49--49
+ []  
+ []
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-di
+st/fonts/enc/dvips/base/8r.enc} <./figures/eso-logo-p3005cmyk.pdf>] [2]
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 77.
+
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[3
+
+] [4] (./main.toc
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 30.
+
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[5
+
+
+]
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 32
+.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+))
+\tf@toc=\write6
+\openout6 = `main.toc'.
+
+ (./intro.tex
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 1.
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[6]) (./installation.tex
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 2.
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[7
+
+]
+Overfull \hbox (6.79352pt too wide) in paragraph at lines 13--15
+\T1/phv/m/n/10.95 ERIS, ESPRESSO, FORS, GI-RAFFE, GRAV-ITY, HARPS, HAWK-I, KMOS
+, MA-TISSE, MOONS, MUSE,
+ []
+
+
+Overfull \hbox (57.51399pt too wide) in paragraph at lines 20--21
+\T1/phv/m/n/10.95 should re-turn the full path to the in-stalled \T1/pcr/m/n/10
+.95 esorex \T1/phv/m/n/10.95 bi-nary. Check that recipes are vis-i-ble with [][
+]\T1/pcr/m/n/10.95 esorex --recipes[]\T1/phv/m/n/10.95 .
+ []
+
+
+Overfull \hbox (13.8722pt too wide) in paragraph at lines 38--38
+ []  \T1/pcr/m/n/10.95 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent
+.com/Homebrew/[] 
+ []
+
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 43.
+
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[8
+
+]
+LaTeX Font Info:    Trying to load font information for TS1+phv on input line 7
+9.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1phv.fd
+File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 81.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 81.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 81.
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 97.
+
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[9]
+Overfull \hbox (72.00534pt too wide) in paragraph at lines 126--127
+\T1/phv/m/n/10.95 is empty, check that \T1/pcr/m/n/10.95 esorex --recipes \T1/p
+hv/m/n/10.95 shows the pipeline and that \T1/pcr/m/n/10.95 esorex_path \T1/phv/
+m/n/10.95 in \T1/pcr/m/n/10.95 application.properties
+ []
+
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 136
+.
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[10]) (./quick_reduction.tex
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 2.
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[11]
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 41.
+
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[12
+
+]
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 67.
+
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[13]) (./customized_reduction.tex
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 2.
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[14]
+Overfull \hbox (12.46797pt too wide) in paragraph at lines 10--11
+\T1/phv/m/n/10.95 The out-put list shows the tasks grouped by meta-target. Stan
+-dard metatar-gets are \T1/pcr/m/n/10.95 science\T1/phv/m/n/10.95 , \T1/pcr/m/n
+/10.95 qc1calib\T1/phv/m/n/10.95 ,
+ []
+
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 39.
+
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[15
+
+]
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 50.
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 76.
+
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[16]
+Overfull \hbox (1.3212pt too wide) in paragraph at lines 77--78
+[]\T1/pcr/m/n/10.95 $combine_exposures\T1/phv/m/n/10.95 : header key-word used 
+to com-bine re-duced cubes (\T1/pcr/m/n/10.95 'obs.targ.name'
+ []
+
+
+Overfull \hbox (6.43372pt too wide) in paragraph at lines 109--110
+\T1/pcr/m/n/10.95 idp_parameters\T1/phv/m/n/10.95 . For KMOS, one can show the 
+in-for-ma-tion for the pa-ram-e-ter set \T1/pcr/m/n/10.95 qc0_parameters\T1/phv
+/m/n/10.95 : 
+ []
+
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 118
+.
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[17]
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 163
+.
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[18]
+Overfull \hbox (41.14465pt too wide) in paragraph at lines 164--165
+[]\T1/phv/m/n/10.95 Named sets are usu-ally de-fined once with YAML an-chors (\
+T1/pcr/m/n/10.95 &default\T1/phv/m/n/10.95 ) and reused as \T1/pcr/m/n/10.95 qc
+0_parameters\T1/phv/m/n/10.95 ,
+ []
+
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 198
+.
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[19]) (./useful_options.tex
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 1.
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[20]
+
+LaTeX Warning: Characters dropped after `\end{verbatim}' on input line 5.
+
+
+Overfull \hbox (19.34709pt too wide) in paragraph at lines 30--30
+[]  \T1/pcr/m/n/10.95 gs -sDEVICE=pdfwrite -sOutputFile=espresso.pdf -dNOPAUSE 
+-dBATCH noname*pdf[] 
+ []
+
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 41.
+
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[21
+
+]
+
+LaTeX Warning: Characters dropped after `\end{verbatim}' on input line 56.
+
+
+LaTeX Warning: Characters dropped after `\end{verbatim}' on input line 61.
+
+
+LaTeX Warning: Characters dropped after `\end{verbatim}' on input line 69.
+
+
+Overfull \hbox (23.49707pt too wide) in paragraph at lines 77--78
+[]\T1/phv/m/n/10.95 executes only cal-i-bra-tion tasks. Other stan-dard metatar
+-gets are \T1/pcr/m/n/10.95 science \T1/phv/m/n/10.95 (the de-fault), \T1/pcr/m
+/n/10.95 qc0\T1/phv/m/n/10.95 , \T1/pcr/m/n/10.95 calchecker\T1/phv/m/n/10.95 ,
+
+ []
+
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 89.
+
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[22]) (./configuration.tex
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 2.
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[23]
+Overfull \hbox (6.94907pt too wide) in paragraph at lines 28--30
+[]\T1/phv/m/n/10.95 If a com-bi-na-tion of \T1/pcr/m/n/10.95 RAW \T1/phv/m/n/10
+.95 and \T1/pcr/m/n/10.95 MASTER \T1/phv/m/n/10.95 cal-i-bra-tions are present,
+ the value of \T1/pcr/m/n/10.95 association_preference
+ []
+
+
+Overfull \hbox (48.39545pt too wide) in paragraph at lines 28--30
+\T1/phv/m/n/10.95 might have an im-pact on the per-for-mances and the qual-ity 
+of the re-sults. Typ-i-cally, \T1/pcr/m/n/10.95 association_preference
+ []
+
+
+Overfull \hbox (5.60265pt too wide) in paragraph at lines 28--30
+\T1/pcr/m/n/10.95 MASTER \T1/phv/m/n/10.95 cal-i-bra-tions are present in the i
+n-put di-rec-to-ries, then the value of \T1/pcr/m/n/10.95 association_preferenc
+e
+ []
+
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 32.
+
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[24
+
+]
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 68.
+
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[25]
+Overfull \hbox (13.8722pt too wide) in paragraph at lines 87--87
+ [] \T1/pcr/m/n/10.95 pattern=$TASK/$DATASET/$TIMESTAMP/\$object\$\_\$pro.catg\
+$_reduced.$EXT[] 
+ []
+
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 111
+.
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[26]) (./troubleshooting.tex
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 2.
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[27]) (./feedback.tex
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 3.
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[28
+
+]) (./conda.tex
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 2.
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[29
+
+])
+File: figures/eso-logo-p3005cmyk.pdf Graphic file (type pdf)
+<use figures/eso-logo-p3005cmyk.pdf>
+Package pdftex.def Info: figures/eso-logo-p3005cmyk.pdf  used on input line 91.
+
+(pdftex.def)             Requested size: 42.67912pt x 55.5904pt.
+
+Overfull \vbox (18.87047pt too high) has occurred while \output is active []
+
+
+Overfull \hbox (2.13373pt too wide) has occurred while \output is active
+ [] 
+ []
+
+[30
+
+] 
+enddocument/afterlastpage: lastpage setting LastPage.
+(./main.aux)
+ ***********
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+ ***********
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: AA1F51674ACD377D6FF182B6B816249A;9015.
+ ) 
+Here is how much of TeX's memory you used:
+ 15066 strings out of 474222
+ 239634 string characters out of 5748733
+ 1940975 words of memory out of 5000000
+ 36950 multiletter control sequences out of 15000+600000
+ 612449 words of font info for 110 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 80i,24n,82p,931b,625s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/h
+elvetic/uhvro8a.pfb>
+Output written on main.pdf (30 pages, 131222 bytes).
+PDF statistics:
+ 485 PDF objects out of 1000 (max. 8388607)
+ 435 compressed objects within 5 object streams
+ 86 named destinations out of 1000 (max. 500000)
+ 326 words of extra memory for PDF output out of 10000 (max. 10000000)
+
