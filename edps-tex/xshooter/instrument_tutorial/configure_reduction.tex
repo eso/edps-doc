@@ -61,6 +61,9 @@ This parameter controls the use of a dark frame in the UVB/VIS data reduction.
 Because the dark current is negligible at these wavelengths, 
 it is set to {\tt FALSE} by default.
 Set it to {\tt TRUE} if you wish to enable dark correction.
+
+\item {\tt process\_nodding\_as\_stare}:
+When reducing data obtained in nodding mode, setting this parameter to {\tt TRUE} allows the data to be processed as if they were obtained in stare mode (no A-B and B-A subtractions are performed). See Section\,\ref{sec:wobbles} for an example of its application.
 \end{itemize}
 
 \subsection{Troubleshooting}
@@ -123,6 +126,23 @@ reduce systematic sky--subtraction residuals.
 \caption{Example of alternating under- and over-subtracted regions around OH emission lines, caused by a slight tilt of the sky lines relative to the object trace. The plot on the right shows the flux profile extracted along the green line in the 2D image.}
 \label{fig-res}
 \end{figure}
+
+\subsubsection{Wobble pattern in the NIR}
+\label{sec:wobbles}
+
+Temporal variations in the sky background between the A and B exposures of a nodding pair can result in imperfect sky subtraction, producing a “wobbling” pattern in the extracted 1d NIR spectrum. The effect is more pronounced for faint targets, for which the sky background represents a larger fraction of the measured signal.
+
+As a workaround, individual nodding frames can be re-reduced in stare mode by setting the workflow parameter {\tt process\_nodding\_as\_stare} to {\tt TRUE}.
+
+A customized extraction of the trace using a local measurement of the sky background is then required. Note that while this approach mitigates the wobbling pattern, it may introduce other artifacts, including imperfect subtraction of OH emission lines and a discontinuity in the flux level of the reddest NIR order, around 2.28 µm, which may require additional processing.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{../instrument_tutorial/figures/nod_vs_stare.png}
+\caption{Comparison of X-shooter NIR spectrum obtained with the standard nodding reduction (blue) and with the same nodding data reduced in stare mode using a local measurement of the sky background (orange). OB ID: 3841371; date of observation: 2024-08-15T01:49:08.5169. Credit: Koshvendra Singh.}
+\label{fig-wobble}
+\end{figure}
+
 
 \subsubsection{Trace-localization failures}
 
