@@ -61,7 +61,13 @@ determined by the value of the workflow parameter {\bf
   model}.
 
 In this configuration the \instname\ workflow uses dedicated sky
-exposures (if available) to compute the SKY\_CONTINUUM and the
+exposures (if available)\footnote{By default, dedicated sky exposures
+have to be part of the same OB of the science frame. However, it is
+possible to use sky OB of different OBs by changing the workflow
+parameter associate\_sky and set it for example to 'obs.container.id'
+(pick the closest sky from an OB of the same instrument setup and
+contained id) or 'night' (to select the closest sky exposure of the
+same setup in the same night.} to compute the SKY\_CONTINUUM and the
 SKY\_LINES calibrations. The SKY\_CONTINUUM is the directly subtracted
 from the target field of view, whereas the intensities of the sky
 emission lines are refitted (using a small portion of the target field

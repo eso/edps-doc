@@ -48,9 +48,9 @@ Figure \ref{fig:examining_products} demonstrates how the pipeline products can b
 \end{figure}
 
 
-\subsection{Create Master Flat Field, Dispersion Solution and Correction for Spatial Distortion}
+\subsection{Spectra calibrations: Create Master Flat Field, Dispersion Solution and Correction for Spatial Distortion}
 
-Tasks: {\bf calibration\_lss}, {\bf calibration\_mos}, {\bf calibration\_mxu}, {\bf calibration\_std}  Recipe: {\bf fors\_calib}
+Subworkflow: {\bf spectra\_calibrations}. Tasks: {\bf calibration\_lss}, {\bf calibration\_mos}, {\bf calibration\_mxu}, {\bf calibration\_std}.  Recipe: {\bf fors\_calib}
 
 In one step, the input screen flat raw calibration frames: SCREEN\_FLAT\_LSS/MOS/MXU together with the arc lamp raw frame: LAMP\_LSS/MOS/MXU
 are used to create a normalized master flat-field, a 2D dispersion solution, correction for spatial distortion, and to determine the slit limits.
@@ -146,25 +146,55 @@ In the frame, depending on the normalization method residual gradients may be va
 See Section \ref{sec:configuration_calibration} for more information on how to improve the products if needed.
 
 
-\subsection{Compute Response Function}
+\subsection{Response: compute the response function}
 
-Tasks: {\bf standard\_lss}, {\bf standard\_mos}   Recipes: {\bf fors\_science}
+Subworkflow: {\bf Response}. Tasks: {\bf standard\_mos}, {\bf clean\_spectrum\_standard}, {\bf fors\_response}, {\bf response\_curve}, {\bf standard\_lss}.   Recipes: {\bf fors\_science}, {\bf fors\_response}, {\bf fors\_molecfit\_model}, {\bf fors\_molecfit\_calctrans}, {\bf fors\_ molecfit\_correct}
 
-The observed spectrophotometric standard stars are stars with a well known flux distribution. They are usually observed during twilight within ±3 days of the science data.
-The data are processed to create the instrument response curves. They may be later used to flux-calibrate science data in case there is no master
-response curve determined for the particular grism (affects mostly
-observations before January 1, 2025. After that date, the master
-response curves exist for most of the grisms). The recipe
-{\bf fors\_science} integrates the observed flux, corrected for gain,
-exposure time and atmospheric extinction, over the intervals indicated
-in the STD\_FLUX\_TABLE corresponding to the observed star (the {\tt HIERARCH ESO OBS TARG NAME} keyword is matched between the observation and the entries in the table).
-The reference flux values for the star are then divided by the integrated observed flux values to create the so-called raw response. Features like strong stellar lines or regions of telluric absorption are
-masked before a polynomial or a spline fit is performed to define the final response curve. 
+
+By default, 
+the FORS science spectroscopic data are flux calibrated by using a master response curve that is delivered when
+downloading data from the archive. If this master response is not available, or if the user sets the workflow parameter {\tt associate\_master\_spectro\_photometric\_table} to "FALSE" (default: "TRUE"), then the standard star of the night is reduced and used to generate the response curve.
+
+The following, applies only if the standard star of the night is used to flux calibrate the data
+
+
+
+The subworkflow {\bf response} creates an instrument response curve from the observation of a standard star (if its reference data are found in the static calibrations).
+The spectrophotometric standard stars have a well known flux distribution. They are usually observed during twilight within ±3 days of the science data.
+The data are processed to create the instrument response curves, that may be later used to flux-calibrate science data in case there is no master response curve determined for the particular grism. This affects mostly observations before January 1, 2025. After that date, the master response curves exist for most of the grisms.
+
+The response curve is obtained in two ways. The first, processes the standard star and masking telluric regions before comparing the extracted spectrum with a reference table and fitting the response curve. The second, cleans the telluric features from the extracted spectrum and then compares it with the reference table (default).
+The response curve from the first method is always produced; the response curve form the second only if the star spectrum is observed above 6800 angstrom. In any case, even if both response curves are produced, only one is used to calibrate the data, depending if the removal of telluric lines on the standard star spectrum was required or not (workflow parameter: {\tt remove\_telluric\_lines\_from\_standard}).
+
+
+
+
+
+The response curve can be obtained in two ways. The first, processes the standard star and masking telluric regions before comparing the extracted spectrum with a reference table and fitting the response curve. The second, cleans the telluric features from the extracted spectrum and then comparing it with the reference table (default).
+Response curves from both methods are produced, but only one is used to calibrate the data, depending if the removal of telluric lines on the standard star spectrum was required or not (workflow parameter: {\tt remove\_telluric\_lines\_from\_standard}). 
+
+Few recipes are available to perform these tasks. The recipe 
+{\bf fors\_science} integrates the observed flux, corrected for gain, exposure time and atmospheric extinction, over the intervals indicated in the STD\_FLUX\_TABLE corresponding to the observed star.
+The star is identified in this table by matching the name recorded in the keyword HIERARCH ESO OBS TARG NAME. The reference flux values for the star are then divided by the integrated observed flux values to create the so-called raw response. Features like strong stellar lines or regions of telluric absorption are masked before a polynomial or a spline fit is performed to define the final response curve. The recipe also provides the extracted 1-dimensional spectrum of the standard star in Phase3 format, which is needed for
+the recipe {\bf fors\_response}.
+
+The task {\bf standard\_lss} produces the response curve from the LSS observations of the standard star. The processing ends on running the {\bf fors\_science} recipe. This product is not further used by the workflow to flux calibrate science data.
+
+The recipe {\bf fors\_response} uses model spectra provided in the STD\_FLUX\_CATALOG as reference data. Because the reference data do not include telluric absorption, observed spectra extending to wavelengths above 6800 Å are first corrected using the FORS-specific molecfit recipes: {\bf fors\_molecfit\_model},
+{\bf fors\_molecfit\_calctr ans}, and {\bf fors\_molecfit\_correct} in one task {\bf clean\_spectrum\_standard}.
+For this correction the Phase3 format provided by the {\bf fors\_science} recipe is needed.
+The reference model spectrum is then aligned in wavelength to the telluric-corrected observed spectrum
+or – for bluer settings – the original Phase3 spectrum so that its velocity matches that of the observed
+spectrum and it has the same step size in wavelength. Next it is divided by the observed spectrum (corrected for gain exposure time and atmospheric extinction) to create a raw response. The median value of this raw response is then determined at predefined wavelength (read from FIT\_POINTS\_CATALOG)
+and interpolated with a spline fit to define the response.
+Please refer to the FORS Pipeline User Manual (Sections 9 and 10) for details of this step in data reduction.
+
+Note that these tasks are skipped if there are no observations of a standard star in the input dataset. 
 
 
 Product:
 \begin{itemize}
-\item SPECPHOT\_TABLE - table with efficiency and response curves. It can be used as an input to the {\bf fors\_science} recipe when the flux-calibrated products are created.
+\item SPECPHOT\_TABLE - table with efficiency and response curves. It can be used for the science data reduction as an input to the {\bf fors\_science} recipe when the flux-calibrated products are created.
 
 \end{itemize}
 
@@ -175,26 +205,45 @@ Product:
 \label{fig:reduced_std_mos}
 \end{figure}
 
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{../instrument_tutorial/figures/FORS2_response.jpg}
+\caption{Example of the "Graphical report" reduced\_std\_mos.png of the task: {\bf response\_curve}, recipe: {\bf fors\_response}. For the spectra extending above 6800 A the telluric correction was also applied. }
+\label{fig:fors2_response}
+\end{figure}
+
 In this step, the quality of the response curve fit should be checked.
 
 Figure \ref{fig:reduced_std_mos} is an example of the created "Graphical report" for the relevant task: {\bf standard\_mos}, recipe: {\bf fors\_science}. The extracted standard star spectrum should show no jumps or sky emission lines. Strong gradients due to order separating filters are valid but may cause problems with the fit of the response curve.
 
-In the "Response" panel, the dots show the raw response (ratio of reference spectrum and observed spectrum integrated over same bins as reference spectrum) and the blue line shows the corresponding fit. Blue dots are masked and not used for the fit.
+In the "Response" panel, the red dots show the raw response (ratio of reference spectrum and observed spectrum integrated over same bins as reference spectrum) and the black line shows the corresponding fit. Blue dots are masked and not used for the fit.
+The black curve should follow the red points closely. If the fit deviates from the data in the masked regions in unexpected ways (blue dots) the user may try to remove {\tt stellar\_absorption} and/or {\tt telluric} from the parameter {\tt resp\_ignore\_mode} and mask only smaller regions via {\tt resp\_ign ore\_points}. Alternatively or in addition one may change the fit method and/or degree via {\tt resp\_fit\_degr ee} (polynomial degree) or {\tt resp\_fit\_nknots} (number of spline knots).
+One should keep in mind that interpolating across a larger region (e.g. covered by telluric lines) provides at best a probable response curve, but may also show strong deviations. This is even more true for extrapolations, e.g. if a response curve has telluric regions at its edges.
 
 In the bottom panel the red line marks the observed standard star
 spectrum calibrated with its own response curve and the black curve indicates the reference data (blue points were masked during the fitting of the response). Differences between the black and
-the red lines indicate a problem with the flux calibration, usually features on a scale smaller than the bins
-of the reference data. Differences between the red and black curves may indicate problems with inter- and/or extrapolation, but may also be valid, for instance due to different amounts of telluric absorption or
-to differences in resolution between the reference spectra and the observed data.
-
-Raw and fitted response - the blue curve (fit) should follow the red curve (unmasked raw response) closely. If the fit deviates from the data in the masked regions in unexpected ways (blue dots) the user may try to remove {\tt stellar\_absorption} and/or {\tt telluric} from the parameter {\tt resp\_ignore\_mode} and mask only smaller regions via {\tt resp\_ignore\_points}. Alternatively or in addition one may change the fit method and/or degree via {\tt resp\_fit\_degree} (polynomial degree) or {\tt resp\_fit\_nknots} (number of spline knots).
-One should keep in mind that interpolating across a larger region (e.g. covered by telluric lines) provides at best a probable response curve, but may also show strong deviations. This is even more true for extrapolations, e.g. if a response curve has telluric regions at its edges.
-
-Flux-calibrated standard star spectrum should
-coincide with the tabulated standard star flux (blue dots were ignored during the response fit). Deviations at the very blue end may results from problems with atmospheric extinction and deviations at wavelengths above 6000 Å may point to problems with telluric absorption.
+the red lines indicate a problem with the flux calibration, usually features on a scale smaller than the bins of the reference data. 
+Differences between the red and black curves may indicate problems with inter- and/or extrapolation, but may also be valid, for instance due to different amounts of telluric absorption or
+to differences in resolution between the reference spectra and the observed data. Deviations at the very blue end may results from problems with atmospheric extinction and deviations at wavelengths above 6000 Å may point to problems with telluric absorption.
 
 Keep in mind that occasionally there may be no STD\_FLUX\_TABLE associated to the observations of a flux standard star.
 
+
+The Figure \ref{fig:fors2_response} is an example of the created "Graphical report" for the task: {\bf response\_curve}. It is similar to the "Graphical report" in the task {\bf standard\_mos} and, as there, the extracted standard star spectrum should show no jumps or sky emission lines. The O2 absorption feature at
+7594 Å often shows residuals after the telluric correction due to saturation. The saturation is not visible in FORS2 spectra due to the low resolution, which smears out the flux.
+
+In the "Response" panel the black curve (fit) should follow the red dots closely. For wavelengths above about 8800 A the detector shows fringing, which may require larger fit windows to smear
+out the effect of the fringe pattern, which is generally not the same between standard star and science observations.
+
+In the "Flux-calibrated extracted spectrum" panel the red curve (flux-calibrated standard star spectrum) should
+coincide with the black one (tabulated standard star flux). Deviations at the very blue end may results from
+problems with atmospheric extinction and deviations at wavelengths above 6500 Å may point to problems with telluric absorption.
+
+In the end, the task {\bf response\_curve} collects the desired response curve (obtained either by removing telluric features from the standard star spectrum, or without removing them, depending on the initial choice of the 
+ workflow parameter {\tt remove\_telluric\_lines\_from\_ standard}
+) and passes it to the next reduction steps.
 
 \subsection{Reduce Science Data}
 
@@ -203,6 +252,8 @@ Task: {\bf science\_spectra}   Recipe: {\bf fors\_science}
 In this task the recipe {\bf fors\_science} is run to apply sky subtraction
 and extract the spectra. The science observations get flux calibrated using the master response curve (preferred if available) or the instrument response curve derived from the standard star observation.
 If neither standard star observation nor master response curve is available, then the science observation will not be flux-calibrated.
+
+Note, that not all output frames listed here are always produced. Some of them are created only on request, and some are not created in case of LSS or LSS-like data. The LSS-like data are obtained in the MOS instrument mode when all the slits are aligned. This kind of data are processed as a single long slit spectrum. The product categories will contain the acronym LONG before the instrument mode tag.
 
 Products (the filenames for the other modes are similar but with the MOS suffix replaced by MXU, LONG\_MOS or LSS as appropriate):
 
@@ -280,23 +331,19 @@ The spectra should have a generally smooth look, and only appear to be noisier i
 The best way to ensure that the sky was subtracted optimally, at least at the positions of the objects
 to extract, is to check that the residual noise is compatible with the statistical error associated to the
 extracted object spectra. The extracted spectra are contained in the REDUCED\_SCI\_MOS/MXU/LSS image (one extracted spectrum for each row). Their error spectra (at a 1 - $\sigma$ level) are contained in the
-REDUCED\_ERROR\_SCI\_MOS/MXU/LSS image. The regions of the extracted spectra corresponding to a (bright) sky line may include a few noisier points, which deviation from the spectral continuum should (almost) never pass the 3 - $\sigma$ deviation. If this condition is fulfilled, the sky subtraction is probably as good as it can get.
+REDUCED\_ERROR\_SCI\_MOS/MXU/LSS image. The regions of the extracted spectra corresponding to a (bright) sky line may include a few noisier points, where deviation from the spectral continuum should (almost) never pass the 3 - $\sigma$ deviation. If this condition is fulfilled, the sky subtraction is probably as good as it can get.
 The sky spectra extracted from the modeled sky frames in exactly the same way as the object spectra from
 the sky-subtracted frames can be found in REDUCED\_SKY\_SCI\_MOS/MXU/LSS.
-Note that if the barycentric correction is applied to the products, the wavelengths are re-computed to match
-the desired reference system. No interpolation is done on the spectrum itself, only wavelengths are changed.
-This means that spectra of the same target might be defined at different wavelengths, depending on the velocity
-correction. This has to be taken into account when combining spectra for further analysis.
 
-
+Note that if the barycentric correction is applied to the products, the wavelengths are re-computed to match the desired reference system. No interpolation is done on the spectrum itself, only wavelengths are changed.
+This means that spectra of the same target might be defined at different wavelengths, depending on the velocity correction. This has to be taken into account when combining spectra for further analysis.
 
 
 \subsection{Performing Telluric Correction}
 
 Task: {\bf telluric\_correction}   Recipes: {\bf fors\_molecfit\_model}, {\bf fors\_molecfit\_calctrans}, {\bf fors\_molecfit\_correct}
 
-The telluric correction is performed only in case of spectra extending
-beyond 6800 A. Currently, this has been implemented only for the LSS mode data but is going to be extended for other modes in the near future. To enable this correction the workflow parameter {\tt Apply\_telluric\_correction} must be set to anything but
+The telluric correction is performed only in case of spectra extending beyond 6800 A. To enable this correction the workflow parameter {\tt Apply\_telluric\_correction} must be set to anything but
 {\tt false} and this is done automatically by the workflow for the data with {\tt WAVELMAX} larger than 6800 A. In case the Reduction Target {\bf telluric\_correction} was selected by the user but the correction was not applied, the {\bf science\_spectra} products are copied over to the {\bf telluric\_correction} data products directory.
 
 The way the correction works is that for each observation, the 1D spectrum with the highest signal-to-noise ratio is selected and used as reference spectrum to be fitted by the recipe {\bf fors\_molecfit\_model}. This recipe computes the abundances
@@ -305,17 +352,54 @@ of various molecules taking into account also the instrument set-up. Then, the b
 in the observation. This step is performed by the recipe {\bf fors\_molecfit\_calctrans}. Last, each spectrum
 is corrected for telluric absorption using the appropriate transmission by the recipe {\bf fors\_molecfit\_correct}.
 
-Note: although the science spectra share the same reference spectrum used to determine the best fit parameters, each individual science
-spectrum must have its own correction because they might differ in wavelength extension (e.g., in the case of MOS or MXU observations).
+Note that although the science spectra share the same reference spectrum used to determine the best fit parameters, each individual science spectrum must have its own correction because they might differ in wavelength extension (e.g., in the case of MOS or MXU observations).
 
 In general, for the FORS data, it is sufficient to fit only O2 and H2O molecules.
 
-Note: Only 1-dimensional spectra in Phase3 format are corrected, not the various 2D frames produced by the FORS2 science recipe.
+Only the 1-dimensional spectra in Phase3 format are corrected, not the various 2D frames produced by the FORS2 science recipe.
 
+
+\subsection{Selecting and combining 1D Phase 3 compliant spectra of the same target}
+
+Task: {\bf filter\_spectra}, {\bf combine\_spectra} Recipe: {\bf esotk\_spectrum1d\_combine}
+
+
+Processing of the FORS2 spectroscopic science data is based 
+on a single exposures. In the task {\bf science\_spectra} every science exposure is pipeline-processed and results usually 
+in several extracted, flux-calibrated 1-dimensional spectra (because the pipeline extracts all spectra it detects). However, often science observation consists of several exposures on the same object, which should be combined e.g. in order to get higher signal-to-noise ratio. This is done by the tasks {\bf filter\_spectra} and {\bf combine\_spectra}.
+They are applied only if the desired final reduction target is {\bf idp}, i.e. 1-dimensional extracted spectra Phase 3 compliant.
+
+The goal of the task {\bf filter\_spectra} is to filter out the sub-standard quality extracted spectra and to ensure that only the good quality spectra are passed to Phase 3. Thus, the following selection is performed:
+
+\begin{itemize}
+\item Spectra with S/N <2 are discarded as they may correspond to spurious sources (keyword {\tt SNR})
+\item  Spectra with a ratio of the saturated pixels, in the region from which the  spectrum was extracted, to all pixels in that region >0.03 are discarded (keyword {\tt QC SAT RATIO})
+\item Spectra with ratio of the zero-flux background pixels > 0.5 (or max-background and min-background < 0.001) are discarded, as they may correspond to spurious sources
+\item Spectra with values of the keywords: {\tt QC TRACE CURVATURE, DRS LAMRMS}, and {\tt NAXIS2} exceeding set thresholds, depending on the instrumental setup, are discarded, as they indicate problems with the calibrations used for processing.
+
+\end{itemize}
+
+To identify the individual single-exposure spectra of the same object to be co-added into a combined spectrum following selection criteria have to be fulfilled:
+
+\begin{itemize}
+\item Difference of calculated on-sky position < 0.5 arcsec from one spectrum to another
+\item S/N within a factor of 5 from one spectrum to another.
+\end{itemize}
+
+Products:
+
+{\bf 1-dimensional extracted spectra}
+
+\begin{itemize}
+\item ESOTK\_SPECTRUM\_COMBINED - the combined spectrum
+\item ESOTK\_SPECTRUM\_IDP\_FORMAT - the combined spectrum in Phase 3 compliant format
+\item SPECTRUM\_1D - single observation spectra that fulfilled the first stage selection criteria and were offered for combination.
+
+\end{itemize}
 
 \subsection{Static Calibration Data}
 
-In addition to calibration frames taken regularly, the FORS pipeline also uses static calibration tables related to spectroscopy.
+In addition to calibration frames taken regularly, the FORS pipeline also uses static calibration tables related to spectroscopy:
 
 \begin{enumerate}
 

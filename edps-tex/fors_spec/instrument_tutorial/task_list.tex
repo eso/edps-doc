@@ -4,7 +4,7 @@ This is the list of all the tasks and associated recipes in the
 \instname\ workflow.  Only some of them are needed for scientific
 reduction, they are indicated by the flag "yes" (triggered by default)
 or "optional" (triggered only if requested by a workflow
-parameter). Other tasks are not used for scientific reduction (they
+parameter and/or the content of the dataset allows for it). Other tasks are not used for scientific reduction (they
 are indicated by the flag "no"), they are mainly used for instrument
 monitoring and they can be executed only by specifying them as
 target. Note that, when a task is specified as target, all the tasks
@@ -16,7 +16,8 @@ executed.
 \scriptsize
 \begin{tabular}{|l|l|c|p{7cm}|}
 \hline
-\textbf{TASK} & \textbf{RECIPE} & \textbf{Used in science reduction} & \textbf{Notes} \\
+\textbf{TASK} & \textbf{RECIPE} & \textbf{Used in scence} & \textbf{Notes} \\
+             &                 & \textbf{reduction} &   \\
 \hline 
 bias 	      & fors\_bias 	     & yes  & Computes the master bias frame \\
 calibration\_lss & fors\_calib 	 & yes	& Creates all necessary calibration products to process LSS data \\
@@ -25,12 +26,24 @@ calibration\_mxu & fors\_calib 	 & yes	 & Creates all necessary calibration prod
 calibration\_std & fors\_calib 	 & yes   & Creates calibration products to process spectrophotometric standard star data \\
 calibration\_hc\_lss & fors\_calib & no  & Creates LSS calibration products used for monitoring \\
 calibration\_hc\_std & fors\_calib & no  & Creates MOS calibration products used for monitoring \\
+clean\_spectrum\_standard & fors\_molecfit\_model & optional & Removes telluric absorption features \\
+     & fors\_molecfit\_calctrans &    & from the standard star spectrum, if applicable\\
+     & fors\_molecfit\_correct    &    &    \\
+combine\_spectra & esotk\_spectrum1d\_combine & yes & Combines spectra of the same object \\
+filter\_spectra &    &  yes & Selects the individual single-exposure science spectra to be combined   \\
+fors\_response & fors\_response &  yes & Creates a response calibration curve from the standard star spectrum cleaned from telluric features \\
 lamp\_monitor & fors\_sumflux 	   & no  & Used for flux monitoring of the lamps     \\
+response\_curve &    & yes & It collects the produced response curve (obtained either by removing telluric features from the standard star spectrum, or without removing them, depending on the initial choice) and passes it to the next reduction steps. \\
 science\_spectra & fors\_science   & yes & Reduces science data                      \\
-standard\_mos & fors\_science 	   & yes & Reduces spectrophotometric standard star data \\
-standard\_lss & fors\_science	   & yes & Reduces LSS standard star data \\
-telluric\_correction & fors\_molecfit\_correct	& optional   & Applies molecfit correction to the  science data \\
-
+science\_spectra\_lss & fors\_science   & no & Reduces qc0 LSS science data                      \\
+science\_spectra\_mos & fors\_science   & no & Reduces qc0 MOS science data                      \\
+science\_spectra\_mxu & fors\_science   & no & Reduces qc0 MXU science data                      \\
+standard\_mos & fors\_science 	   &optional & Reduces spectrophotometric standard star data \\
+standard\_lss & fors\_science	   & no & Reduces LSS standard star data \\
+telluric\_correction & fors\_molecfit\_model	& optional   & Applies molecfit correction to the  science data \\
+     & fors\_molecfit\_calctrans &    &    \\
+     & fors\_molecfit\_correct    &    &    \\
+     
 \hline
 \end{tabular}
 \caption{\instname\ pipeline tasks overview}

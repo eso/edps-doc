@@ -188,20 +188,62 @@ Avoiding normalization along the slit (i.e. setting both {\tt sradius} and {\tt 
 
 \subsection{Response Determination}
 
-To verify the quality of the response curve determined by the {\bf fors\_science} recipe the user should check the corresponding "Graphical report" reduced\_std\_mos.png of the task {\bf standard\_mods}, recipe {\bf fors\_science} as in Figure \ref{fig:reduced_std_mos}.
+The task {\bf standard\_mos} runs recipe {\bf fors\_science}. 
+Its parameters relevant to the response determination are:
+\begin{itemize}
+
+\item {\tt resp\_fit\_nknots}: specifies the number of knots to be used for a spline fit of the response curves ({\tt resp\_fit\_degree} = -1 required)
+
+\item {\tt resp\_fit\_degree}: sets the degree of a polynomial for the fitting of the response curve ({\tt resp\_fit\_nknots} = -1 required)
+
+ \item {\tt resp\_ignore\_mode}: defines which features should be masked: {\tt stellar\_absorption} masks strong absorption lines in the stellar spectra, which may cause residuals; {\tt telluric} excludes wavelength regions affected by telluric absorption from the fit {\tt command\_line} excludes the wavelength points or regions specified by {\tt resp\_ignore\_points}.
+
+\item {\tt resp\_ignore\_points}: provides user-defined wavelengths to be masked
+
+\item {\tt resp\_use\_flat\_sed}: defines if the spectra should be corrected by the spectral energy distribution of the flat field lamp. This is necessary for data observed with holographic grisms, whose response depends on the position on the detector along the dispersion axis. By default it is read from the GRISM\_TABLE.
+
+\end{itemize}
+
+To verify the quality of the response curve determined in the task {\bf standard\_mos} by the {\bf fors\_science} recipe the user should check the corresponding "Graphical report". Example as in Figure \ref{fig:reduced_std_mos}.
 
 The reference data for the flux standard stars have entries that identify the presence of strong stellar features (column {\tt STLLR\_ABSORP} set to T(rue)). These regions will be ignored during the response fit if {\tt resp\_ignore\_mode}
 is set to {\tt stellar\_absorption}. Depending on the resolution of the grism such masking may or may not be necessary. If additional regions need to be ignored {\tt resp\_ignore\_mode} set to {\tt stellar\_absorption,command\_line} allows the user to specify the additional points (e.g. 4750, 4900) and/or regions (e.g.
 8900-9850) with {\tt resp\_ignore\_points}.
 
-In order to avoid the fitting of regions affected by telluric absorption (whose strength may differ between reference spectra and FORS2 data) the static calibration table fors2\_telluric\_regions.fits contains such regions (per grism, as their width depends on spectral resolution). These can be masked by setting {\tt resp\_ignore\_mode} to telluric. If additional regions need
-to be ignored {\tt resp\_ignore\_mode} set to {\tt telluric,command\_line} allows to specify the additional points/regions with {\tt resp\_ignore\_points}. This is especially useful for data with very strong variations at the edges of the response.
-
+In order to avoid the fitting of regions affected by telluric absorption (whose strength may differ between reference spectra and FORS2 data) the static calibration table fors2\_telluric\_regions.fits contains such regions (per grism, as their width depends on spectral resolution). These can be masked by setting {\tt resp\_ignore\_mode} to telluric. If additional regions need to be ignored {\tt resp\_ignore\_mode} set to {\tt telluric,command\_line} allows to specify the additional points/regions with {\tt resp\_ignore\_points}. This is especially useful for data with very strong variations at the edges of the response.
 By default {\tt resp\_ignore\_mode} is set to stellar\_absorption,telluric,command\_line.
 
 In order to take small scale variations into account when fitting the response the pipeline uses a spline fit with
-the number of knots defined with {\tt resp\_fit\_nknots}. For grisms with a small wavelength range and/or only moderate large-scale variation in their response a small number of knots can be sufficient. For grisms with small-scale variations a higher number of knots may be necessary (e.g. fifth demo dataset, see above). One
-should keep in mind that the maximum number of knots for the spline is the number of unmasked data points – 2 (entering a higher number will cause the pipeline to reduce it to the allowed maximum). Since the knots are distributed at equal distances this means that the distance between two knots is always larger than the distance between two data points. This explains why even at a maximum number of knots the fit may not go through all data points.
+the number of knots defined with {\tt resp\_fit\_nknots}. For grisms with a small wavelength range and/or only moderate large-scale variation in their response a small number of knots can be sufficient. For grisms with small-scale variations a higher number of knots may be necessary. One should keep in mind that the maximum number of knots for the spline is the number of unmasked data points – 2 (entering a higher number will cause the pipeline to reduce it to the allowed maximum). Since the knots are distributed at equal distances this means that the distance between two knots is always larger than the distance between two data points. This explains why even at a maximum number of knots the fit may not go through all data points.
+
+
+The task {\bf fors\_response} runs recipe {\bf fors\_response}. 
+It has the following parameters:
+
+\begin{itemize}
+
+\item {\tt resp\_use\_flat\_sed}: defines if the spectra should be corrected by the spectral energy distribution of the flat field lamp. This is necessary for data observed with holographic grisms,
+whose response depends on the position on the detector along the dispersion axis. By default it is read from the GRISM\_TABLE.
+
+ \item {\tt velocity\_wguess}: provides the wavelength (in Å) of the stellar line from which the radial velocity of the standard star is determined. By default the value is read from the GRISM\_TABLE.
+ 
+\item {\tt fit\_window\_pix}: sets the window (in unbinned pixels) across which the median of the raw response is taken at predefined wavelengths recorded in FIT\_POINTS\_CATALOG. By default the
+value is read from the GRISM\_TABLE. A large value may provide a smoother response, especially in wavelength regions affected by fringing.
+
+\end{itemize}
+
+The reference data used by {\bf fors\_response} are model spectra at laboratory wavelengths and without telluric
+absorption. This requires two corrections to be applied before the response can be calculated:
+
+- The observed data have to be corrected for telluric absorption if they cover wavelengths above 6800 Å.
+
+- The model spectra have to be aligned in wavelength to the observed spectra to avoid pseudo P Cygni profiles in the raw response. This is done using a strong absorption line to determine the radial velocity of the observed spectrum, which is then applied to the model spectra.
+
+The response curves may show a wavy pattern at wavelengths above about 7000 Å, which is caused by fringing.
+Because the fringe pattern differs between science and standard star observations it is not useful to try fitting
+it in the response curve. Substantially increasing the value of {\tt fit\_window\_pix} helps to create a smoother fitted response. This can also be helpful in the case of noisy standard star observations.
+If substantial P Cygni profiles are visible in the raw response the wavelength of the line used to determine the
+radial velocity can be changed with the recipe parameter {\tt velocity\_wguess}.
 
 
 \subsection{Telluric Correction}
