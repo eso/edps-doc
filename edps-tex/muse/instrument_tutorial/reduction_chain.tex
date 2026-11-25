@@ -143,6 +143,7 @@ charge of aligning and combining scientific exposures. They are:
 
 \end{itemize}
 
+\subsubsection{Alignment}
 The most important thing to check in this step is whether or not the
 images to combine were properly aligned.  In the Reduction Queue tab,
 locate and expand the reduced dataset you want to check, and click on
@@ -237,3 +238,21 @@ correct recipe parameters set has been found, the full reduction
 cascade can be triggered.
 
 
+\subsubsection{Reduction and combination of scientific exposures}
+
+The quality of the reduced datacubes, either from single or combined
+exposures, can be assessed by dedicated quality plots.
+These plots are associated to the tasks (for individual exposures) and (for combined exposures), and look the same.
+
+Figure \ref{fig:datacube_figure} we show one example.
+A wavelength slice of the reduced cube is shown on the left panel. It is possible to select which wavelength to show by moving the slicer underneeth.
+On the right, the white lamp image is shown.
+By clicking with the mouse on a location of the field of view (either in the panel of the wavelength slice or the one of the white lamp image) it is possible
+to see the spectrum on that location. The radius circular aperture over which the spectrum is generated can be selected in the Radius box.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{../instrument_tutorial/figures/datacube_figure.jpg}
+\caption{Qulity plot showing the reduced datacube. It is possible to show a desired wavelength slice and a spectrum extracted at a desired location with a desired aperture radius.}
+\label{fig:datacube_figure}
+\end{figure}

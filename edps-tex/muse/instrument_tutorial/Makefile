@@ -1,4 +1,4 @@
-TUT_VERSION=1.0_20261120
+TUT_VERSION=1.0_202zyyxx
 
 TOPDIR :=$(shell pwd)/..
 PIPEDOC_COMMON :=$(TOPDIR)/common

@@ -246,8 +246,11 @@ In the end, the task {\bf response\_curve} collects the desired response curve (
 ) and passes it to the next reduction steps.
 
 \subsection{Reduce Science Data}
+\label{sec:reduce_science_data}
+
 
 Task: {\bf science\_spectra}   Recipe: {\bf fors\_science}
+
 
 In this task the recipe {\bf fors\_science} is run to apply sky subtraction
 and extract the spectra. The science observations get flux calibrated using the master response curve (preferred if available) or the instrument response curve derived from the standard star observation.
@@ -363,6 +366,9 @@ Only the 1-dimensional spectra in Phase3 format are corrected, not the various 2
 
 Task: {\bf filter\_spectra}, {\bf combine\_spectra} Recipe: {\bf esotk\_spectrum1d\_combine}
 
+Note: this task is not listed among the "science" Target category, but
+from "all", or "idp" Target categories, to be at step 3 of the Raw
+data Tab in the GUI.
 
 Processing of the FORS2 spectroscopic science data is based 
 on a single exposures. In the task {\bf science\_spectra} every science exposure is pipeline-processed and results usually 
