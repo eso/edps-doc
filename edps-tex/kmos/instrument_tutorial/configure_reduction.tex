@@ -200,6 +200,10 @@ n-th IFU has the corresponding sky cube in the same n-th IFU of the frame with i
 The same is true for the object frame KMOS.2013-06-30T23:59:09.586.fits (that has index 2), 
 except for IFU 19. The corresponding sky has to be found in the frame with index 1, at ifu 20.
 
+
+Figure \ref{fig:sci_reconstructed_figure} allows to inspect the
+datacube in each IFU of each reconstructed exposure
+
 \subsection{Object combination}
 Task: {\bf object\_combination}. Recipe: {\tt kmos\_combine}.
 
@@ -231,6 +235,11 @@ Its possible values are:
 \item {\tt user}: shifts are read from file.
 \end{itemize}
 
+
+Figure \ref{fig:combined_cube_figure} allows to inspect the datacube of
+each combined object.
+
+
 \subsection{Combination of pre-reduced cubes}
 The task {\bf object\_combination} works on data cube that share the same target name (OBS TARGET NAME header keyword).
 In order to create combined data cubes from observations with different target names (but for the same objects), the task
@@ -249,6 +258,9 @@ The suggested procedure is:
 For each target in the input data set, a product of category COMBINED\_CUBE, COMBINED\_IMAGE, 
 IDP\_COMBINED\_CUBE, and EXP\_MASK, respectively, is then created.
 The same workflow and recipe parameters as described in Section \ref{sec:object_combination} for the task {\bf object\_combination} can be applied.
+
+Figure \ref{fig:combined_cube_figure} allows to inspect the datacube of
+each combined object.
 
 
 \subsection{Telluric correction}
@@ -306,9 +318,6 @@ under the same atmospheric conditions (water vapor and column densities of molec
 This strategy is recommended if there are science data with high signal-to-noise and few intrinsic features. These
 data can be used to determine the correction for all other science frames in the dataset.
 
-\bigskip
-
-Go to top
 
 \subsubsection{Using a telluric model from a standard star observation}
 \label{sec:telluric_standard}
@@ -318,9 +327,6 @@ are encapsulated in the sub workflow \textbf{telluric\_on\_standard}. It uses th
 (pipeline recipe {\tt kmos\_molecfit\_model}) and \textbf{transmission\_on\_standard}
 (recipe {\tt kmos\_molecfit\_calctrans}).
 
-\bigskip
-
-Go to top
 
 \subsubsection{Using a telluric model from a science observation}
 \label{sec:telluric_science}
