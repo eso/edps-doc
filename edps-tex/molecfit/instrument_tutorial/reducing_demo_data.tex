@@ -1,0 +1,45 @@
+
+\section{Reducing demo data}
+\label{sec:reducing_demo_data}
+In this section we show how to reduce the demo datasets within the
+distribution kit of the molecfit pipeline. The procedure can be
+extended to any valid dataset.
+
+{\bf Important note. The EDPS workflow associated with pipeline
+version \pipelinevers\ supports reduced 1 dimensional spectra in IDP
+format \footnote{Binary table that follows the ESO science archive
+standards. They can be recognized by the header keyword {\tt PRODCATG=SCIENCE.SPECTRUM}. Examples can be obtained by downloading a
+science product from the ESO science archive at:\\
+\url{https://archive.eso.org/scienceportal/home}} of the following
+instruments: XSHOOTER, UVES, ESPRESSO, GIRAFFE, FORS. Additionally,
+VISIR data with product category {\tt SPC\_OBS\_LMR\_TAB} as shown in
+the header keyword {\tt HIERARCH ESO PRO CATG}. Also, spectra must
+have minimum wavelenght greater than 650 nm, as indicated in the
+header keyword {\tt WAVELMIN}.}
+
+\input{../common/common_reducing_demo_data}
+
+ 
+\subsubsection{Quality plots}
+\input{../common/quality_plots}
+
+\subsection{Exporting the final products}
+\label{sec:export_final_products}
+
+
+\input{../common/common_export}
+ 
+ 
+Exported products are organized by `DATASET` (named as the first
+scientific exposure of the dataset), and `TIMESTAMP` (time of start of
+reduction)
+
+The final products saved in the specified directory are: 
+
+
+
+{\bf DESCRIBE HERE THE LIST OF THE FINAL EXPORTED PRODUCTS}
+\begin{itemize}
+\item product 1 ...
+\item product 2 ...
+\end{itemize}

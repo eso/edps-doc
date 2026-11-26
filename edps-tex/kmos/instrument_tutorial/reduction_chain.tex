@@ -128,6 +128,7 @@ The different exposures for each object are combined. The final products are:
 \item A field-of-view image `COMBINED\_IMAGE` and an exposure mask image `EXP\_MASK` for each object.
 \end{itemize}
 
+
 \subsection{Cubes combination}
 \label{sec:cubes_combination}
 Task: {\bf cubes\_combination}. Recipe: {\tt kmos\_combine}.
@@ -137,3 +138,43 @@ for each object. This is useful for combining observations of the same targets w
 using different Observation Blocks.
 
 
+
+
+\subsection{Quality plots of reduced cubes}
+
+There are quality plots dedicated to the assessment of the reduced datacubes.
+
+The Interactive Plot associated to the task {\bf object} (figure
+\ref{fig:sci_reconstructed_figure}) allows to select the product with
+the reconstructed cubes and the IFU to inspect. A plot showing the
+white lamp image of the desired IFU is shown. By clicking on the image, it is possible to extract a spectrum at a desired position with a desired aperture.
+
+The Interactive plot associated to the tasks {\bf object\_combination}
+and {\bf cubes\_combination} (see Figure
+\ref{fig:combined_cube_figure}) allows to inspect the combined
+datacubes of individual. The object to inspect can be selected from a
+drop-down menu. It is possible to inspect a given wavelength slice of the combined datacube and the reconstructed white lamp image. Similarly to the previous case, it is possible to extract a spectrum at a given position with a given aperture radius.
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{../instrument_tutorial/figures/sci_reconstructed_figure.jpg}
+\caption{Quality plots of the task {\bf object}, showing a given IFU
+  of a specific product file. The spectrum at desired location
+  extracted over a desired circular aperture is also shown.}
+\label{fig:sci_reconstructed_figure}
+\end{figure}
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{../instrument_tutorial/figures/combined_cube_figure.jpg}
+\caption{Quality plot showing the combined cube of an object. The
+  object to inspect can be selected from a drop-down menu on the top.
+  The datacube at a given wavelength (on the top-left), the white lamp
+  image (on the top-right) and the spectrum extracted at a given
+  location with a given circular aperture (on the bottom) are
+  shown. It is possible to specify the wavelength slice to show, and
+  the position and the aperture radius of the spectrum to extract.}
+\label{fig:combined_cube_figure}
+\end{figure}

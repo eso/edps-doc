@@ -24,23 +24,24 @@
 \contentsline {subsection}{\numberline {3.9}Telluric correction}{21}{subsection.3.9}%
 \contentsline {subsection}{\numberline {3.10}Object combination}{21}{subsection.3.10}%
 \contentsline {subsection}{\numberline {3.11}Cubes combination}{22}{subsection.3.11}%
-\contentsline {section}{\numberline {4}Overview of all the data reduction configuration options}{23}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Selection of most appropriate calibrations}{23}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Configuration of parameters: the configuration editor}{23}{subsection.4.2}%
-\contentsline {subsubsection}{\numberline {4.2.1}Apply the same parameters to multiple datasets and configurations}{25}{subsubsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.3}Wavelength calibration}{27}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Illumination correction}{27}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}Science reduction}{28}{subsection.4.5}%
-\contentsline {subsubsection}{\numberline {4.5.1}Science reduction: grouping of input data}{28}{subsubsection.4.5.1}%
-\contentsline {subsubsection}{\numberline {4.5.2}Science reduction: level correction}{28}{subsubsection.4.5.2}%
-\contentsline {subsubsection}{\numberline {4.5.3}Science reduction: optimizing sky removal with recipe parameters}{29}{subsubsection.4.5.3}%
-\contentsline {subsubsection}{\numberline {4.5.4}Science reduction: object/sky association for sky subtraction}{29}{subsubsection.4.5.4}%
-\contentsline {subsection}{\numberline {4.6}Object combination}{30}{subsection.4.6}%
-\contentsline {subsection}{\numberline {4.7}Combination of pre-reduced cubes}{31}{subsection.4.7}%
-\contentsline {subsection}{\numberline {4.8}Telluric correction}{32}{subsection.4.8}%
-\contentsline {subsubsection}{\numberline {4.8.1}Using a telluric model from a standard star observation}{33}{subsubsection.4.8.1}%
-\contentsline {subsubsection}{\numberline {4.8.2}Using a telluric model from a science observation}{33}{subsubsection.4.8.2}%
-\contentsline {subsubsection}{\numberline {4.8.3}Improving the telluric model}{33}{subsubsection.4.8.3}%
-\contentsline {subsubsection}{\numberline {4.8.4}Computation of atmospheric transmission: running calctrans}{35}{subsubsection.4.8.4}%
-\contentsline {section}{\numberline {5}List of workflow tasks}{36}{section.5}%
-\contentsline {section}{\numberline {6}Frequently Asked Questions}{37}{section.6}%
+\contentsline {subsection}{\numberline {3.12}Quality plots of reduced cubes}{22}{subsection.3.12}%
+\contentsline {section}{\numberline {4}Overview of all the data reduction configuration options}{25}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Selection of most appropriate calibrations}{25}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Configuration of parameters: the configuration editor}{25}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Apply the same parameters to multiple datasets and configurations}{27}{subsubsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.3}Wavelength calibration}{29}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Illumination correction}{29}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Science reduction}{30}{subsection.4.5}%
+\contentsline {subsubsection}{\numberline {4.5.1}Science reduction: grouping of input data}{30}{subsubsection.4.5.1}%
+\contentsline {subsubsection}{\numberline {4.5.2}Science reduction: level correction}{30}{subsubsection.4.5.2}%
+\contentsline {subsubsection}{\numberline {4.5.3}Science reduction: optimizing sky removal with recipe parameters}{31}{subsubsection.4.5.3}%
+\contentsline {subsubsection}{\numberline {4.5.4}Science reduction: object/sky association for sky subtraction}{31}{subsubsection.4.5.4}%
+\contentsline {subsection}{\numberline {4.6}Object combination}{33}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}Combination of pre-reduced cubes}{33}{subsection.4.7}%
+\contentsline {subsection}{\numberline {4.8}Telluric correction}{34}{subsection.4.8}%
+\contentsline {subsubsection}{\numberline {4.8.1}Using a telluric model from a standard star observation}{35}{subsubsection.4.8.1}%
+\contentsline {subsubsection}{\numberline {4.8.2}Using a telluric model from a science observation}{35}{subsubsection.4.8.2}%
+\contentsline {subsubsection}{\numberline {4.8.3}Improving the telluric model}{35}{subsubsection.4.8.3}%
+\contentsline {subsubsection}{\numberline {4.8.4}Computation of atmospheric transmission: running calctrans}{37}{subsubsection.4.8.4}%
+\contentsline {section}{\numberline {5}List of workflow tasks}{38}{section.5}%
+\contentsline {section}{\numberline {6}Frequently Asked Questions}{39}{section.6}%
