@@ -1,12 +1,150 @@
-\section{Overview of all the data reduction configuration options}
+\section{Optimization of the telluric correction}
 \label{sec:configuretion_overview}
 
 \subsection{Selection of most appropriate calibrations}
 
-\input{../common/appropriate_calibrations}
+The EDPS workflows allow to express a preference w.r.t. the
+calibrations to be associated, e.g. raw calibrations or master
+calibrations (pre-computed from previous runs).
+
+This is done by setting the Calibration Preference in the Raw Data
+tab.
+
+In the case of the molecfit workflow, there are no master calibrations
+available at the moment, therefore this option is not supported.
+
+\subsection{Adjusting the recipe parameters {\it before } fitting}
+\label{sec:adjust_recipe_parameters}
+
+Recipe parameters can be configured per dataset from the configuration
+editor (Section \ref{sec:configuration_editor}. If no action is taken,
+default recipe parameters (either recipe defaults or automatically set
+by the workflow depending on the type of input data) are
+used. Defaults can be changed before starting the reduction, or
+after (in this case, a new configuration is created).
+
+In the case of \pipename\ the fit step carried on by the task {\bf
+  atmospheric\_model} takes a lot of time: adjusting recipe parametes
+{\it after} each recipe execution is indeed inefficient.
+
+The \pipename\ EDPS workflow offers the possibility to inspect the
+recipe parameters {\it before} fitting the reference spectrum. This is
+particularly relevant for those parameters that can be assessed after
+a visual inspection of the spectrum to fit (e.g., wavelength range to
+consider, molecules to include in the fit, degree of the polynomial
+continuum).
+
+To do so, follow this procedure:
+
+\begin{itemize}
+
+\item Open the configuration editor (Section
+  \ref{sec:configuration_editor}) for the desired
+  dataset/configuration in the Reduction Queue and set the workflow
+  parameter {\bf set\_parameters\_only} has to be set to {\bf true} {\it
+    before starting the reduction}. This can be done also from the Raw
+  Data tab {\it before} creating the datasets.
+
+\item Select the datasets (those with {\bf
+  set\_parameters\_only = 'true'}) and start the reduction by pressing
+  the Reduce button in the Reduction Queue.
+
+\item The reduction will start. The task {\bf
+  parameter\_configuration} automatically set the recipe parameter,
+  which are passed to the next tasks. The next tasks do not execute
+  any recipe and do not produce any output, but are automatically set
+  to {\tt COMPLETED}. They are associated to a recipe named {\tt
+    skip\_execution}.
+
+\item Open the configuration editor (Section
+  \ref{sec:configuration_editor}), select the task {\bf
+    parameter\_configuration} and edit the parameters according to the
+  needs. Visual inspection of the data might help in deciding the
+  most appropriate values. To visually inspect the data, press on
+  the magnifying lens symbol close to the {\bf parameter\_configuration}
+  task (see Section \ref{sec:quality_plots}).
+
+
+\item Once the new parameter are set, save the new configuration. The
+  reduction of the new configuration can be started. Once the
+  parameters have been optimized, save a new configuration with {\bf
+    set\_parameters\_only = 'false'} and start the reduction.  The
+  following tasks will now perform the fit, compute the atmospheric
+  transmission, and correct the science spectrum with the correct
+  recipes.
+
+\item If final results are still not satisfactory and recipe
+  parameters have to be modified again, create a new configuration
+  with {\bf set\_parameters\_only = 'true'} and repeat the process.
+
+
+\end{itemize}
+
+\subsection{Tipps on how to set parameters}
+
+The most common recipe parameters that might need to be adjusted, even
+after the automatic setting done in the workflow, are:
+
+\begin{itemize}
+
+\item {\tt WAVE\_INCLUDE}. A list of wavelength values in micron,
+  comma separated, that specifies the boundaries of the wavelength
+  regions to include in the fit. Try to select short regions that contain
+  clear and intense absoprtion lines. Avoid lines close to
+  saturation. Leave a few pixels outside the lines to facilitate the
+  determination of the continuum level.  Please, not that a continuum
+  level is computed for each region. The more and broade wavelength
+  regions are defined, the longer the fit will be, and it is not
+  guarantee that the fit will be better than one obtained with less
+  numerous and narrower regions.
+
+\item {\tt WAVE\_EXCLUDE}. A list of wavelength values in micron,
+  comma separated, that specifies the boundaries of the wavelength
+  regions to exclude in the fit. An exclusion region inside an
+  inclusion region does not divide the inclusion region in 2 smaller
+  regions: a single continuum level is still computed for that
+  inclusion region.
+
+\item {\tt LIST\_MOLEC}, {\tt FIT\_MOLEC}, {\tt REL\_COL}. The first
+  parameter, {\tt LIST\_MOLEC}, contains the comma-separated list of
+  molecules to include in the fit. Be sure to include only molecules
+  that have a significant impact within the visible spectral
+  region. Each individual molecule can be fit (the corresponding temr
+  in {\tt FIT\_MOLEC} is 1) or computed (the corresponding term in
+  FIT\_MOLEC is 0) considering typical abundance ratios and relative
+  column densities (the corresponding value in {\tt REL\_COL} is
+  used). Note that the number of elements in FIT\_MOLEC and {\tt
+    REL\_COL} must be the same as the number of elements in {\tt
+    LIST\_MOLEC}.
+  
+\item {\tt CONTINUUM\_N} The polynomial degree to fit the continuum. A
+  comma separated list of values can be provided, each per every
+  wavelegth region defined in {\tt WAVE\_INCLUDE}.
+
+\item {\tt WLC\_N}. The polynomial degree to fit the wavelength
+  adjustment. A global wavelength solution is used for all the
+  specgtral range. It is recommended to leave it to 1, unless telluric
+  features are fitted all over the spectrum, including the edges, to
+  avoud interpolation and extrapolation effects.
+  
+  
+\item {\tt FIT\_RES\_BOX}, {\tt FIT\_RES\_LORENTZ}, {\tt RES\_BOX},
+  {\tt RES\_LORENTZ}, {\tt VARKERN}. These are parameters that specify
+  the shape of the line profile (line spread function). For wide slits
+  where the box-car contribution is relevant, set {\tt FIT\_RES\_BOX =
+    1} and {\tt RES\_BOX} different from 0. If the box-car
+  contribution does not have to be included, then set both {\tt
+    FIT\_RES\_BOX} and {\tt RES\_BOX} to 0.  {\tt VARKERN} has to be
+  set to:
+  \begin{itemize}
+  \item {\tt VARKERN = 'TRUE'} if the resolving power ($\lambda/$fwhm) is constant
+    with wavelength.
+    \item {\tt VARKERN = 'FALSE'} if the spectral resolution (fwhm) is constant with wavelength.
+  \end{itemize}
+\end{itemize}
+
+
 
 \subsection{Configuration of parameters: the configuration editor}
 \label{sec:configuration_editor}
 \input{../common/configuration_editor}
-
-{\bf OTHER CONFIGURATIONS}

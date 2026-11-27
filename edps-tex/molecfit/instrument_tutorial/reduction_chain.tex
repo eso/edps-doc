@@ -1,11 +1,75 @@
 \section{The \instname\ data reduction flow.}
 \label{sec:reduction_flow}
-\input{../common/common_reduction_flow}
+\input{reduction_flow}
 
-{\bf LIST THE REDUCTION STEPS HERE}
-\subsection{step 1}
-t.b.d.
-\subsection{step 2}
-t.b.d.
-\subsection{step 3}
-t.b.d.
+
+\subsection{Reference spectrum}
+
+This tasks selects the reference spectrum to fit in order to derive
+the parameters of the atmosphere (such as molecules) and the
+instrument (such as spectral resolution).
+
+The user has the possibility to select whether this has to be done
+directly on the input science spectrum to correct, or on a telluric
+standard star that is somehow associated to the science spectrum to
+correct. This is determined by the workflow parameter {\bf
+use\_standard} (default ``true'').
+
+
+{\bf The current version of the \wkfname\ workflow only support the
+association of telluric standard stars for XSHOOTER observations.}
+
+A telluric standard star is recognized as such if it has the string
+{\tt TELL\_SLIT} in its product category. It must be in a format
+compatible with the 1D spectra of the ESO archive standard.
+
+In order to be associated to the science (only for XSHOOTER
+observations) it must match the {\tt SEQ.ARM}, {\tt INS.OPTI4.NAME}
+(for VIS observations), and {\tt INS.OPTI.5.NAME} (for NIR
+observations). Note: telluric correction of XSHOOTER UVB data is not
+supported.
+
+Once the reference spectrum is identified (either telluric standard or
+the very same science spectrum to correct), it is passed to the next
+task.
+
+\subsection{Parameter configuration}
+
+This task analyzes the input spectrum and configure the parameters
+that will be used by the recipe {\tt molecfit\_model} for the fit,
+depending on the instrument, observational setup, and wavelength
+coverage. Note that this step does nor run any fit, it creates a file
+containig the values of the recicpe parameters to be passed to the
+next task and used by {\tt molecfit\_model}.
+
+Typically, there is a task per instrument (xshooter has 2, one for the
+VIS and one for the NIR arm). But the automatic parameter adjustion is
+done separately for each dataset.
+
+By default, the configured parameters are directly passed to the next
+steps. If one desires to review the parameters and change before
+starting the fit, the workflow parameter {\bf set\_parameters\_only}
+has to be set to ``true'' {\it before starting the reduction}. This will be
+explained in more details in Section 
+\ref{sec:adjust_recipe_parameters}.
+
+\subsection{Atmospheric model}
+
+This task runs the recipe {\bf molecfit\_model} on the reference
+spectrum. It uses the recipe parameters defined on the previous task.
+Fitting parameters cannot be changed from this task: fine tuning of
+the fit must be done by setting again the recipe parameters on the
+previous task using the configuration editor (see Section
+\ref{sec:configuration_editor}).
+
+\subsection{Atmospheric transmission}
+
+This task runs the recipe {\bf molecfit\_calctrans}. It uses the
+atmospheric parameters computed on the reference spectrum and computes
+the full atmospheric transmission on the wavelenght range defined by
+the scientific spectrum.
+
+\subsection{Telluric correction}
+
+This task applies the atmospheric transmission correction to the
+scientific spectrum.
